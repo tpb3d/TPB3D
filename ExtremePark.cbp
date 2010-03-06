@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="ExtremePark" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Win32">
+				<Option output="extremepark" prefix_auto="1" extension_auto="1" />
+				<Option object_output=".obj/debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-W" />
+					<Add option="-g" />
+					<Add option="-O0" />
+					<Add option="-DWIN32" />
+					<Add option="-D_DEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add option="-DPNG_NO_ERROR_NUMBERS" />
+					<Add directory="/Dev/VC++/SFML-1.5/include" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8/include" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8" />
+					<Add directory="/Dev/VC++/wxWidgets-2.8.10/include" />
+					<Add directory="/Dev/VC++/zlib123/include" />
+					<Add directory="/Dev/VC++/lib3ds-20080909/src" />
+					<Add directory="/Dev/VC++/lpng1240" />
+					<Add directory="/Dev/VC++/ZLib" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="/Dev/VC++/SFML-1.5/include" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8/include" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8" />
+					<Add directory="/Dev/VC++/wxWidgets-2.8.10/include" />
+					<Add directory="/Dev/VC++/zlib123/include" />
+					<Add directory="/Dev/VC++/lib3ds-20080909/src" />
+					<Add directory="/Dev/VC++/lpng1240" />
+					<Add directory="/Dev/VC++/ZLib" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="sfml-graphics" />
+					<Add library="sfml-system" />
+					<Add library="sfml-window" />
+					<Add library="GL" />
+					<Add library="GLU" />
+					<Add library="CEGUIBase" />
+					<Add library="libpng" />
+					<Add library="lib3ds" />
+					<Add library="CEGUIOpenGLRenderer" />
+					<Add directory="/Dev/VC++/SFML-1.5/lib/vc2005" />
+					<Add directory="C:/Program Files (x86)/Microsoft Visual Studio 8/VC/lib" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8/lib" />
+					<Add directory="/Dev/VC++/lpng1240/projects/visualc71/Win32_LIB_Release" />
+					<Add directory="/Dev/VC++/lib3ds-20080909/release" />
+					<Add directory="/Dev/VC++/zlib/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release Win32">
+				<Option output="ExtremeParkDev" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Release Win32" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-DWIN32" />
+					<Add option="-DNDEBUG" />
+					<Add option="-D_CONSOLE" />
+					<Add option="-W" />
+					<Add directory="/Dev/VC++/SFML-1.5/include" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8/include" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8" />
+					<Add directory="F:/Dev/VC++/wxWidgets-2.8.10/include" />
+				</Compiler>
+				<ResourceCompiler>
+					<Add directory="/Dev/VC++/SFML-1.5/include" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8/include" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8" />
+					<Add directory="F:/Dev/VC++/wxWidgets-2.8.10/include" />
+				</ResourceCompiler>
+				<Linker>
+					<Add library="sfml-Graphics" />
+					<Add library="sfml-System" />
+					<Add library="sfml-Window" />
+					<Add library="OPENGL32" />
+					<Add library="glu32" />
+					<Add library="CEGUIBase" />
+					<Add library="OpenGLGUIRenderer" />
+					<Add library="CEGUITinyXMLParser_Static" />
+					<Add directory="/Dev/VC++/SFML-1.5/lib/vc2005" />
+					<Add directory="C:/Program Files (x86)/Microsoft Visual Studio 8/VC/lib" />
+					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8/lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="AI/PathAgent.cpp" />
+		<Unit filename="AI/PathAgent.h" />
+		<Unit filename="AI/PeepAgent.cpp" />
+		<Unit filename="AI/PeepAgent.h" />
+		<Unit filename="AI/RideAgent.cpp" />
+		<Unit filename="AI/RideAgent.h" />
+		<Unit filename="Builders/RidePartLoader.cpp" />
+		<Unit filename="Builders/RidePartLoader.h" />
+		<Unit filename="Builders/TerrainFormer.cpp" />
+		<Unit filename="Builders/TerrainFormer.h" />
+		<Unit filename="Builders/TrackFormer.cpp" />
+		<Unit filename="Builders/TrackFormer.h" />
+		<Unit filename="Builders/TreeFormer.cpp" />
+		<Unit filename="Builders/TreeFormer.h" />
+		<Unit filename="CoreObjects/BuildStrategies.cpp" />
+		<Unit filename="CoreObjects/BuildStrategies.h" />
+		<Unit filename="CoreObjects/Building.cpp" />
+		<Unit filename="CoreObjects/Building.h" />
+		<Unit filename="CoreObjects/CamPath.cpp" />
+		<Unit filename="CoreObjects/CamPath.h" />
+		<Unit filename="CoreObjects/CoreBase.cpp" />
+		<Unit filename="CoreObjects/CoreBase.h" />
+		<Unit filename="CoreObjects/GhostObject.cpp" />
+		<Unit filename="CoreObjects/GhostObject.h" />
+		<Unit filename="CoreObjects/Park.cpp" />
+		<Unit filename="CoreObjects/Park.h" />
+		<Unit filename="CoreObjects/ParkDebug.cpp" />
+		<Unit filename="CoreObjects/Pathway.cpp" />
+		<Unit filename="CoreObjects/Pathway.h" />
+		<Unit filename="CoreObjects/PersonQueue.cpp" />
+		<Unit filename="CoreObjects/PersonQueue.h" />
+		<Unit filename="CoreObjects/RouteBase.h" />
+		<Unit filename="CoreObjects/Routes.cpp" />
+		<Unit filename="CoreObjects/Routes.h" />
+		<Unit filename="CoreObjects/SingleStair.cpp" />
+		<Unit filename="CoreObjects/SingleStair.h" />
+		<Unit filename="CoreObjects/Terrain.cpp" />
+		<Unit filename="CoreObjects/Terrain.h" />
+		<Unit filename="CoreObjects/Track.cpp" />
+		<Unit filename="CoreObjects/Track.h" />
+		<Unit filename="CoreObjects/TrackBase.cpp" />
+		<Unit filename="CoreObjects/TrackBase.h" />
+		<Unit filename="CoreObjects/medicalclinic.h" />
+		<Unit filename="CoreObjects/routebase.h" />
+		<Unit filename="CoreObjects/security.h" />
+		<Unit filename="ExtremeParkDev.cpp" />
+		<Unit filename="ExtremeParkDev.h" />
+		<Unit filename="Graphics/Animation.cpp" />
+		<Unit filename="Graphics/Animation.h" />
+		<Unit filename="Graphics/AnimationBase.cpp" />
+		<Unit filename="Graphics/Camera.cpp" />
+		<Unit filename="Graphics/Camera.h" />
+		<Unit filename="Graphics/Car.cpp" />
+		<Unit filename="Graphics/Car.h" />
+		<Unit filename="Graphics/ComplexMeshObject.cpp" />
+		<Unit filename="Graphics/ComplexMeshObject.h" />
+		<Unit filename="Graphics/ComponentObject.cpp" />
+		<Unit filename="Graphics/ComponentObject.h" />
+		<Unit filename="Graphics/ErrorImage.cpp" />
+		<Unit filename="Graphics/ErrorImage.h" />
+		<Unit filename="Graphics/FireAnimation.cpp" />
+		<Unit filename="Graphics/FireAnimation.h" />
+		<Unit filename="Graphics/Image.cpp" />
+		<Unit filename="Graphics/Image.h" />
+		<Unit filename="Graphics/LeavesObject.cpp" />
+		<Unit filename="Graphics/LeavesObject.h" />
+		<Unit filename="Graphics/Material.cpp" />
+		<Unit filename="Graphics/Material.h" />
+		<Unit filename="Graphics/Matrix16.cpp" />
+		<Unit filename="Graphics/Matrix16.h" />
+		<Unit filename="Graphics/MeshNode.cpp" />
+		<Unit filename="Graphics/MeshNode.h" />
+		<Unit filename="Graphics/ModelObject.cpp" />
+		<Unit filename="Graphics/ModelObject.h" />
+		<Unit filename="Graphics/ObjectBase.cpp" />
+		<Unit filename="Graphics/ObjectBase.h" />
+		<Unit filename="Graphics/ObjectFactory.cpp" />
+		<Unit filename="Graphics/ObjectFactory.h" />
+		<Unit filename="Graphics/ObjectNode.cpp" />
+		<Unit filename="Graphics/ObjectNode.h" />
+		<Unit filename="Graphics/ObjectTree.cpp" />
+		<Unit filename="Graphics/ObjectTree.h" />
+		<Unit filename="Graphics/PolyBase.cpp" />
+		<Unit filename="Graphics/PolyBase.h" />
+		<Unit filename="Graphics/PolyMesh.cpp" />
+		<Unit filename="Graphics/PolyMesh.h" />
+		<Unit filename="Graphics/QuadMeshObject.cpp" />
+		<Unit filename="Graphics/QuadMeshObject.h" />
+		<Unit filename="Graphics/QuadObject.h" />
+		<Unit filename="Graphics/Rail.cpp" />
+		<Unit filename="Graphics/Rail.h" />
+		<Unit filename="Graphics/SimpleMeshObject.cpp" />
+		<Unit filename="Graphics/SimpleMeshObject.h" />
+		<Unit filename="Graphics/SkyBowl.cpp" />
+		<Unit filename="Graphics/SkyBowl.h" />
+		<Unit filename="Graphics/StripMeshObject.cpp" />
+		<Unit filename="Graphics/StripMeshObject.h" />
+		<Unit filename="Graphics/Texture.cpp" />
+		<Unit filename="Graphics/Texture.h" />
+		<Unit filename="Graphics/TexturedMesh.cpp" />
+		<Unit filename="Graphics/TexturedMesh.h" />
+		<Unit filename="Graphics/TexturedStrip.cpp" />
+		<Unit filename="Graphics/TexturedStrip.h" />
+		<Unit filename="Graphics/Tiler.cpp" />
+		<Unit filename="Graphics/Tiler.h" />
+		<Unit filename="Graphics/Track.cpp" />
+		<Unit filename="Graphics/Track.h" />
+		<Unit filename="Graphics/TrackBase.cpp" />
+		<Unit filename="Graphics/TrackBase.h" />
+		<Unit filename="Graphics/Tree.cpp" />
+		<Unit filename="Graphics/Tree.h" />
+		<Unit filename="Graphics/VPoint.cpp" />
+		<Unit filename="Graphics/VPoint.h" />
+		<Unit filename="Graphics/ViewObject.cpp" />
+		<Unit filename="Graphics/ViewObject.h" />
+		<Unit filename="Graphics/objecttree.h" />
+		<Unit filename="People/Peeps.cpp" />
+		<Unit filename="People/Peeps.h" />
+		<Unit filename="People/Person.cpp" />
+		<Unit filename="People/Person.h" />
+		<Unit filename="Root/3DSHandler.cpp" />
+		<Unit filename="Root/3DSHandler.h" />
+		<Unit filename="Root/CamPath.cpp" />
+		<Unit filename="Root/CamPath.h" />
+		<Unit filename="Root/EPDException.cpp" />
+		<Unit filename="Root/EPDException.h" />
+		<Unit filename="Root/GameManager.cpp" />
+		<Unit filename="Root/GameManager.h" />
+		<Unit filename="Root/MS3DFile.cpp" />
+		<Unit filename="Root/MS3DFile.h" />
+		<Unit filename="Root/Physics.cpp" />
+		<Unit filename="Root/Physics.h" />
+		<Unit filename="Root/RouteVisitor.cpp" />
+		<Unit filename="Root/RouteVisitor.h" />
+		<Unit filename="Root/SceneEvent.cpp" />
+		<Unit filename="Root/SceneEvent.h" />
+		<Unit filename="Root/SerializerBase.h" />
+		<Unit filename="Root/XMLSerializer.cpp" />
+		<Unit filename="Root/XMLSerializer.h" />
+		<Unit filename="Scene/Scene.cpp" />
+		<Unit filename="Scene/Scene.h" />
+		<Unit filename="Settings/Settings.cpp" />
+		<Unit filename="Settings/Settings.h" />
+		<Unit filename="Types/MathStuff.cpp" />
+		<Unit filename="Types/MathStuff.h" />
+		<Unit filename="Types/Rect.h" />
+		<Unit filename="Types/String.cpp" />
+		<Unit filename="Types/String.h" />
+		<Unit filename="Types/Vector2.h" />
+		<Unit filename="Types/Vector3.h" />
+		<Unit filename="Window/Clock.cpp" />
+		<Unit filename="Window/Clock.h" />
+		<Unit filename="Window/Event.cpp" />
+		<Unit filename="Window/Event.h" />
+		<Unit filename="Window/GUIManager.cpp" />
+		<Unit filename="Window/GUIManager.h" />
+		<Unit filename="Window/Interface.cpp" />
+		<Unit filename="Window/Interface.h" />
+		<Unit filename="Window/LoadSave.cpp" />
+		<Unit filename="Window/SettingsWindow.cpp" />
+		<Unit filename="Window/SettingsWindow.h" />
+		<Unit filename="Window/Stats.cpp" />
+		<Unit filename="Window/Stats.h" />
+		<Unit filename="Window/ToolsWindow.cpp" />
+		<Unit filename="Window/ToolsWindow.h" />
+		<Unit filename="xml/tinyxml/tinystr.cpp" />
+		<Unit filename="xml/tinyxml/tinystr.h" />
+		<Unit filename="xml/tinyxml/tinyxml.cpp" />
+		<Unit filename="xml/tinyxml/tinyxml.h" />
+		<Unit filename="xml/tinyxml/tinyxmlerror.cpp" />
+		<Unit filename="xml/tinyxml/tinyxmlparser.cpp" />
+		<Unit filename="xml/tinyxml/xmltest.cpp" />
+		<Unit filename="xml/xml.cpp" />
+		<Unit filename="xml/xml.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

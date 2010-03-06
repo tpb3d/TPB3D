@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<GUILayout>
+    <Window Type="DefaultGUISheet" Name="frcs">
+        <Property Name="Text" Value="FRCS" />
+
+       <Window Type="WindowsLook/Button" Name="frcs/NewRide">
+            <Property Name="Text" Value="New Ride" />
+            <Property Name="UnifiedAreaRect" Value="{{0.02,0},{0.05,0},{0.38,0},{0.10,0}}" />
+            <Property Name="Tooltip" Value="Switch active page to selected" />
+        </Window>
+
+        <Window Type="WindowsLook/Listbox" Name="frcs/PartList">
+            <Property Name="UnifiedAreaRect" Value="{{0.40,0},{0.05,0},{0.99,0},{0.74,0}}" />
+            <Property Name="Tooltip" Value="A list of available tabs to experiment with" />
+        </Window>
+
+        <Window Type="WindowsLook/Button" Name="frcs/Place">
+            <Property Name="Text" Value="Place" />
+            <Property Name="UnifiedAreaRect" Value="{{0.40,0},{0.75,0},{0.69,0},{0.80,0}}" />
+            <Property Name="Tooltip" Value="Switch active page to selected" />
+        </Window>
+    </Window>
+</GUILayout>

@@ -1,0 +1,390 @@
+{\rtf1\ansi\ansicpg1252\deff0\deflang1033{\fonttbl{\f0\fswiss\fcharset0 Arial;}}
+{\*\generator Msftedit 5.41.21.2500;}\viewkind4\uc1\pard\f0\fs20 Welcome to the TPB3D Park Plaza\par
+alabamacajun Has entered the room\par
+slickdude[8:28:32 PM]: hello bama\par
+GermanTaco[8:28:36 PM]: hey bama\par
+alabamacajun[8:28:41 PM]: Hmm\par
+alabamacajun[8:28:44 PM]: hey\par
+slickdude[8:28:56 PM]: hey neeners at ya\par
+slickdude[8:28:58 PM]:\par
+alabamacajun[8:29:08 PM]: I have two sign ins for chats\par
+slickdude[8:29:10 PM]: cook a no show after his spat with doc\par
+slickdude[8:29:16 PM]: cook gone all day\par
+GermanTaco[8:29:28 PM]: i missed the excitement\par
+alabamacajun[8:29:35 PM]: I started to ask today and GT is just the man to answer\par
+slickdude[8:29:40 PM]: well it's over\par
+slickdude[8:29:50 PM]: ok\par
+GermanTaco[8:30:04 PM]: yes?\par
+alabamacajun[8:30:05 PM]: Nothing much, just a lot of talk to move the project ahead\par
+alabamacajun[8:30:23 PM]: On faces and triagles\par
+slickdude[8:30:23 PM]: yeah and moving it is\par
+alabamacajun[8:30:36 PM]: Is there a reason some said not to use Quads\par
+GermanTaco[8:30:38 PM]: awesome! okay\par
+GermanTaco[8:30:43 PM]: what about them>\par
+alabamacajun[8:30:57 PM]: *triangles\par
+slickdude[8:30:57 PM]: brb\par
+slickdude[8:31:14 PM]: polys\par
+alabamacajun[8:31:22 PM]: Polly?\par
+slickdude[8:31:32 PM]: polygons\par
+GermanTaco[8:31:33 PM]: not to use triangles and use quads? or the other way around?\par
+slickdude[8:31:39 PM]: those bog the system\par
+alabamacajun[8:31:50 PM]: Either way\par
+alabamacajun[8:32:02 PM]: Some believe that quads bog a system\par
+slickdude[8:32:18 PM]: i'm sure both do.\par
+slickdude[8:32:30 PM]: best to go as many alphas ???\par
+alabamacajun[8:32:42 PM]: It takes 4 to 6 points to make a square\par
+GermanTaco[8:32:39 PM]: I think it really depends on how the information is stored or something\par
+GermanTaco[8:32:45 PM]: I'm not sure really\par
+GermanTaco[8:33:04 PM]: 4 most of the time\par
+GermanTaco[8:33:08 PM]: or all?\par
+alabamacajun[8:33:23 PM]: In the trees we use quads so it only takes for points to make a leaf alpha\par
+slickdude[8:33:22 PM]: ask groovdafied.\par
+slickdude[8:33:30 PM]: want me to try and get him here?\par
+slickdude[8:33:43 PM]: brb\par
+alabamacajun[8:33:46 PM]: ok\par
+GermanTaco[8:34:00 PM]: It depends on the modeler being used doesnt it?\par
+alabamacajun[8:34:13 PM]: Slick, Go get some salsa and crackers for Polly\par
+GermanTaco[8:34:10 PM]: or the file\par
+alabamacajun[8:34:44 PM]: Triangles do best for facted planes and most modeling\par
+alabamacajun[8:35:02 PM]: I just wanted to be sure we were not setting a rule on no quads\par
+slickdude[8:35:19 PM]: groov got my pm to him.\par
+slickdude[8:35:26 PM]: maybe jonwil pops in here too.\par
+GermanTaco[8:35:31 PM]: oh okay makes sense\par
+alabamacajun[8:35:51 PM]: The main push is to keep CPU loads down and balance with the Graphics card\par
+alabamacajun[8:36:10 PM]: The CPU has at least 6 big tasks\par
+slickdude[8:36:21 PM]: well why not load in ram\par
+alabamacajun[8:36:36 PM]: 1 is to supply the graphics data of the park\par
+alabamacajun[8:37:24 PM]: 2 keep the oct trees sorted so that alphas are drawn correctly and only local objects are fully rendered.\par
+alabamacajun[8:37:41 PM]: 3 Run the animations and physics\par
+alabamacajun[8:38:00 PM]: 4 Run the park like and animate the peeps\par
+alabamacajun[8:38:21 PM]: 5 keep the network up to date on shared parks\par
+alabamacajun[8:38:41 PM]: 6 keep the piped parks in sync\par
+alabamacajun[8:39:10 PM]: Just a little insight into what goes on and the order is important\par
+alabamacajun[8:40:00 PM]: Ram is mostly used but unfortunatly Slick, when parks get large, swaps are just going to happen.\par
+drewyoman Has entered the room\par
+alabamacajun[8:40:20 PM]: hey\par
+slickdude[8:40:28 PM]: hence local park piping?\par
+drewyoman[8:40:30 PM]: hey everyone\par
+slickdude[8:40:34 PM]: heya drew\par
+drewyoman[8:40:48 PM]: how are the chats going tonight? any topics being discussed\par
+GermanTaco[8:40:51 PM]: hey\par
+alabamacajun[8:40:56 PM]: local and distant pipes\par
+alabamacajun[8:41:11 PM]: Quads vs Trigs\par
+GermanTaco[8:41:42 PM]: I dont really know the answer to that though\par
+GermanTaco[8:41:48 PM]: well as far as memory usage\par
+drewyoman[8:41:52 PM]: i see. so connecting tomorrowland with fantasyland type deal and connecting park A to park B\par
+alabamacajun[8:42:11 PM]: Quads work best for single parts where you want only 4 points.\par
+GermanTaco[8:42:19 PM]: I would think that Trigs are only 3 points, not 4\par
+GermanTaco[8:42:35 PM]: yeah that makes sense\par
+alabamacajun[8:42:46 PM]: strips of triangles work best for contouring like ride parts and land scaping\par
+GermanTaco[8:43:14 PM]: Now I see what you mean by using them for trees\par
+GermanTaco[8:43:18 PM]: yes\par
+slickdude[8:43:27 PM]: brb\par
+alabamacajun[8:43:35 PM]: Trigs are 3 but when you put two together to make a plane you end up sending 6 points in some cases\par
+GermanTaco[8:44:12 PM]: so that takes more time when you could simply use a quad\par
+alabamacajun[8:44:14 PM]: If you use a trig strip then you still get four pints because it loads in pairs.\par
+alabamacajun[8:44:21 PM]: Yes\par
+GermanTaco[8:44:20 PM]: right?\par
+GermanTaco[8:45:05 PM]: Okay\par
+alabamacajun[8:45:06 PM]: Meshes are different because we load a field of points then send indexes to tell the GPU which ones to use.\par
+GermanTaco[8:46:04 PM]: Oh okay\par
+alabamacajun[8:46:16 PM]: Drew, yeah, the pipes will allow you to slit a single park or connect parks\par
+GermanTaco[8:46:42 PM]: hold on. this internet...\par
+drewyoman[8:47:16 PM]: haha. thanks cajun. im just kinda sittin back and learnin if anything right now\par
+GermanTaco[8:47:23 PM]: sorry internet keeps crapping out\par
+alabamacajun[8:47:41 PM]: Think of parks as meshes on grand scales, you can seperate them\par
+slickdude[8:48:11 PM]: back\par
+alabamacajun[8:48:25 PM]: How we split them up should be on themes for local parks but not as a hard rule\par
+alabamacajun[8:48:40 PM]: No Rules, just Fun!\par
+GermanTaco[8:49:12 PM]: I like it\par
+slickdude[8:49:15 PM]: there are 2 types of park piping\par
+alabamacajun[8:49:18 PM]: The coasters are going to create a paradox\par
+drewyoman[8:49:23 PM]: so your thinking that ever serparate theme(land) will automatically become its own seperate park? and then just link them altogether later>\par
+alabamacajun[8:49:40 PM]: What if a coaster crosses from one pipe to another?\par
+slickdude[8:49:39 PM]: local for connecting small park sections to a disneyland or disneyworld sized park.\par
+slickdude[8:49:53 PM]: distant park piping is more like a webring of sorts\par
+alabamacajun[8:50:08 PM]: yeah\par
+GermanTaco[8:50:12 PM]: that would be cool\par
+slickdude[8:50:15 PM]: it uses the souvenir map with a list of distant web parks that you can forward to.\par
+GermanTaco[8:50:27 PM]: its possible right?\par
+GermanTaco[8:50:35 PM]: anything is actually\par
+GermanTaco[8:50:39 PM]: but will it be easy?\par
+slickdude[8:50:41 PM]: yes\par
+alabamacajun[8:50:51 PM]: It's got two answers\par
+slickdude[8:50:50 PM]: tracked rides can cross local pipes.\par
+slickdude[8:51:02 PM]: such as a monorail at disneyland\par
+alabamacajun[8:51:08 PM]: One happens if you are an observer\par
+alabamacajun[8:51:17 PM]: the other if you are on it\par
+slickdude[8:51:24 PM]: the monorail crosses fantasyland, tomorrowland and the main parking lot to the disney hotel.\par
+GermanTaco[8:51:33 PM]: brb\par
+alabamacajun[8:51:37 PM]: The later brings the conundrum\par
+slickdude[8:51:43 PM]: ok\par
+alabamacajun[8:52:20 PM]: You are in them A transitioning to theme B\par
+slickdude[8:52:37 PM]: yes\par
+drewyoman[8:52:57 PM]: so does only part of the ride stay in land A? or go continuously throughout all lands it passes?\par
+alabamacajun[8:53:03 PM]: The graphic system will be suddenly piling in a second load to pick up\par
+alabamacajun[8:53:41 PM]: Both will have to loaded until the trail.cars are inside only one\par
+alabamacajun[8:54:03 PM]: Warp tunnels might be an answer in the first release\par
+alabamacajun[8:54:16 PM]: just a tree or fence lined area\par
+alabamacajun[8:55:00 PM]: A lot of theory has been posted in docs but no code has been written\par
+slickdude[8:55:04 PM]: well actually.\par
+slickdude[8:55:41 PM]: the user whether they go on a monorail or trail path when they enter a piped section locally, they are handed or enter the park and exit the other one.\par
+slickdude[8:55:46 PM]: stat wise though\par
+slickdude[8:56:03 PM]: the overall connected park will identify the user in a park section.\par
+alabamacajun[8:56:36 PM]: They have to transfer the consist of passengers which is not a big deal\par
+slickdude[8:56:46 PM]: well that is because captain cook has been coding a cad program for over 3 years instead of a theme park.\par
+slickdude[8:57:19 PM]: as for distant park piping, an elaborate exit on a jetplane and you arrive at the selected park on the web.\par
+alabamacajun[8:57:39 PM]: Well the first order is bringing the FRCS and Terrain into fruition\par
+slickdude[8:57:54 PM]: agreed\par
+slickdude[8:58:02 PM]: less than 6 weeks now\par
+alabamacajun[8:58:11 PM]: Yeah, distant can have stewardices!\par
+drewyoman[8:58:11 PM]: will it be ready?\par
+slickdude[8:58:18 PM]: heck yeah\par
+alabamacajun[8:58:30 PM]: That is the FRCS and Landscaping\par
+slickdude[8:58:31 PM]: stewdarices...lol\par
+slickdude[8:58:45 PM]: break out the travel bubbly for me\par
+drewyoman[8:58:46 PM]: right. just seems to be a lot! haha\par
+drewyoman[8:58:51 PM]: i have faith of course\par
+slickdude[8:59:04 PM]: yeah I have great faith in bama\par
+alabamacajun[8:59:21 PM]: The push is moving to some form of functionality.\par
+do_the_ron Has entered the room\par
+drewyoman[8:59:27 PM]: hey\par
+slickdude[8:59:29 PM]: hiya do\par
+do_the_ron[8:59:38 PM]: hey\par
+slickdude[8:59:40 PM]: very cool bama.\par
+alabamacajun[8:59:43 PM]: Currently, I'm the only one to have loaded actual rides.\par
+alabamacajun[8:59:49 PM]: hey\par
+csf Has entered the room\par
+alabamacajun[9:00:10 PM]: Or at least parts of one with Stars Planes\par
+slickdude[9:00:15 PM]: hiya csf\par
+slickdude[9:00:23 PM]: now we're rocking tonight.\par
+csf[9:00:24 PM]: hi\par
+drewyoman[9:00:27 PM]: hey csf\par
+alabamacajun[9:00:42 PM]: Yeah and the wife just called @Arrg\par
+drewyoman[9:00:45 PM]: zoom! yay planes\par
+alabamacajun[9:00:45 PM]: brb\par
+slickdude[9:00:56 PM]: ok\par
+slickdude[9:01:05 PM]: so dudes, this is hot now.\par
+slickdude[9:01:11 PM]: lotsa of our friends here.\par
+do_the_ron[9:01:13 PM]: yup\par
+drewyoman[9:01:26 PM]: ive never seen it this active\par
+slickdude[9:01:30 PM]: Hey GT that parachute jump will be exciting once you start posting pics.\par
+slickdude[9:01:44 PM]: it will get more active...trust me\par
+drewyoman[9:02:26 PM]: hey slick, regarding the rocket rods i brought up today.\par
+slickdude[9:02:32 PM]: yes\par
+drewyoman[9:02:34 PM]: do you know how long disney has a trademark on the cars for?\par
+slickdude[9:02:41 PM]: they are trademarked you know.\par
+slickdude[9:02:50 PM]: trademarks are forever\par
+slickdude[9:02:59 PM]: as long as they pay on it they own it.\par
+drewyoman[9:03:15 PM]: that doesnt quiet make sense though\par
+GermanTaco[9:03:18 PM]: just change the car a little bit\par
+slickdude[9:03:18 PM]: better to make rocketrods a bit different and call them rocket hotrods.\par
+GermanTaco[9:03:24 PM]: give it a new name\par
+slickdude[9:03:31 PM]: well on certain patents.\par
+drewyoman[9:03:35 PM]: they are not using them ever again as it was a defunct attraction\par
+GermanTaco[9:03:41 PM]: or use the idea and make something totally new\par
+drewyoman[9:03:44 PM]: but yes i do agree.\par
+drewyoman[9:03:53 PM]: rocket hotrods eh?\par
+slickdude[9:03:57 PM]: disney also has copyright on the art work or trademarked the name or patent drawing as a logo\par
+alabamacajun[9:04:12 PM]: Yeah, as long as it look more original\par
+slickdude[9:04:13 PM]: same on their variation of the nemo sub...\par
+drewyoman[9:04:14 PM]: mix between futuristic/50s prime time\par
+do_the_ron[9:04:24 PM]: rocket hotrods...lame yet EPIC\par
+slickdude[9:04:25 PM]: varies from the original jules verne version.\par
+alabamacajun[9:04:28 PM]: I'll be back later\par
+slickdude[9:04:40 PM]: okay bama hurray back\par
+slickdude[9:04:44 PM]: we'll be here\par
+drewyoman[9:04:45 PM]: see ya cajun!\par
+slickdude[9:04:55 PM]: ragin'cajun\par
+GermanTaco[9:04:56 PM]: k cya\par
+slickdude[9:04:59 PM]:\par
+GermanTaco[9:05:01 PM]: haha\par
+do_the_ron[9:05:04 PM]: see ya\par
+slickdude[9:05:08 PM]: and a big neener too.\par
+slickdude[9:05:31 PM]: the technojump should be an easy one to knock out.\par
+slickdude[9:05:55 PM]: I have copied the sound recording, so we have the whish hydraulics noise for your ride gt\par
+do_the_ron Has exited the room\par
+GermanTaco[9:05:59 PM]: yeah should take no time\par
+slickdude[9:06:08 PM]: anyone talk to star ranger4 yet\par
+slickdude[9:06:21 PM]: do did the ron and split...lol\par
+drewyoman[9:06:21 PM]: nope. where has he been for....ever?\par
+GermanTaco[9:06:28 PM]: I just started on the parachute drop and all i have left is a few details and texturing\par
+slickdude[9:06:36 PM]: said he would be gone for 2 weeks.\par
+slickdude[9:06:45 PM]: I think he got weeks mixed up with years\par
+slickdude[9:06:54 PM]: yeah\par
+drewyoman[9:07:05 PM]: haha. well he has enough liver to last him a few years\par
+slickdude[9:07:09 PM]: on the parachute drop you'll need several parachutes for the ride.\par
+slickdude[9:07:22 PM]: i gave him raw liver\par
+slickdude[9:07:27 PM]: YUK!\par
+coasterdl Has entered the room\par
+slickdude[9:07:45 PM]: hiya coasterdl\par
+GermanTaco Has entered the room\par
+GermanTaco[9:07:49 PM]: he deserves it in my mind\par
+GermanTaco[9:07:52 PM]: everyone needs a break\par
+coasterdl[9:07:52 PM]: hi\par
+slickdude[9:07:58 PM]: what happened to GT...oh there he is LOL\par
+drewyoman[9:08:03 PM]: haha. on that note i must be gettin along. i have packin to do for my trip for six flags great america!\par
+slickdude[9:08:06 PM]: yeah\par
+slickdude[9:08:14 PM]: let him take a while off I guess\par
+drewyoman[9:08:18 PM]: i will talk to everyone later!\par
+slickdude[9:08:25 PM]: we got a whole community to pick up the pace\par
+slickdude[9:08:30 PM]: later drew\par
+Germantaco[9:08:38 PM]: sorry\par
+Germantaco[9:08:42 PM]: internet again\par
+slickdude[9:08:52 PM]: i wonder if jonwil is popping in here.\par
+drewyoman Has exited the room\par
+slickdude[9:09:01 PM]: no problem dude\par
+slickdude[9:09:35 PM]: yeah I can't wait to see that tower. It's like 261 to 281 feet tall.\par
+Germantaco[9:09:37 PM]: that would be cool\par
+slickdude[9:09:43 PM]: the eiffel tower of america\par
+csf[9:09:48 PM]: slick I know your trying to get cook to get more coders involved but I think we need to watch jumping on him. I think for the most part he knows what he is talking about....\par
+slickdude[9:09:58 PM]: lemme see if jw is online brb\par
+coasterdl[9:10:20 PM]: it does seem like most of the pressure is on him\par
+slickdude[9:10:45 PM]: on who?\par
+coasterdl[9:10:53 PM]: cook\par
+jonwil Has entered the room\par
+slickdude[9:11:09 PM]: uh cook is making a cad program.\par
+slickdude[9:11:22 PM]: cook jumped all over docj this morning.\par
+coasterdl[9:11:30 PM]: personally, i view TPB as more of a cad program anyway\par
+slickdude[9:11:35 PM]: it was so bad I had to move it to the coder's hideout.\par
+csf[9:11:36 PM]: well what people are asking for is more like a cad program\par
+coasterdl[9:11:40 PM]: at least in terms of programing\par
+slickdude[9:11:42 PM]: I don't think that was called for.\par
+smallish Has entered the room\par
+slickdude[9:11:47 PM]: welcome JW\par
+slickdude[9:12:00 PM]: nope not at all csf\par
+csf[9:12:01 PM]: ever play No Limits? cant get more cad then that\par
+slickdude[9:12:05 PM]: welcome smallish\par
+Germantaco[9:12:10 PM]: wow we have everyone in here\par
+coasterdl[9:12:12 PM]: i like No Limits\par
+slickdude[9:12:15 PM]: what people want csf is to make their parks.\par
+smallish[9:12:29 PM]: 7 people is everyone?\par
+slickdude[9:12:29 PM]: cook is making a CAD program, tpb3d is not that.\par
+csf[9:12:32 PM]: yes but the detail people want will not be do able in a game\par
+csf[9:12:38 PM]: things like the FRC\par
+slickdude[9:12:38 PM]: Like docj says, it is a game of sorts.\par
+csf[9:12:43 PM]: free form tracks\par
+Germantaco[9:12:48 PM]: usually its like 3\par
+csf[9:12:48 PM]: the bulding enerator\par
+slickdude[9:12:53 PM]: no people coming and going tonight smallish.\par
+Germantaco[9:12:57 PM]: so its big to mke\par
+csf[9:12:59 PM]: there all more cad and 3d modoling related\par
+coasterdl[9:13:01 PM]: cant we just call it something in the middle?\par
+csf[9:13:05 PM]: then gaming related\par
+coasterdl[9:13:06 PM]: thats basically what it is\par
+slickdude[9:13:23 PM]: well yes but, they must accomodate a game/slash modeler, but not strictly a hard to use cad package.\par
+csf[9:13:30 PM]: also as for the full screen thing. I dont play rct3 full scree.....\par
+csf[9:13:33 PM]: I play it in a window\par
+slickdude[9:13:35 PM]: tpb3d was never intenbded to only be a cad package.\par
+csf[9:13:37 PM]: so i can multie task\par
+slickdude[9:13:48 PM]: that's fine\par
+csf[9:13:55 PM]: it wont be just a cad program\par
+slickdude[9:13:59 PM]: I have no issue whether it is full screen or window.\par
+coasterdl[9:14:04 PM]: i never uses RCT3 full screen anyway\par
+coasterdl[9:14:13 PM]: used*\par
+slickdude[9:14:18 PM]: well according to The_Cook it is a cad package\par
+csf[9:14:33 PM]: actually it looks better RCT3 not full screen cause my monitor is wide screen\par
+smallish[9:14:36 PM]: Full screen does increase performance\par
+slickdude[9:14:44 PM]: and unfortunately that is not the direction the community wants the project to go.\par
+csf[9:14:58 PM]: well tpb3d is much closer to a cad program then a game cause of all they physics involved in rieds\par
+csf[9:15:07 PM]: were making the rieds free form\par
+slickdude[9:15:08 PM]: well Jonwil and Bama are here and while bama is away for a bit he will be back.\par
+csf[9:15:12 PM]: like a 3D modoler\par
+slickdude[9:15:15 PM]: Let's hear their thoughts too.\par
+csf[9:15:20 PM]: the buldinger genrator is presdeual\par
+slickdude[9:15:26 PM]: not quite.\par
+slickdude[9:15:53 PM]: The current FRCS is esxtremely difficult to use in fact the program coding has had many issues as well.\par
+csf[9:15:56 PM]: well its not a full 3d modeler but when the game is done it will be prety darn close\par
+slickdude[9:16:14 PM]: it shouldn't go that far though.\par
+csf[9:16:20 PM]: ever animate in a 3D program using joint bone animation?\par
+slickdude[9:16:33 PM]: it still remains the game more than a full blown CAD package.\par
+csf[9:16:43 PM]: its basicly the same as the FRC just the FRC makes it much more user frendly to animate\par
+csf[9:16:54 PM]: its nether fully game or fully cad\par
+csf[9:17:12 PM]: cause we will never have all the laws of physics a cad pogram would have\par
+csf[9:17:15 PM]: or it will be way to slow\par
+slickdude[9:17:55 PM]: slow do to a lot of bad coding perhaps???\par
+csf[9:18:16 PM]: no the amount of coded need is what makes it slow\par
+slickdude[9:18:19 PM]: first off, the reason many other coders didn't jump in is a thing called QT.\par
+smallish[9:18:20 PM]: No, just a lot of calculations\par
+slickdude[9:18:50 PM]: why aren't we using a better and more open system to gain more coders, that is a major question.\par
+slickdude[9:19:02 PM]: well things are happening.\par
+csf[9:19:04 PM]: there are some problems that even with the best programming are basically un solvable even for supper computters cause of the caculations neded\par
+csf[9:19:20 PM]: Truly I am tired of the bashing on qt...\par
+csf[9:19:25 PM]: qt is not the problom\par
+csf[9:19:35 PM]: I have gotten a pice of the game to compile\par
+csf[9:19:45 PM]: and got another fully program to compile with qt in the past\par
+slickdude[9:19:48 PM]: well that remains debateable amongst the coders themselves.\par
+csf[9:19:52 PM]: and have played a bit with my own coding in qt\par
+csf[9:20:13 PM]: it that tpb3d is very complet and along with qt it needs a bunch of other programs and libaries to compile\par
+csf[9:20:26 PM]: I think people are just jumping on qt as the isue\par
+slickdude[9:20:31 PM]: well my main concern is 3 plus years and nada\par
+csf[9:20:37 PM]: when its not just a qt isue that makes it hard to compile\par
+slickdude[9:20:44 PM]: time to start getting the community their game\par
+csf[9:20:58 PM]: slick has any one else gotten tpb3d to compile?\par
+slickdude[9:21:11 PM]: as a park builder I want to be able to after 3 plus years finally get a park to begin working on.\par
+csf[9:21:14 PM]: you cant program for a program you can compile\par
+csf[9:21:21 PM]: and people are not trying to compile it\par
+slickdude[9:21:23 PM]: not to my knowledge\par
+csf[9:21:25 PM]: and just bashing qt\par
+csf[9:21:38 PM]: before they got it to compile once\par
+csf[9:21:51 PM]: get the game to compile then talk about it if you think its no good\par
+csf[9:22:03 PM]: cook will work with any one that has question on compiling\par
+slickdude[9:22:07 PM]: I am not bashing it, just that others don't like QT and especially have a hard on for microsoft\par
+csf[9:22:12 PM]: heck he had no problom helping me .....\par
+slickdude[9:22:44 PM]: not saying it's no good, just saying it's over 3 years and "Where's the Beef!"\par
+slickdude[9:23:04 PM]: not questioning Brian's helping you either.\par
+Germantaco[9:23:09 PM]: haha\par
+csf[9:23:11 PM]: I want to know where my game is too....\par
+slickdude[9:23:25 PM]: but ask the other guys here if they would like a working game and you know their answers.\par
+csf[9:23:28 PM]: but I want to know where our other coders are ....\par
+coasterdl Has exited the room\par
+slickdude[9:24:38 PM]: they are here actually\par
+csf[9:26:19 PM]: yes and I know some of them dont have much time (and trust me I understand I have very little time my self) but I have yet to see AC or jonwill get the game to compiling\par
+csf[9:26:29 PM]: and if there not compiling it they cant write code for it\par
+slickdude[9:28:30 PM]: well magic happens often when you least expect it dude\par
+coasterdl Has entered the room\par
+slickdude[9:28:52 PM]: csf, ever feel you are on the wrong side of history\par
+Germantaco[9:29:00 PM]: whats up with my internet!\par
+slickdude[9:29:06 PM]: history has a way of happening...\par
+Germantaco[9:29:10 PM]: I think I'm back...\par
+csf[9:29:17 PM]: I cant say I am the greatest coder or I would be helping cook more then again I have only been coding for 2 years but trust me I know a few things and have worked on some prety complex programs\par
+coasterdl[9:29:22 PM]: mines being wierd too\par
+slickdude[9:29:55 PM]: well gt you haven't checked out yet.\par
+slickdude[9:30:02 PM]: coasterdl just popped in here\par
+csf[9:30:09 PM]: one pluse of NY we have great internet\par
+slickdude[9:30:50 PM]: working here great so far.\par
+Germantaco[9:30:52 PM]: I think its my browser\par
+slickdude[9:31:05 PM]: what browser you using?\par
+Germantaco[9:31:22 PM]: just Safari\par
+slickdude[9:31:31 PM]: i use firefox 3.5.3 right now, no issues.\par
+Germantaco[9:31:35 PM]: should probably use firefox maybe\par
+Germantaco[9:31:39 PM]: yeah\par
+slickdude[9:32:15 PM]: that's right gt ur on mac right\par
+Germantaco[9:32:27 PM]: yep love em\par
+slickdude[9:32:45 PM]: ah ok\par
+csf[9:32:48 PM]: safari for mac gives you probloms?\par
+slickdude[9:32:55 PM]: well windows firefox is working fine here.\par
+Germantaco[9:33:09 PM]: it might not be safari but who knows\par
+slickdude[9:33:14 PM]: csf is also on mac i think\par
+Germantaco[9:33:17 PM]: dont know what to blame\par
+Germantaco[9:33:23 PM]: yeah\par
+coasterdl Has exited the room\par
+csf[9:34:04 PM]: I am on safra on a mac right now\par
+slickdude[9:35:37 PM]: i use firefox almost all the time.\par
+csf[9:35:39 PM]: technicaly on am on 2 computters\par
+slickdude[9:35:43 PM]: It works great for me.\par
+csf[9:35:58 PM]: cause my profesor is making us code some thing in vb6 lol\par
+csf[9:36:16 PM]: I like ff to and I think for pc it wins but I really like the mac safri too\par
+slickdude[9:36:43 PM]: well your sfri seems stable csf\par
+Germantaco[9:36:53 PM]: probably my internet\par
+Germantaco[9:36:58 PM]: its been fine for now\par
+csf[9:40:12 PM]: vb6 is such a pain lol\par
+coasterdl Has entered the room\par
+csf[9:40:34 PM]: its to primitive for me lol\par
+slickdude[9:40:34 PM]: wb cdl\par
+coasterdl[9:40:46 PM]: thanks...\par
+slickdude[9:41:31 PM]: np\par
+slickdude[9:43:38 PM]: well i don't code.\par
+csf[9:44:33 PM]: lets just say I think there are 4 or 5 newer versons of vb\par
+}
+ 
