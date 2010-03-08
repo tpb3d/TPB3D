@@ -44,13 +44,13 @@ void RotationHub::Update(int dt)
    {
       mRun--;
       mIdle = 0;
-      Integrate ((float)dt);
+      Integrate (1);//(float)dt);
       mvAngle.y = mPosition;
    }
    else if( mIdle > 0)
    {
       mIdle--;
-      Integrate ((float)dt);
+      Integrate (1);//(float)dt);
       mvAngle.y = mPosition;
    }
    else
@@ -58,12 +58,12 @@ void RotationHub::Update(int dt)
       if(this->mVelocity > 0)
       {
          SetDestinVelocity( 0 );
-         mIdle = 300;
+         mIdle = 28*dt;
       }
       else
       {
-         SetDestinVelocity (90);
-         mIdle = 600;
+         SetDestinVelocity (60);
+         mIdle = 60*dt;
       }
    }
 }

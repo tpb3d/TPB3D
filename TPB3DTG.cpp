@@ -113,6 +113,10 @@ main ()
             pInterface->GetStats().SetPopulation( thePark.GetPopulation() );
             pInterface->Update(10);
             break;
+         case 2:
+            thePark.Update (5, pInterface->GetTimeOfDay());
+            break;
+            
          default:
             static int cc_count = 30; //only once in a while
             if( cc_count < 1 )
@@ -124,7 +128,6 @@ main ()
             cycle = 0;
             break;
          }
-         thePark.Update (60, pInterface->GetTimeOfDay());
          // end update scope
       }
       std::cout << mev.IsRunning() << "\n";

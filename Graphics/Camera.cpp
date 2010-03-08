@@ -49,7 +49,7 @@ const GLfloat SpecRef[]= {  0.45f, 0.55f, 0.75f, 1.0f };
 Camera * Camera::mpInstance = NULL;
 
 Camera::Camera ()
-:  Body (1280, 720)
+:  Body (960, 720)
 {
    sf::WindowSettings Settings;
    Settings.DepthBits         = 24; // Request a 24 bits depth buffer

@@ -69,17 +69,17 @@ void Park::Update (float dt, int timeOfDay)
 {
    static int delay = 5; // playing physics
 
-   if( --delay > 0 )
-   {
-      return;
-   }
-   delay = 3;
    mpTheTree->Update(dt);
    mGhostObject.GetPathNo();
    mGhostObject.Update (this);
 
    if( mCurPoint <= mPoints )
    {
+      if( --delay > 0 )
+      {
+         return;
+      }
+      delay = 2;//dt;
       if( mCurPoint < mPoints )
       {
          //m_xcam = m_VPoints[m_CurPoint].x;

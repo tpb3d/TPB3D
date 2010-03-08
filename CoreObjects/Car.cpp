@@ -49,9 +49,9 @@ int Car::Render( int lod ) // render returning the poly count
 void Car::Draw()
 {
 	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
-   glTranslatef( m_vPosition.x, m_vPosition.y+1.5f, m_vPosition.z );										// Move Left 1.5 Units And Into The Screen 6.0
-	glRotatef(m_vAngle.x,1.0f,0.0f,0.0f);
+   glTranslatef( m_vPosition.x, m_vPosition.y+0.5f, m_vPosition.z );										// Move Left 1.5 Units And Into The Screen 6.0
 	glRotatef(-m_vAngle.y,0.0f,1.0f,0.0f);
+	glRotatef(m_vAngle.x,1.0f,0.0f,0.0f);
 	glRotatef(m_vAngle.z,0.0f,0.0f,1.0f);
 
    for( int ix = 0; ix < m_PartsCount; ++ix )

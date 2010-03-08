@@ -3,7 +3,7 @@
 	ProjectType="Visual C++"
 	Version="8.00"
 	Name="ThemeParkBuilder3DTG"
-	ProjectGUID="{E8AF950B-C382-4F85-8E66-53485E607759}"
+	ProjectGUID="{3D5A176D-A9CE-431C-8B8D-2903939D00C9}"
 	RootNamespace="HighRise"
 	Keyword="Win32Proj"
 	>
