@@ -15,44 +15,44 @@
  */
 
 #pragma once
-#ifndef _ROTPHYSICS_H
-#define _ROTPHYSICS_H
+#ifndef _SERVOPHYSICS_H
+#define _SERVOPHYSICS_H
 
-class RotationPhysics
+class ServoPhysics
 {
 protected:
    bool  mIsMoving;
-   float mTime;
-   float mTimeTotal;
+   //float mTime;
+   //float mTimeTotal;
    float mPosition;
-   float mDestinedVelocity;
+   float mDesiredAngle;
    float mVelocity;
-   float mAcceleration;
+   //float mAcceleration;
    float mMass;
-   float mDragRatio;     // this controls speed up and slowdown rates
+   //float mDragRatio;     // this controls speed up and slowdown rates
    float mWeight;        // this amplifies acceleration and deminishes deceleration
 
 public:
    // CTOR
-   RotationPhysics (float mDestinedVelocity, float drag, float weight, float mass);
+   ServoPhysics (float mDestinedAngle, float weight, float mass);
 
    float Velocity() { return mVelocity; }
-   float Acceleration() { return mAcceleration; }
+   //float Acceleration() { return mAcceleration; }
    float Mass() { return mMass; }
    float Position() { return mPosition; }
    void SetMass (float mass) { mMass = mass; }
-   void SetAcceleration (float acc) { mAcceleration = acc; }
+   //void SetAcceleration (float acc) { mAcceleration = acc; }
    void SetWeight (float weight) { mWeight = weight; }
-   void SetDestinVelocity (float destvel) { mDestinedVelocity = destvel; }
+   void SetDesiredAngle (float destvel) { mDesiredAngle = destvel; }
    void SetPosition (float pos) { mPosition = pos; }
 
    // Mothods
-   void Freeze() { mVelocity = mAcceleration = 0; }  // laws of physics ignored
-   void Kill () { mAcceleration = mVelocity / 10; }  // fast stop
+   void Freeze() { mVelocity = 0; }  // laws of physics ignored
+   void Kill () { mVelocity = 0; }  // fast stop
    void Stop ();
    
    void DebugPrint ();
    void Integrate (float dt);
 };
 
-#endif // _ROTPHYSICS_H
+#endif //  _SERVOPHYSICS_H

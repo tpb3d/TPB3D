@@ -266,8 +266,10 @@ void Camera::InitLighting()
 
 void Camera::DrawModel (Scene* pModel)   // 3d interface objects
 {
-   glEnable (GL_LIGHTING);
+	//glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
+   //glLoadIdentity();									// Reset The Projection Matrix
    glMatrixMode(GL_MODELVIEW);
+   glEnable (GL_LIGHTING);
    glPushMatrix();
    {                       // brackets just keep the code in push and pop uniform
       glEnable (GL_TEXTURE_2D);

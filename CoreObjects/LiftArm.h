@@ -2,7 +2,7 @@
 //  Copyright (C)2010 Ralph Daigle.   All rights reserved.
 //  Licensed according to the GPL v3.0
 //
-//  RotationHub class
+//  LiftArm class
 //
 //  You should have received a copy of the GNU General Public License
 //  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
@@ -14,20 +14,21 @@
 */
 
 #pragma once
-#include "Hub.h"
-#include "../Physics/RotationPhysics.h"
+#include "RideNode.h"
+#include "../Physics/ServoPhysics.h"
 
-class RotationHub : public Hub, public RotationPhysics
+class LiftArm : public RideNode, public ServoPhysics, public TexturedMesh
 {
    int mIdle;
    int mRun;
-   float mDesiredSpeed;
+   int mSides;
+   //float mDesiredAngle;
+   float mWidth;
+   float mLength;
 public:
-   RotationHub(int ID, float height, short sides, const char* TexName );
-   ~RotationHub(void);
-
-   void SetYPosition(float y) { mvPosition.y = y; }
-   void SetDesiredSpeed (float ds) { mDesiredSpeed = ds; }
+   LiftArm(int ID, float length, float width, const char* TexName );
+   ~LiftArm(void);
+   void SetDesiredAngle (float ang) { mDesiredAngle = ang; }
    void Render();
    void Update(int dt);
    void Draw ();

@@ -73,11 +73,11 @@ void Hub::Render()
    for( int idx = 0; idx < mSides; ++idx )
    {
       double dTheta = M_PI/180 * dRad;
-      CVPoint pt (cos(dTheta) * this->mRadii[0], mvPosition.y, sin(dTheta)* this->mRadii[0]);
+      CVPoint pt (cos(dTheta) * this->mRadii[0], 0, sin(dTheta)* this->mRadii[0]);
       sf::Vector3f temp = pt.GetVector3f();
       AddPoint (temp);
       dRad += dDeg;
-      pt = CVPoint (cos(dTheta) * this->mRadii[1], mvPosition.y + mHeight, sin(dTheta)* this->mRadii[1]);
+      pt = CVPoint (cos(dTheta) * this->mRadii[1], mHeight, sin(dTheta)* this->mRadii[1]);
       temp = sf::Vector3f (pt.GetVector3f());
       AddPoint (temp);
    }

@@ -51,7 +51,7 @@ void RotationHub::Draw()
  	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
    glTranslatef( mvPosition.x, mvPosition.y, mvPosition.z );										// Move Left 1.5 Units And Into The Screen 6.0
 	glRotatef(mvAngle.x,1.0f,0.0f,0.0f);
-	glRotatef(-mvAngle.y,0.0f,1.0f,0.0f);
+	glRotatef(mvAngle.y,0.0f,1.0f,0.0f);
 	glRotatef(mvAngle.z,0.0f,0.0f,1.0f);
 
    TexturedMesh::Draw();
@@ -103,8 +103,11 @@ void RotationHub::Update(int dt)
       else
       {
          SetDestinVelocity (mDesiredSpeed);
-         mIdle = 60*dt;
+         mRun = 60*dt;
       }
    }
-   RideNode::Update (int (mVelocity));
+   if(this->mVelocity > 0)
+   {
+      RideNode::Update (int (mVelocity));
+   }
 }

@@ -702,6 +702,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CoreObjects\LiftArm.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\LiftArm.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CoreObjects\LinearActuator.h"
 				>
 			</File>
@@ -1091,6 +1099,14 @@
 			</File>
 			<File
 				RelativePath="..\Physics\RotationPhysics.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Physics\ServoPhysics.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Physics\ServoPhysics.h"
 				>
 			</File>
 		</Filter>

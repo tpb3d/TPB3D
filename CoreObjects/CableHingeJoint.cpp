@@ -57,6 +57,7 @@ void CableHingeJoint::Draw()
    glTranslatef( mvPosition.x, mvPosition.y, mvPosition.z );
 	glRotatef(mAngle,0.0f,0.0f,1.0f);
    TexturedStrip::Draw();
+   glTranslatef( mV2.x, mV2.y, mV2.z );
    RideNode::Draw(); 
    glPopMatrix();
 }

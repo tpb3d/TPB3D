@@ -38,8 +38,8 @@ void CarouselAssembly::PresetCrank()
       double dTheta = M_PI/180 * dRad;
       CVPoint pt (cos(dTheta) * 1.0, 0, sin(dTheta)* 1.0);
       dRad += dDeg;
-      mRockAngle[ix] = pt.x;
-      mHeights[ix] = pt.y;
+      mRockAngle[ix] = pt.x * 2;
+      mHeights[ix] = pt.z*0.5f;
    }
 }
 // end crank code
@@ -60,6 +60,14 @@ CarouselAssembly::~CarouselAssembly (void)
 {
 }
 
+void CarouselAssembly::Update(int dt)
+{
+   mCrankPos1+=1;
+   if( mCrankPos1 > 35) mCrankPos1 -= 36;
+   mCrankPos2+=1;
+   if( mCrankPos2 > 35) mCrankPos2 -= 36;
+}
+
 void CarouselAssembly::Draw()
 {
  	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
@@ -68,12 +76,26 @@ void CarouselAssembly::Draw()
 	glRotatef(-mvAngle.y,0.0f,1.0f,0.0f);
 	glRotatef(mvAngle.z,0.0f,0.0f,1.0f);
    TexturedStrip::Draw();
-   RideNode::Draw();
+   RideNode::RideNodeIterator ir;
+   float pos = 0;
+   float ang = 0;
+   int cc = 0;
+   glTranslatef( 0, -13.125, 0 );										// Move Left 1.5 Units And Into The Screen 6.0
+   for (ir = mBaseParts.begin(); ir != mBaseParts.end(); ir++)
+   {
+      int cp = (cc & 0x01) ? mCrankPos1 : mCrankPos2;
+      cc++;
+      ang = mRockAngle[cp];
+      pos = mHeights[cp];
+    	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
+      glTranslatef( 0, pos, 0 );										// Move Left 1.5 Units And Into The Screen 6.0
+   	glRotatef(ang,0.0f,0.0f,1.0f);
+      RideNode* pB = *(ir);
+      pB->Draw ();
+      glPopMatrix();
+   }
+//   RideNode::Draw();
    glPopMatrix();
-   if( mCrankPos1 > 35) mCrankPos1 = 0;
-   else mCrankPos1++;
-   if( mCrankPos2 > 35) mCrankPos2 = 0;
-   else mCrankPos2++;
 }
 
 void CarouselAssembly::DrawSelectionTarget()

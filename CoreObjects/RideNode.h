@@ -17,12 +17,12 @@ class SerializerBase;
 
 class RideNode
 {
+protected:
    typedef std::vector<RideNode*> RideNodeVector;
    typedef std::vector<RideNode*>::iterator RideNodeIterator;
 //   typedef std::vector<ObjectBase*> SectionVector;
 //   typedef std::vector<ObjectBase*>::iterator SectionIterator;
 
-private:
    RideNodeVector mBaseParts; // temp hardcode
 //   SectionVector mMeshes;
 protected:

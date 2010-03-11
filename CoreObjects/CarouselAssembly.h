@@ -39,6 +39,7 @@ public:
    CarouselAssembly (int CarouselAssemblyID, float offset, float depth, float length, float angle);
    ~CarouselAssembly (void);
 
+   virtual void Update(int dt);
    virtual void Render();
    virtual void Draw();
    virtual void DrawSelectionTarget(); // base can't draw
