@@ -21,8 +21,12 @@ class RotationHub : public Hub, public RotationPhysics
 {
    int mIdle;
    int mRun;
+   float mDesiredSpeed;
 public:
    RotationHub(int ID, float height, short sides, const char* TexName );
    ~RotationHub(void);
+   void SetDesiredSpeed (float ds) { mDesiredSpeed = ds; }
+   void Render();
    void Update(int dt);
+   void Draw ();
 };

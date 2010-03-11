@@ -12,7 +12,7 @@
 #include "PivotJoint.h"
 
 PivotJoint::PivotJoint( int ID )
-:  JointBase( ID)
+:  JointBase( ID, 2)
 {
 }
 

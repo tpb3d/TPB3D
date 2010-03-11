@@ -10,12 +10,29 @@
 
 
 #pragma once
+#include "RideNode.h"
 #include "../Graphics/ObjectBase.h"
+#include "../Graphics/TexturedStrip.h"
 
-class Deck : public ObjectBase
+class Deck : public RideNode, public TexturedStrip
 {
+   float mRadii[2];
+   short mSides;
+   short mSections;
+   std::string mTexName;
 
 public:
-   Deck(int ID );
+   Deck (float innerRadius, float outerRadius, short sides, const char* TexName);
    ~Deck(void);
+
+   ObjectBase* Clone( );
+   void IncreseSides();
+   void DecreseSides();
+   virtual void Update(int dt);
+   void Render();
+   void Draw();
+   void DrawSelectionTarget();
+
+   void Load(SerializerBase& ser);
+   void Save(SerializerBase& ser);
 };

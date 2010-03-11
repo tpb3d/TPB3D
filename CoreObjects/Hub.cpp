@@ -53,13 +53,6 @@ Hub::Hub (float height, short sides, const char* TexName)
    mSections = 2; // some rides may have more
    mRadii[0] = 2;
    mRadii[1] = 1.9f;
-   Render();
-   mvPosition.x = 10;
-   mvPosition.y = 1;
-   mvPosition.z = 90;
-   mvAngle.x = 0;
-   mvAngle.y = 0;
-   mvAngle.z = 0;
 }
 
 Hub::~Hub(void)
@@ -68,15 +61,8 @@ Hub::~Hub(void)
 
 void Hub::Draw()
 {
- 	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
-   glTranslatef( mvPosition.x, mvPosition.y, mvPosition.z );										// Move Left 1.5 Units And Into The Screen 6.0
-	glRotatef(mvAngle.x,1.0f,0.0f,0.0f);
-	glRotatef(-mvAngle.y,0.0f,1.0f,0.0f);
-	glRotatef(mvAngle.z,0.0f,0.0f,1.0f);
-
    TexturedMesh::Draw();
    RideNode::Draw();
-   glPopMatrix();
 }
 
 void Hub::Render()
@@ -87,11 +73,11 @@ void Hub::Render()
    for( int idx = 0; idx < mSides; ++idx )
    {
       double dTheta = M_PI/180 * dRad;
-      CVPoint pt (cos(dTheta) * this->mRadii[0], 0, sin(dTheta)* this->mRadii[0]);
+      CVPoint pt (cos(dTheta) * this->mRadii[0], mvPosition.y, sin(dTheta)* this->mRadii[0]);
       sf::Vector3f temp = pt.GetVector3f();
       AddPoint (temp);
       dRad += dDeg;
-      pt = CVPoint (cos(dTheta) * this->mRadii[1], mHeight, sin(dTheta)* this->mRadii[1]);
+      pt = CVPoint (cos(dTheta) * this->mRadii[1], mvPosition.y + mHeight, sin(dTheta)* this->mRadii[1]);
       temp = sf::Vector3f (pt.GetVector3f());
       AddPoint (temp);
    }
@@ -140,6 +126,6 @@ void Hub::Load(SerializerBase& ser)
 
 void Hub::Save(SerializerBase& ser)
 {
-   ser.Add("type", "RideNode");
+   ser.Add("type", "Hub");
    RideNode::Save(ser);
 }

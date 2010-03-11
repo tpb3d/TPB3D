@@ -36,6 +36,7 @@ public:
    void Render() { Render(0); };
    int Render( int lod ); // render returning the poly count
 //   int GetPathCount() { return m_PointsCount; };
+   void SetPosition (float x, float y, float z) { mvPosition.x = x; mvPosition.y = y; mvPosition.z = z; }
    void Position(sf::Vector3f& vPosition, sf::Vector3f& vAngle) // ah ha, we can move this thing
    {
       mvPosition = vPosition;

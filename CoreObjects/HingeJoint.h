@@ -16,6 +16,10 @@ class HingeJoint : public JointBase
 {
 
 public:
-   HingeJoint(int ID );
+   HingeJoint(int ID, int points );
    ~HingeJoint(void);
+   virtual void Render() {};
+   virtual void Draw() {};
+   virtual void DrawSelectionTarget() {}; // base can't draw
+   //virtual JointBase* Clone( ) {};
 };

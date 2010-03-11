@@ -11,11 +11,11 @@
 #include <string>
 #include "RotationJoint.h"
 
-RotationJoint::RotationJoint( int ID )
-:  JointBase( ID)
+RotationJoint::RotationJoint (int ID, int points)
+:  JointBase (ID, points)
 {
 }
 
-RotationJoint::~RotationJoint(void)
+RotationJoint::~RotationJoint (void)
 {
 }

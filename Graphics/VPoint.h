@@ -18,6 +18,7 @@ struct STrig
    STrig( double x,double y,double z, double scale );
    virtual ~STrig() {};
    virtual void SetAspect( double Aspect );
+   void Set (double x, double y, double z) {SetX(x); SetY(y); SetZ(z); }
    void SetX( double x );
    void SetY( double y );
    void SetZ( double z );

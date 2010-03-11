@@ -11,11 +11,11 @@
 #include <string>
 #include "GimbalJoint.h"
 
-GimbalJoint::GimbalJoint( int ID )
-:  JointBase( ID)
+GimbalJoint::GimbalJoint (int ID)
+:  JointBase (ID, 1)
 {
 }
 
-GimbalJoint::~GimbalJoint(void)
+GimbalJoint::~GimbalJoint (void)
 {
 }

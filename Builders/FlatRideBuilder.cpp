@@ -9,19 +9,42 @@
 //  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
 
+#include "../Graphics/VPoint.h"
 #include "../CoreObjects/Ride.h"
 #include "../CoreObjects/RideBase.h"
 #include "../CoreObjects/RideSection.h"
 #include "../CoreObjects/Arm.h"
 #include "../CoreObjects/Hub.h"
+#include "../CoreObjects/Deck.h"
+#include "../CoreObjects/Strut.h"
 #include "../CoreObjects/RotationHub.h"
 #include "../CoreObjects/SpokeAssembly.h"
 #include "../CoreObjects/RotationJoint.h"
+#include "../CoreObjects/CableHingeJoint.h"
 #include "../CoreObjects/Carriage.h"
 #include "../CoreObjects/Car.h"
 
 #include "FlatRideBuilder.h"
 
+/* Must Have List
+Monorail - Large Retro
+Monorail ( People Mover with Roof )
+
+Coasters
+
+Steel Twister
+Woodie Twister
+
+Flat Rides
+
+Carousel Small
+Crazy Bus
+Eli Ferris Wheel
+Eyerly Loop-O-Plane
+Eyerly Octopus
+Flying Scooters
+Scrambler
+*/
 
 FlatRideBuilder::FlatRideBuilder(void)
 {
@@ -35,26 +58,112 @@ FlatRideBuilder::~FlatRideBuilder(void)
 //
 // The game manger call this then adds the returned ride to the park or attack it to a ghost object for placement.
 //
-Ride* FlatRideBuilder::CreateRide()
+Ride* FlatRideBuilder::CreateRide(int iPattern)
 {
    Ride* pRide = new Ride();
-   // test data
-   Hub* pHub = new Hub (12, 13, "Chute.png");
-   pRide->SetNode(pHub);
-   pHub->Render();
-   RotationHub* pHub2 = new RotationHub (1, 3, 13, "Chips.png");
-   pHub->AddNode(pHub2);
-   pHub2->Render();
-   // test with 8 arms
    const int iTest = 8;
-   float fDeg = 360.0f / iTest;
-   float fAngle = 0;
-   for (int ix = 0; ix < iTest; ++ix)
+
+   if( iPattern == 0)
    {
-      Arm* pArm = new Arm(1, 1.5f, 2.25f, 12.75f, fAngle);
-      pArm->Render();
-      pHub2->AddNode(pArm);
-      fAngle += fDeg;
+      // test data, the laundery ride
+      Deck* pDeck = new Deck(3,15,iTest,"Basemetal.png");
+      pDeck->SetPosition(0,0,0);
+      pDeck->Render();
+      Hub* pHub = new Hub (12, 13, "foundation.png");
+      pRide->SetNode(pHub);
+      pHub->Render();
+      RotationHub* pHub2 = new RotationHub (1, 4, 13, "Chips.png");
+      pHub->AddNode(pHub2);
+      pHub2->Render();
+      pHub2->SetDesiredSpeed(75);
+      pHub->AddNode (pDeck);
+
+      // test with 8 arms, the laundery ride
+      float fDeg = 360.0f / iTest;
+      float fDegH = fDeg /2; // Half increment
+      float fAngle = 0;
+      STrig trig(0,fDegH,0, 1.0);
+      CVPoint v1(0,0,13.25);
+      CVPoint v2(v1);
+      v2.Rotate(trig);
+      v2 -= v1;
+      float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
+      
+      for (int ix = 0; ix < iTest; ++ix)
+      {
+         Arm* pArm = new Arm(1, 1.5f, 2.25f, 12.75f, fAngle);
+         pArm->Render();
+         pHub2->AddNode(pArm);
+         float fAngle2 = fAngle + fDegH;
+         fAngle += fDeg;
+         
+         CableHingeJoint* pWire = new CableHingeJoint();
+         CVPoint v1(0,0,-vx*2);
+         CVPoint v2(0,0,0);
+         CVPoint v3(0,0,-vx);
+         v3.y = -10;
+         pWire->SetPoints (v1.GetVector3f(), v3.GetVector3f(), v2.GetVector3f());
+         pHub2->AddNode (pWire);
+         CVPoint v4(13.35,3.15f,0);
+         v4.Rotate(trig);
+         pWire->SetYAngle(fAngle2);
+         pWire->SetPosition(v4.GetVector3f());
+         pWire->Render();
+         Hub* p2 = new Hub(4,8,"railing.png");
+         p2->SetPosition(0,-11,-vx);
+         p2->Render();
+         pWire->AddNode(p2);
+      }
+   }
+   else
+   {
+
+      // test with 8 section carousel
+      pRide = new Ride();
+
+      // test data, the laundery ride
+      int iSides = 14;
+      int iRadius = 18;
+      Hub* pHub = new Hub (12, iSides, "DarkWood.png");
+      pRide->SetNode(pHub);
+      pHub->Render();
+      RotationHub* pHub2 = new RotationHub (1, 3, iSides, "Chips.png");
+      pHub->AddNode(pHub2);
+      pHub2->Render();
+      pHub2->SetDesiredSpeed(15);
+      Deck* pDeck = new Deck(3,iRadius,iSides,"DarkWood.png");
+      pDeck->SetPosition(0,-9.5f, 0);
+      pDeck->Render();
+      pHub2->AddNode (pDeck);
+
+      float fDeg = 360.0f / iSides;
+      float fDegH = fDeg /2; // Half increment
+      float fAngle = 0;
+      STrig trig(0,fDegH,0, 1.0);
+      CVPoint v1 (0,0,iRadius);
+      CVPoint v2 (v1);
+      v2.Rotate(trig);
+      v2 -= v1;
+      float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
+      
+      for (int ix = 0; ix < iSides; ++ix)
+      {
+         Arm* pArm = new Arm(1, 0, -2.25f, iRadius, fAngle);
+         pArm->SetPosition(0,2.25,0);
+         pArm->Render();
+         pHub2->AddNode(pArm);
+         
+         Strut* pStrut = new Strut();
+         trig.SetY (fAngle);
+         CVPoint v1(iRadius-1, -2.25, 0);
+         v1.Rotate (trig);
+         CVPoint v2(iRadius-1, -12.5, 0);
+         v2.Rotate (trig);
+         pStrut->SetPoints (v1.GetVector3f(), v2.GetVector3f());
+         pStrut->Render();
+         pArm->AddNode (pStrut);
+         fAngle += fDeg;
+      }
    }
    return pRide;
 }

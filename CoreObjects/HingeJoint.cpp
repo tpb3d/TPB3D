@@ -11,11 +11,11 @@
 #include <string>
 #include "HingeJoint.h"
 
-HingeJoint::HingeJoint( int ID )
-:  JointBase( ID)
+HingeJoint::HingeJoint (int ID, int points)
+:  JointBase (ID, points)
 {
 }
 
-HingeJoint::~HingeJoint(void)
+HingeJoint::~HingeJoint (void)
 {
 }

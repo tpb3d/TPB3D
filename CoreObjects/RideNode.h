@@ -41,6 +41,7 @@ public:
    void SetupGuide (PartGuide& guide);
    void Preset (float fDefPitch, float fLength, float fDegRotation);
    void AddNode( RideNode* pNodeBase );
+   void SetPosition (float x, float y, float z) { mvPosition.x = x; mvPosition.y = y; mvPosition.z = z; }
 //   void AddSection( ObjectBase* pGLBase );
    virtual void Update (int dt);
    virtual void Render() = 0;   // force each derivative to 

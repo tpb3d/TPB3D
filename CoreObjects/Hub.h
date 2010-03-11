@@ -19,6 +19,7 @@
 
 class Hub : public RideNode, public TexturedMesh
 {
+protected:
    float mHeight;
    float mRadii[4];
    short mSides;

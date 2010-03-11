@@ -17,6 +17,6 @@ class JointBase : public ObjectBase
    // float mMaxAngle;
    // float mMinAngle;
 public:
-   JointBase(int ID ) : ObjectBase(0, ID) {}
+   JointBase(int ID, int points ) : ObjectBase(points, ID) {}
    virtual ~JointBase(void) {}
 };

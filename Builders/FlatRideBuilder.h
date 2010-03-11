@@ -31,7 +31,7 @@ public:
    ~FlatRideBuilder(void);
    
    // Game Manager Interaction
-   static Ride* CreateRide();
+   static Ride* CreateRide(int iPattern);
 
    // UI Interaction
    void MakeSection( PartGuide& guide, Ride& ride );

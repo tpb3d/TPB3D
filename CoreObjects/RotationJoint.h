@@ -15,6 +15,6 @@ class RotationJoint : public JointBase
 {
 
 public:
-   RotationJoint(int ID );
-   ~RotationJoint(void);
+   RotationJoint (int ID, int points);
+   ~RotationJoint (void);
 };
