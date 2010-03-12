@@ -129,7 +129,7 @@ bool GameManager::LoadGame (const char *fileName)
    pOTree.AddNode(pRide);
 
    pRide = flat.CreateRide(2);
-   pRide->SetPosition(24,1,20);
+   pRide->SetPosition(34,1,100);
    pOTree.AddNode(pRide);
 
    // test build coaster track

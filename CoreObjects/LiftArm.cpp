@@ -76,6 +76,7 @@ LiftArm::~LiftArm(void)
 void LiftArm::Draw()
 {
  	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
+   glTranslatef( mvPosition.x, 0, mvPosition.z );										// Move to the arc end of the arm 
 	glRotatef(mPosition, 1.0f, 0.0f, 0.0f);
    TexturedMesh::Draw();
    glTranslatef( 0, 0, mLength );										// Move to the arc end of the arm 
@@ -89,15 +90,15 @@ void LiftArm::Render()
    int index = 0;
    for( int ix = 0; ix < mSides; ++ix )  // 7 x 4
    {
-      CVPoint pt (LiftPairs[index].x, -0.5f, LiftPairs[index].x);
+      CVPoint pt (LiftPairs[index].z*mWidth, -0.5f, LiftPairs[index].x*mLength);
       AddPoint (pt.GetVector3f());
-      pt = CVPoint  (LiftPairs[index].x, 0.5f, LiftPairs[index].x);
+      pt = CVPoint  (LiftPairs[index].z*mWidth, 0.5f, LiftPairs[index].x*mLength);
       AddPoint (pt.GetVector3f());
       index++;
 
-      pt = CVPoint  (LiftPairs[index].x, 0.5f, LiftPairs[index].x);
+      pt = CVPoint  (LiftPairs[index].z*mWidth, 0.5f, LiftPairs[index].x*mLength);
       AddPoint (pt.GetVector3f());
-      pt = CVPoint (LiftPairs[index].x, -0.5f, LiftPairs[index].x);
+      pt = CVPoint (LiftPairs[index].z*mWidth, -0.5f, LiftPairs[index].x*mLength);
       AddPoint (pt.GetVector3f());
       index++;
    }
@@ -131,7 +132,7 @@ void LiftArm::Update(int dt)
          // raise the assembly
          mode = 1;
          mIdle = 0;
-         mRun = 60*dt;
+         mRun = 90*dt;
          break;
       case 1:
          mode = 2;
@@ -141,7 +142,7 @@ void LiftArm::Update(int dt)
          SetDesiredAngle( 0 );
          mode = 3;
          mIdle = 0;
-         mRun = -60*dt;
+         mRun = -90*dt;
          break;
       default:
          // go idle

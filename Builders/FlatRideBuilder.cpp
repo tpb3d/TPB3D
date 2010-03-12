@@ -187,8 +187,10 @@ Ride* FlatRideBuilder::CreateRide(int iPattern)
       Deck* pDeck = new Deck(3,15,iTest,"Basemetal.png");
       pDeck->SetPosition(0,0,0);
       pDeck->Render();
-      LiftArm* pLA = new  LiftArm(123, 15, 5, "Basemetal.png");
-      pRide->SetNode(pLA);
+      pRide->SetNode (pDeck);
+      LiftArm* pLA = new  LiftArm(123, 18, 5, "Basemetal.png");
+      pDeck->AddNode(pLA);
+      pLA->RideNode::SetPosition(0,0,-15);
       Hub* pHub = new Hub (2, 3, "foundation.png");
       pLA->AddNode (pHub);
       pHub->Render();
@@ -197,7 +199,6 @@ Ride* FlatRideBuilder::CreateRide(int iPattern)
       pHub2->SetYPosition (3.0f);
       pHub2->Render();
       pHub2->SetDesiredSpeed(75);
-      pHub->AddNode (pDeck);
 
       // test with 8 arms, the laundery ride
       float fDeg = 360.0f / iTest;

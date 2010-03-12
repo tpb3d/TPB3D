@@ -57,7 +57,7 @@ void ServoPhysics::Integrate (float dt)
       }
       else
       {
-         if (mVelocity < 18)
+         if (mVelocity < 24)
          {
             mVelocity++;
          }
@@ -71,7 +71,7 @@ void ServoPhysics::Integrate (float dt)
       }
       else
       {
-         if (mVelocity > -18)
+         if (mVelocity > -24)
          {
             mVelocity--;
          }
