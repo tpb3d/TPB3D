@@ -929,6 +929,10 @@
 				RelativePath="..\xml\tinyxml\tinyxmlparser.cpp"
 				>
 			</File>
+			<File
+				RelativePath="..\xml\tinyxml\xmltest.cpp"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Hub"
@@ -950,11 +954,35 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Hub\PathManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Hub\PathManager.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Hub\RideManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Hub\RideManager.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Hub\RouteVisitor.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\Hub\RouteVisitor.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Hub\StallsManager.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Hub\StallsManager.h"
 				>
 			</File>
 		</Filter>

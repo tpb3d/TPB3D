@@ -8,19 +8,18 @@
 //  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////#pragma once
 #pragma once
-#include "../Graphics/ObjectNode.h"
+#include "CoreBase.h"
 
+class ObjectBase;
 class RideNode;
 
-class Ride : public ObjectNode
+class Ride : public CoreBase
 {
-   sf::Vector3f  mvDim;
-   sf::Vector3f  mvPosition;
-   sf::Vector3f  mvAngle;
+   Park& mParkParent;
    RideNode* mpBaseNode;   // only child
 public:
-   Ride();
-   virtual ~Ride(void);
+   Ride(Vector3f& vPosition, Park& ParkParent);
+   virtual ~Ride();
    void SetNode (RideNode* pRideNode)
    {
       // be sure to delete the old one if present
@@ -29,7 +28,7 @@ public:
 
    void DrawSelectionTarget();
 
-   ObjectNode* Clone( );
+   CoreBase* Clone( );
    void AddSection( ObjectBase* pGLBase );
    void Update(int dt);
    void Draw();
@@ -40,10 +39,24 @@ public:
    void Position(sf::Vector3f& vPosition, sf::Vector3f& vAngle) // ah ha, we can move this thing
    {
       mvPosition = vPosition;
-      mvAngle = vAngle;
+//      mvAngle = vAngle;
    };
    void Default();
 
    void Load(SerializerBase& ser);
    void Save(SerializerBase& ser);
 };
+
+// Plug
+#include "../Graphics/ObjectNode.h"
+class RidePack : public ObjectNode
+{
+   Ride* mpRide;
+   public:
+   RidePack(Ride* pRide) : mpRide(pRide), ObjectNode(1,1) {}
+   void Update(int dt) { mpRide->Update(dt); }
+   void Draw() { mpRide->Draw(); }
+   ObjectNode* Clone( ) { return NULL; }
+   void DrawSelectionTarget() { mpRide->DrawSelectionTarget(); }
+};
+// End Plug

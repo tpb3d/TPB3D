@@ -27,7 +27,7 @@ using namespace Gfx;
 
 GhostObject::GhostObject (Vector3f& origin, int level)
    :  mCurrentState (GS_Invalid)
-   ,  CoreBase (origin, NULL)// no parent
+   ,  CoreBase (origin, Vector3f(0,0,0))// no parent
    ,  mBase (1, 1)
 {
    mWidthUnits = 1;

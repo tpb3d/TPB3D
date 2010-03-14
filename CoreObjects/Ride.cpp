@@ -17,12 +17,11 @@
 #include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
 
-Ride::Ride(void)
-:  ObjectNode( 1, ObjectFactory::TakeANumber() )
+Ride::Ride(Vector3f& vPosition, Park& ParkParent)
+:  CoreBase ( vPosition, Vector3f(0,0,0))
+,  mParkParent (ParkParent)
 {
-   mLocation[0] = 0;
-   mLocation[1] = 0;
-   mLocation[2] = 0;
+   mvPosition = sf::Vector3f(0,0,0);
 }
 
 Ride::~Ride(void)
@@ -50,9 +49,9 @@ void Ride::Draw()
    glPopMatrix();
 }
 
-ObjectNode* Ride::Clone( )
+CoreBase* Ride::Clone( )
 {
-   Ride* pRide = new Ride();
+   Ride* pRide = new Ride (Vector3f(mvPosition.x,mvPosition.y,mvPosition.z), this->mParkParent);
    return pRide;
 }
 
@@ -65,8 +64,13 @@ void Ride::Load(SerializerBase& ser)
 
 void Ride::Save(SerializerBase& ser)
 {
-   ser.Add("type", "Ride");
-   ser.Add("angle",mAngle);
-   ser.Add("ID", mID);
+   ser.Add ("type", "Ride");
+   ser.Add ("positionX",mvPosition.x);
+   ser.Add ("positionY",mvPosition.y);
+   ser.Add ("positionZ",mvPosition.z);
+   ser.Add ("angleX",mvAngle.x);
+   ser.Add ("angleY",mvAngle.y);
+   ser.Add ("angleZ",mvAngle.z);
+   ser.Add ("ID", mID);
 //   delete pSer;
 }

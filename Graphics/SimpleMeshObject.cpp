@@ -26,7 +26,7 @@ SimpleMeshObject::SimpleMeshObject( int id )
    memset( mMatrix, 0, 4 * 4 * sizeof(float) );        /**< Transformation matrix for mesh data */
    mpVertices = NULL;
    mpFaces = NULL;
-   mfScale = 1.0;
+   mfScale = 8.0;
 }
 
 SimpleMeshObject::~SimpleMeshObject(void)
@@ -203,6 +203,7 @@ void SimpleMeshObject::AddMesh( int VertexCount, float(* pVertexes)[3], float(* 
       pFace->mPoints[2].Normal[1] = pNormals[idx][1];
       pFace->mPoints[2].Normal[2] = pNormals[idx][2];
       idxF++;
+      mpFaces[idx] = pFace;
    }
 }
 

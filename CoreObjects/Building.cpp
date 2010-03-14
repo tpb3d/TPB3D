@@ -35,12 +35,13 @@ namespace ParkObjects
 
 using namespace ParkObjects;
 
-Building::Building (Vector3f& origin, Park* ParkParent)
+Building::Building (Vector3f& origin, Park& ParkParent)
       :  mCurrentState (BS_Operational)
-      ,  CoreBase (origin, ParkParent)
+      ,  CoreBase (Vector3f(origin.x, origin.y, origin.z), Vector3f(0,0,0))
+      ,  mParkParent (ParkParent)
 {
    ImageManager * image_man = ImageManager::GetInstance ();
-   std::cout << "New Building at " << mOrigin.x << ", " << mOrigin.x << std::endl;
+   std::cout << "New Park Object at " << mvPosition.x << ", " << mvPosition.x << std::endl;
    SetImages (0);
 }
 

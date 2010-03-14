@@ -32,7 +32,7 @@ class Car;
 
 // Park is a ModelObject
 // This renderes the Park in the ModelSpaces with perspective, pan and zoom.
-class Park : public Gfx::ModelObject
+class Park// : public Gfx::ModelObject
 {
    friend class ParkAgent;
    friend class FloorAgent;

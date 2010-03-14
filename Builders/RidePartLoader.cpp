@@ -258,7 +258,7 @@ void RidePartLoader::Load3ds( const char* Path, int id )
    char buf[256];
    // removed the _s, so it might have a buffer overrun now!
    strcpy( buf, Path );
-   char* pdest = strrchr( buf, '\\' );
+   char* pdest = strrchr( buf, '/' );
    *(pdest++) = 0;
    Gfx::ImageManager& IMan = *(Gfx::ImageManager::GetInstance());
 
@@ -275,17 +275,21 @@ void RidePartLoader::Load3ds( const char* Path, int id )
          for( int idx = 0; idx < iTMax; ++idx )
          {
             Lib3dsMaterial *pMat = pFile->materials[idx];
+            Material* pGLMat = new Material( pMat->shading, pMat->two_sided, pMat->blur,
+                                             pMat->self_illum, pMat->shininess, pMat->shin_strength, pMat->transparency );
+            pGLMat->SetLight( pMat->ambient, pMat->diffuse, pMat->specular );
             //assert(pMat)
             if( pMat->texture1_map.name )
             {
                char szName[256];
                // removed the _s, should check lengths.
-               strcpy( szName, buf );
-               strcat( szName, "\\" );
+               strcpy( szName, "Restroom 01"); //buf );
+               strcat( szName, "/" );
                strcat( szName, pMat->texture1_map.name );//mat.diffuseMaterialMap.bitmap_filter );
                int iChannels = 4;
                Gfx::Texture* pTex = IMan.GetTexture(szName,4);
                texs[idx] = pTex;
+               pGLMat->SetTexture(pTex);
 
                //png_color pngColor;
                //png_uint_32 iWide = 0;
@@ -325,9 +329,6 @@ void RidePartLoader::Load3ds( const char* Path, int id )
                //delete [] pMirImage;
                //delete [] pImage;
             }
-            Material* pGLMat = new Material( pMat->shading, pMat->two_sided, pMat->blur,
-                                             pMat->self_illum, pMat->shininess, pMat->shin_strength, pMat->transparency );
-            pGLMat->SetLight( pMat->ambient, pMat->diffuse, pMat->specular );
             Mats[idx] = pGLMat;
          }
       }

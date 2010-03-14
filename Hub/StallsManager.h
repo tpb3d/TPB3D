@@ -18,37 +18,23 @@
 // create an instance of this. The lobby is created empty.
 // call newPathway or newSubPathway to add floors or basement Pathways
 #pragma once
-#ifndef _GAMEMANAGER_H
-#define _GAMEMANAGER_H
 
-class Park;
+class Ride;
+class RideNode;
 class Scene;
-class TiXmlElement;
-class TiXmlNode;
 
 // Park is a ModelObject along with all the FloorSpace entities
 // This renderes the Park in the ModelSpaces with perspective, pan and zoom.
-class GameManager
+class StallsManager
 {
-
-private:
    Scene& mScene;
-   Park& mPark;
+private:
 
 public:
-   GameManager( Scene& scene, Park& thePath);
-   ~GameManager() {}
+   StallsManager( Scene& scene);
+   ~StallsManager() {}
    void InitialSetup();
 
-   bool LoadGame(const char* fileName);
-   bool SaveGame(const char* fileName);
    bool Settings();
-   bool FRCS();
-
-   bool LoadPark(TiXmlNode* nPark, Park* pPark);
-   bool SavePark(TiXmlElement* pnParent, Park* pPark);
-
-   void Add( TiXmlNode* pnElement, const char* szTag, const char* szText);
+   bool Update();
 };
-
-#endif //_GAMEMANAGER_H

@@ -39,6 +39,7 @@
 #include "../Builders/TreeFormer.h"
 #include "../Builders/TrackFormer.h"
 #include "../Builders/FlatRideBuilder.h"
+#include "../Builders/RidePartLoader.h"
 #include "../CoreObjects/TrackBase.h"
 #include "../CoreObjects/Track.h"
 #include "../CoreObjects/TrackGuide.h"
@@ -56,7 +57,7 @@ GameManager::GameManager (Scene& scene, Park& park)
 
 void GameManager::InitialSetup()
 {
-   Park* pPark = new Park(1, 10, mScene);
+   //Park* pPark = new Park(1, 10, mScene);
    TerrainFormer TF;
    mScene.SetTerrain (TF.DefaultMesh());
 }
@@ -120,18 +121,40 @@ bool GameManager::LoadGame (const char *fileName)
    
    FlatRideBuilder flat;
 
-   Ride* pRide = flat.CreateRide(0);
-   pRide->SetPosition(-10,1,110);
-   pOTree.AddNode(pRide);
+   Ride* pRide;
+   float fx = 10;
+   float fz = 40;
+   pRide = flat.CreateRide(0, mPark );
+   pRide->SetPosition (fx+20,1,fz+10);
+   pOTree.AddNode(new RidePack (pRide));
 
-   pRide = flat.CreateRide(1);
-   pRide->SetPosition(8,1,150);
-   pOTree.AddNode(pRide);
+   pRide = flat.CreateRide(1, mPark);
+   pRide->SetPosition (fx-20,1, fz+10);
+   pOTree.AddNode(new RidePack (pRide));
+   
+   pRide = flat.CreateRide(2, mPark);
+   pRide->SetPosition (fx,1, fz+40);
+   pOTree.AddNode(new RidePack (pRide));
 
-   pRide = flat.CreateRide(2);
-   pRide->SetPosition(34,1,100);
-   pOTree.AddNode(pRide);
-
+   RidePartLoader rpl (&pOTree );
+   const char* pszFile = "data/Restroom 01/restroom01.3ds";
+   size_t slen = strlen( pszFile );
+   if( slen > 3 )
+   {
+      if( _strnicmp( &pszFile[slen-3], "ASE", 3 ) == 0 )
+      {
+         rpl.LoadASE( pszFile );
+      }
+      else if( _strnicmp( &pszFile[slen-4], "MS3D", 4 ) == 0 )
+      {
+         rpl.LoadMS3D( pszFile );
+      }
+      else
+      {
+         rpl.Load3ds( pszFile );
+      }
+   }
+   
    // test build coaster track
    Texture* pTex = Gfx::ImageManager::GetInstance()->GetTexture("ref1.png",3);
    TrackFormer TF(pTex, mPark);

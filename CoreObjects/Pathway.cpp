@@ -35,7 +35,7 @@
 using namespace Gfx;
 
 Pathway::Pathway (Vector3f& origin, Park * ParkParent)
-:  CoreBase(origin, ParkParent)
+:  CoreBase(origin, Vector3f(0,0,0))
 {
    mID = CoreBase::GetNextID();
    mSkin = new AnimationSingle (ImageManager::GetInstance()->GetTexture("foundation.png", GL_RGBA), 56, 36);

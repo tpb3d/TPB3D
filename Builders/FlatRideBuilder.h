@@ -2,6 +2,7 @@
 #include "../Types/Vector3.h"
 
 // forward decls
+class Park;
 class Ride;
 class RideBase;
 class ObjectBase;
@@ -31,7 +32,7 @@ public:
    ~FlatRideBuilder(void);
    
    // Game Manager Interaction
-   static Ride* CreateRide(int iPattern);
+   static Ride* CreateRide(int iPattern, Park& pPark);
 
    // UI Interaction
    void MakeSection( PartGuide& guide, Ride& ride );

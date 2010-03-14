@@ -49,6 +49,7 @@ public:
 
    void Update (Park* pPark);
    void Draw ();
+   CoreBase* Clone() { throw "Can't clone this object"; return NULL; }
    void DrawSelectionTarget () {};
    virtual BaseType GetType () { return BaseGhostObject; }
    void SetShownType (BaseType bt) { mShownType = bt; }

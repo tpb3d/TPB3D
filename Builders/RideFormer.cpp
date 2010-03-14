@@ -149,10 +149,10 @@ RideFormer::~RideFormer(void)
 {
 }
 
-Ride* RideFormer::CreateRide()
-{
-   return new Ride( );
-}
+//Ride* RideFormer::CreateRide()
+//{
+//   return new Ride( );
+//}
 
 
 void RideFormer::MakeSection( RideGuide& guide, Ride& Ride )

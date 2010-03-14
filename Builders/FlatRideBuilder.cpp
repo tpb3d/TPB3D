@@ -60,9 +60,9 @@ FlatRideBuilder::~FlatRideBuilder(void)
 //
 // The game manger call this then adds the returned ride to the park or attack it to a ghost object for placement.
 //
-Ride* FlatRideBuilder::CreateRide(int iPattern)
+Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
 {
-   Ride* pRide = new Ride();
+   Ride* pRide = new Ride(Vector3f(0,0,0), park);
    const int iTest = 8;
 
    if( iPattern == 0)
@@ -121,7 +121,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern)
    {
 
       // test with 8 section carousel
-      pRide = new Ride();
+      pRide = new Ride(Vector3f(0,0,0), park);
 
       // test data, the laundery ride
       int iSides = 14;

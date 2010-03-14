@@ -55,29 +55,29 @@ protected:
    int mLevel;
    int mID;
    int mOccupants;
-   Vector3f mOrigin;
-   Park* mpParkParent;
+   Vector3f mvPosition;
+   Vector3f mvAngle;
 
    static unsigned int NextID;   // all model objects will get one
 public:
    // CTOR
-   CoreBase (Vector3f& origin, Park* ParkParent);
+   CoreBase (Vector3f& vPosition, Vector3f& vAngle);
 
    // Properties
-   inline float GetX() { return mOrigin.x; }
-   inline float GetY() { return mOrigin.y; }
-   inline float GetZ() {return mOrigin.z; }
+   inline float GetX() { return mvPosition.x; }
+   inline float GetY() { return mvPosition.y; }
+   inline float GetZ() {return mvPosition.z; }
    inline int   GetPathNo() { return mLevel; }
-   inline Park* GetParent() { return mpParkParent; }
    inline int   GetID () { return mID; }
 
-   inline void SetOrigin(Vector3f& origin) { mOrigin = origin; }
+   inline void SetvPosition(Vector3f& vPosition) { mvPosition = vPosition; }
 
    // Methods
    virtual void Update (float dt, int tod);
    virtual void Draw ();
    virtual void DrawSelectionTarget () { }
    virtual BaseType GetType () { return BaseEmpty; }
+   virtual CoreBase* Clone () = 0;
 
    virtual void Load(SerializerBase& ser);// iXmlElement* pnParent)
    virtual void Save(SerializerBase& ser);// iXmlElement* pnParent)

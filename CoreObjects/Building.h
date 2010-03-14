@@ -33,10 +33,11 @@ enum Building_state
 
 class Building : public CoreBase, public Gfx::ModelObject
 {
+   Park& mParkParent;
    Building_state mCurrentState; // metric of building condition
 
 public:
-   Building (Vector3f& origin, Park* ParkParent);
+   Building (Vector3f& origin, Park& ParkParent);
 
    void Update (float dt, int tod);
    void Draw ();

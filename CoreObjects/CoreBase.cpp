@@ -28,16 +28,12 @@
 //using namespace Gfx;
 unsigned int CoreBase::NextID = 1;
 
-CoreBase::CoreBase (Vector3f& origin, Park* pParkParent)
-      :  mOrigin (origin)
-      ,  mpParkParent (pParkParent)
+CoreBase::CoreBase (Vector3f& pos, Vector3f& angle)
+      :  mvPosition (pos)
+      ,  mvAngle (angle)
 {
    mID = CoreBase::GetNextID();
    mOccupants = 0;
-   if (pParkParent!=NULL)
-   {
-      pParkParent->GetScene().RegisterFloorSpace (mID, this);
-   }
 }
 
 int CoreBase::GetNextID() // static
@@ -58,14 +54,14 @@ void CoreBase::Draw ()
 void CoreBase::Load(SerializerBase& ser)
 {
    mID = ser.GetInt("ID");   // first tag
-   mOrigin.x = ser.GetFloat("OriginX");   // origin
-   mOrigin.y = ser.GetFloat("OriginY");
-   mOrigin.z = ser.GetFloat("OriginZ");
+   mvPosition.x = ser.GetFloat("PositionX");   // Position
+   mvPosition.y = ser.GetFloat("PositionY");
+   mvPosition.z = ser.GetFloat("PositionZ");
 }
 void CoreBase::Save(SerializerBase& ser)
 {
    ser.Add("ID", mID);   // first tag
-   ser.Add("OriginX", mOrigin.x);   // origin
-   ser.Add("OriginY", mOrigin.y);
-   ser.Add("OriginZ", mOrigin.z);
+   ser.Add("PositionX", mvPosition.x);   // Position
+   ser.Add("PositionY", mvPosition.y);
+   ser.Add("PositionZ", mvPosition.z);
 }
