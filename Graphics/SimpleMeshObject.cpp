@@ -26,7 +26,7 @@ SimpleMeshObject::SimpleMeshObject( int id )
    memset( mMatrix, 0, 4 * 4 * sizeof(float) );        /**< Transformation matrix for mesh data */
    mpVertices = NULL;
    mpFaces = NULL;
-   mfScale = 8.0;
+   mfScale = 1.0;
 }
 
 SimpleMeshObject::~SimpleMeshObject(void)
@@ -70,7 +70,6 @@ void SimpleMeshObject::Draw()
 //   else
    if( mpTexture != NULL )
    {
-      glEnable( GL_TEXTURE_2D );
       mpTexture->Bind( );
    }
    //glEnableClientState( GL_NORMAL_ARRAY );
@@ -86,6 +85,8 @@ void SimpleMeshObject::Draw()
    //glDisableClientState( GL_VERTEX_ARRAY );
    //glDisableClientState( GL_INDEX_ARRAY );
    //glDisable( GL_TEXTURE_2D );
+   unsigned char ub[] = { 250,250,220,255 };
+   glColor3ubv( ub );
 
    glBegin(GL_TRIANGLES); // glBegin and glEnd delimit the vertices that define a primitive (in our case triangles)
    for( int idx = 0; idx < mFaces; ++idx )
@@ -93,23 +94,22 @@ void SimpleMeshObject::Draw()
         // Coordinates of the first vertex
       TrigPoint& face = mpFaces[idx]->mPoints[0];
       glTexCoord2fv( face.mUV );
-      glNormal3fv( face.Normal );
+      //glNormal3fv( face.Normal );
       glVertex3fv( mpVertices[face.Index] ); //Vertex definition
 
         // Coordinates of the second vertex
       TrigPoint& face1 = mpFaces[idx]->mPoints[1];
       glTexCoord2fv( face1.mUV );
-      glNormal3fv( face1.Normal );
+      //glNormal3fv( face1.Normal );
       glVertex3fv( mpVertices[face1.Index] ); //Vertex definition
 
         // Coordinates of the third vertex
       TrigPoint& face2 = mpFaces[idx]->mPoints[2];
       glTexCoord2fv( face2.mUV );
-      glNormal3fv( face2.Normal );
+      //glNormal3fv( face2.Normal );
       glVertex3fv( mpVertices[face2.Index] ); //Vertex definition
    }
    glEnd( );
-   glDisable( GL_TEXTURE_2D );
 }
 
 void SimpleMeshObject::DrawSelectionTarget()

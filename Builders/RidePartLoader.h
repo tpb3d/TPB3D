@@ -19,7 +19,7 @@ protected:
 public:
    RidePartLoader( ObjectTree* pTree );
    virtual ~RidePartLoader(void);
-   void Load3ds( const char* Path, int id = -1 );// from the 3DS lib
+   void Load3ds( const char* Path, const char* Name, int id = -1 );// from the 3DS lib
    void LoadASE( const char* Path );// ASE files
    void LoadMS3D( const char* Path); // MilkShape
 };

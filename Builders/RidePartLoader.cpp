@@ -250,19 +250,22 @@ RidePartLoader::~RidePartLoader(void)
 {
 }
 
-void RidePartLoader::Load3ds( const char* Path, int id )
+void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
 {
    C3DSHandler cds;
    Gfx::Texture* texs[16];
    memset( texs, 0, sizeof(texs) );
    char buf[256];
    // removed the _s, so it might have a buffer overrun now!
-   strcpy( buf, Path );
-   char* pdest = strrchr( buf, '/' );
-   *(pdest++) = 0;
+   strcpy (buf, Path);
+   strcat (buf, "/" );
+   strcat (buf, Name);
+   Gfx::ImageManager::GetInstance()->set_path(Path);
+   //char* pdest = strrchr( buf, '/' );
+   //*(pdest++) = 0;
    Gfx::ImageManager& IMan = *(Gfx::ImageManager::GetInstance());
 
-   if( cds.Load( Path ) )
+   if( cds.Load( buf ) )
    {
       Lib3dsFile* pFile = cds.GetFile();
       Material* Mats[8];
@@ -283,9 +286,10 @@ void RidePartLoader::Load3ds( const char* Path, int id )
             {
                char szName[256];
                // removed the _s, should check lengths.
-               strcpy( szName, "Restroom 01"); //buf );
-               strcat( szName, "/" );
-               strcat( szName, pMat->texture1_map.name );//mat.diffuseMaterialMap.bitmap_filter );
+               //strcpy( szName, buf );
+               //strcat( szName, "/" );
+               //strcat( szName, pMat->texture1_map.name );//mat.diffuseMaterialMap.bitmap_filter );
+               strcpy( szName, pMat->texture1_map.name );
                int iChannels = 4;
                Gfx::Texture* pTex = IMan.GetTexture(szName,4);
                texs[idx] = pTex;
@@ -339,6 +343,8 @@ void RidePartLoader::Load3ds( const char* Path, int id )
 
       float pn[3];
       ObjectNode* pNode = ObjectFactory::CreateNode( pFile->nmeshes );
+      float fLoc[4] = { 20,1,20,0 };
+      pNode->Move(fLoc);
       if( id > -1 )
       {
          ObjectNode* pParent = m_pObjectTree->GetNode(id);

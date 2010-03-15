@@ -136,25 +136,6 @@ bool GameManager::LoadGame (const char *fileName)
    pRide->SetPosition (fx,1, fz+40);
    pOTree.AddNode(new RidePack (pRide));
 
-   RidePartLoader rpl (&pOTree );
-   const char* pszFile = "data/Restroom 01/restroom01.3ds";
-   size_t slen = strlen( pszFile );
-   if( slen > 3 )
-   {
-      if( _strnicmp( &pszFile[slen-3], "ASE", 3 ) == 0 )
-      {
-         rpl.LoadASE( pszFile );
-      }
-      else if( _strnicmp( &pszFile[slen-4], "MS3D", 4 ) == 0 )
-      {
-         rpl.LoadMS3D( pszFile );
-      }
-      else
-      {
-         rpl.Load3ds( pszFile );
-      }
-   }
-   
    // test build coaster track
    Texture* pTex = Gfx::ImageManager::GetInstance()->GetTexture("ref1.png",3);
    TrackFormer TF(pTex, mPark);
@@ -200,6 +181,29 @@ bool GameManager::LoadGame (const char *fileName)
    pOTree.AddNode( pCar );
    pCar->Default();
    mPark.mpCar = pCar;
+/*   
+   RidePartLoader rpl (&pOTree );
+//   const char* pszFile = "restroom01.3ds";
+//   const char* pszFile = "alex2.3ds";
+   const char* pszPath = "data/BarnStormers";
+   const char* pszFile = "brnstrmcar.3ds";
+   size_t slen = strlen( pszFile );
+   if( slen > 3 )
+   {
+      if( _strnicmp( &pszFile[slen-3], "ASE", 3 ) == 0 )
+      {
+         rpl.LoadASE( pszFile );
+      }
+      else if( _strnicmp( &pszFile[slen-4], "MS3D", 4 ) == 0 )
+      {
+         rpl.LoadMS3D( pszFile );
+      }
+      else
+      {
+         rpl.Load3ds( pszPath, pszFile );
+      }
+   }
+*/   
    SaveGame("data/xml/Park.xml");
 
    return true;
