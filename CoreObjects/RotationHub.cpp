@@ -48,6 +48,7 @@ RotationHub::~RotationHub(void)
 
 void RotationHub::Draw()
 {
+   Integrate(22);
  	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
    glTranslatef( mvPosition.x, mvPosition.y, mvPosition.z );										// Move Left 1.5 Units And Into The Screen 6.0
 	glRotatef(mvAngle.x,1.0f,0.0f,0.0f);
@@ -84,13 +85,13 @@ void RotationHub::Update(int dt)
    {
       mRun--;
       mIdle = 0;
-      Integrate (1);//(float)dt);
+//      Integrate (1);//(float)dt);
       mvAngle.y = mPosition;
    }
    else if( mIdle > 0)
    {
       mIdle--;
-      Integrate (1);//(float)dt);
+//      Integrate (1);//(float)dt);
       mvAngle.y = mPosition;
    }
    else

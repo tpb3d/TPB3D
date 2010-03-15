@@ -181,12 +181,12 @@ bool GameManager::LoadGame (const char *fileName)
    pOTree.AddNode( pCar );
    pCar->Default();
    mPark.mpCar = pCar;
-/*   
+   
    RidePartLoader rpl (&pOTree );
-//   const char* pszFile = "restroom01.3ds";
+   const char* pszFile = "restroom01.3ds";
 //   const char* pszFile = "alex2.3ds";
-   const char* pszPath = "data/BarnStormers";
-   const char* pszFile = "brnstrmcar.3ds";
+   const char* pszPath = "data/Restroom 01/";
+//   const char* pszFile = "brnstrmcar.3ds";
    size_t slen = strlen( pszFile );
    if( slen > 3 )
    {
@@ -203,7 +203,14 @@ bool GameManager::LoadGame (const char *fileName)
          rpl.Load3ds( pszPath, pszFile );
       }
    }
-*/   
+   const char* pTag = "tagedatub.3ds";
+   const char* pTag2 = "data/Tagada/";
+   rpl.Load3ds( pTag2, pTag );
+   
+   const char* pHT = "hrtwr.3ds";
+   const char* pHT2 = "data/HighRide/";
+   rpl.Load3ds( pHT2, pHT );
+   
    SaveGame("data/xml/Park.xml");
 
    return true;

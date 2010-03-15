@@ -52,6 +52,7 @@ public:
 	SimpleMeshObject( int id );
 	virtual ~SimpleMeshObject();
    virtual ObjectBase* Clone( );
+   void SetScale (float frx) { mfScale = frx; }
 
 	void Draw();
    void DrawSelectionTarget();

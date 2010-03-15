@@ -275,14 +275,14 @@ void Camera::DrawModel (Scene* pModel)   // 3d interface objects
       glEnable (GL_TEXTURE_2D);
       glTranslatef (GetPositionX(), GetPositionY(), mZoomFactor);
       glColor4ub (255,255,255,255);
-      glEnable(GL_BLEND);
       glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA  );
-
+      glEnable(GL_BLEND);
       pModel->Draw();
       glDisable(GL_BLEND);
    }
    glPopMatrix();
    glDisable (GL_LIGHTING);
+   glMatrixMode(GL_MODELVIEW);						// Select The Projection Matrix
 }
 
 void Camera::DrawInterface(Interface* pI)   // 2d interface objects

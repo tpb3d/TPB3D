@@ -258,12 +258,11 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
    char buf[256];
    // removed the _s, so it might have a buffer overrun now!
    strcpy (buf, Path);
-   strcat (buf, "/" );
    strcat (buf, Name);
-   Gfx::ImageManager::GetInstance()->set_path(Path);
    //char* pdest = strrchr( buf, '/' );
    //*(pdest++) = 0;
    Gfx::ImageManager& IMan = *(Gfx::ImageManager::GetInstance());
+   IMan.set_path(Path);
 
    if( cds.Load( buf ) )
    {
@@ -290,10 +289,24 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
                //strcat( szName, "/" );
                //strcat( szName, pMat->texture1_map.name );//mat.diffuseMaterialMap.bitmap_filter );
                strcpy( szName, pMat->texture1_map.name );
-               int iChannels = 4;
-               Gfx::Texture* pTex = IMan.GetTexture(szName,4);
+               if( strlen(szName) > 11 && !(szName[8] == '.'))
+               {
+                  size_t iNameLen = strlen(szName);
+                  for( size_t ixc = 9; ixc < iNameLen; ++ixc)
+                  {
+                     if(szName[ixc] == '.')
+                     {
+                        szName[ixc] = 0;
+                        break;
+                     }
+                  }
+                  strcat (szName, ".png");
+               }
+               int iChannels = GL_RGBA;
+               Gfx::Texture* pTex = IMan.GetTexture(szName, iChannels);
                texs[idx] = pTex;
                pGLMat->SetTexture(pTex);
+
 
                //png_color pngColor;
                //png_uint_32 iWide = 0;
@@ -343,8 +356,25 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
 
       float pn[3];
       ObjectNode* pNode = ObjectFactory::CreateNode( pFile->nmeshes );
-      float fLoc[4] = { 20,1,20,0 };
-      pNode->Move(fLoc);
+      float fRRLoc[4] = { 24,1,120,0 };
+      float fTALoc[4] = { 24,1,40,0 };
+      float fHRLoc[4] = { 10,-60,-40,0 };
+      float frx = 1.0;
+      if (strnicmp(Name,"Tag",3) == 0)
+      {
+         frx = 4;
+         pNode->Move(fTALoc);
+      }
+      else if (strnicmp(Name,"hrt",3) == 0)
+      {
+         frx = 5;
+         pNode->Move(fHRLoc);
+      }
+      else
+      {
+         frx = 4;
+         pNode->Move(fRRLoc);
+      }
       if( id > -1 )
       {
          ObjectNode* pParent = m_pObjectTree->GetNode(id);
@@ -370,6 +400,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
             pNormals[ifx][2] = pn[2];
          }
          SimpleMeshObject* pGLMesh = ObjectFactory::CreateMesh();
+         pGLMesh->SetScale (frx);
 
          pGLMesh->AddMaterials( 1, Mats[pMesh->faces[0].material] );
          pNode->AddMesh( pGLMesh );
@@ -385,6 +416,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
          delete Mats[idx];
       }
    }
+   IMan.set_path("Data");
 }
 
 void RidePartLoader::LoadASE( const char* Path )

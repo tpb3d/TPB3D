@@ -70,6 +70,7 @@ void SimpleMeshObject::Draw()
 //   else
    if( mpTexture != NULL )
    {
+      glEnable( GL_TEXTURE_2D );
       mpTexture->Bind( );
    }
    //glEnableClientState( GL_NORMAL_ARRAY );
@@ -88,6 +89,7 @@ void SimpleMeshObject::Draw()
    unsigned char ub[] = { 250,250,220,255 };
    glColor3ubv( ub );
 
+   glEnable( GL_BLEND );
    glBegin(GL_TRIANGLES); // glBegin and glEnd delimit the vertices that define a primitive (in our case triangles)
    for( int idx = 0; idx < mFaces; ++idx )
    {
@@ -110,6 +112,8 @@ void SimpleMeshObject::Draw()
       glVertex3fv( mpVertices[face2.Index] ); //Vertex definition
    }
    glEnd( );
+   glDisable( GL_TEXTURE_2D );
+   glDisable( GL_BLEND );
 }
 
 void SimpleMeshObject::DrawSelectionTarget()
@@ -175,30 +179,38 @@ void SimpleMeshObject::AddMesh( int VertexCount, float(* pVertexes)[3], float(* 
    for( int i = 0; i < mVertices; ++i)
    {
       mpVertices[i][0] = pVertexes[i][0]*mfScale;
-      mpVertices[i][1] = pVertexes[i][1]*mfScale;
-      mpVertices[i][2] = pVertexes[i][2]*mfScale;
+      if( mfScale == 4.0)
+      {
+         mpVertices[i][1] = pVertexes[i][2]*mfScale;
+         mpVertices[i][2] = -pVertexes[i][1]*mfScale;
+      }
+      else
+      {
+         mpVertices[i][1] = pVertexes[i][1]*mfScale;
+         mpVertices[i][2] = pVertexes[i][2]*mfScale;
+      }
    }
    int idxF = 0;
    for( int idx = 0; idx < FaceCount; ++idx )
    {
       SimpleFace* pFace = new SimpleFace();
       pFace->mPoints[0].Index = pFaces[idx][0];
-      pFace->mPoints[0].mUV[0] = pUVs[idxF][0];
-      pFace->mPoints[0].mUV[1] = pUVs[idxF][1];
+      pFace->mPoints[0].mUV[0] = pUVs[pFaces[idx][0]][0];
+      pFace->mPoints[0].mUV[1] = pUVs[pFaces[idx][0]][1];
       pFace->mPoints[0].Normal[0] = pNormals[idx][0];
       pFace->mPoints[0].Normal[1] = pNormals[idx][1];
       pFace->mPoints[0].Normal[2] = pNormals[idx][2];
       idxF++;
       pFace->mPoints[1].Index = pFaces[idx][1];
-      pFace->mPoints[1].mUV[0] = pUVs[idxF][0];
-      pFace->mPoints[1].mUV[1] = pUVs[idxF][1];
+      pFace->mPoints[1].mUV[0] = pUVs[pFaces[idx][1]][0];
+      pFace->mPoints[1].mUV[1] = pUVs[pFaces[idx][1]][1];
       pFace->mPoints[1].Normal[0] = pNormals[idx][0];
       pFace->mPoints[1].Normal[1] = pNormals[idx][1];
       pFace->mPoints[1].Normal[2] = pNormals[idx][2];
       idxF++;
-      pFace->mPoints[2].Index = pFaces[idx][1];
-      pFace->mPoints[2].mUV[0] = pUVs[idxF][0];
-      pFace->mPoints[2].mUV[1] = pUVs[idxF][1];
+      pFace->mPoints[2].Index = pFaces[idx][2];
+      pFace->mPoints[2].mUV[0] = pUVs[pFaces[idx][2]][0];
+      pFace->mPoints[2].mUV[1] = pUVs[pFaces[idx][2]][1];
       pFace->mPoints[2].Normal[0] = pNormals[idx][0];
       pFace->mPoints[2].Normal[1] = pNormals[idx][1];
       pFace->mPoints[2].Normal[2] = pNormals[idx][2];

@@ -124,7 +124,7 @@ void StripMeshObject::Draw()
       }
       glEnd( );
       glDisable( GL_TEXTURE_2D );
-      glDisable( GL_BLEND );
+      //glDisable( GL_BLEND );
    }
    ObjectNode::Draw();
    glDisable( GL_LIGHTING );

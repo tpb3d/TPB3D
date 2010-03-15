@@ -17,6 +17,7 @@ public:
 
    bool OnToolHit (const HR_Events tool);
    bool OnPlay (const CEGUI::EventArgs& e);
+   bool OnFRCS ();
    bool OnSettings ();
    bool OnTools ();
    bool OnExit (const CEGUI::EventArgs& e);

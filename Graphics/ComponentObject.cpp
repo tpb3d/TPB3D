@@ -109,7 +109,7 @@ void ComponentObject::Draw()
       }
       glEnd( );
       glDisable( GL_TEXTURE_2D );
-      glDisable( GL_BLEND );
+      //glDisable( GL_BLEND );
    }
    glPopMatrix();
 

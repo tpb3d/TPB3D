@@ -21,6 +21,7 @@
 #include "../Utility/GameException.h"
 
 #include "../Hub/Event.h"
+#include "FRCSWindow.h"
 #include "SettingsWindow.h"
 #include "ToolsWindow.h"
 #include "GUIManager.h"
@@ -99,6 +100,7 @@ void GUIManager::Draw()
 	mpSystem->renderGUI();
 }
 
+static FRCSWindow frcswin;
 static SettingsWindow setwin;
 static ToolsWindow ToolsWin;
 
@@ -116,8 +118,16 @@ bool GUIManager::OnToolHit (const HR_Events tool)
       return OnSettings();
    case HR_Tools:
       return OnTools();
+   case HR_FRCS:
+      return OnFRCS();
    }
    return false;
+}
+
+bool GUIManager::OnFRCS ()
+{
+   frcswin.Create (this->mpRootWind);
+   return true;
 }
 
 bool GUIManager::OnTools ()

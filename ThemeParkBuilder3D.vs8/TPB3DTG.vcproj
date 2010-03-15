@@ -206,6 +206,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Window\FRCSWindow.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\FRCSWindow.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Window\GUIManager.cpp"
 				>
 				<FileConfiguration
