@@ -15,16 +15,18 @@
 
 #pragma once
 #include "RideNode.h"
-#include "../Graphics/ObjectBase.h"
-#include "../Graphics/TexturedMesh.h"
+class ObjectBase;
+//#include "../Graphics/ObjectBase.h"
+//#include "../Graphics/TexturedMesh.h"
 
-class Arm : public RideNode, public TexturedMesh
+class Arm : public RideNode//, public TexturedMesh
 {
    int   mArmID;
    float mOffset;  // from center axis
    float mDepth;   // depth of the arm web (height at hub)
    float mLength;  // Projection from hub
    float mAngle;
+   ObjectBase* mpGraphic;
 public:
    Arm (int ArmID, float offset, float depth, float length, float angle);
    ~Arm (void);
@@ -32,5 +34,5 @@ public:
    virtual void Render();
    virtual void Draw();
    virtual void DrawSelectionTarget(); // base can't draw
-   virtual ObjectBase* Clone( );
+   //virtual ObjectBase* Clone( );
 };

@@ -48,6 +48,34 @@ Flying Scooters
 Scrambler
 */
 
+namespace Builders
+{
+   const char* kszParts[] =
+   {
+      "brnstrbase.3ds",
+      "brnstrprimary.3ds",
+      "brnstrsec.3ds",
+      "",
+      "brnstrlifter.3ds",
+      "",
+      "brnstrmcar.3ds",
+      "brnstrmdoor.3ds"
+   };
+
+   PartGuide::TFlatRideNodeType kParts[] = 
+   {
+      PartGuide::RideNodeBase,
+      PartGuide::RideNodeHub,
+      PartGuide::RideNodeHub,
+      PartGuide::RideNodeRotationHub,
+      PartGuide::RideNodeArm,
+      PartGuide::RideNodeCableHinge,
+      PartGuide::RideNodeCar
+   };
+}
+
+using namespace Builders;
+
 FlatRideBuilder::FlatRideBuilder(void)
 {
 }
@@ -67,18 +95,25 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
 
    if( iPattern == 0)
    {
+      PartGuide guide;
+      guide.Clear();
       // test data, the laundery ride
-      Deck* pDeck = new Deck(3,15,iTest,"Basemetal.png");
-      pDeck->SetPosition(0,0,0);
-      pDeck->Render();
-      Hub* pHub = new Hub (12, 13, "foundation.png");
-      pRide->SetNode(pHub);
-      pHub->Render();
-      RotationHub* pHub2 = new RotationHub (1, 4, 13, "Chips.png");
-      pHub->AddNode(pHub2);
-      pHub2->Render();
-      pHub2->SetDesiredSpeed(75);
-      pHub->AddNode (pDeck);
+      guide.fHeight = 12;
+      guide.nCount = 13;
+      RideNode* pHub = AddRideNodeHub (NULL, NULL, guide);
+      pRide->SetNode (pHub);
+
+      // spin up
+      guide.fHeight = 4;
+      guide.nSpeed = 75;
+      guide.fDrop = 12;
+      RideNode* pRotHub = AddRideNodeRotationHub (pHub, NULL, guide);
+
+      // Make a base
+      guide.fOffset = 2;
+      guide.fWidth = 18;
+      guide.nCount = iTest;
+      RideNode* pDeck = AddRideNodeDeck (pHub, NULL, guide);
 
       // test with 8 arms, the laundery ride
       float fDeg = 360.0f / iTest;
@@ -91,30 +126,25 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       v2 -= v1;
       float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
       
+      guide.fAngle = 0;
+      guide.fOffset = 1.5f;
+      guide.fHeight = 2.25f;
+      guide.fLength = 12.75f;
+      guide.fDrop = -10.0f;
+      guide.fWidth = vx;
+      guide.trig.SetY (fDegH);
       for (int ix = 0; ix < iTest; ++ix)
       {
-         Arm* pArm = new Arm(1, 1.5f, 2.25f, 12.75f, fAngle);
-         pArm->Render();
-         pHub2->AddNode(pArm);
-         float fAngle2 = fAngle + fDegH;
+         // Arm code
+         guide.fAngle = fAngle;
+         AddRideNodeArm (pRotHub, NULL, guide); // do the extension arm
+
+         // Building the yoke
+         guide.fAngle = fAngle + fDegH;
+         RideNode* pWire = AddRideNodeCableHinge (pRotHub, NULL, guide); // do the hanger
          fAngle += fDeg;
          
-         CableHingeJoint* pWire = new CableHingeJoint();
-         CVPoint v1(0,0,-vx*2);
-         CVPoint v2(0,0,0);
-         CVPoint v3(0,0,-vx);
-         v3.y = -10;
-         pWire->SetPoints (v1.GetVector3f(), v3.GetVector3f(), v2.GetVector3f());
-         pHub2->AddNode (pWire);
-         CVPoint v4(13.35,3.15f,0);
-         v4.Rotate(trig);
-         pWire->SetYAngle(fAngle2);
-         pWire->SetPosition(v4.GetVector3f());
-         pWire->Render();
-         Hub* p2 = new Hub(4,8,"railing.png");
-         p2->SetPosition(0,-11,-vx);
-         p2->Render();
-         pWire->AddNode(p2);
+         AddRideNodeCar (pWire, NULL, guide);
       }
    }
    else if( iPattern == 1)
@@ -126,9 +156,13 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       // test data, the laundery ride
       int iSides = 14;
       float fRadius = 18.0f;
+
+      // stator hub
       Hub* pHub = new Hub (12, iSides, "DarkWood.png");
       pRide->SetNode(pHub);
       pHub->Render();
+
+      // rotating hub
       RotationHub* pHub2 = new RotationHub (1, 3, iSides, "Chips.png");
       pHub->AddNode(pHub2);
       pHub2->Render();
@@ -138,6 +172,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       pDeck->Render();
       pHub2->AddNode (pDeck);
 
+      // prerequisits for the carousel assembly
       float fDeg = 360.0f / iSides;
       float fDegH = fDeg /2; // Half increment
       float fAngle = 0;
@@ -147,7 +182,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       v2.Rotate(trig);
       v2 -= v1;
       float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
-      
+      // spin out the rows of poles
       for (int ix = 0; ix < iSides; ++ix)
       {
          CarouselAssembly* pArm = new CarouselAssembly(1, 0, -2.25f, fRadius, fAngle);
@@ -165,6 +200,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          pStrut->Render();
          pHub2->AddNode (pStrut);
 
+         // radiate the columns of poles
          for( int iRad = 3+4; iRad < (int)fRadius-3; iRad+=3 )
          {
             // plug the gallop poles into the arm cranks
@@ -183,23 +219,33 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
    }
    else
    {
+      PartGuide guide;
+      guide.Clear();
+
       // test data, the dryer ride
+      // base deck
       Deck* pDeck = new Deck(3,15,iTest,"Basemetal.png");
       pDeck->SetPosition(0,0,0);
       pDeck->Render();
       pRide->SetNode (pDeck);
+      // lifter arm build
       LiftArm* pLA = new  LiftArm(123, 18, 5, "Basemetal.png");
       pDeck->AddNode(pLA);
+      pLA->Render();
       pLA->RideNode::SetPosition(0,0,-15);
-      Hub* pHub = new Hub (2, 3, "foundation.png");
-      pLA->AddNode (pHub);
-      pHub->Render();
-      RotationHub* pHub2 = new RotationHub (1, 4, 13, "Chips.png");
-      pHub->AddNode(pHub2);
-      pHub2->SetYPosition (3.0f);
-      pHub2->Render();
-      pHub2->SetDesiredSpeed(75);
 
+      // stator hub on the end of the lifter
+      guide.fHeight = 2;
+      guide.nCount = 13;
+      RideNode* pHubNode = AddRideNodeHub (pLA, NULL, guide);
+
+      // rotating hub mointed on the stator hub
+      guide.fHeight = 4;
+      guide.nSpeed = 75;
+      guide.fDrop = 1.0f;
+      RideNode* pRotHub = AddRideNodeRotationHub (pHubNode, NULL, guide);
+
+      // put what ever tub, arm assembly or deck here
       // test with 8 arms, the laundery ride
       float fDeg = 360.0f / iTest;
       float fDegH = fDeg /2; // Half increment
@@ -210,31 +256,27 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       v2.Rotate(trig);
       v2 -= v1;
       float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
-      
+
+      // preset our guide to build from.
+      // This will come from a data stream once this is all together
+      guide.fAngle = 0;
+      guide.fOffset = 1.5f;
+      guide.fHeight = 2.25f;
+      guide.fLength = 12.75f;
+      guide.fDrop = -3.0f;
+      guide.fWidth = vx;
+      guide.trig.SetY (fDegH);
+
       for (int ix = 0; ix < iTest; ++ix)
       {
-         Arm* pArm = new Arm(1, 1.5f, 2.25f, 12.75f, fAngle);
-         pArm->Render();
-         pHub2->AddNode(pArm);
-         float fAngle2 = fAngle + fDegH;
+         guide.fAngle = fAngle;
+         AddRideNodeArm (pRotHub, NULL, guide); // do the extension arm
+
+         guide.fAngle = fAngle + fDegH;
+         RideNode* pWire = AddRideNodeCableHinge (pRotHub, NULL, guide); // do the hanger
          fAngle += fDeg;
          
-         CableHingeJoint* pWire = new CableHingeJoint();
-         CVPoint v1(0,0,-vx*2);
-         CVPoint v2(0,0,0);
-         CVPoint v3(0,0,-vx);
-         v3.y = -3;
-         pWire->SetPoints (v1.GetVector3f(), v3.GetVector3f(), v2.GetVector3f());
-         pHub2->AddNode (pWire);
-         CVPoint v4(13.35,3.15f,0);
-         v4.Rotate(trig);
-         pWire->SetYAngle(fAngle2);
-         pWire->SetPosition(v4.GetVector3f());
-         pWire->Render();
-         Hub* p2 = new Hub(4,8,"railing.png");
-         p2->SetPosition(0,-2,-vx);
-         p2->Render();
-         pWire->AddNode(p2);
+         AddRideNodeCar (pWire, NULL, guide);
       }
    }
 
@@ -267,7 +309,7 @@ void FlatRideBuilder::MakeSection( PartGuide& guide, Ride& ride )
       case PartGuide::RideNodeArm:
       break;
       
-      case PartGuide::RideNodeAxis:
+      case PartGuide::RideNodeBase:
       break;
       
       case PartGuide::RideNodeCar:
@@ -294,6 +336,103 @@ ObjectBase* FlatRideBuilder::Support( Vector3f pt, PartGuide& guide, float Mount
 {
    RideSection* pToDo = new RideSection();
    return pToDo;
+}
+
+RideNode* FlatRideBuilder::AddRideNodePlatForm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   return NULL;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeBase (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   return NULL;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeHub (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   Hub* pHub = new Hub (guide.fHeight, guide.nCount, "foundation.png");
+   pHub->Render();
+   if (pParent != NULL)
+   {
+      pParent->AddNode (pHub);
+   }
+   return pHub;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeStrut (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   return NULL;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeArm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   Arm* pArm = new Arm(1, guide.fOffset, guide.fHeight, guide.fLength, guide.fAngle);
+   pArm->Render();
+   pParent->AddNode (pArm);
+   return pArm;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeDeck (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   Deck* pDeck = new Deck(guide.fOffset, guide.fWidth - guide.fOffset, guide.nCount, "Basemetal.png");
+   pDeck->SetPosition(0,0,0);
+   pDeck->Render();
+   if (pParent != NULL)
+   {
+      pParent->AddNode (pDeck);
+   }
+   return pDeck;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeCar (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   Hub* pHub = new Hub(2,8,"railing.png");
+   pHub->SetPosition(0,-2,-(guide.fWidth));
+   pHub->Render();
+   pParent->AddNode(pHub);
+   return pHub;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeDisc (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   return NULL;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeCarriage (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   return NULL;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeCableHinge (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   CableHingeJoint* pWire = new CableHingeJoint();
+   CVPoint v1(0,0,-(guide.fWidth) * 2);
+   CVPoint v2(0,0,0);
+   CVPoint v3(0,0,-(guide.fWidth));
+   v3.y = guide.fDrop;
+   pWire->SetPoints (v1.GetVector3f(), v3.GetVector3f(), v2.GetVector3f());
+   CVPoint v4(13.35,3.15f,0);
+   v4.Rotate (guide.trig);
+   pWire->SetYAngle (guide.fAngle);
+   pWire->SetPosition (v4.GetVector3f());
+   pWire->Render();
+   pParent->AddNode (pWire);
+   return pWire;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeRotationHub (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   RotationHub* pHub2 = new RotationHub (guide.TakeANumber(), guide.fHeight, guide.nCount, "Chips.png");
+   pParent->AddNode (pHub2);
+   pHub2->SetYPosition (guide.fDrop);
+   pHub2->Render ();
+   pHub2->SetDesiredSpeed (guide.nSpeed);
+   return pHub2;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeLiftArm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+{
+   return NULL;
 }
 
 /* DOC

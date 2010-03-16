@@ -45,7 +45,6 @@ namespace CoreObjects
 }
 
 Hub::Hub (float height, short sides, const char* TexName)
-:  TexturedMesh (sides,2,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8, ObjectFactory::TakeANumber())
 {
    mTexName = TexName;
    mHeight = height;
@@ -53,15 +52,20 @@ Hub::Hub (float height, short sides, const char* TexName)
    mSections = 2; // some rides may have more
    mRadii[0] = 2;
    mRadii[1] = 1.9f;
+   mpGraphic = new TexturedMesh (sides,2,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8, ObjectFactory::TakeANumber());
 }
 
 Hub::~Hub(void)
 {
+   if (mpGraphic != NULL)
+   {
+      delete mpGraphic;
+   }
 }
 
 void Hub::Draw()
 {
-   TexturedMesh::Draw();
+   mpGraphic->Draw();
    RideNode::Draw();
 }
 
@@ -75,11 +79,11 @@ void Hub::Render()
       double dTheta = M_PI/180 * dRad;
       CVPoint pt (cos(dTheta) * this->mRadii[0], 0, sin(dTheta)* this->mRadii[0]);
       sf::Vector3f temp = pt.GetVector3f();
-      AddPoint (temp);
+      mpGraphic->AddPoint (temp);
       dRad += dDeg;
       pt = CVPoint (cos(dTheta) * this->mRadii[1], mHeight, sin(dTheta)* this->mRadii[1]);
       temp = sf::Vector3f (pt.GetVector3f());
-      AddPoint (temp);
+      mpGraphic->AddPoint (temp);
    }
 }
 
@@ -93,11 +97,11 @@ void Hub::Update(int dt)
 }
 
 
-ObjectBase* Hub::Clone( )
-{
-   Hub* pHub = new Hub(mHeight, mSides, mTexName.c_str());
-   return pHub;
-}
+//ObjectBase* Hub::Clone( )
+//{
+//   Hub* pHub = new Hub(mHeight, mSides, mTexName.c_str());
+//   return pHub;
+//}
 
 void Hub::IncreseSides()
 {

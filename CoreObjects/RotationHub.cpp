@@ -55,7 +55,7 @@ void RotationHub::Draw()
 	glRotatef(mvAngle.y,0.0f,1.0f,0.0f);
 	glRotatef(mvAngle.z,0.0f,0.0f,1.0f);
 
-   TexturedMesh::Draw();
+   mpGraphic->Draw();
    RideNode::Draw();
    glPopMatrix();
 }
@@ -70,11 +70,11 @@ void RotationHub::Render()
       double dTheta = M_PI/180 * dRad;
       CVPoint pt (cos(dTheta) * this->mRadii[0], 0, sin(dTheta)* this->mRadii[0]);
       sf::Vector3f temp = pt.GetVector3f();
-      AddPoint (temp);
+      mpGraphic->AddPoint (temp);
       dRad += dDeg;
       pt = CVPoint (cos(dTheta) * this->mRadii[1], 0 + mHeight, sin(dTheta)* this->mRadii[1]);
       temp = sf::Vector3f (pt.GetVector3f());
-      AddPoint (temp);
+      mpGraphic->AddPoint (temp);
    }
 }
 

@@ -14,18 +14,19 @@
 #include "../Graphics/ObjectBase.h"
 #include "../Graphics/TexturedStrip.h"
 
-class Deck : public RideNode, public TexturedStrip
+class Deck : public RideNode //, public TexturedStrip
 {
    float mRadii[2];
    short mSides;
    short mSections;
    std::string mTexName;
+   ObjectBase* mpGraphic;
 
 public:
    Deck (float innerRadius, float outerRadius, short sides, const char* TexName);
    ~Deck(void);
 
-   ObjectBase* Clone( );
+   //ObjectBase* Clone( );
    void IncreseSides();
    void DecreseSides();
    virtual void Update(int dt);

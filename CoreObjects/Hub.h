@@ -14,10 +14,11 @@
 #include <string>
 
 #include "RideNode.h"
-#include "../Graphics/ObjectBase.h"
-#include "../Graphics/TexturedMesh.h"
+class ObjectBase;
+//#include "../Graphics/ObjectBase.h"
+//#include "../Graphics/TexturedMesh.h"
 
-class Hub : public RideNode, public TexturedMesh
+class Hub : public RideNode//, public TexturedMesh
 {
 protected:
    float mHeight;
@@ -25,12 +26,13 @@ protected:
    short mSides;
    short mSections;
    std::string mTexName;
+   ObjectBase* mpGraphic;
 
 public:
    Hub (float height, short sides, const char* TexName);
    ~Hub(void);
 
-   ObjectBase* Clone( );
+   //ObjectBase* Clone( );
    void IncreseSides();
    void DecreseSides();
    virtual void Update(int dt);

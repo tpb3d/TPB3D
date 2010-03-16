@@ -16,8 +16,9 @@
 #pragma once
 #include "RideNode.h"
 #include "../Physics/ServoPhysics.h"
+class ObjectBase;
 
-class LiftArm : public RideNode, public ServoPhysics, public TexturedMesh
+class LiftArm : public RideNode, public ServoPhysics//, public TexturedMesh
 {
    int mIdle;
    int mRun;
@@ -25,6 +26,8 @@ class LiftArm : public RideNode, public ServoPhysics, public TexturedMesh
    //float mDesiredAngle;
    float mWidth;
    float mLength;
+   ObjectBase* mpGraphic;
+
 public:
    LiftArm(int ID, float length, float width, const char* TexName );
    ~LiftArm(void);

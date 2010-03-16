@@ -23,19 +23,26 @@
 #include "../Graphics/ObjectBase.h"
 #include "Arm.h"
 
+// temp
+#include "../Graphics/TexturedMesh.h"
+
 Arm::Arm (int ID, float offset, float depth, float length, float angle)
 :  RideNode()
-,  TexturedMesh (2,2,Gfx::ImageManager::GetInstance()->GetTexture("Arm.png",4), 0x98b0b0b8, ObjectFactory::TakeANumber())
 {
    mArmID = ID;
    mOffset = offset;
    mDepth = depth;
    mLength = length;
    mAngle = angle;
+   mpGraphic = new TexturedMesh (2,2,Gfx::ImageManager::GetInstance()->GetTexture("Arm.png",4), 0x98b0b0b8, ObjectFactory::TakeANumber());
 }
 
 Arm::~Arm (void)
 {
+   if(mpGraphic != NULL)
+   {
+      delete mpGraphic;
+   }
 }
 
 void Arm::Draw()
@@ -45,7 +52,7 @@ void Arm::Draw()
 	glRotatef(mvAngle.x,1.0f,0.0f,0.0f);
 	glRotatef(-mvAngle.y,0.0f,1.0f,0.0f);
 	glRotatef(mvAngle.z,0.0f,0.0f,1.0f);
-   TexturedMesh::Draw();
+   mpGraphic->Draw();
    RideNode::Draw();
    glPopMatrix();
 }
@@ -61,23 +68,23 @@ void Arm::Render()
    CVPoint pt (mOffset, -0.125, 0);
    CVPoint ptr = pt;
    ptr.Rotate(trig);
-   AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr.GetVector3f());
    pt.y += mDepth;
    ptr = pt;
    ptr.Rotate(trig);
-   AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr.GetVector3f());
    pt.x += mLength;
    ptr = pt;
    ptr.Rotate(trig);
-   AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr.GetVector3f());
    pt.y -= ep;
    ptr = pt;
    ptr.Rotate(trig);
-   AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr.GetVector3f());
 }
 
-ObjectBase* Arm::Clone()
-{
-   Arm* pArm = new Arm(mArmID, mOffset, mDepth, mLength, mAngle);
-   return pArm;
-}
+//ObjectBase* Arm::Clone()
+//{
+//   Arm* pArm = new Arm(mArmID, mOffset, mDepth, mLength, mAngle);
+//   return pArm;
+//}

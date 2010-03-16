@@ -28,25 +28,30 @@
 #include <math.h>
 
 Deck::Deck (float innerRadius, float outerRadius, short sides, const char* TexName)
-:  TexturedStrip (sides,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8)
+//:  TexturedStrip (sides,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8)
 {
    mTexName = TexName;
    mSides = sides;
    mSections = 2; // some rides may have more
    mRadii[0] = innerRadius;
    mRadii[1] = outerRadius;
+   mpGraphic = new TexturedStrip (sides,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8);
    Render();
 }
 
 Deck::~Deck(void)
 {
+   if (mpGraphic != NULL)
+   {
+      delete mpGraphic;
+   }
 }
 
 void Deck::Draw()
 {
  	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
    glTranslatef( mvPosition.x, mvPosition.y, mvPosition.z );
-   TexturedStrip::Draw();
+   mpGraphic->Draw();
    RideNode::Draw();
    glPopMatrix();
 }
@@ -61,11 +66,11 @@ void Deck::Render()
       double dTheta = M_PI/180 * dRad;
       CVPoint pt (cos(dTheta) * this->mRadii[0], 0, sin(dTheta)* this->mRadii[0]);
       sf::Vector3f temp = pt.GetVector3f();
-      AddPoint (temp);
+      mpGraphic->AddPoint (temp);
       dRad += dDeg;
       pt = CVPoint (cos(dTheta) * this->mRadii[1], 0, sin(dTheta)* this->mRadii[1]);
       temp = sf::Vector3f (pt.GetVector3f());
-      AddPoint (temp);
+      mpGraphic->AddPoint (temp);
    }
 }
 
@@ -79,11 +84,11 @@ void Deck::Update(int dt)
 }
 
 
-ObjectBase* Deck::Clone( )
-{
-   Deck* pHub = new Deck(mRadii[0], mRadii[1], mSides, mTexName.c_str());
-   return pHub;
-}
+//ObjectBase* Deck::Clone( )
+//{
+//   Deck* pHub = new Deck(mRadii[0], mRadii[1], mSides, mTexName.c_str());
+//   return pHub;
+//}
 
 namespace CoreObjects
 {

@@ -54,8 +54,7 @@ using namespace CoreObjects;
 // linear physics will also need this for the drop tower.
 
 LiftArm::LiftArm (int ID, float length, float width, const char* TexName)
-:  TexturedMesh (7,4,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8, ObjectFactory::TakeANumber())
-,  ServoPhysics (0, 2000.0f, 1000.0f)
+:  ServoPhysics (0, 2000.0f, 1000.0f)
 {
    mIdle = 10;
    mRun = 0;
@@ -66,11 +65,15 @@ LiftArm::LiftArm (int ID, float length, float width, const char* TexName)
    mvPosition.z = 0;
    mWidth = width;
    mLength = length;
-   Render();
+   mpGraphic = new TexturedMesh (7,4,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8, ObjectFactory::TakeANumber());
 }
 
 LiftArm::~LiftArm(void)
 {
+   if(mpGraphic != NULL)
+   {
+      delete mpGraphic;
+   }
 }
 
 void LiftArm::Draw()
@@ -78,7 +81,7 @@ void LiftArm::Draw()
  	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
    glTranslatef( mvPosition.x, 0, mvPosition.z );										// Move to the arc end of the arm 
 	glRotatef(mPosition, 1.0f, 0.0f, 0.0f);
-   TexturedMesh::Draw();
+   mpGraphic->Draw();
    glTranslatef( 0, 0, mLength );										// Move to the arc end of the arm 
    RideNode::Draw();
    glPopMatrix();
@@ -91,15 +94,15 @@ void LiftArm::Render()
    for( int ix = 0; ix < mSides; ++ix )  // 7 x 4
    {
       CVPoint pt (LiftPairs[index].z*mWidth, -0.5f, LiftPairs[index].x*mLength);
-      AddPoint (pt.GetVector3f());
+      mpGraphic->AddPoint (pt.GetVector3f());
       pt = CVPoint  (LiftPairs[index].z*mWidth, 0.5f, LiftPairs[index].x*mLength);
-      AddPoint (pt.GetVector3f());
+      mpGraphic->AddPoint (pt.GetVector3f());
       index++;
 
       pt = CVPoint  (LiftPairs[index].z*mWidth, 0.5f, LiftPairs[index].x*mLength);
-      AddPoint (pt.GetVector3f());
+      mpGraphic->AddPoint (pt.GetVector3f());
       pt = CVPoint (LiftPairs[index].z*mWidth, -0.5f, LiftPairs[index].x*mLength);
-      AddPoint (pt.GetVector3f());
+      mpGraphic->AddPoint (pt.GetVector3f());
       index++;
    }
 }

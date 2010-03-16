@@ -203,13 +203,17 @@ bool GameManager::LoadGame (const char *fileName)
          rpl.Load3ds( pszPath, pszFile );
       }
    }
-   const char* pTag = "tagedatub.3ds";
+   const char* pTag1 = "tagedatubhr.3ds";
    const char* pTag2 = "data/Tagada/";
-   rpl.Load3ds( pTag2, pTag );
+   rpl.Load3ds( pTag2, pTag1 );
+   const char* pTag3 = "tagedashkr.3ds";
+//   rpl.Load3ds( pTag2, pTag3 );
+   const char* pTag4 = "tagadagate.3ds";
+   rpl.Load3ds( pTag2, pTag4 );
    
-   const char* pHT = "hrtwr.3ds";
-   const char* pHT2 = "data/HighRide/";
-   rpl.Load3ds( pHT2, pHT );
+//   const char* pHT = "hrtwr.3ds";
+//   const char* pHT2 = "data/HighRide/";
+//   rpl.Load3ds( pHT2, pHT );
    
    SaveGame("data/xml/Park.xml");
 
