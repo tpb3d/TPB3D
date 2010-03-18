@@ -17,7 +17,8 @@ class SimpleMeshObject; // Object;
 class StripMeshObject;
 class QuadMeshObject;
 class ComplexMeshObject;
-
+class TexturedStrip;
+class TexturedMesh;
 
 class ObjectFactory
 {
@@ -38,6 +39,8 @@ public:
    static SimpleMeshObject* CreateMesh();
    static QuadMeshObject* CreateQuadMesh();
    static StripMeshObject* CreateStrip();
+   static TexturedStrip* CreateTexturedStrip(int length, const char* pTexName, long color);
+   static TexturedMesh* CreateTexturedMesh(int length, int width, const char* pTexName, long color);
    static ComplexMeshObject* CreateComplex();
 
    static ObjectBase* Clone( ObjectBase* pDupee );

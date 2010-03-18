@@ -29,6 +29,7 @@ class Arm : public RideNode//, public TexturedMesh
    ObjectBase* mpGraphic;
 public:
    Arm (int ArmID, float offset, float depth, float length, float angle);
+   Arm (int ArmID, float offset, float depth, float length, float angle, ObjectBase* pGfx);
    ~Arm (void);
 
    virtual void Render();

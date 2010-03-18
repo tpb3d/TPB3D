@@ -9,11 +9,12 @@
 //////////////////////////////////////////////////////////////////////#pragma once
 
 #include "RideNode.h"
-#include "../Graphics/ObjectBase.h"
-#include "../Graphics/SimpleMeshObject.h"
 
-class Carriage : public RideNode, public SimpleMeshObject
+class ObjectBase;
+
+class Carriage : public RideNode
 {
+   ObjectBase* mpGraphic;
 
 public:
    Carriage();
@@ -22,6 +23,6 @@ public:
    virtual void Render();
    virtual void Draw();
    virtual void DrawSelectionTarget(); // base can't draw
-   virtual ObjectBase* Clone( );
+   //virtual ObjectBase* Clone( );
    void Default();
 };

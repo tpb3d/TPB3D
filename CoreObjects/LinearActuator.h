@@ -31,9 +31,8 @@
 */
 
 #pragma once
-#include "../Graphics/ObjectBase.h"
 
-class RideBase : public ObjectBase
+class RideBase
 {
 
 public:

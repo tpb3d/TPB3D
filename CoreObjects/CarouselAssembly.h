@@ -15,16 +15,17 @@
 
 #pragma once
 #include "RideNode.h"
-#include "../Graphics/ObjectBase.h"
-#include "../Graphics/TexturedStrip.h"
 
-class CarouselAssembly : public RideNode, public TexturedStrip
+class ObjectBase;
+
+class CarouselAssembly : public RideNode
 {
    int   mCarouselAssemblyID;
    float mOffset;  // from center axis
    float mDepth;   // depth of the CarouselAssembly web (height at hub)
    float mLength;  // Projection from hub
    float mAngle;
+   ObjectBase* mpGraphic;
    
    // This goes with the crank later
    // this will simulate the crank and gallop of the carousel horse
@@ -43,5 +44,5 @@ public:
    virtual void Render();
    virtual void Draw();
    virtual void DrawSelectionTarget(); // base can't draw
-   virtual ObjectBase* Clone( );
+   //virtual ObjectBase* Clone( );
 };

@@ -34,6 +34,8 @@
 //test
 #include "../Graphics/StripMeshObject.h"
 #include "../Graphics/ObjectTree.h"
+#include "../Graphics/ObjectBase.h"
+#include "../Graphics/ObjectNode.h"
 #include "../Graphics/Tree.h"
 #include "../Graphics/Image.h"
 #include "../Builders/TreeFormer.h"
@@ -46,6 +48,8 @@
 #include "../CoreObjects/TrackSection.h"
 #include "../CoreObjects/Car.h"
 #include "../CoreObjects/Ride.h"
+#include "../CoreObjects/Lamp.h"
+#include "../CoreObjects/Pathway.h"
 // endtest
 
 GameManager::GameManager (Scene& scene, Park& park)
@@ -118,23 +122,30 @@ bool GameManager::LoadGame (const char *fileName)
    tfm.Generate( myTree,1 );
    ObjectTree& pOTree = mScene.GetPark()->GetTree();
    pOTree.AddNode( myTree);
-   
-   FlatRideBuilder flat;
 
-   Ride* pRide;
-   float fx = 10;
-   float fz = 40;
-   pRide = flat.CreateRide(0, mPark );
-   pRide->SetPosition (fx+20,1,fz+10);
-   pOTree.AddNode(new RidePack (pRide));
+   Lamp* pLamp = new Lamp(8, "SteamPunkLamp.png", "LightParticle1.png");
+   float fLoc[] = { -10, 0.1f, 55};
+   pLamp->Render();
+   pLamp->Move (fLoc);
+   pOTree.AddNode (pLamp);
 
-   pRide = flat.CreateRide(1, mPark);
-   pRide->SetPosition (fx-20,1, fz+10);
-   pOTree.AddNode(new RidePack (pRide));
-   
-   pRide = flat.CreateRide(2, mPark);
-   pRide->SetPosition (fx,1, fz+40);
-   pOTree.AddNode(new RidePack (pRide));
+
+   Pathway* pPath = new Pathway (Vector3f(-30.0f, 0.1f, 61.0f), mScene.GetPark(), "Stone.png");
+   pPath->Render();
+   pOTree.AddNode (pPath);
+
+   // this is BS just to show paths
+   Pathway* pPath2 = new Pathway (Vector3f(-30.0f, 0.1f, 61.0f), mScene.GetPark(), "Stone.png");
+   pPath2->Render2();
+   pOTree.AddNode (pPath2);
+
+   RidePartLoader rpl;
+   ObjectNode* pTempTree = new ObjectNode(0, 33);
+   const char* pszFile = "restroom01.3ds";
+   const char* pszPath = "data/Restroom 01/";
+   rpl.Load3ds( pszPath, pszFile, pTempTree );
+   pOTree.AddNode (pTempTree);
+
 
    // test build coaster track
    Texture* pTex = Gfx::ImageManager::GetInstance()->GetTexture("ref1.png",3);
@@ -178,39 +189,30 @@ bool GameManager::LoadGame (const char *fileName)
 
    pOTree.AddNode (pTrack);
    Car* pCar = new Car( sf::Vector3f( 4, 1.8f, 6 ), sf::Vector3f( -10, 4.2f, -21 ), sf::Vector3f( 0,0,0 ),8,599 );
-   pOTree.AddNode( pCar );
+   Ride* pCarRide = new Ride(Vector3f(0,0,0), mPark);
+   pOTree.AddNode ( new RidePack (pCarRide));
+   pCarRide->SetNode (pCar);
    pCar->Default();
    mPark.mpCar = pCar;
-   
-   RidePartLoader rpl (&pOTree );
-   const char* pszFile = "restroom01.3ds";
-//   const char* pszFile = "alex2.3ds";
-   const char* pszPath = "data/Restroom 01/";
-//   const char* pszFile = "brnstrmcar.3ds";
-   size_t slen = strlen( pszFile );
-   if( slen > 3 )
-   {
-      if( _strnicmp( &pszFile[slen-3], "ASE", 3 ) == 0 )
-      {
-         rpl.LoadASE( pszFile );
-      }
-      else if( _strnicmp( &pszFile[slen-4], "MS3D", 4 ) == 0 )
-      {
-         rpl.LoadMS3D( pszFile );
-      }
-      else
-      {
-         rpl.Load3ds( pszPath, pszFile );
-      }
-   }
-   const char* pTag1 = "tagedatubhr.3ds";
-   const char* pTag2 = "data/Tagada/";
-   rpl.Load3ds( pTag2, pTag1 );
-   const char* pTag3 = "tagedashkr.3ds";
-//   rpl.Load3ds( pTag2, pTag3 );
-   const char* pTag4 = "tagadagate.3ds";
-   rpl.Load3ds( pTag2, pTag4 );
-   
+
+   FlatRideBuilder flat;
+
+   Ride* pRide;
+   float fx = 0;
+   float fz = 80;
+   pRide = flat.CreateRide(0, mPark );
+   pRide->SetPosition (fx,0.1,fz);
+   pOTree.AddNode(new RidePack (pRide));
+
+   //pRide = flat.CreateRide(1, mPark);
+   //pRide->SetPosition (fx-20,1, fz+10);
+   //pOTree.AddNode(new RidePack (pRide));
+   //
+   //pRide = flat.CreateRide(2, mPark);
+   //pRide->SetPosition (fx,1, fz+40);
+   //pOTree.AddNode(new RidePack (pRide));
+
+
 //   const char* pHT = "hrtwr.3ds";
 //   const char* pHT2 = "data/HighRide/";
 //   rpl.Load3ds( pHT2, pHT );

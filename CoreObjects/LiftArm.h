@@ -16,9 +16,10 @@
 #pragma once
 #include "RideNode.h"
 #include "../Physics/ServoPhysics.h"
+
 class ObjectBase;
 
-class LiftArm : public RideNode, public ServoPhysics//, public TexturedMesh
+class LiftArm : public RideNode, public ServoPhysics
 {
    int mIdle;
    int mRun;

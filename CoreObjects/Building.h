@@ -20,10 +20,10 @@
 
 #include <map>
 
-#include "../Graphics/ModelObject.h"
 #include "CoreBase.h"
 
 class SerializerBase;
+class ObjectBase;
 
 enum Building_state
 {
@@ -31,10 +31,11 @@ enum Building_state
    BS_Smoking        // equipment inside has failed, not filled with smoke
 };
 
-class Building : public CoreBase, public Gfx::ModelObject
+class Building : public CoreBase
 {
    Park& mParkParent;
    Building_state mCurrentState; // metric of building condition
+   ObjectBase* mpGraphic;
 
 public:
    Building (Vector3f& origin, Park& ParkParent);

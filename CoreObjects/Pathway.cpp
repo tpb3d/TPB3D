@@ -18,8 +18,16 @@
 #include <string>
 #include <iostream>
 #include "../Physics/MotionPhysics.h"
+#include <SFML/System.hpp>
+#include <SFML/Graphics.hpp>
 #include "../Graphics/Image.h"
 #include "../Graphics/Animation.h"
+#include "../Graphics/VPoint.h"
+#include "../Graphics/Material.h"
+#include "../Graphics/Texture.h"
+#include "../Graphics/ObjectNode.h"
+#include "../Graphics/TexturedStrip.h"
+#include "../Graphics/ObjectFactory.h"
 #include "../People/Person.h"
 #include "../Storage/SerializerBase.h"
 
@@ -34,12 +42,13 @@
 
 using namespace Gfx;
 
-Pathway::Pathway (Vector3f& origin, Park * ParkParent)
-:  CoreBase(origin, Vector3f(0,0,0))
+Pathway::Pathway (Vector3f& origin, Park * ParkParent, const char* szTex)
+:  CoreBase(origin, Vector3f(0,45,0))
+,  ObjectNode(0, ObjectFactory::TakeANumber())
 {
+   mTexName = szTex;
    mID = CoreBase::GetNextID();
-   mSkin = new AnimationSingle (ImageManager::GetInstance()->GetTexture("foundation.png", GL_RGBA), 56, 36);
-   mThePathway = new AnimationEmpty ((int)origin.x, (int)origin.z);
+   mpGraphic = ObjectFactory::CreateNode(1);
 }
 
 //Pathway::Pathway(TiXmlNode* pnPathway)
@@ -49,6 +58,10 @@ Pathway::Pathway (Vector3f& origin, Park * ParkParent)
 
 Pathway::~Pathway()
 {
+   if (mpGraphic != NULL)
+   {
+      delete mpGraphic;
+   }
    // delete the nodes
 }
 
@@ -56,11 +69,51 @@ void Pathway::Update (float dt, int tod)
 {
 }
 
+void Pathway::Render()
+{
+   int iSides = 15;
+   float  fOff = 1.75f;
+   float  fStep = 3.5;
+   TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
+   mpGraphic->AddMesh (pBase);
+   CVPoint pt1 (mvPosition.x, mvPosition.y, mvPosition.z-fOff);
+   CVPoint pt2 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
+   pBase->AddPoint (pt1.GetVector3f());
+   pBase->AddPoint (pt2.GetVector3f());
+   for( int ix =0; ix < iSides; ++ix)
+   {
+      pt1.x += fStep;
+      pt2.x += fStep;
+      pBase->AddPoint (pt1.GetVector3f());
+      pBase->AddPoint (pt2.GetVector3f());
+   }
+}
+// dummy code
+void Pathway::Render2()
+{
+   int iSides = 15;
+   float  fOff = 1.75f;
+   float  fStep = 3.5;
+   TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
+   mpGraphic->AddMesh (pBase);
+   CVPoint pt1 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
+   CVPoint pt2 (mvPosition.x+fOff*2, mvPosition.y, mvPosition.z+fOff);
+   pBase->AddPoint (pt1.GetVector3f());
+   pBase->AddPoint (pt2.GetVector3f());
+   for( int ix =0; ix < iSides; ++ix)
+   {
+      pt1.z += fStep;
+      pt2.z += fStep;
+      pBase->AddPoint (pt1.GetVector3f());
+      pBase->AddPoint (pt2.GetVector3f());
+   }
+}
+
 // Function that calls the OpenGL rendering in the subclass.
 void Pathway::Draw ()
 {
    // add meshed then draw them here
-   // mpMesh->Draw;
+   mpGraphic->Draw();
 }
 
 void Pathway::DrawSelectionTarget (bool PathwayOnly)

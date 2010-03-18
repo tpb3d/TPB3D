@@ -608,6 +608,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CoreObjects\CableSusp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\CableSusp.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CoreObjects\CamPath.cpp"
 				>
 				<FileConfiguration
@@ -707,6 +715,14 @@
 			</File>
 			<File
 				RelativePath="..\CoreObjects\JointBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\Lamp.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\Lamp.h"
 				>
 			</File>
 			<File

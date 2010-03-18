@@ -15,13 +15,13 @@
 #include "../Graphics/Image.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/ObjectBase.h"
-#include "../Graphics/TexturedMesh.h"
+#include "../Graphics/SimpleMeshObject.h"
 #include "../Graphics/ObjectFactory.h"
 
 
 Carriage::Carriage()
-:  SimpleMeshObject(ObjectFactory::TakeANumber())
 {
+   mpGraphic = ObjectFactory::CreateMesh();
 }
 
 Carriage::~Carriage(void)
@@ -133,8 +133,8 @@ void Carriage::Default()
    pMesh->AddPoint( sf::Vector3f( 1.8f, 1.8f,-2.65f) );*/
 }
 
-ObjectBase* Carriage::Clone( )
-{
-   Carriage* pCA = new Carriage();
-   return pCA;
-}
+//ObjectBase* Carriage::Clone( )
+//{
+//   Carriage* pCA = new Carriage();
+//   return pCA;
+//}

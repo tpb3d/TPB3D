@@ -20,20 +20,19 @@
 #include <list>
 
 #include "../Types/vector2.h"
-#include "../Graphics/ModelObject.h"
 #include "CoreBase.h"
+#include "../graphics/ObjectNode.h"
 
 // forward decls, some of these may be removed
-class AnimationSingle;
-class AnimationEmpty;
 class CoreBase;
 class Park;
 class RouteBase;
 class PersonQueue;
 class GameManager;
 class PathAgent;
+class ObjectNode;
 
-class Pathway : public Gfx::ModelObject, public CoreBase
+class Pathway : public CoreBase, public ObjectNode
 {
    friend class GameManager;
    friend class PathAgent;
@@ -57,8 +56,8 @@ protected:
 
 protected:
    Vector3f m_Point;
-   AnimationSingle* mSkin;
-   AnimationEmpty* mThePathway;
+   std::string mTexName;
+   ObjectNode* mpGraphic;
 
 public:
    void  DrawEmptySpace();
@@ -68,7 +67,7 @@ public:
 
 public:
    // CTOR
-   Pathway (Vector3f& origin, Park* parent);
+   Pathway (Vector3f& origin, Park* parent, const char* szTex);
    // Initialize from an xml node
    virtual ~Pathway ();
 
@@ -86,6 +85,9 @@ public:
    // Methods
    virtual void Update (float dt, int tod);
    virtual void Draw ();
+   virtual void Render ();
+   virtual void Render2 ();
+   Pathway* Clone() { return new Pathway (Vector3f(mLocation[0],mLocation[1],mLocation[2]), NULL, mTexName.c_str()); }
 
    bool AddFloorSpace (CoreBase * floor);
    void SetFloorPositions( int x, int x2 );

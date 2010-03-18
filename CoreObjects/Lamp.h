@@ -2,30 +2,36 @@
 //  Copyright (C)2010 Ralph Daigle.   All rights reserved.
 //  Licensed according to the GPL v3.0
 //
-//  Deck class
+//  Lamp class
 //
 //  You should have received a copy of the GNU General Public License
 //  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
 
+//  RideLamp        Stationay Structural element such as the pylon for the yoyo and carousel.
 
 #pragma once
-#include "RideNode.h"
+#include <string>
 
-class ObjectBase;
+//#include "CoreBase.h"
 
-class Deck : public RideNode
+class ObjectNode;
+
+class Lamp : public ObjectNode
 {
-   float mRadii[2];
+protected:
+   float mHeight;
+   float mRadii[4];
    short mSides;
    short mSections;
    std::string mTexName;
-   ObjectBase* mpGraphic;
+   std::string mTexGlow;
+   ObjectNode* mpGraphic;
 
 public:
-   Deck (float innerRadius, float outerRadius, short sides, const char* TexName);
-   Deck (float innerRadius, float outerRadius, short sides, ObjectBase* pGfx);
-   ~Deck(void);
+   Lamp (float height, const char* TexName, const char* TexGlow);
+   Lamp (float height, ObjectNode* pGfx);
+   ~Lamp(void);
 
    //ObjectBase* Clone( );
    void IncreseSides();
@@ -34,6 +40,7 @@ public:
    void Render();
    void Draw();
    void DrawSelectionTarget();
+   Lamp* Clone() { return new Lamp (mHeight, mTexName.c_str() ,mTexGlow.c_str()); }
 
    void Load(SerializerBase& ser);
    void Save(SerializerBase& ser);

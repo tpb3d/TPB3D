@@ -10,16 +10,14 @@
 
 #pragma once
 
-class ObjectTree;
+class ObjectNode;
 
 class RidePartLoader
 {
-protected:
-   ObjectTree* m_pObjectTree;
 public:
-   RidePartLoader( ObjectTree* pTree );
+   RidePartLoader( );
    virtual ~RidePartLoader(void);
-   void Load3ds( const char* Path, const char* Name, int id = -1 );// from the 3DS lib
-   void LoadASE( const char* Path );// ASE files
-   void LoadMS3D( const char* Path); // MilkShape
+   void Load3ds( const char* Path, const char* Name, ObjectNode* pBase);// from the 3DS lib
+   void LoadASE( const char* Path );// ASE files NOT SUPPORTED YET
+   void LoadMS3D( const char* Path, const char* Name, ObjectNode* pBase); // MilkShape
 };

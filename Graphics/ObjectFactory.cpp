@@ -18,6 +18,10 @@
 #include "QuadMeshObject.h"
 #include "ComplexMeshObject.h"
 #include "ObjectFactory.h"
+#include "VPoint.h"
+#include "TexturedStrip.h"
+#include "TexturedMesh.h"
+#include "Image.h"
 
 int ObjectFactory::mNextObjectID = 1;
 
@@ -64,7 +68,19 @@ ComplexMeshObject* ObjectFactory::CreateComplex() // Objec
    return new ComplexMeshObject( 1, TakeANumber() );
 }
 
+TexturedStrip* ObjectFactory::CreateTexturedStrip(int length, const char* pTexName, long color)
+{
+   return new TexturedStrip (length, Gfx::ImageManager::GetInstance()->GetTexture(pTexName, 4), color);
+}
+
+TexturedMesh* ObjectFactory::CreateTexturedMesh(int length, int width, const char* pTexName, long color)
+{
+   return new TexturedMesh (length, width, Gfx::ImageManager::GetInstance()->GetTexture(pTexName, 4),
+                            color, TakeANumber());
+}
+
 ObjectBase* ObjectFactory::Clone( ObjectBase* pDupee )
 {
    return pDupee->Clone( );
 }
+

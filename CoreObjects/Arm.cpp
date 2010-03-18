@@ -11,16 +11,14 @@
 //  Structural Elemant that extends from a ride hub or axis with a carriage, car or other ride part at the other end.
 //  Movable or Stationary. Think Biplanes, Octopus, monster
 
-#include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "../Types/vector3.h"
 #include "../Graphics/VPoint.h"
-#include "../Graphics/Image.h"
-#include "../Graphics/Material.h"
-#include "../Graphics/Texture.h"
 #include "../Graphics/ObjectBase.h"
+#include "../Graphics/TexturedMesh.h"
+#include "../Graphics/ObjectFactory.h"
 #include "Arm.h"
 
 // temp
@@ -34,7 +32,18 @@ Arm::Arm (int ID, float offset, float depth, float length, float angle)
    mDepth = depth;
    mLength = length;
    mAngle = angle;
-   mpGraphic = new TexturedMesh (2,2,Gfx::ImageManager::GetInstance()->GetTexture("Arm.png",4), 0x98b0b0b8, ObjectFactory::TakeANumber());
+   mpGraphic = ObjectFactory::CreateTexturedMesh (2, 2, "Arm.png", 0x98b0b0b8 );
+}
+
+Arm::Arm (int ID, float offset, float depth, float length, float angle, ObjectBase* pGfx)
+:  RideNode()
+,  mpGraphic (pGfx)
+{
+   mArmID = ID;
+   mOffset = offset;
+   mDepth = depth;
+   mLength = length;
+   mAngle = angle;
 }
 
 Arm::~Arm (void)

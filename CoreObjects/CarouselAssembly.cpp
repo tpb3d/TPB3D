@@ -11,16 +11,14 @@
 //  Structural Elemant that extends from a ride hub or axis with a carriage, car or other ride part at the other end.
 //  Movable or Stationary. Think Biplanes, Octopus, monster
 
-#include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "../Types/vector3.h"
 #include "../Graphics/VPoint.h"
-#include "../Graphics/Image.h"
-#include "../Graphics/Material.h"
-#include "../Graphics/Texture.h"
 #include "../Graphics/ObjectBase.h"
+#include "../Graphics/TexturedStrip.h"
+#include "../Graphics/ObjectFactory.h"
 #include "CarouselAssembly.h"
 
 // Crank code
@@ -46,7 +44,6 @@ void CarouselAssembly::PresetCrank()
 
 CarouselAssembly::CarouselAssembly (int ID, float offset, float depth, float length, float angle)
 :  RideNode()
-,  TexturedStrip (12, Gfx::ImageManager::GetInstance()->GetTexture("Chips.png",4), 0x98b0b0b8)
 {
    mCarouselAssemblyID = ID;
    mOffset = offset;
@@ -54,6 +51,7 @@ CarouselAssembly::CarouselAssembly (int ID, float offset, float depth, float len
    mLength = length;
    mAngle = angle;
    PresetCrank();
+   mpGraphic = ObjectFactory::CreateTexturedStrip (12, "Chips.png", 0x98b0b0b8);
 }
 
 CarouselAssembly::~CarouselAssembly (void)
@@ -75,7 +73,7 @@ void CarouselAssembly::Draw()
 	glRotatef(mvAngle.x,1.0f,0.0f,0.0f);
 	glRotatef(-mvAngle.y,0.0f,1.0f,0.0f);
 	glRotatef(mvAngle.z,0.0f,0.0f,1.0f);
-   TexturedStrip::Draw();
+   mpGraphic->Draw();
    RideNode::RideNodeIterator ir;
    float pos = 0;
    float ang = 0;
@@ -109,23 +107,23 @@ void CarouselAssembly::Render()
    CVPoint pt (mOffset, -0.125, 0);
    CVPoint ptr = pt;
    ptr.Rotate(trig);
-   AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr.GetVector3f());
    pt.y += mDepth;
    ptr = pt;
    ptr.Rotate(trig);
-   AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr.GetVector3f());
    pt.x += mLength;
    ptr = pt;
    ptr.Rotate(trig);
-   AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr.GetVector3f());
    pt.y -= ep;
    ptr = pt;
    ptr.Rotate(trig);
-   AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr.GetVector3f());
 }
 
-ObjectBase* CarouselAssembly::Clone()
-{
-   CarouselAssembly* pCarouselAssembly = new CarouselAssembly(mCarouselAssemblyID, mOffset, mDepth, mLength, mAngle);
-   return pCarouselAssembly;
-}
+//ObjectBase* CarouselAssembly::Clone()
+//{
+//   CarouselAssembly* pCarouselAssembly = new CarouselAssembly(mCarouselAssemblyID, mOffset, mDepth, mLength, mAngle);
+//   return pCarouselAssembly;
+//}

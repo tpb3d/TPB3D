@@ -241,8 +241,7 @@
 //}
 
 
-RidePartLoader::RidePartLoader( ObjectTree* pObjectTree )
-: m_pObjectTree( pObjectTree )
+RidePartLoader::RidePartLoader()
 {
 }
 
@@ -250,7 +249,7 @@ RidePartLoader::~RidePartLoader(void)
 {
 }
 
-void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
+void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pBaseNode )
 {
    C3DSHandler cds;
    Gfx::Texture* texs[16];
@@ -356,7 +355,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
 
       float pn[3];
       ObjectNode* pNode = ObjectFactory::CreateNode( pFile->nmeshes );
-      float fRRLoc[4] = { 24,1,120,0 };
+      float fRRLoc[4] = { -20,0.5,55,0 };
       float fTALoc[4] = { 24,1,40,0 };
       float fHRLoc[4] = { 10,-60,-40,0 };
       float frx = 1.0;
@@ -370,20 +369,18 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
          frx = 5;
          pNode->Move(fHRLoc);
       }
+      else if (strnicmp(Name,"brn",3) == 0)
+      {
+         frx = 1;
+      }
       else
       {
-         frx = 4;
+         frx = 3;
          pNode->Move(fRRLoc);
       }
-      if( id > -1 )
-      {
-         ObjectNode* pParent = m_pObjectTree->GetNode(id);
-         pParent->AddNode( pNode );
-      }
-      else
-      {
-         m_pObjectTree->AddNode( pNode );
-      }
+
+      pBaseNode->AddNode( pNode );
+
       for( int idx = 0; idx < pFile->nmeshes; idx++ )
       {
          Lib3dsMesh* pMesh = pFile->meshes[idx];
@@ -416,7 +413,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, int id )
          delete Mats[idx];
       }
    }
-   IMan.set_path("Data");
+   IMan.set_path("Data/");
 }
 
 void RidePartLoader::LoadASE( const char* Path )
@@ -524,7 +521,7 @@ void RidePartLoader::LoadASE( const char* Path )
 //   }
 }
 
-void RidePartLoader::LoadMS3D(const char *Path)
+void RidePartLoader::LoadMS3D (const char *Path, const char* Name, ObjectNode* pBaseNode)
 {
    CMS3DFile cds;
    Gfx::Texture* texs[16];
@@ -641,7 +638,8 @@ void RidePartLoader::LoadMS3D(const char *Path)
       //}
 
       ComponentObject* pNode = ObjectFactory::CreateComponent();// new CComponentObject( 461 );
-      m_pObjectTree->AddNode( pNode );
+      pBaseNode->AddNode( pNode );
+
       int iVerts = cds.GetNumVertices();
       int iFaces = cds.GetNumTriangles();
       int iMax = iFaces*3 +1;

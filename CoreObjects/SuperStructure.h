@@ -12,9 +12,10 @@
 // Ferris Wheel supports, Double Wheel center axle.
 
 #pragma once
-#include "../Graphics/ObjectBase.h"
 
-class SuperStructure : public ObjectBase
+class ObjectBase;
+
+class SuperStructure
 {
 
 public:

@@ -10,6 +10,10 @@
 
 
 #pragma once
+namespace Gfx
+{
+   class Texture;
+}
 
 class TexturedMesh : public ObjectBase
 {

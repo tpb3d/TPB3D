@@ -9,10 +9,12 @@
 //////////////////////////////////////////////////////////////////////#pragma once
 #include "../Graphics/ObjectBase.h"
 #include "../Graphics/ObjectNode.h"
+#include "RideNode.h"
+
 class CVPoint;
 class CMainFrame;
 
-class Car : public ObjectNode
+class Car : public RideNode
 {
    int m_BaseTexture;
    int m_SeatTexture;
@@ -21,10 +23,11 @@ class Car : public ObjectNode
    sf::Vector3f  m_vPosition;
    sf::Vector3f  m_vAngle;
    int      m_PartsCount;
-   ObjectBase* m_BaseParts[16]; // temp hardcode
+   ObjectNode* m_BaseParts; // temp hardcode
 
 public:
    Car(sf::Vector3f& vDim, sf::Vector3f& vPosition, sf::Vector3f& vAngle, int meshcount, int id );
+   Car (ObjectNode* pNode);
    virtual ~Car(void);
 
    void Draw();

@@ -10,13 +10,12 @@
 
 
 #pragma once
-#include "../Graphics/ObjectBase.h"
 
-class JointBase : public ObjectBase
+class JointBase
 {
    // float mMaxAngle;
    // float mMinAngle;
 public:
-   JointBase(int ID, int points ) : ObjectBase(points, ID) {}
+   JointBase(int ID, int points ) {}
    virtual ~JointBase(void) {}
 };

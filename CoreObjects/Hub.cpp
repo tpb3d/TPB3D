@@ -55,6 +55,17 @@ Hub::Hub (float height, short sides, const char* TexName)
    mpGraphic = new TexturedMesh (sides,2,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8, ObjectFactory::TakeANumber());
 }
 
+Hub::Hub (float height, short sides, ObjectBase* pGfx)
+:  mpGraphic (pGfx)
+{
+   mTexName = "";
+   mHeight = height;
+   mSides = sides;
+   mSections = 2; // some rides may have more
+   mRadii[0] = 2;
+   mRadii[1] = 1.9f;
+}
+
 Hub::~Hub(void)
 {
    if (mpGraphic != NULL)

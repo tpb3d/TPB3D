@@ -11,32 +11,37 @@
 // Section or sections that make up a surface that can stood or leaned on in rides
 // See platform for stations and ramps
 
-#include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "../Types/vector3.h"
 #include "../Graphics/VPoint.h"
-#include "../Graphics/Image.h"
-#include "../Graphics/Material.h"
-#include "../Graphics/Texture.h"
 #include "../Graphics/ObjectBase.h"
-#include "../Graphics/TexturedMesh.h"
+#include "../Graphics/TexturedStrip.h"
+#include "../Graphics/ObjectFactory.h"
 #include "Deck.h"
 
 #define _USE_MATH_DEFINES
 #include <math.h>
 
 Deck::Deck (float innerRadius, float outerRadius, short sides, const char* TexName)
-//:  TexturedStrip (sides,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8)
 {
    mTexName = TexName;
    mSides = sides;
    mSections = 2; // some rides may have more
    mRadii[0] = innerRadius;
    mRadii[1] = outerRadius;
-   mpGraphic = new TexturedStrip (sides,Gfx::ImageManager::GetInstance()->GetTexture(TexName, 3), 0x98b0b0b8);
-   Render();
+   mpGraphic = ObjectFactory::CreateTexturedStrip (sides, TexName, 0x98b0b0b8);
+}
+
+Deck::Deck (float innerRadius, float outerRadius, short sides, ObjectBase* pGfx)
+:  mpGraphic (pGfx)
+{
+   mTexName = "";
+   mSides = sides;
+   mSections = 2; // some rides may have more
+   mRadii[0] = innerRadius;
+   mRadii[1] = outerRadius;
 }
 
 Deck::~Deck(void)

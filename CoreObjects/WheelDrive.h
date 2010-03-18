@@ -13,7 +13,8 @@
 
 class WheelDrive : public ActuatorBase
 {
-   // float fWheelDiameter;
+   ObjectBase* mpGraphic;
+// float fWheelDiameter;
 public:
    WheelDrive(int ID );
    ~WheelDrive(void);

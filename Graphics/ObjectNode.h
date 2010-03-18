@@ -18,7 +18,7 @@ class ObjectNode : public ObjectBase
    unsigned short mAllocatedNodes;
    unsigned short mMeshCount;
    unsigned short mNodeCount;
-   SimpleMeshObject**   mpMeshes;
+   ObjectBase** mpMeshes;
    ObjectNode** mpNodes;
 protected:
    float       mAngle;
@@ -35,7 +35,7 @@ public:
    virtual ObjectNode* Clone( );
 
    void Animate();
-   void AddMesh( SimpleMeshObject* pNode );
+   void AddMesh( ObjectBase* pNode );
    void AddNode( ObjectNode* pChild );
    ObjectNode* GetNode( int index );
    void Move( float Location[3] );

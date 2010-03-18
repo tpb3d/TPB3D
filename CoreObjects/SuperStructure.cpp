@@ -12,7 +12,6 @@
 #include "SuperStructure.h"
 
 SuperStructure::SuperStructure( int ID )
-:  ObjectBase( 0, ID)
 {
 }
 

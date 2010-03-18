@@ -14,11 +14,10 @@
 #include <string>
 
 #include "RideNode.h"
-class ObjectBase;
-//#include "../Graphics/ObjectBase.h"
-//#include "../Graphics/TexturedMesh.h"
 
-class Hub : public RideNode//, public TexturedMesh
+class ObjectBase;
+
+class Hub : public RideNode
 {
 protected:
    float mHeight;
@@ -30,6 +29,7 @@ protected:
 
 public:
    Hub (float height, short sides, const char* TexName);
+   Hub (float height, short sides, ObjectBase* pGfx);
    ~Hub(void);
 
    //ObjectBase* Clone( );

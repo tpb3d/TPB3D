@@ -2,7 +2,7 @@
 //  Copyright (C)2010 Ralph Daigle.   All rights reserved.
 //  Licensed according to the GPL v3.0
 //
-//  CableHingeJoint class
+//  CableSusp class
 //
 //  You should have received a copy of the GNU General Public License
 //  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
@@ -16,52 +16,66 @@
 #include "../Graphics/ObjectBase.h"
 #include "../Graphics/ObjectFactory.h"
 #include "../Graphics/TexturedStrip.h"
-#include "CableHingeJoint.h"
+#include "CableSusp.h"
 
-CableHingeJoint::CableHingeJoint ()
+CableSusp::CableSusp ()
+:  Body (0, 1)
 {
     mAngle = 0;
     mWeight = 500;
     mDistance = 5; 
     mLength = 4;
-    mpGraphic = ObjectFactory::CreateTexturedStrip (3, "basemetal.png", 0x98b0b0b0);
+    mMax = 20;
+    mpGraphic = ObjectFactory::CreateTexturedStrip (2, "basemetal.png", 0x98b0b0b0);
+    SetVelocity(0,0);
+    SetAcceleration(0,0);
 }
 
-CableHingeJoint::~CableHingeJoint (void)
+CableSusp::~CableSusp (void)
 {
 }
 
-void CableHingeJoint::SetForce(float Velocity)
+void CableSusp::SetDirection(float Velocity)
 {
-   mAngle = Velocity * (mWeight/100) / mDistance;  // Fc = sm2/r
-   mAngle -= mAngle * (mLength * mLength) / mWeight;
-}
-
-void CableHingeJoint::Update(int dt)  // add the other physics beside centrifugal
-{
-   if(dt > 0)
+   if (mVelocity.y != Velocity)
    {
-      SetForce((float)dt);
+      SetVelocity (0,Velocity);
+      if (Velocity < 0)
+      {
+         this->SetDistance(-mMax);
+      }
+      else if (Velocity > 0)
+      {
+         this->SetDistance(mMax);
+      }
+      else
+      {
+         this->SetDistance(0);
+      }
+   }
+}
+
+void CableSusp::Update(int dt)  // add the other physics beside centrifugal
+{
+   static int wait = 10;
+   if(wait < 1)
+   {
+      Integrate(1.0);
+      wait = dt;
    }
    else
    {
-      mAngle = 0;
+      wait--;
    }
 }
 
-void CableHingeJoint::Draw()
+void CableSusp::Draw()
 {
- 	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
-	glRotatef(mYAngle,0.0f,1.0f,0.0f);
-   glTranslatef( mvPosition.x, mvPosition.y, mvPosition.z );
-	glRotatef(mAngle,0.0f,0.0f,1.0f);
-   //mpGraphic->Draw();
-   glTranslatef( mV2.x, mV2.y, mV2.z );
+   mpGraphic->Draw();
    RideNode::Draw(); 
-   glPopMatrix();
 }
 
-void CableHingeJoint::Render()
+void CableSusp::Render()
 {
    sf::Vector3f tv = mV1;
    mpGraphic->AddPoint (tv);
@@ -71,9 +85,5 @@ void CableHingeJoint::Render()
    mpGraphic->AddPoint (tv);
    tv.y += 0.05f;
    tv.z += 0.05f;
-   mpGraphic->AddPoint (tv);
-   tv = mV3;
-   mpGraphic->AddPoint (tv);
-   tv.z += 0.1f;
    mpGraphic->AddPoint (tv);
 }

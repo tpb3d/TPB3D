@@ -29,6 +29,8 @@ ObjectNode::ObjectNode( int MeshCount, int id )
    mRotation[0] = 0;
    mRotation[1] = 0;
    mRotation[2] = 0;
+   mpNodes = NULL;
+   mpMeshes = NULL;
 }
 
 ObjectNode::~ObjectNode(void)
@@ -115,7 +117,7 @@ void ObjectNode::Draw()
 
    for( int idx = 0; idx < mMeshCount; ++idx )
    {
-      SimpleMeshObject* pMesh = mpMeshes[idx];
+      ObjectBase* pMesh = mpMeshes[idx];
       pMesh->Draw();
    }
    glPopMatrix();
@@ -144,16 +146,16 @@ void ObjectNode::DrawSelectionTarget()
    glEnd();
 }
 
-void ObjectNode::AddMesh( SimpleMeshObject* pNode )
+void ObjectNode::AddMesh( ObjectBase* pNode )
 {
    if( !mpMeshes )
    {
-      mpMeshes = new SimpleMeshObject*[mAllocatedCount];
+      mpMeshes = new ObjectBase*[mAllocatedCount];
    }
    else if( mMeshCount+1 > mAllocatedCount )
    {
       mAllocatedCount+=4;
-      SimpleMeshObject** pMeshes = new SimpleMeshObject*[mAllocatedCount];
+      ObjectBase** pMeshes = new ObjectBase*[mAllocatedCount];
       if( mAllocatedCount > 0 )
       {
          for( int idx = 0; idx < mMeshCount; ++idx )

@@ -11,10 +11,10 @@
 
 #pragma once
 #include "RideNode.h"
-#include "../Graphics/ObjectBase.h"
-#include "../Graphics/TexturedStrip.h"
 
-class CableHingeJoint : public RideNode, public TexturedStrip
+class ObjectBase;
+
+class CableHingeJoint : public RideNode//, public TexturedStrip
 {
    float  mAngle;
    float  mYAngle;
@@ -24,6 +24,7 @@ class CableHingeJoint : public RideNode, public TexturedStrip
    sf::Vector3f mV1;
    sf::Vector3f mV2;
    sf::Vector3f mV3;
+   ObjectBase* mpGraphic;
 
 public:
    CableHingeJoint();
@@ -36,10 +37,10 @@ public:
    void SetDistance (float dis) { mDistance = dis; } // radius of ride is spining
    void SetLength (float len) { mLength = len; }     // current length of cable (some rides will change this
 
-   void CableHingeJoint::SetForce(float Velocity);
+   void SetForce(float Velocity);
 
    virtual void Update(int dt);
    virtual void Render();
    virtual void Draw();
-   virtual ObjectBase* Clone( ) { return new CableHingeJoint(); }
+//   virtual ObjectBase* Clone( ) { return new CableHingeJoint(); }
 };

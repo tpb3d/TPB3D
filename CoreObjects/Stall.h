@@ -18,6 +18,7 @@
 
 class Stall : public Vendor
 {
+   ObjectBase* mpGraphic;
 
 public:
    // ctor dtor

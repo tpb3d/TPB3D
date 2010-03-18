@@ -10,9 +10,8 @@
 // Ride Assembly - collection or parts that make a complex component
 
 #pragma once
-#include "../Graphics/ObjectBase.h"
 
-class RideBase : public ObjectBase
+class RideBase
 {
 
 public:

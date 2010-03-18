@@ -179,7 +179,7 @@ void SimpleMeshObject::AddMesh( int VertexCount, float(* pVertexes)[3], float(* 
    for( int i = 0; i < mVertices; ++i)
    {
       mpVertices[i][0] = pVertexes[i][0]*mfScale;
-      if( mfScale == 4.0)
+      if( mfScale > 2.0)
       {
          mpVertices[i][1] = pVertexes[i][2]*mfScale;
          mpVertices[i][2] = -pVertexes[i][1]*mfScale;

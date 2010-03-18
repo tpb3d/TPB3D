@@ -13,11 +13,14 @@
 #pragma once
 #include "RideNode.h"
 
+class ObjectBase;
+
 class SpokeAssembly : public RideNode
 {
    float mHeight;
    short mSpokes;
    //  added lifters and other parts
+   ObjectBase* mpGraphic;
 
 public:
    SpokeAssembly (float height, short sides );

@@ -35,11 +35,10 @@ RotationHub::RotationHub (int ID, float height, short sides, const char* TexName
    mRun = 0;
    mDesiredSpeed = 5;
    mvPosition.x = 0;
-   mvPosition.y = 12;
+   mvPosition.y = height;
    mvPosition.z = 0;
    mRadii[0] = 2.75f;
    mRadii[1] = 2.75f;
-   Render();
 }
 
 RotationHub::~RotationHub(void)
@@ -48,11 +47,11 @@ RotationHub::~RotationHub(void)
 
 void RotationHub::Draw()
 {
-   Integrate(22);
+   //Integrate(22);
  	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
    glTranslatef( mvPosition.x, mvPosition.y, mvPosition.z );										// Move Left 1.5 Units And Into The Screen 6.0
 	glRotatef(mvAngle.x,1.0f,0.0f,0.0f);
-	glRotatef(mvAngle.y,0.0f,1.0f,0.0f);
+	glRotatef(-mvAngle.y,0.0f,1.0f,0.0f);
 	glRotatef(mvAngle.z,0.0f,0.0f,1.0f);
 
    mpGraphic->Draw();
@@ -85,13 +84,13 @@ void RotationHub::Update(int dt)
    {
       mRun--;
       mIdle = 0;
-//      Integrate (1);//(float)dt);
+      Integrate (1);//(float)dt);
       mvAngle.y = mPosition;
    }
    else if( mIdle > 0)
    {
       mIdle--;
-//      Integrate (1);//(float)dt);
+      Integrate (1);//(float)dt);
       mvAngle.y = mPosition;
    }
    else
