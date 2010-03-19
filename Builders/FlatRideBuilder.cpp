@@ -97,7 +97,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
    if( iPattern == 0)
    {
       RidePartLoader rpl;
-      const char* pPath = "data/Barn Stormer/";
+      const char* pPath = "Data/BarnStormers/";
       PartGuide guide;
       guide.Clear();
       // test data, the Barn Stormer ride

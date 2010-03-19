@@ -154,10 +154,10 @@ bool GameManager::LoadGame (const char *fileName)
    TrackGuide guide;
    guide.fCurAngleY = 0;
    guide.fCurAngleZ = 0;
-   guide.fTubeRadius = 0.4f;
+   guide.fTubeRadius = 0.0f;
    guide.fRailRadius = 0.2f;
    guide.fTrackGauge = 2;
-   guide.iRailShape = 3;
+   guide.iRailShape = 8;
    guide.point.Set (0,12,23);
 
    guide.SetupStraight( 20, 45 );
@@ -201,7 +201,7 @@ bool GameManager::LoadGame (const char *fileName)
    float fx = 0;
    float fz = 80;
    pRide = flat.CreateRide(0, mPark );
-   pRide->SetPosition (fx,0.1,fz);
+   pRide->SetPosition (fx,0.1f,fz);
    pOTree.AddNode(new RidePack (pRide));
 
    //pRide = flat.CreateRide(1, mPark);
@@ -216,6 +216,10 @@ bool GameManager::LoadGame (const char *fileName)
 //   const char* pHT = "hrtwr.3ds";
 //   const char* pHT2 = "data/HighRide/";
 //   rpl.Load3ds( pHT2, pHT );
+   
+   //const char* pFC5A = "gondola.3ds";
+   //const char* pFC5B = "data/Flyncircusride/5-Gondola/";
+   //rpl.Load3ds( pFC5B, pFC5A, );
    
    SaveGame("data/xml/Park.xml");
 

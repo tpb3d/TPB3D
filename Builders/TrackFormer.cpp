@@ -40,14 +40,14 @@ Track* TrackFormer::CreateTrack()
    return new Track();
 }
 
-
 void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
 {
+   bool bWood = (guide.iRailShape == 8);
    int id = 400;
    int iTubeSections = 6;
+   int iRailSides = 6;
    float fGauge = (float)(guide.fTrackGauge/2);
    float fYOffset = 0.8f;
-   TexturedMesh *pMesh = 0;
    if( guide.fTubeRadius > 1.99/12 )
    {
       iTubeSections = 9;
@@ -57,22 +57,31 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
    Track.AddSection(pTrackSection);
 
    // Determine rails needed
-   if( guide.iRailShape == 3 )
+   TexturedMesh *pMesh = NULL;
+   if (bWood)
    {
-      pMesh = new TexturedMesh( guide.iSections+1, iTubeSections, mpTexture, 0xff009090, id++ );
-      pTrackSection->AddSection( pMesh );
-   }
-   else if( guide.iRailShape > 2 )
-   {
-      pMesh = new TexturedMesh( guide.iSections+1, iTubeSections, mpTexture, 0xff009090, id++ );
-      pTrackSection->AddSection( pMesh );
+      iRailSides = 5;
+      fYOffset = 0.0f;
    }
    else
    {
-      fYOffset = 0.2f;
+      if( guide.iRailShape == 3 )
+      {
+         pMesh = new TexturedMesh( guide.iSections+1, iTubeSections, mpTexture, 0xff009090, id++ );
+         pTrackSection->AddSection( pMesh );
+      }
+      else if( guide.iRailShape > 2 )
+      {
+         pMesh = new TexturedMesh( guide.iSections+1, iTubeSections, mpTexture, 0xff009090, id++ );
+         pTrackSection->AddSection( pMesh );
+      }
+      else
+      {
+         fYOffset = 0.2f;
+      }
    }
-   TexturedMesh *pMeshA = new TexturedMesh( guide.iSections+1, 6, mpTexture, 0xff2f6f1f, id++ );
-   TexturedMesh *pMeshB = new TexturedMesh( guide.iSections+1, 6, mpTexture, 0xff2f6f1f, id++ );
+   TexturedMesh *pMeshA = new TexturedMesh( guide.iSections+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
+   TexturedMesh *pMeshB = new TexturedMesh( guide.iSections+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
    pTrackSection->AddSection( pMeshA );
    pTrackSection->AddSection( pMeshB );
    // option for one or two more rails
@@ -98,7 +107,7 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
       STrig trigRZ( 0, 0, guide.fCurRailAngle, 1.0 );
       STrig trigPXYZ( guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ, 1.0 );
       double dRad = 0.0;
-      if( pMesh )
+      if (pMesh != NULL)
       {
          double dDeg = 360.0/ (iTubeSections-1);
          for( int idx = 0; idx < iTubeSections; ++idx )
@@ -112,9 +121,9 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
             dRad += dDeg;
          }
       }
-      double dRDeg = 360.0/5;
-      dRad = 0.0;
-      for( int idx = 0; idx < 6; ++idx )
+      double dRDeg = 360.0/(iRailSides-1);
+      dRad = (bWood) ? 45.0f : 0.0;
+      for( int idx = 0; idx < iRailSides; ++idx )
       {
          double dTheta = M_PI/180 * dRad;
          CVPoint ptA( cos(dTheta) * guide.fRailRadius-fGauge, sin(dTheta)* guide.fRailRadius + fYOffset, 0 );
@@ -234,8 +243,10 @@ TexturedStrip* TrackFormer::CrossTie( CVPoint& TrackPoint, TrackGuide& guide )
       
    FPoint IShape[] = // Railroad or non coaster
    {
-      { -0.42f, 0.2f, -0.42f, 0.12f },
-      { 0.42f,  0.2f,  0.42f, 0.12f }
+      { -1.2f, -0.15f,  1.2f, -0.15f },
+      { -1.2f, -0.02f,  1.2f, -0.02f },
+      { -1.2f, -0.02f,  1.2f, -0.02f },
+      { -1.2f, -0.12f,  1.2f, -0.15f }
    };
    
    const int   TiePoints = 5;
@@ -244,6 +255,7 @@ TexturedStrip* TrackFormer::CrossTie( CVPoint& TrackPoint, TrackGuide& guide )
 
    FPoint* pPoints;
    int iCount = 2;
+   bool bWood = false;
    switch( guide.iRailShape )
    {
    case 6:
@@ -267,35 +279,67 @@ TexturedStrip* TrackFormer::CrossTie( CVPoint& TrackPoint, TrackGuide& guide )
       iCount = 5;
       break;
    case 7:
+   case 8:
       pPoints = IShape; // railroad
-      iCount = 2;
+      iCount = 4;
+      bWood = true;
       break;
    };
 
    TexturedStrip* pTBar = new TexturedStrip( iCount, mpTexture, 0x00505750 );
    STrig trigZ( 0, 0, guide.fCurRailAngle, 1.0 );
    STrig trig2( guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ, 1.0 );
-   for( int ix = 0; ix < iCount; ++ix )
+   if (bWood)
    {
-      CVPoint pt1( pPoints[ix].X1, pPoints[ix].Y1, 0 );
-      CVPoint pt2( pPoints[ix].X2, pPoints[ix].Y2, 0 );
+      float Z1 = 0;
+      for( int ix = 0; ix < iCount; ++ix )
+      {
+         CVPoint pt1( pPoints[ix].X1, pPoints[ix].Y1, Z1 );
+         CVPoint pt2( pPoints[ix].X2, pPoints[ix].Y2, Z1 );
 
-      pt1.Rotate( trigZ );
-      pt1.Rotate( trig2 );
-      pt1 *= dTrackGuage;
-      pt1 += TrackPoint;
+         pt1.Rotate( trigZ );
+         pt1.Rotate( trig2 );
+         pt1 *= dTrackGuage;
+         pt1 += TrackPoint;
 
-      pt2.Rotate( trigZ );
-      pt2.Rotate( trig2 );
-      pt2 *= dTrackGuage;
-      pt2 += TrackPoint;
+         pt2.Rotate( trigZ );
+         pt2.Rotate( trig2 );
+         pt2 *= dTrackGuage;
+         pt2 += TrackPoint;
 
-      sf::Vector3f temp1 = pt1.GetVector3f();
-      sf::Vector3f temp2 = pt2.GetVector3f();
-      pTBar->AddPoint( temp1 );
-      pTBar->AddPoint( temp2 );
+         sf::Vector3f temp1 = pt1.GetVector3f();
+         sf::Vector3f temp2 = pt2.GetVector3f();
+         pTBar->AddPoint( temp1 );
+         pTBar->AddPoint( temp2 );
+         if (ix == 2)
+         {
+            Z1 += 0.1f;
+         }
+      }
    }
+   else
+   {
+      for( int ix = 0; ix < iCount; ++ix )
+      {
+         CVPoint pt1( pPoints[ix].X1, pPoints[ix].Y1, 0 );
+         CVPoint pt2( pPoints[ix].X2, pPoints[ix].Y2, 0 );
 
+         pt1.Rotate( trigZ );
+         pt1.Rotate( trig2 );
+         pt1 *= dTrackGuage;
+         pt1 += TrackPoint;
+
+         pt2.Rotate( trigZ );
+         pt2.Rotate( trig2 );
+         pt2 *= dTrackGuage;
+         pt2 += TrackPoint;
+
+         sf::Vector3f temp1 = pt1.GetVector3f();
+         sf::Vector3f temp2 = pt2.GetVector3f();
+         pTBar->AddPoint( temp1 );
+         pTBar->AddPoint( temp2 );
+      }
+   }
    return pTBar;
 }
 
