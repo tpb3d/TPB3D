@@ -11,7 +11,7 @@
 
 #pragma once
 #include <vector>
-#include "../types/vector3.h"
+#include "../types/Vector3.h"
 struct PartGuide;
 class SerializerBase;
 

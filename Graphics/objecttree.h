@@ -8,7 +8,7 @@
 //  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////#pragma once
 
-#include "objectbase.h"
+#include "ObjectBase.h"
 
 class ObjectNode;
 

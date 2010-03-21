@@ -14,7 +14,7 @@
 #include "../Storage/SerializerBase.h"
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "../Types/vector3.h"
+#include "../Types/Vector3.h"
 #include "../Graphics/VPoint.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/Material.h"

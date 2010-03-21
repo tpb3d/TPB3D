@@ -13,7 +13,7 @@
 #include "../Storage/SerializerBase.h"
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "../Types/vector3.h"
+#include "../Types/Vector3.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/ObjectBase.h"

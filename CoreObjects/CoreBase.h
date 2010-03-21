@@ -18,7 +18,7 @@
 #ifndef _CoreBase_H
 #define _CoreBase_H
 
-#include "../Types/vector3.h"
+#include "../Types/Vector3.h"
 
 class Park;
 class Person;

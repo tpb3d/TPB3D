@@ -530,7 +530,7 @@ void RidePartLoader::LoadMS3D (const char *Path, const char* Name, ObjectNode* p
    char buf[256];
    // removed _s should do a length check
    strcpy( buf, Path );
-   char* pdest = strrchr( buf, '\\' );
+   char* pdest = strrchr( buf, '/' );
    *(pdest++) = 0;
    Gfx::ImageManager& IMan = *(Gfx::ImageManager::GetInstance());
 
@@ -616,7 +616,7 @@ void RidePartLoader::LoadMS3D (const char *Path, const char* Name, ObjectNode* p
                char szName[256];
                // removed _s, should do a length check
                strcpy( szName, buf );
-               strcat( szName, "\\" );
+               strcat( szName, "/" );
                strcat( szName, pMat->texture );//mat.diffuseMaterialMap.bitmap_filter );
                int iChannels = 4;
                Gfx::Texture* pTex = IMan.GetTexture(szName,4);
