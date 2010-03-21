@@ -17,7 +17,7 @@
 #include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
 
-Ride::Ride(Vector3f& vPosition, Park& ParkParent)
+Ride::Ride(const Vector3f& vPosition, const Park& ParkParent)
 :  CoreBase ( vPosition, Vector3f(0,0,0))
 ,  mParkParent (ParkParent)
 {

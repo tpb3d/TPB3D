@@ -45,7 +45,7 @@ class GhostObject : public CoreBase, public Gfx::ModelObject
    int   mOffsetUnits;
 
 public:
-   GhostObject (Vector3f& origin, int level);
+   GhostObject (const Vector3f& origin, int level);
 
    void Update (Park* pPark);
    void Draw ();

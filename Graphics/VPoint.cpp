@@ -12,28 +12,28 @@ CVPoint::CVPoint( double ix, double iy, double iz )
    z = iz;
 }
 */
-CVPoint::CVPoint( CVPoint& vp )
+CVPoint::CVPoint( const CVPoint& vp )
 {
 	x = vp.x;
 	y = vp.y;
    z = vp.z;
 }
 
-void CVPoint::operator = (CVPoint& vp)
+void CVPoint::operator = (const CVPoint& vp)
 {
 	x = vp.x;
 	y = vp.y;
    z = vp.z;
 }
 
-void CVPoint::operator += (CVPoint& dp)
+void CVPoint::operator += (const CVPoint& dp)
 {
 	x += dp.x;
 	y += dp.y;
    z += dp.z;
 }
 
-void CVPoint::operator *= (CVPoint& dp)
+void CVPoint::operator *= (const CVPoint& dp)
 {
 	x *= dp.x;
 	y *= dp.y;
@@ -47,28 +47,28 @@ void CVPoint::operator *= (double dd )
    z *= (float)dd;
 }
 
-void CVPoint::operator /= (CVPoint& dp)
+void CVPoint::operator /= (const CVPoint& dp)
 {
 	x /= dp.x;
 	y /= dp.y;
    z /= dp.z;
 }
 
-void CVPoint::operator -= (CVPoint& dp)
+void CVPoint::operator -= (const CVPoint& dp)
 {
 	x -= dp.x;
 	y -= dp.y;
    z -= dp.z;
 }
 
-void CVPoint::Offset(CVPoint& dp)
+void CVPoint::Offset(const CVPoint& dp)
 {
    x += dp.x;
    y += dp.y;
    z += dp.z;
 }
 
-void CVPoint::Rotate( STrig& trig )  // Lean - Mean
+void CVPoint::Rotate( const STrig& trig )  // Lean - Mean
 {
    double TY = y*trig.m_dCosX - z*trig.m_dSinX;
    double TZ = y*trig.m_dSinX + z*trig.m_dCosX;
@@ -81,7 +81,7 @@ void CVPoint::Rotate( STrig& trig )  // Lean - Mean
    y = (float)(TX*trig.m_dSinZ + TY*trig.m_dCosZ);//y
 }
 
-void CVPoint::Transform( STrig& trig, CVPoint& point )
+void CVPoint::Transform( const STrig& trig, const CVPoint& point )
 {
    double TY = y*trig.m_dCosX - z*trig.m_dSinX;
    double TZ = y*trig.m_dSinX + z*trig.m_dCosX;
@@ -94,7 +94,7 @@ void CVPoint::Transform( STrig& trig, CVPoint& point )
    x = (float)((TX*trig.m_dCosZ - TY*trig.m_dSinZ) + point.x);//x
 }
 
-void CVPoint::Render( STrig& trig, CVPoint& Points )
+void CVPoint::Render( const STrig& trig, const CVPoint& Points )
 {
     /*rotate around x-axis*/
    double TY = trig.m_dScale * Points.y*trig.m_dCosX - trig.m_dScale * Points.z*trig.m_dSinX;
@@ -108,7 +108,7 @@ void CVPoint::Render( STrig& trig, CVPoint& Points )
    y = (float)( TX*trig.m_dSinZ + TY*trig.m_dCosZ );//y
 }
 
-void CVPoint::Normal( CVPoint& a, CVPoint& b, CVPoint& c )
+void CVPoint::Normal( const CVPoint& a, const CVPoint& b, const CVPoint& c )
 {
    CVPoint p(c);
    p -= b;

@@ -15,10 +15,10 @@ class RideNode;
 
 class Ride : public CoreBase
 {
-   Park& mParkParent;
+   const Park& mParkParent;
    RideNode* mpBaseNode;   // only child
 public:
-   Ride(Vector3f& vPosition, Park& ParkParent);
+   Ride(const Vector3f& vPosition, const Park& ParkParent);
    virtual ~Ride();
    void SetNode (RideNode* pRideNode)
    {

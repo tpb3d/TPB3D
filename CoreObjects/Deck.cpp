@@ -73,7 +73,7 @@ void Deck::Render()
       sf::Vector3f temp = pt.GetVector3f();
       mpGraphic->AddPoint (temp);
       dRad += dDeg;
-      pt = CVPoint (cos(dTheta) * this->mRadii[1], 0, sin(dTheta)* this->mRadii[1]);
+      pt.Set(cos(dTheta) * this->mRadii[1], 0, sin(dTheta)* this->mRadii[1]);
       temp = sf::Vector3f (pt.GetVector3f());
       mpGraphic->AddPoint (temp);
    }

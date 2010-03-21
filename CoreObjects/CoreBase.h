@@ -61,8 +61,15 @@ protected:
    static unsigned int NextID;   // all model objects will get one
 public:
    // CTOR
-   CoreBase (Vector3f& vPosition, Vector3f& vAngle);
+   CoreBase ();
+   CoreBase (const Vector3f& vPosition);
+   CoreBase (const Vector3f& vPosition, const Vector3f& vAngle);
+   ~CoreBase ();
+   
+protected:
+   void Initialize();
 
+public:   
    // Properties
    inline float GetX() { return mvPosition.x; }
    inline float GetY() { return mvPosition.y; }

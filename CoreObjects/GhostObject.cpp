@@ -25,7 +25,7 @@
 using namespace Gfx;
 //using namespace ParkObjects;
 
-GhostObject::GhostObject (Vector3f& origin, int level)
+GhostObject::GhostObject (const Vector3f& origin, int level)
    :  mCurrentState (GS_Invalid)
    ,  CoreBase (origin, Vector3f(0,0,0))// no parent
    ,  mBase (1, 1)

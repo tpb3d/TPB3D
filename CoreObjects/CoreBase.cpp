@@ -27,10 +27,29 @@
 
 //using namespace Gfx;
 unsigned int CoreBase::NextID = 1;
+CoreBase::CoreBase ()
+:  mvPosition (0,0,0)
+,  mvAngle (0,0,0)
+{
+}
 
-CoreBase::CoreBase (Vector3f& pos, Vector3f& angle)
-      :  mvPosition (pos)
-      ,  mvAngle (angle)
+CoreBase::CoreBase (const Vector3f& vPosition)
+:  mvPosition (vPosition)
+,  mvAngle (0,0,0)
+{
+}
+
+CoreBase::CoreBase (const Vector3f& vPosition, const Vector3f& vAngle)
+:  mvPosition (vPosition)
+,  mvAngle (vAngle)
+{
+}
+
+CoreBase::~CoreBase ()
+{
+}
+
+void CoreBase::Initialize() // private, only call from CTOR
 {
    mID = CoreBase::GetNextID();
    mOccupants = 0;

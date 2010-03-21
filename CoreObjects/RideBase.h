@@ -20,7 +20,7 @@ class RideBase : public ObjectBase
 public:
    RideBase(int ID );
    ~RideBase(void);
-   void SetupGuide(PartGuide& guide);
+   void SetupGuide(const PartGuide& guide);
    void Preset( float fDefPitch, float fDistance, float fDegRotation, float fRadius, float fPitchRadius, float fRoll);
    void Draw();
    void Load(SerializerBase& ser);

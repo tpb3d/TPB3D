@@ -31,13 +31,14 @@ using namespace Gfx;
 
 namespace ParkObjects
 {
+   static Vector3f VR(0,0,0);
 }
 
 using namespace ParkObjects;
 
 Building::Building (Vector3f& origin, Park& ParkParent)
       :  mCurrentState (BS_Operational)
-      ,  CoreBase (Vector3f(origin.x, origin.y, origin.z), Vector3f(0,0,0))
+      ,  CoreBase (origin, origin)
       ,  mParkParent (ParkParent)
 {
    ImageManager * image_man = ImageManager::GetInstance ();

@@ -32,7 +32,7 @@ void RideBase::Load(SerializerBase& ser)
 void RideBase::Save(SerializerBase& ser)
 {
    ser.Add("type", "Track");
-   long* pI = (long*)mRGBA[0];
+   int* pI = (int*)mRGBA[0];
    ser.Add("RGBA", *pI);
    ser.Add("ID", mID);
 }
