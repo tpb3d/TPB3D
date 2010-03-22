@@ -152,7 +152,7 @@ void Person::Draw ()
    Render (manimations[mMood] );
 }
 
-void Person::Draw (int vx, int vy)
+void Person::Draw (float vx, float vy)
 {
 
    Render (manimations[mMood], vx, vx+8 );

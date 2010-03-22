@@ -524,6 +524,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Types\String.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Types\Vector2.h"
 				>
 			</File>
@@ -703,6 +707,14 @@
 			</File>
 			<File
 				RelativePath="..\CoreObjects\HingeJoint.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\HorizontalCrankHub.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\HorizontalCrankHub.h"
 				>
 			</File>
 			<File

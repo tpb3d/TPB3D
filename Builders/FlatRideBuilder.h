@@ -23,6 +23,7 @@ struct PartGuide
       RideNodeCarriage,    // rolling or orbiting -  no power
       RideNodeCableHinge,  // swinging - no power
       RideNodeRotationHub, // rotates - powered
+      RideNodeCrankHub,    // rotates - powered
       RideNodeLiftArm,     // lifiting hinge - powered
       RideNodeDud
    };

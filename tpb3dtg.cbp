@@ -137,6 +137,8 @@
 		<Unit filename="CoreObjects\GimbleJoint.h" />
 		<Unit filename="CoreObjects\HingeJoint.cpp" />
 		<Unit filename="CoreObjects\HingeJoint.h" />
+		<Unit filename="CoreObjects\HorizontalCrankHub.cpp" />
+		<Unit filename="CoreObjects\HorizontalCrankHub.h" />
 		<Unit filename="CoreObjects\Hub.cpp" />
 		<Unit filename="CoreObjects\Hub.h" />
 		<Unit filename="CoreObjects\JointBace.h" />

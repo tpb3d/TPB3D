@@ -13,13 +13,14 @@
 #include <math.h>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "../Types/AC_Inlines.h"
 #include "../CoreObjects/Terrain.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/QuadMeshObject.h"
 #include "../Graphics/ObjectFactory.h"
 #include "TerrainFormer.h"
 
-// SlickDude blew the pooch on the deal with Doc so we do our own terrain gen
+// our own terrain gen until Doc brings his on!
 
 TerrainFormer::TerrainFormer(void)
 {

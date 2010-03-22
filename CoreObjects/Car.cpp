@@ -19,7 +19,7 @@
 #include "Car.h"
 
 
-Car::Car(sf::Vector3f& vDim, sf::Vector3f& vPosition, sf::Vector3f& vAngle, int meshCount, int id)
+Car::Car(const sf::Vector3f& vDim, const sf::Vector3f& vPosition, const sf::Vector3f& vAngle, int meshCount, int id)
 //:  ObjectNode(8,600 )
 {
    m_BaseParts = new ObjectNode (meshCount, id);

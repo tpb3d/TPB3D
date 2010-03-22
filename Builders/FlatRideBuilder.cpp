@@ -19,6 +19,7 @@
 #include "../CoreObjects/Strut.h"
 #include "../CoreObjects/LiftArm.h"
 #include "../CoreObjects/CarouselAssembly.h"
+#include "../CoreObjects/HorizontalCrankHub.h"
 #include "../CoreObjects/RotationHub.h"
 #include "../CoreObjects/SpokeAssembly.h"
 #include "../CoreObjects/RotationJoint.h"
@@ -51,7 +52,9 @@ Scrambler
 
 namespace Builders
 {
-   const char* kszParts[] =
+   // these are temporary templates for ride assembly
+   // Later these will be in XML
+   const char* kszBSParts[] =
    {
       "brnstrbase.3ds",
       "brnstrprimary.3ds",
@@ -62,8 +65,9 @@ namespace Builders
       "brnstrmcar.3ds",
       "brnstrmdoor.3ds"
    };
+   const char* kszBS = "Data/Barn Stormer/";
 
-   PartGuide::TFlatRideNodeType kParts[] =
+   PartGuide::TFlatRideNodeType kBSNodes[] =
    {
       PartGuide::RideNodeBase,
       PartGuide::RideNodeHub,
@@ -71,6 +75,28 @@ namespace Builders
       PartGuide::RideNodeRotationHub,
       PartGuide::RideNodeArm,
       PartGuide::RideNodeCableHinge,
+      PartGuide::RideNodeCar
+   };
+
+   const char* kszSpida = "Data/Spider/";
+   const char* kszSpidaParts[] =
+   {
+      "",
+      "sr4_Spyd_EngBox.3ds",
+      "sr4_Spyd_DSphr.3ds",
+      "",   // crank
+      "sr4_Spyd_arm.3ds",
+      "sr4_Spyd_SFing.3ds",
+      "sr4_Spyd_pod.3ds"
+   };
+   PartGuide::TFlatRideNodeType kSpidaNodes[] =
+   {
+      PartGuide::RideNodeBase,
+      PartGuide::RideNodeRotationHub,
+      PartGuide::RideNodeHub,
+      PartGuide::RideNodeCrankHub,
+      PartGuide::RideNodeArm,
+      PartGuide::RideNodeCarriage,
       PartGuide::RideNodeCar
    };
 }
@@ -97,7 +123,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
    if( iPattern == 0)
    {
       RidePartLoader rpl;
-      const char* pPath = "Data/BarnStormers/";
+      const char* pPath = kszBS;
       PartGuide guide;
       guide.Clear();
       // test data, the Barn Stormer ride
@@ -121,20 +147,20 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       rpl.Load3ds( pPath, kszBase, pBaseNode );
       // Make a base
       guide.fOffset = 2;
-      guide.fWidth = 19.2;
+      guide.fWidth = 19.2f;
       guide.nCount = 17;
       RideNode* pDeck2 = AddRideNodeDeck (pHub, NULL, guide);
-      pDeck2->SetPosition (0,1.1,0);
+      pDeck2->SetPosition (0, 1.1f, 0);
       pDeck2->Render();
       guide.nCount = iTest;
       RideNode* pDeck = AddRideNodeDeck (pHub, pBaseNode, guide);
-      pDeck->SetPosition (0,0,0);
+      pDeck->SetPosition (0, 0, 0);
 
       // test with 8 arms, the laundery ride
       float fDeg = 360.0f / iTest;
       float fDegH = fDeg /2; // Half increment
       float fAngle = 0;
-      STrig trig(0, fDegH, 0, 1.0);
+      STrig trig(0, fDegH, 0, 1.0f);
       CVPoint v1(0,0,10);
       CVPoint v2(v1);
       v2.Rotate(trig);
@@ -156,6 +182,89 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       rpl.Load3ds( pPath, pTag1, pCarNode );
 
       const char* kszArm = "brnstrliftr.3ds";
+      rpl.Load3ds( pPath, kszArm, pArmNode );
+
+//         guide.fAngle = fAngle;
+      AddRideNodeArm (pRotHub, pArmNode, guide); // do the extension arm
+
+      guide.fHeight = 9;
+      guide.fLength = 11.0f;
+      guide.fDrop = -8.0f;
+      guide.fOffset = -vx-2;
+      for (int ix = 0; ix < iTest; ++ix)
+      {
+         // Arm code
+
+         // Building the yoke
+         guide.fAngle = fAngle + fDegH;
+         RideNode* pWire = AddRideNodeCableHinge (pRotHub, NULL, guide); // do the hanger
+         fAngle += fDeg;
+
+         AddRideNodeCar (pWire, pCarNode, guide);
+      }
+   }
+   else if( iPattern == 4)
+   {
+      RidePartLoader rpl;
+      const char* pPath = kszSpida;
+      PartGuide guide;
+      guide.Clear();
+      // test data, the Barn Stormer ride
+      ObjectNode* pHubNode = new ObjectNode (0, 31);
+      const char* kszHub = kszSpidaParts[1];
+      rpl.Load3ds( pPath, kszHub, pHubNode );
+
+      guide.fHeight = 18;
+      guide.nCount = 13;
+      RideNode* pHub = AddRideNodeHub (NULL, pHubNode, guide);
+      pRide->SetNode (pHub);
+
+      // spin up
+      guide.fHeight = 12;
+      guide.nSpeed = 35;
+      guide.fDrop = 12;
+      RideNode* pRotHub = AddRideNodeRotationHub (pHub, NULL, guide);
+
+      ObjectNode* pBaseNode = new ObjectNode (0, 33);
+      const char* kszBase = kszSpidaParts[0];
+      rpl.Load3ds( pPath, kszBase, pBaseNode );
+      // Make a base
+      guide.fOffset = 2;
+      guide.fWidth = 19.2f;
+      guide.nCount = 17;
+      RideNode* pDeck2 = AddRideNodeDeck (pHub, NULL, guide);
+      pDeck2->SetPosition (0, 1.1f, 0);
+      pDeck2->Render();
+      guide.nCount = iTest;
+      RideNode* pDeck = AddRideNodeDeck (pHub, NULL, guide);
+      pDeck->SetPosition (0, 0, 0);
+
+      // test with 8 arms, the laundery ride
+      float fDeg = 360.0f / iTest;
+      float fDegH = fDeg /2; // Half increment
+      float fAngle = 0;
+      STrig trig(0, fDegH, 0, 1.0f);
+      CVPoint v1(0,0,10);
+      CVPoint v2(v1);
+      v2.Rotate(trig);
+      v2 -= v1;
+      float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
+
+      guide.fAngle = 0;
+      guide.fOffset = 0;
+      guide.fHeight = 12;
+      guide.fLength = 10.0f;
+      guide.fDrop = -10.0f;
+      guide.fWidth = vx;
+      guide.trig.SetY (fDegH);
+
+      ObjectNode* pCarNode = new ObjectNode (0, 34);
+      ObjectNode* pArmNode = new ObjectNode (0, 35);
+
+      const char* pTag1 = kszSpidaParts[4];
+      rpl.Load3ds( pPath, pTag1, pCarNode );
+
+      const char* kszArm = kszSpidaParts[3];
       rpl.Load3ds( pPath, kszArm, pArmNode );
 
 //         guide.fAngle = fAngle;

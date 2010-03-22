@@ -202,7 +202,7 @@ public:
    // Implementation methods
    virtual void Update (int tod);
    virtual void Draw ();
-   virtual void Draw (int vx, int vy);
+   virtual void Draw (float vx, float vy);
    virtual int  DrawSelectionTarget (int id) { return 0; }
    void    SetResidence (int Pathway);
    void    SetCurrent( int Pathway );

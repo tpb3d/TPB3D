@@ -358,18 +358,18 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       float fRRLoc[4] = { -20,0.5,55,0 };
       float fTALoc[4] = { 24,1,40,0 };
       float fHRLoc[4] = { 10,-60,-40,0 };
-      float frx = 1.0;
-      if (strnicmp(Name,"Tag",3) == 0)
+      float frx = 1.0f;
+      if (_strnicmp(Name,"Tag",3) == 0)
       {
          frx = 4;
          pNode->Move(fTALoc);
       }
-      else if (strnicmp(Name,"hrt",3) == 0)
+      else if (_strnicmp(Name,"hrt",3) == 0)
       {
          frx = 5;
          pNode->Move(fHRLoc);
       }
-      else if (strnicmp(Name,"brn",3) == 0)
+      else if (_strnicmp(Name,"brn",3) == 0)
       {
          frx = 1;
       }

@@ -26,7 +26,7 @@ class Car : public RideNode
    ObjectNode* m_BaseParts; // temp hardcode
 
 public:
-   Car(sf::Vector3f& vDim, sf::Vector3f& vPosition, sf::Vector3f& vAngle, int meshcount, int id );
+   Car( const sf::Vector3f& vDim, const sf::Vector3f& vPosition, const sf::Vector3f& vAngle, int meshcount, int id );
    Car (ObjectNode* pNode);
    virtual ~Car(void);
 
@@ -34,11 +34,11 @@ public:
    void Render() { Render(0); };
    int Render( int lod ); // render returning the poly count
 //   int GetPathCount() { return m_PointsCount; };
-   void Position(sf::Vector3f& vPosition, sf::Vector3f& vAngle) // ah ha, we can move this thing
+   void Position(const sf::Vector3f& vPosition, const sf::Vector3f& vAngle) // ah ha, we can move this thing
    {
       m_vPosition = vPosition;
       m_vAngle = vAngle;
    };
    void AddSection( ObjectBase* pGLBase );
-   void Car::Default();
+   void Default();
 };

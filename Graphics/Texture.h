@@ -19,7 +19,7 @@
 #define _TEXTURE_H
 
 // Is there a way to avoid this include?
-#include <string>
+#include <cstring>
 #include "SFML/Graphics.hpp"
 
 
