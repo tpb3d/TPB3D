@@ -1215,6 +1215,10 @@
 			</File>
 		</Filter>
 		<File
+			RelativePath="..\Resources.h"
+			>
+		</File>
+		<File
 			RelativePath="..\TPB3DTG.cpp"
 			>
 		</File>
