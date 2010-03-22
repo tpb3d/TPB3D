@@ -62,7 +62,7 @@ int Car::Render( int lod ) // render returning the poly count
 void Car::Draw()
 {
 	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
-   glTranslatef( m_vPosition.x, m_vPosition.y, m_vPosition.z );										// Move Left 1.5 Units And Into The Screen 6.0
+   glTranslatef( m_vPosition.x, m_vPosition.y, m_vPosition.z );				// Move Left 1.5 Units And Into The Screen 6.0
 	glRotatef(-m_vAngle.y,0.0f,1.0f,0.0f);
 	glRotatef(m_vAngle.x,1.0f,0.0f,0.0f);
 	glRotatef(m_vAngle.z,0.0f,0.0f,1.0f);
@@ -84,14 +84,14 @@ void Car::Default()
    Gfx::Texture* pTexB = Gfx::ImageManager::GetInstance()->GetTexture("basemetal.png",3);
    pMesh = new TexturedMesh( 4, 2, pTexB, 0x98b0b0b8, 600 );
    this->AddSection(pMesh);
-   pMesh->AddPoint( sf::Vector3f(-2,0.5f,-3) );
-   pMesh->AddPoint( sf::Vector3f(-2,0.5f, 3) );
-   pMesh->AddPoint( sf::Vector3f(-2,0.8f,-3) );
-   pMesh->AddPoint( sf::Vector3f(-2,0.8f, 3) );
-   pMesh->AddPoint( sf::Vector3f( 2,0.8f,-3) );
-   pMesh->AddPoint( sf::Vector3f( 2,0.8f, 3) );
-   pMesh->AddPoint( sf::Vector3f( 2,0.5f,-3) );
-   pMesh->AddPoint( sf::Vector3f( 2,0.5f, 3) );
+   pMesh->AddPoint( sf::Vector3f(-2.0f,0.5f,-3.0f) );
+   pMesh->AddPoint( sf::Vector3f(-2.0f,0.5f, 3.0f) );
+   pMesh->AddPoint( sf::Vector3f(-2.0f,0.8f,-3.0f) );
+   pMesh->AddPoint( sf::Vector3f(-2.0f,0.8f, 3.0f) );
+   pMesh->AddPoint( sf::Vector3f( 2.0f,0.8f,-3.0f) );
+   pMesh->AddPoint( sf::Vector3f( 2.0f,0.8f, 3.0f) );
+   pMesh->AddPoint( sf::Vector3f( 2.0f,0.5f,-3.0f) );
+   pMesh->AddPoint( sf::Vector3f( 2.0f,0.5f, 3.0f) );
 
    Gfx::Texture* pTexC = Gfx::ImageManager::GetInstance()->GetTexture("darkwood.png",3);
    pMesh = new TexturedMesh( 4, 2, pTexC, 0x7f7f7faf, 601 );

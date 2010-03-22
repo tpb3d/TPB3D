@@ -97,10 +97,10 @@ bool EventHandler::HandleEvents (const sf::Event& Event)
       break;
 
       // EXTREMELY HACKISH, we need a new way to do this. CUSTOM EVENTS!!!
-      case sf::Event::JoyButtonPressed: // no event mutations
-         for (ConType::iterator i = mHandlers.begin (); i != mHandlers.end (); i++)
-            if ((*i)->OnToolHit("DOESNT WORK YET DUH!!!!")) // event does not support other events
-               return true;
+//      case sf::Event::JoyButtonPressed: // no event mutations
+//         for (ConType::iterator i = mHandlers.begin (); i != mHandlers.end (); i++)
+//            if ((*i)->OnToolHit("DOESNT WORK YET DUH!!!!")) // event does not support other events
+//               return true;
 
       default:
          return false;
@@ -119,7 +119,7 @@ bool EventHandler::HandleEvents (const HR_Events& Event)
       break;
    default:
       for (ConType::iterator i = mHandlers.begin (); i != mHandlers.end (); i++)
-         if ((*i)->OnToolHit("DOESNT WORK YET DUH!!!!")) // event does not support other events
+         if ((*i)->OnToolHit(Event)) // event does not support other events
             return true;
    }
    return false;

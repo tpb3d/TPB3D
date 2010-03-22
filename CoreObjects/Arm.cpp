@@ -77,19 +77,19 @@ void Arm::Render()
    CVPoint pt (mOffset, -0.125, 0);
    CVPoint ptr = pt;
    ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   //mpGraphic->AddPoint (ptr.GetVector3f());
    pt.y += mDepth;
    ptr = pt;
    ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   //mpGraphic->AddPoint (ptr.GetVector3f());
    pt.x += mLength;
    ptr = pt;
    ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   //mpGraphic->AddPoint (ptr.GetVector3f());
    pt.y -= ep;
    ptr = pt;
    ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   //mpGraphic->AddPoint (ptr.GetVector3f());
 }
 
 //ObjectBase* Arm::Clone()

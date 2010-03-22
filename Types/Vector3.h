@@ -84,7 +84,7 @@ public:
    }
    static Vector3<T>& Cross( const Vector3<T>& a, const Vector3<T>& b)
    {
-      Vector3<T> result;
+      static Vector3<T> result;
       result.x =  Det2x2(a.y, b.y, a.z, b.z);
       result.y = -Det2x2(a.x, b.x, a.z, b.z);
       result.z =  Det2x2(a.x, b.x, a.y, b.y);

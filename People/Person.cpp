@@ -85,7 +85,7 @@ void Person::Update (int tod)   //actual time
          }
          else
          {
-            // waiting 
+            // waiting
          }
       }
       if (mWorkPath.index >= mWorkPath.size) // this can be handled better and also need to check times
@@ -148,13 +148,13 @@ void Person::Update (int tod)   //actual time
 
 void Person::Draw ()
 {
-   
+
    Render (manimations[mMood] );
 }
 
 void Person::Draw (int vx, int vy)
 {
-   
+
    Render (manimations[mMood], vx, vx+8 );
 }
 

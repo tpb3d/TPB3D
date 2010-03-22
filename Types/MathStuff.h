@@ -4,7 +4,7 @@
 a few simple mathematical routines; not the most efficient ones, but easy to understand.
 */
 
-#pragma once;
+#pragma once
 
 #define DOUBLE_MAX DBL_MAX
 

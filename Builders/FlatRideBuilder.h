@@ -68,7 +68,7 @@ class FlatRideBuilder
 public:
    FlatRideBuilder(void);
    ~FlatRideBuilder(void);
-   
+
    // Game Manager Interaction
    static Ride* CreateRide(int iPattern, Park& pPark);
 

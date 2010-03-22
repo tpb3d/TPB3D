@@ -67,7 +67,7 @@ public:
 
 public:
    // CTOR
-   Pathway (Vector3f& origin, Park* parent, const char* szTex);
+   Pathway (const Vector3f& origin, Park* parent, const char* szTex);
    // Initialize from an xml node
    virtual ~Pathway ();
 

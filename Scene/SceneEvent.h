@@ -17,8 +17,6 @@
 // #DEFINES moved to resource.h until we get a platform ind resouce file.
 
 #pragma once
-#ifndef _SCENE_EVENT
-#define _SCENE_EVENT
 
 #include "../Resources.h"
 
@@ -46,5 +44,3 @@ public:
    virtual bool OnMouseUp (sf::Mouse::Button Button, Vector2i pointa, Vector2i pointb);
    virtual bool OnMouseMove ( Vector2i pointa, Vector2i pointb);
 };
-
-#endif //_SCENE_EVENT

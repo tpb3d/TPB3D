@@ -32,7 +32,7 @@ void RideBase::Load(SerializerBase& ser)
 void RideBase::Save(SerializerBase& ser)
 {
    ser.Add("type", "Track");
-   int* pI = (int*)mRGBA[0];
-   ser.Add("RGBA", *pI);
+   int lRGB = *((int*)mRGBA[0]);
+   ser.Add("RGBA", lRGB);
    ser.Add("ID", mID);
 }

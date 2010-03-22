@@ -33,7 +33,7 @@ protected:
    short mPointCount;
    short mMaxPointCount;
    unsigned char mRGBA[4];
-   long mID;
+   int mID;
    bool mbHighlighted;
 
 public:
@@ -47,10 +47,10 @@ public:
    virtual void Save(SerializerBase& ser) {};
    virtual void Load(SerializerBase& ser) {};
 
-   int AddPoint( sf::Vector3f& point );
+   int AddPoint( const sf::Vector3f& point );
    void Resize( int width, int depth );
 
-   // properties 
+   // properties
    int  GetID() { return mID; };
    sf::Vector3f* GetPoints() { return mpPoints; };
    void HighLight( bool bVal ) {mbHighlighted = bVal; };

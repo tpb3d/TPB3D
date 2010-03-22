@@ -18,7 +18,7 @@
 //////////////////////////////////////////////////////////////////////
 // Alocation is handled here at the base level dictated by derivation
 // You must derive from this base as it is pure virtual.
- 
+
 ObjectBase::ObjectBase( int count, int id )
 :  mID( id )
 ,  mMaxPointCount( count )
@@ -48,11 +48,11 @@ ObjectBase::~ObjectBase()
    }
    catch( ... )
    {
-      throw( "Failed to delete a Points Array","GLBase" ); // CGLException
+      throw "Failed to delete a Points Array in GLBase"; // CGLException
    }
 }
 
-int ObjectBase::AddPoint( sf::Vector3f& point )
+int ObjectBase::AddPoint( const sf::Vector3f& point )
 {
    if( mPointCount >= mMaxPointCount )
       return -1;

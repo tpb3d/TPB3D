@@ -42,7 +42,7 @@
 
 using namespace Gfx;
 
-Pathway::Pathway (Vector3f& origin, Park * ParkParent, const char* szTex)
+Pathway::Pathway (const Vector3f& origin, Park * ParkParent, const char* szTex)
 :  CoreBase(origin, Vector3f(0,45,0))
 ,  ObjectNode(0, ObjectFactory::TakeANumber())
 {

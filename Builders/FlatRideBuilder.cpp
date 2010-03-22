@@ -63,7 +63,7 @@ namespace Builders
       "brnstrmdoor.3ds"
    };
 
-   PartGuide::TFlatRideNodeType kParts[] = 
+   PartGuide::TFlatRideNodeType kParts[] =
    {
       PartGuide::RideNodeBase,
       PartGuide::RideNodeHub,
@@ -140,7 +140,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       v2.Rotate(trig);
       v2 -= v1;
       float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
-      
+
       guide.fAngle = 0;
       guide.fOffset = 0;
       guide.fHeight = 12;
@@ -173,7 +173,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          guide.fAngle = fAngle + fDegH;
          RideNode* pWire = AddRideNodeCableHinge (pRotHub, NULL, guide); // do the hanger
          fAngle += fDeg;
-         
+
          AddRideNodeCar (pWire, pCarNode, guide);
       }
    }
@@ -219,7 +219,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          pArm->SetPosition(0,2.25,0);
          pArm->Render();
          pHub2->AddNode(pArm);
-         
+
          Strut* pStrut = new Strut();
          trig.SetY (fAngle);
          CVPoint v1( fRadius-1, 1.5, 0);
@@ -305,7 +305,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          guide.fAngle = fAngle + fDegH;
          RideNode* pWire = AddRideNodeCableHinge (pRotHub, NULL, guide); // do the hanger
          fAngle += fDeg;
-         
+
          AddRideNodeHub (pWire, NULL, guide);
       }
    }
@@ -316,7 +316,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
 /*
    Ride Sections or nodes that are built in this function as set in the guide.
    The guide is the UIs extension to the builder giving in build commands
-   
+
       RideNodePlatForm  The Base that sits on the ground or
       RideNodeChassis   Deck or Central base as in a carousel
       RideNodeDisc      Circular Deck or Roof
@@ -335,22 +335,22 @@ void FlatRideBuilder::MakeSection( PartGuide& guide, Ride& ride )
    {
       case PartGuide::RideNodePlatForm:
       break;
-      
+
       case PartGuide::RideNodeArm:
       break;
-      
+
       case PartGuide::RideNodeBase:
       break;
-      
+
       case PartGuide::RideNodeCar:
       break;
-      
+
       case PartGuide::RideNodeCarriage:
       break;
-      
+
       case PartGuide::RideNodeDisc:
       break;
-      
+
       case PartGuide::RideNodeStrut:
       break;
    }
@@ -538,5 +538,5 @@ TFlatRideNode Primary;
 };
 
 
-For a scrambler type of ride with 3 main arms and 4 secondary arms, there is only a single entry(node) for the main arms and a single node for the secondary arms. Each node contains the number of repetitions and the render engine was responsible for traversing the tree and performing the repetitions during descent. That worked well for the ride editor but may not be the best way to render it during game play. 
+For a scrambler type of ride with 3 main arms and 4 secondary arms, there is only a single entry(node) for the main arms and a single node for the secondary arms. Each node contains the number of repetitions and the render engine was responsible for traversing the tree and performing the repetitions during descent. That worked well for the ride editor but may not be the best way to render it during game play.
 */

@@ -94,7 +94,7 @@ struct Trunk
       mGroupCount = 0;
       mVerticies = 0;
    }
-   void AddPoint( sf::Vector3f& pt )
+   void AddPoint( const sf::Vector3f& pt )
    {
       mVertexes[mVerticies++] = pt;
    }

@@ -51,7 +51,7 @@ void RideSection::Clear()
    mfDistance = 0;
    mfDegRotation = 0;
    mfRadius = 0;
-   mfPitchRadius;
+   mfPitchRadius =0;
    mfRoll = 0;
 }
 void RideSection::Create(int count)

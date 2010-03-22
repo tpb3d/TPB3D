@@ -373,7 +373,7 @@ int Camera::DrawSelectionTarget (Scene* pModel, Vector2f mouse, int Pathway)
    glMatrixMode(GL_MODELVIEW);
 
    // If a single hit occured, display the info.
-   GLuint nHit = -1;
+   GLuint nHit = 0;
    if(hits == 1)
    {
 //      MakeSelection(selectBuff[3]);
