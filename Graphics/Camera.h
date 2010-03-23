@@ -88,6 +88,7 @@ public:
    void ZoomOut();
    // Event hanlders
    bool OnKeyDown (sf::Key::Code Key);
+   bool OnKeyUp (sf::Key::Code Key);
    bool OnMouseWheel (int Delta);
    bool OnResize(Vector2i);
 };

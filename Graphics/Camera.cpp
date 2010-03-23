@@ -425,6 +425,12 @@ Camera::GetEvent (sf::Event & event)
 }
 
 bool
+Camera::OnKeyUp (sf::Key::Code Key)
+{
+   return true;
+}
+
+bool
 Camera::OnKeyDown (sf::Key::Code Key)
 {
    if (Key == sf::Key::D)
@@ -488,6 +494,14 @@ Camera::OnMouseWheel (int Delta)
       ZoomIn();
    else
       ZoomOut();
+      
+   // zoom height and tilt
+   float ang = mZoomFactor/ 600*90;
+   float x = cos(0.01745329 * (180.0 + ang));
+   float y = sin(0.01745329 * (180.0 - ang)) * 200;
+   //mPosition.y = y-8;
+   //mXrot = -ang;
+   
    return true;
 }
 
