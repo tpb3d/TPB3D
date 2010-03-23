@@ -8,7 +8,7 @@
 	"../AI/PeepAgent.h"
 	"PathAgent.h"
 
-1267890770 c:\users\ac\dev\opensource\tpb3dtg\people\person.h
+1269300917 c:\users\ac\dev\opensource\tpb3dtg\people\person.h
 	<map>
 	"../Graphics/ModelObject.h"
 
@@ -44,8 +44,8 @@
 	"../Physics/MotionPhysics.h"
 	"Texture.h"
 
-1267890773 c:\users\ac\dev\opensource\tpb3dtg\graphics\texture.h
-	<string>
+1269300918 c:\users\ac\dev\opensource\tpb3dtg\graphics\texture.h
+	<cstring>
 	"SFML/Graphics.hpp"
 
 1269149947 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\corebase.h
@@ -79,7 +79,8 @@
 	<map>
 	"CoreBase.h"
 
-1267890774 c:\users\ac\dev\opensource\tpb3dtg\utility\gameexception.h
+1269313674 c:\users\ac\dev\opensource\tpb3dtg\utility\gameexception.h
+	<string>
 
 1267890770 c:\users\ac\dev\opensource\tpb3dtg\people\peeps.h
 
@@ -108,11 +109,11 @@
 	"Texture.h"
 	"ObjectBase.h"
 
-1267890774 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridepart.h
+1269308702 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridepart.h
 	"../Graphics/ObjectBase.h"
 	"../Graphics/ObjectNode.h"
 
-1269258939 source:c:\users\ac\dev\opensource\tpb3dtg\builders\flatridebuilder.cpp
+1269300918 source:c:\users\ac\dev\opensource\tpb3dtg\builders\flatridebuilder.cpp
 	"../Graphics/VPoint.h"
 	"../CoreObjects/Ride.h"
 	"../CoreObjects/RideBase.h"
@@ -123,6 +124,7 @@
 	"../CoreObjects/Strut.h"
 	"../CoreObjects/LiftArm.h"
 	"../CoreObjects/CarouselAssembly.h"
+	"../CoreObjects/HorizontalCrankHub.h"
 	"../CoreObjects/RotationHub.h"
 	"../CoreObjects/SpokeAssembly.h"
 	"../CoreObjects/RotationJoint.h"
@@ -145,9 +147,9 @@
 1268954725 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\arm.h
 	"RideNode.h"
 
-1269149971 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridenode.h
+1269308657 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridenode.h
 	<vector>
-	"../types/Vector3.h"
+	"../Types/Vector3.h"
 
 1268954725 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\hub.h
 	<string>
@@ -188,14 +190,14 @@
 1268954725 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\carriage.h
 	"RideNode.h"
 
-1268954725 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\car.h
+1269300918 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\car.h
 	"../Graphics/ObjectBase.h"
 	"../Graphics/ObjectNode.h"
 	"RideNode.h"
 
 1268954725 c:\users\ac\dev\opensource\tpb3dtg\builders\ridepartloader.h
 
-1269258931 c:\users\ac\dev\opensource\tpb3dtg\builders\flatridebuilder.h
+1269300918 c:\users\ac\dev\opensource\tpb3dtg\builders\flatridebuilder.h
 	"../Graphics/VPoint.h"
 	"../Types/Vector3.h"
 
@@ -230,7 +232,7 @@
 
 1267890775 c:\users\ac\dev\opensource\tpb3dtg\builders\rideformer.h
 
-1269148966 source:c:\users\ac\dev\opensource\tpb3dtg\builders\ridepartloader.cpp
+1269300918 source:c:\users\ac\dev\opensource\tpb3dtg\builders\ridepartloader.cpp
 	<cstring>
 	<SFML/System.hpp>
 	<SFML/Graphics.hpp>
@@ -259,7 +261,7 @@
 
 1267890774 c:\users\ac\dev\opensource\tpb3dtg\storage\3dshandler.h
 
-1267890775 source:c:\users\ac\dev\opensource\tpb3dtg\builders\terrainformer.cpp
+1269301047 source:c:\users\ac\dev\opensource\tpb3dtg\builders\terrainformer.cpp
 	<cstring>
 	<math.h>
 	<SFML/System.hpp>
@@ -374,12 +376,12 @@
 	"Building.h"
 	"BuildStrategies.h"
 
-1269258227 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\pathway.h
+1269308757 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\pathway.h
 	<vector>
 	<list>
-	"../Types/vector2.h"
+	"../Types/Vector2.h"
 	"CoreBase.h"
-	"../graphics/ObjectNode.h"
+	"../Graphics/ObjectNode.h"
 
 1267890774 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\buildstrategies.h
 	<string>
@@ -408,8 +410,8 @@
 	"../Types/String.h"
 	"Building.h"
 
-1267890774 c:\users\ac\dev\opensource\tpb3dtg\types\string.h
-	<string>
+1269300918 c:\users\ac\dev\opensource\tpb3dtg\types\string.h
+	<cstring>
 	<sstream>
 
 1269258279 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\campath.cpp
@@ -419,7 +421,7 @@
 
 1267890774 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\campath.h
 
-1269258866 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\car.cpp
+1269300918 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\car.cpp
 	<math.h>
 	<SFML/System.hpp>
 	<SFML/Graphics.hpp>
@@ -1037,8 +1039,8 @@
 	"../Graphics/Animation.h"
 	"GuestPerson.h"
 
-1267890770 c:\users\ac\dev\opensource\tpb3dtg\people\guestperson.h
-	"person.h"
+1269308780 c:\users\ac\dev\opensource\tpb3dtg\people\guestperson.h
+	"Person.h"
 
 1267890770 source:c:\users\ac\dev\opensource\tpb3dtg\people\peeps.cpp
 	<list>
@@ -1053,8 +1055,8 @@
 	"../Graphics/Animation.h"
 	"SpecialPerson.h"
 
-1267890770 c:\users\ac\dev\opensource\tpb3dtg\people\specialperson.h
-	"person.h"
+1269308788 c:\users\ac\dev\opensource\tpb3dtg\people\specialperson.h
+	"Person.h"
 
 1267890770 source:c:\users\ac\dev\opensource\tpb3dtg\people\staffperson.cpp
 	<iostream>
@@ -1062,8 +1064,8 @@
 	"../Graphics/Animation.h"
 	"StaffPerson.h"
 
-1267890770 c:\users\ac\dev\opensource\tpb3dtg\people\staffperson.h
-	"person.h"
+1269308818 c:\users\ac\dev\opensource\tpb3dtg\people\staffperson.h
+	"Person.h"
 
 1267890770 source:c:\users\ac\dev\opensource\tpb3dtg\people\vipperson.cpp
 	<iostream>
@@ -1071,8 +1073,8 @@
 	"../Graphics/Animation.h"
 	"VIPPerson.h"
 
-1267890770 c:\users\ac\dev\opensource\tpb3dtg\people\vipperson.h
-	"person.h"
+1269308825 c:\users\ac\dev\opensource\tpb3dtg\people\vipperson.h
+	"Person.h"
 
 1267890770 source:c:\users\ac\dev\opensource\tpb3dtg\physics\motionphysics.cpp
 	<iostream>
@@ -1174,7 +1176,7 @@
 	"../Graphics/Camera.h"
 	"Clock.h"
 
-1269260208 source:c:\users\ac\dev\opensource\tpb3dtg\people\person.cpp
+1269300917 source:c:\users\ac\dev\opensource\tpb3dtg\people\person.cpp
 	<iostream>
 	"../Graphics/Image.h"
 	"../Graphics/Animation.h"
@@ -1263,11 +1265,10 @@
 	"../Graphics/Camera.h"
 	"Stats.h"
 
-1267890775 source:c:\users\ac\dev\opensource\tpb3dtg\window\toolbar.cpp
+1269308894 source:c:\users\ac\dev\opensource\tpb3dtg\window\toolbar.cpp
 	<cstring>
 	<map>
-	<string>
-	"../utility/GameException.h"
+	"../Utility/GameException.h"
 	"../Graphics/Image.h"
 	"../Graphics/Camera.h"
 	"ToolButton.h"
@@ -1321,4 +1322,19 @@
 	<SFML/Graphics.hpp>
 	"tinyxml/tinyxml.h"
 	<string>
+
+1269300918 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\horizontalcrankhub.h
+	"RideNode.h"
+
+1269300918 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\horizontalcrankhub.cpp
+	"../Storage/SerializerBase.h"
+	<SFML/System.hpp>
+	<SFML/Graphics.hpp>
+	"../Types/Vector3.h"
+	"../Graphics/VPoint.h"
+	"../Graphics/ObjectBase.h"
+	"../Graphics/TexturedStrip.h"
+	"../Graphics/ObjectFactory.h"
+	"HorizontalCrankHub.h"
+	<math.h>
 

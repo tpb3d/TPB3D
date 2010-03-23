@@ -35,5 +35,5 @@ public:
       m_vAngle = vAngle;
    };
    void AddSection( ObjectBase* pGLBase );
-   void RidePart::Default();
+   void Default();
 };

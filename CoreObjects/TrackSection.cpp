@@ -51,7 +51,7 @@ void TrackSection::Clear()
    mfDistance = 0;
    mfDegRotation = 0;
    mfRadius = 0;
-   mfPitchRadius;
+   mfPitchRadius = 0;
    mfRoll = 0;
 }
 void TrackSection::Create(int count)
@@ -102,5 +102,4 @@ void TrackSection::Save(SerializerBase& ser)
    ser.Add("Radius", mfRadius);
    ser.Add("PitchRadius", mfPitchRadius);
    ser.Add("Roll", mfRoll);
-
 }

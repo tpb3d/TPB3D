@@ -13,7 +13,6 @@
 #include <math.h>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "../Types/AC_Inlines.h"
 #include "../CoreObjects/Terrain.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/QuadMeshObject.h"

@@ -19,7 +19,7 @@
 #ifndef _STAFFPERSON_H
 #define _STAFFPERSON_H
 
-#include "person.h" // includes other needed resources
+#include "Person.h" // includes other needed resources
 
 
 class StaffPerson : public Person

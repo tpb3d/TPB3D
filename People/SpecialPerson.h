@@ -20,7 +20,7 @@
 #ifndef _SPECIALPERSON_H
 #define _SPECIALPERSON_H
 
-#include "person.h" // includes other needed resources
+#include "Person.h" // includes other needed resources
 
 
 class SpecialPerson : public Person

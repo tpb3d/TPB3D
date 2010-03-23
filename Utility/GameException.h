@@ -1,6 +1,5 @@
 #pragma once
-#ifndef _GameException_H
-#define _GameException_H
+#include <string>
 
 using namespace std;
 
@@ -12,10 +11,9 @@ public:
    GameException( const char* message );
    ~GameException (void) throw ();
 
-   string& get_Message()
+   const char* get_Message()
    {
-      return mMessage;
+      return mMessage.c_str();
    }
 };
 
-#endif //_GameException_H

@@ -16,8 +16,7 @@
 
 #include <cstring>
 #include <map>
-#include <string>
-#include "../utility/GameException.h"
+#include "../Utility/GameException.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/Camera.h"
 #include "ToolButton.h"

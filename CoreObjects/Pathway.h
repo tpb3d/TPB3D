@@ -19,9 +19,9 @@
 #include <vector>
 #include <list>
 
-#include "../Types/vector2.h"
+#include "../Types/Vector2.h"
 #include "CoreBase.h"
-#include "../graphics/ObjectNode.h"
+#include "../Graphics/ObjectNode.h"
 
 // forward decls, some of these may be removed
 class CoreBase;
