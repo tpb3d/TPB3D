@@ -13,6 +13,10 @@
 #include "ObjectBase.h"
 
 class Material;
+namespace Gfx
+{
+   class MaterialsList;
+}
 
 struct TrigPoint
 {
@@ -23,13 +27,14 @@ struct TrigPoint
 
 struct SimpleFace
 {
+   unsigned int Mat;
    struct TrigPoint mPoints[3];
 };
 
 
 class SimpleMeshObject : public ObjectBase
 {
-   Material* mpMaterial;
+   Gfx::MaterialsList *mpMaterials;
    unsigned short mVertices;
    unsigned short mIndexes;
    unsigned short mFaces;
@@ -58,12 +63,12 @@ public:
    void DrawSelectionTarget();
 
    void AddMatrix( float Mat16[4][4] );
-   void AddMaterials( int iMats, Material* pMats );
+   void SetMaterials( Gfx::MaterialsList* pMats );
    void AddStripFace( int Face, const SimpleFace* pTrigrSource );
    void AddStripFaces( int FaceCount, const SimpleFace pTrigrSource[] );
 
    void AddMesh( int VertexCount, float (* pVertexes)[3], float(* pNormals)[3], int UVCount, float(* pUVs)[2],
-                 int FaceCount, unsigned short(* pFaces)[3] );//, int TFaceCount, unsigned short* pTFaces );
+                 int FaceCount, unsigned short(* pFaces)[3], unsigned int(* pMats) );//, int TFaceCount, unsigned short* pTFaces );
    void AddMesh( int mVertices,  float (* pVertexes)[3], int mFaces, SimpleFace** pTrigSource );
    void AddMesh( int mVertices,  sf::Vector3f*, int mFaces, SimpleFace** pTrigSource );
 };

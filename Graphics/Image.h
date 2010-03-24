@@ -18,6 +18,7 @@
 #define _IMAGEMANAGER_H
 
 #include <map>
+#include <vector>
 #include <string>
 
 #ifndef PI
@@ -27,6 +28,7 @@
 namespace Gfx
 {
    class Texture;
+   //class MaterialsList;
 
    class ImageManager
    {
@@ -34,6 +36,7 @@ namespace Gfx
       std::string mpath_prefix;
       //std::map<std::string, sf::Image *> mimages;
       std::map<std::string, Texture*> mImages;
+      //std::vector<MaterialsList*> mMaterials;
       static ImageManager * mInstance;
       ImageManager ();
 

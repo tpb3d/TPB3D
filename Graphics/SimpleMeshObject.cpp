@@ -15,6 +15,8 @@
 #include "Material.h"
 #include "ObjectFactory.h"
 
+using namespace Gfx;
+
 SimpleMeshObject::SimpleMeshObject( int id )
 :  ObjectBase( 1, id ) // just the mount point
 {
@@ -27,6 +29,7 @@ SimpleMeshObject::SimpleMeshObject( int id )
    mpVertices = NULL;
    mpFaces = NULL;
    mfScale = 1.0;
+   mpMaterials = NULL;
 }
 
 SimpleMeshObject::~SimpleMeshObject(void)
@@ -36,21 +39,21 @@ SimpleMeshObject::~SimpleMeshObject(void)
 
    if( mpName )
       delete mpName;
-   if( mpMaterial )
-      delete mpMaterial;
+   if( mpMaterials )
+      delete [] mpMaterials;
 }
 
-void SimpleMeshObject::AddMaterials( int iMats, Material* pMats )
+void SimpleMeshObject::SetMaterials( Gfx::MaterialsList* pMats )
 {
-   mpMaterial = new Material(*pMats);
-   mpTexture = mpMaterial->GetTexture( );
+   mpMaterials = pMats;
+   mpTexture = pMats->GetMats()[0]->GetTexture();
 }
 
 ObjectBase* SimpleMeshObject::Clone( )
 {
    int id = ObjectFactory::TakeANumber();
    SimpleMeshObject* pNode = new SimpleMeshObject( id );
-   pNode->AddMaterials( 1, mpMaterial );
+   pNode->SetMaterials (mpMaterials);
 //   pNode->AddMesh( mVertices, mpVertices, mpNormals,
 //                   mUVCount, mpUVs,
 //                   mFaces, mpIndexes );
@@ -62,7 +65,7 @@ ObjectBase* SimpleMeshObject::Clone( )
 
 void SimpleMeshObject::Draw()
 {
-   if( mpMaterial )
+   if( mpMaterials )
    {
 //      mpMaterial->GLSetMaterial();
       glShadeModel( GL_SMOOTH );
@@ -72,6 +75,8 @@ void SimpleMeshObject::Draw()
    {
       glEnable( GL_TEXTURE_2D );
       mpTexture->Bind( );
+      unsigned char ub[] = { 250,250,220,255 };
+      glColor3ubv( ub );
    }
    //glEnableClientState( GL_NORMAL_ARRAY );
    //glEnableClientState( GL_VERTEX_ARRAY );
@@ -86,14 +91,15 @@ void SimpleMeshObject::Draw()
    //glDisableClientState( GL_VERTEX_ARRAY );
    //glDisableClientState( GL_INDEX_ARRAY );
    //glDisable( GL_TEXTURE_2D );
-   unsigned char ub[] = { 250,250,220,255 };
-   glColor3ubv( ub );
 
    glEnable( GL_BLEND );
    glBegin(GL_TRIANGLES); // glBegin and glEnd delimit the vertices that define a primitive (in our case triangles)
    for( int idx = 0; idx < mFaces; ++idx )
    {
         // Coordinates of the first vertex
+
+//      Material **mpM = mpMaterials->GetMats();
+//      mpM[mpFaces[idx]->Mat]->GLSetMaterial();
       TrigPoint& face = mpFaces[idx]->mPoints[0];
       glTexCoord2fv( face.mUV );
       //glNormal3fv( face.Normal );
@@ -162,7 +168,7 @@ void SimpleMeshObject::AddStripFaces( int FaceCount, const SimpleFace pTrigSourc
 
 void SimpleMeshObject::AddMesh( int VertexCount, float(* pVertexes)[3], float(* pNormals)[3],
                        int UVCount, float(* pUVs)[2],
-                        int FaceCount, unsigned short(* pFaces)[3] )
+                        int FaceCount, unsigned short(* pFaces)[3], unsigned int(*pMats) )
 {
    if( mpName )
    {
@@ -179,7 +185,7 @@ void SimpleMeshObject::AddMesh( int VertexCount, float(* pVertexes)[3], float(* 
    for( int i = 0; i < mVertices; ++i)
    {
       mpVertices[i][0] = pVertexes[i][0]*mfScale;
-      if( mfScale > 2.0)
+      if( mfScale > 2.0 || mfScale < 1.0)
       {
          mpVertices[i][1] = pVertexes[i][2]*mfScale;
          mpVertices[i][2] = -pVertexes[i][1]*mfScale;
@@ -216,6 +222,7 @@ void SimpleMeshObject::AddMesh( int VertexCount, float(* pVertexes)[3], float(* 
       pFace->mPoints[2].Normal[2] = pNormals[idx][2];
       idxF++;
       mpFaces[idx] = pFace;
+      mpFaces[idx]->Mat = pMats[idx];
    }
 }
 

@@ -83,20 +83,25 @@ namespace Builders
    {
       "",
       "sr4_Spyd_EngBox.3ds",
+      "sr4_Spyd_DCyl.3ds",
+      "",                        // rotation
       "sr4_Spyd_DSphr.3ds",
-      "",   // crank
+      "sr4_Spyd_AShaft.3ds",     // crank
       "sr4_Spyd_arm.3ds",
+      "sr4_Spyd_DFing.3ds",
       "sr4_Spyd_SFing.3ds",
       "sr4_Spyd_pod.3ds"
    };
    PartGuide::TFlatRideNodeType kSpidaNodes[] =
    {
       PartGuide::RideNodeBase,
+      PartGuide::RideNodeDeck,
       PartGuide::RideNodeRotationHub,
       PartGuide::RideNodeHub,
       PartGuide::RideNodeCrankHub,
       PartGuide::RideNodeArm,
-      PartGuide::RideNodeCarriage,
+      PartGuide::RideNodeArm, // left
+      PartGuide::RideNodeArm, // right
       PartGuide::RideNodeCar
    };
 }
@@ -211,7 +216,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.Clear();
       // test data, the Barn Stormer ride
       ObjectNode* pHubNode = new ObjectNode (0, 31);
-      const char* kszHub = kszSpidaParts[1];
+      const char* kszHub = kszSpidaParts[2];
       rpl.Load3ds( pPath, kszHub, pHubNode );
 
       guide.fHeight = 18;
@@ -226,7 +231,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       RideNode* pRotHub = AddRideNodeRotationHub (pHub, NULL, guide);
 
       ObjectNode* pBaseNode = new ObjectNode (0, 33);
-      const char* kszBase = kszSpidaParts[0];
+      const char* kszBase = kszSpidaParts[3];
       rpl.Load3ds( pPath, kszBase, pBaseNode );
       // Make a base
       guide.fOffset = 2;
@@ -264,8 +269,12 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       const char* pTag1 = kszSpidaParts[4];
       rpl.Load3ds( pPath, pTag1, pCarNode );
 
-      const char* kszArm = kszSpidaParts[3];
+      const char* kszArm = kszSpidaParts[6];
+      const char* kszArmA = kszSpidaParts[7];
+      const char* kszArmB = kszSpidaParts[8];
       rpl.Load3ds( pPath, kszArm, pArmNode );
+      rpl.Load3ds( pPath, kszArmA, pArmNode );
+      rpl.Load3ds( pPath, kszArmB, pArmNode );
 
 //         guide.fAngle = fAngle;
       AddRideNodeArm (pRotHub, pArmNode, guide); // do the extension arm

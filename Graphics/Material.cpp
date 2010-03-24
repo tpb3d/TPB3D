@@ -15,6 +15,7 @@ Material::Material( int shade, int sides, float blur, float emit, float shine, f
    mShininess = glossy;
    mTransparency = trans;
    mColorMode = GL_AMBIENT;
+   mpTexture = NULL;
    if( mEmittion != 0 )
    {
       mColorMode = GL_EMISSION;
@@ -60,11 +61,13 @@ void Material::SetLight( float ambi[3], float diff[3], float spec[3] )
 
 void Material::GLSetMaterial()
 {
-   glEnable( GL_COLOR_MATERIAL );
+//   glEnable( GL_COLOR_MATERIAL );
 //   glShadeModel( mShading );
-   glMaterialf( GL_FRONT, GL_SHININESS, mShininess );
+//   glMaterialf( GL_FRONT, GL_SHININESS, mShininess );
 //   glMaterialf( GL_FRONT, GL_TRANSPARANCY, mTransparency );
-   glMaterialf( GL_FRONT, GL_EMISSION, mEmittion );
+//   glMaterialf( GL_FRONT, GL_EMISSION, mEmittion );
+   GLSetBlendMode();
+   glColor4f( mDiffused[0], mDiffused[1], mDiffused[2], 1.0 );
 }
 
 void Material::GLSetBlendMode()

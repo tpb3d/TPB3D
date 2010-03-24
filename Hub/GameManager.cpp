@@ -123,12 +123,6 @@ bool GameManager::LoadGame (const char *fileName)
    ObjectTree& pOTree = mScene.GetPark()->GetTree();
    pOTree.AddNode( myTree);
 
-   Lamp* pLamp = new Lamp(8, "SteamPunkLamp.png", "LightParticle1.png");
-   float fLoc[] = { -10, 0.1f, 55};
-   pLamp->Render();
-   pLamp->Move (fLoc);
-   pOTree.AddNode (pLamp);
-
 
    Pathway* pPath = new Pathway (Vector3f(-30.0f, 0.1f, 61.0f), mScene.GetPark(), "Stone.png");
    pPath->Render();
@@ -145,6 +139,19 @@ bool GameManager::LoadGame (const char *fileName)
    const char* pszPath = "data/Restroom 01/";
    rpl.Load3ds( pszPath, pszFile, pTempTree );
    pOTree.AddNode (pTempTree);
+
+
+   //pTempTree = new ObjectNode(0, 39);
+   //const char* pszFileB = "JMORendered.3ds";
+   //const char* pszPathB = "data/Building/";
+   //rpl.Load3ds( pszPathB, pszFileB, pTempTree );
+   //pOTree.AddNode (pTempTree);
+
+   Lamp* pLamp = new Lamp(8, "SteamPunkLamp.png", "LightParticle1.png");
+   float fLoc[] = { -10, 0.1f, 55};
+   pLamp->Render();
+   pLamp->Move (fLoc);
+   pOTree.AddNode (pLamp);
 
 
    // test build coaster track
@@ -200,7 +207,7 @@ bool GameManager::LoadGame (const char *fileName)
    Ride* pRide;
    float fx = 0;
    float fz = 80;
-   pRide = flat.CreateRide(0, mPark );
+   pRide = flat.CreateRide(4, mPark );
    pRide->SetPosition (fx,0.1f,fz);
    pOTree.AddNode(new RidePack (pRide));
 

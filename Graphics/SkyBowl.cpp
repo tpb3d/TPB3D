@@ -87,7 +87,7 @@ void SkyBowl::Draw ()
 {
    glEnable( GL_TEXTURE_2D );
    mTexture[0]->Bind();
-   glColor4f( 1.0, 1.0, 1.0, 0.95);
+   glColor4f( 1.0f, 1.0f, 1.0f, 0.95f);
    glBegin(GL_TRIANGLE_FAN );
    glTexCoord2f( mfTop[3],mfTop[4] );
    glVertex3fv( this->mfTop );

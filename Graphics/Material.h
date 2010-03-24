@@ -20,13 +20,51 @@ protected:
 
 public:
 
+   Material() {};
    Material( int shade, int sides, float blur, float emit, float shine, float glossy, float trans );
    ~Material(void);
 
    void GLSetMaterial();
    void GLSetBlendMode();
+   void GLSetDiffuse();
    //void SetLight( float ambi[3], float diff[3], float spec[3] );
    void SetLight( float* ambi, float* diff, float* spec );
    void SetTexture( Gfx::Texture* pTex ) { mpTexture = pTex; };
    Gfx::Texture* GetTexture( ) { return mpTexture; };
 };
+
+namespace Gfx
+{
+   class ImageManager;
+
+   class MaterialsList
+   {
+      friend class ImageManager;
+      int count;
+      Material** mpMaterials;
+   public:
+      Material** GetMats() { return mpMaterials; } const
+      MaterialsList (int count)
+      {
+         try
+         {
+            mpMaterials = new Material*[count];
+         }
+         catch (...)
+         {
+            // todo         
+         }
+      }
+      ~MaterialsList ()
+      {
+         try
+         {
+            delete [] mpMaterials;
+         }
+         catch (...)
+         {
+            // todo         
+         }
+      }
+   };
+}

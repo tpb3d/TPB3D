@@ -266,12 +266,13 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
    if( cds.Load( buf ) )
    {
       Lib3dsFile* pFile = cds.GetFile();
-      Material* Mats[8];
-      Mats[0] = 0;
+      Gfx::MaterialsList* MatList = NULL; //Mats[8];
       int iTMax = 0;
       if( pFile->nmaterials > 0 )
       {
-         iTMax = (pFile->nmaterials <= 8) ? pFile->nmaterials : 8;
+         iTMax = pFile->nmaterials; // <= 32) ? pFile->nmaterials : 32;
+         MatList = new Gfx::MaterialsList(pFile->nmaterials);
+         Material** Mats = MatList->GetMats();
          //glGenTextures( iTMax * 2, tex );
          for( int idx = 0; idx < iTMax; ++idx )
          {
@@ -280,7 +281,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
                                              pMat->self_illum, pMat->shininess, pMat->shin_strength, pMat->transparency );
             pGLMat->SetLight( pMat->ambient, pMat->diffuse, pMat->specular );
             //assert(pMat)
-            if( pMat->texture1_map.name )
+            if( pMat->texture1_map.name && strlen(pMat->texture1_map.name) > 0)
             {
                char szName[256];
                // removed the _s, should check lengths.
@@ -373,6 +374,11 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       {
          frx = 1;
       }
+      else if (_strnicmp(Name,"JMO",3) == 0)
+      {
+         frx = 0.1f;
+         pNode->Move(fTALoc);
+      }
       else
       {
          frx = 3;
@@ -380,12 +386,14 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       }
 
       pBaseNode->AddNode( pNode );
-
+      int MatIndexes[32];
+      memset (MatIndexes, 0, sizeof(MatIndexes));
       for( int idx = 0; idx < pFile->nmeshes; idx++ )
       {
          Lib3dsMesh* pMesh = pFile->meshes[idx];
          float(* pNormals)[3] = new float[pMesh->nfaces+1][3];
          unsigned short(* pFaces)[3] = new unsigned short[pMesh->nfaces+1][3];
+         unsigned int(* pMatIndexes) = new unsigned int[pMesh->nfaces+1];
          for( int ifx = 0; ifx < pMesh->nfaces; ++ifx )
          {
             int ia = pFaces[ifx][0] = pMesh->faces[ifx].index[0];
@@ -395,22 +403,18 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
             pNormals[ifx][0] = pn[0];
             pNormals[ifx][1] = pn[1];
             pNormals[ifx][2] = pn[2];
+            pMatIndexes[ifx] = pMesh->faces[ifx].material;
          }
          SimpleMeshObject* pGLMesh = ObjectFactory::CreateMesh();
          pGLMesh->SetScale (frx);
-
-         pGLMesh->AddMaterials( 1, Mats[pMesh->faces[0].material] );
          pNode->AddMesh( pGLMesh );
 
          pGLMesh->AddMatrix( pMesh->matrix );
+         pGLMesh->SetMaterials (MatList);
 
-         pGLMesh->AddMesh( pMesh->nvertices, pMesh->vertices, pNormals, pMesh->nvertices, pMesh->texcos, pMesh->nfaces, pFaces );
+         pGLMesh->AddMesh( pMesh->nvertices, pMesh->vertices, pNormals, pMesh->nvertices, pMesh->texcos, pMesh->nfaces, pFaces, pMatIndexes );
          delete [] pFaces;
          delete [] pNormals;
-      }
-      for( int idx = 0; idx < iTMax; ++idx )
-      {
-         delete Mats[idx];
       }
    }
    IMan.set_path("Data/");

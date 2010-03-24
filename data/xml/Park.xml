@@ -7,17 +7,17 @@
             <type>Trunk</type>
             <ID>1</ID>
             <Branches>
+                <type>Pathway</type>
+                <ID>-842150451</ID>
+                <PositionX>-30</PositionX>
+                <PositionY>0.1</PositionY>
+                <PositionZ>61</PositionZ>
+                <type>Pathway</type>
+                <ID>-842150451</ID>
+                <PositionX>-30</PositionX>
+                <PositionY>0.1</PositionY>
+                <PositionZ>61</PositionZ>
                 <type>Lamp</type>
-                <type>Pathway</type>
-                <ID>-842150451</ID>
-                <PositionX>-30</PositionX>
-                <PositionY>0.1</PositionY>
-                <PositionZ>61</PositionZ>
-                <type>Pathway</type>
-                <ID>-842150451</ID>
-                <PositionX>-30</PositionX>
-                <PositionY>0.1</PositionY>
-                <PositionZ>61</PositionZ>
                 <type>Track</type>
                 <height>5</height>
                 <angle>0</angle>

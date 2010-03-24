@@ -99,11 +99,11 @@ void StripMeshObject::Draw()
       if( mpMaterial[pGroup->mMat] )
       {
 //         glColor4f( 1.0, 1.0, 1.0, 1.0 );
-      //mpMaterial->GLSetMaterial();
-         mpMaterial[pGroup->mMat]->GLSetBlendMode();
+         mpMaterial[pGroup->mMat]->GLSetMaterial();
+         //mpMaterial[pGroup->mMat]->GLSetBlendMode();
       }
       //Plug
-      if( mbHighlighted )
+      else if( mbHighlighted )
       {
          glColor4f( 0.5, 0.75, 1.0, 1.0 );
       }
