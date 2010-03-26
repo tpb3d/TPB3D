@@ -38,13 +38,13 @@ Person::Person (Location& loc)
    manimations[MS_Furious] = new AnimationSingle (ptexMad, 8, 16);
    manimations[MS_Mad] = new AnimationSingle (ptexMad, 8, 16);
    manimations[MS_Annoyed] = new AnimationSingle (ptexAnnoied, 8, 16);
-   manimations[MS_Annoyed]->SetPosition(590,0);
+   manimations[MS_Annoyed]->SetPosition(590,0,0);
    manimations[MS_Content] = new AnimationSingle (ptexHappy, 8, 16);
-   manimations[MS_Content]->SetPosition(590,0);
+   manimations[MS_Content]->SetPosition(590,0,0);
    manimations[MS_Happy] = new AnimationSingle (ptexHappy, 8, 16);
-   manimations[MS_Happy]->SetPosition(590,0);
+   manimations[MS_Happy]->SetPosition(590,0,0);
    manimations[MS_Excited] = new AnimationSingle (ptexHappy, 8, 16);
-   manimations[MS_Excited]->SetPosition(590,0);
+   manimations[MS_Excited]->SetPosition(590,0,0);
 
 }
 Person::~Person (void)

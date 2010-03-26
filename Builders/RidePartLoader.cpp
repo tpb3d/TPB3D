@@ -417,7 +417,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
          delete [] pNormals;
       }
    }
-   IMan.set_path("Data/");
+   IMan.set_path("data/");
 }
 
 void RidePartLoader::LoadASE( const char* Path )

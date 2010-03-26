@@ -1,42 +1,67 @@
 #pragma once
+#include "../Graphics/VPoint.h"
 #include "../Types/Vector3.h"
 
 // forward decls
-class Park;
-class Ride;
-class RideNode;
-class ObjectBase;
-struct PartGuide;
+class SerializerBase;
+struct NodeType;
 
-class FlatRideBuilder
+struct PartGuide
 {
-public:
-   FlatRideBuilder(void);
-   ~FlatRideBuilder(void);
+   enum TRideNodeType
+   {
+      RideNodePlatForm,   // The Base that sits on the ground or
+      RideNodeBase,    // Deck or Central base as in a carousel
+      RideNodeHub,
+      RideNodeStrut,
+      RideNodeArm,
+      RideNodeDeck,
+      RideNodeCar,
+      RideNodeDisc,        // spinner - no power
+      RideNodeCarriage,    // rolling or orbiting -  no power
+      RideNodeCableHinge,  // swinging - no power
+      RideNodeRotationHub, // rotates - powered
+      RideNodeCrankHub,    // rotates - powered
+      RideNodeLiftArm,     // lifiting hinge - powered
+      RideNodeDud
+   };
+   TRideNodeType mNodeType;   // what part to build
+   STrig trig;
+   short nCount;
+   short nSpeed;
+   float fOffset;
+   float fWidth;
+   float fHeight;
+   float fLength;
+   float fAngle;
+   float fDrop; // used for suspended items or offsets
+//   float fTwistAngle;
+//   float fBendAngle;
+   PartGuide ();
+   static PartGuide* CreateLoad (SerializerBase& ser)
+   {
+      PartGuide* pPG = new PartGuide();
+      pPG->Load (ser);
+      return pPG;
+   }
+   int   TakeANumber()
+   {
+      return iNextNode++;  // take currrent then bump
+   }
+   void  Clear();
+   TRideNodeType GetNodeType (const char* szNodeName);
+   void Load (SerializerBase& ser);
+   void Save (SerializerBase& ser);
 
-   // Game Manager Interaction
-   static Ride* CreateRide(int iPattern, Park& pPark);
-
-   // UI Interaction
-   void MakeSection( PartGuide& guide, Ride& ride );
-   bool SetParameter( int node, int parameter, int id, float value );
-   // some rides need supports and legs.
-   ObjectBase* Support( Vector3f pt, PartGuide& guide, float MountAngle, float Load, float fBaseHeight );
-
-   static RideNode* AddRideNodePlatForm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeBase (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeHub (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeStrut (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeArm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeDeck (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeCar (RideNode* pParent, ObjectNode* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeDisc (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeCarriage (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeCableHinge (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeRotationHub (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeLiftArm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
+protected:
+   int   iNextNode;
 };
 
+struct NodeType
+{
+   PartGuide::TRideNodeType nType;
+   const char* pNodeName;
+};
 
 /* Ride list quick reference as of 2-24-2010
 Alakazaam - Star_Ranger4 (Nailed)

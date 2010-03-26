@@ -1,0 +1,70 @@
+<FlatRide>
+   <Type>BarnStarmer</Type>
+   <node>
+      <name>Base</name>
+      <NodeType>Base</NodeType>
+      <Count>17</Count>
+      <Width>19.2</Width>
+      <skin>brnstrbase.3ds</skin>
+   </node>
+   <node>
+      <name>Center Column</name>
+      <NodeType>Hub</NodeType>
+      <Height>18</Height>
+      <skin>brnstrprimary.3ds</skin>
+   </node>
+   <!--Lift Hub brnstrsecondary.3ds-->
+   <node>
+      <name>Spin Hub</name>
+      <NodeType>RotationHub</NodeType>
+      <Speed>40</Speed>
+      <Width>3</Width>
+      <Drop>12</Drop>
+      <skin>brnstrliftr.3ds</skin>
+      <node>
+         <name>Cables</name>
+         <NodeType>CableHinge</NodeType>
+         <Offset>-2.0</Offset>
+         <Height>9.0</Height>
+         <Length>11.0</Length>
+         <Drop>-8.0</Drop>
+         <node>
+            <name>Plane</name>
+            <NodeType>Car</NodeType>
+            <Offset>-2.0</Offset>
+            <Height>9.0</Height>
+            <Length>11.0</Length>
+            <Drop>-8.0</Drop>
+         </node>
+      </node>
+   </node>
+</FlatRide>
+
+<!--
+   <node>
+      <NodeType></NodeType>
+      <Count></Count>
+      <Speed></Speed>
+      <Offset></Offset>
+      <Height></Height>
+      <Width></Width>
+      <Length></Length>
+      <Angle></Angle>
+      <Drop></Drop>
+   </node>
+   
+      (NodeTypes)
+      Platform - elevated ot ground level platform supporting the ride
+      Base - flat base or support legs
+      Hub -  central column of the ride
+      Strut - connecting arm or trusswork
+      Arm - Support arm that is usually mounted to a rotating hub and supporting cars
+      Deck - lower part of the ride the people may walk on at stop to get to seats such as a carousel
+      Car -  the tub or bucket with the seat(s).
+      Disc - round structural element
+      Carriage - assembly or boggy that supports one or more cars.
+      CableHinge - Cable suspension with physics
+      RotationHub - hub that is powered and rotates
+      CrankHub - hun that provides undulation to multiple arms of the spider or octopus
+      LiftArm - hydraulic assembly like on the enterprise
+-->

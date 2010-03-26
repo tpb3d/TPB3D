@@ -43,7 +43,7 @@ namespace Gfx
       int count;
       Material** mpMaterials;
    public:
-      Material** GetMats() { return mpMaterials; } const
+      Material** GetMats() const { return mpMaterials; }
       MaterialsList (int count)
       {
          try
@@ -52,7 +52,7 @@ namespace Gfx
          }
          catch (...)
          {
-            // todo         
+            // todo
          }
       }
       ~MaterialsList ()
@@ -63,7 +63,7 @@ namespace Gfx
          }
          catch (...)
          {
-            // todo         
+            // todo
          }
       }
    };

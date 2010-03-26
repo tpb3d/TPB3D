@@ -28,6 +28,7 @@
 #include "../CoreObjects/Car.h"
 
 #include "RidePartLoader.h"
+#include "PartGuide.h"
 #include "FlatRideBuilder.h"
 
 /* Must Have List
@@ -65,9 +66,9 @@ namespace Builders
       "brnstrmcar.3ds",
       "brnstrmdoor.3ds"
    };
-   const char* kszBS = "Data/Barn Stormer/";
+   const char* kszBS = "data/Barn Stormer/";
 
-   PartGuide::TFlatRideNodeType kBSNodes[] =
+   PartGuide::TRideNodeType kBSNodes[] =
    {
       PartGuide::RideNodeBase,
       PartGuide::RideNodeHub,
@@ -78,7 +79,7 @@ namespace Builders
       PartGuide::RideNodeCar
    };
 
-   const char* kszSpida = "Data/Spider/";
+   const char* kszSpida = "data/Spider/";
    const char* kszSpidaParts[] =
    {
       "",
@@ -92,7 +93,7 @@ namespace Builders
       "sr4_Spyd_SFing.3ds",
       "sr4_Spyd_pod.3ds"
    };
-   PartGuide::TFlatRideNodeType kSpidaNodes[] =
+   PartGuide::TRideNodeType kSpidaNodes[] =
    {
       PartGuide::RideNodeBase,
       PartGuide::RideNodeDeck,

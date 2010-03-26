@@ -1106,6 +1106,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Builders\PartGuide.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Builders\PartGuide.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Builders\RideFormer.cpp"
 				>
 			</File>

@@ -27,8 +27,8 @@ CableSusp::CableSusp ()
     mLength = 4;
     mMax = 20;
     mpGraphic = ObjectFactory::CreateTexturedStrip (2, "basemetal.png", 0x98b0b0b0);
-    SetVelocity(0,0);
-    SetAcceleration(0,0);
+    SetVelocity(0,0,0);
+    SetAcceleration(0,0,0);
 }
 
 CableSusp::~CableSusp (void)
@@ -39,7 +39,7 @@ void CableSusp::SetDirection(float Velocity)
 {
    if (mVelocity.y != Velocity)
    {
-      SetVelocity (0,Velocity);
+      SetVelocity (0,Velocity,0);
       if (Velocity < 0)
       {
          this->SetDistance(-mMax);

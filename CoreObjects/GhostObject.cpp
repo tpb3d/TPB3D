@@ -52,8 +52,7 @@ void GhostObject::Move (Vector3f& point)
 {
    float x = point.x - mOffsetUnits;
    float y = point.y;
-   mLevel = int(y + 1);
-   mBase.SetPosition (x, y);
+   mBase.SetPosition (x, 0, y);
 }
 
 void GhostObject::Update (Park* pPark)
