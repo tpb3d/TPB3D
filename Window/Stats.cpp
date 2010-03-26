@@ -68,8 +68,8 @@ void
 Stats::PosCalc ()
 {
    Camera* pCam = Camera::GetInstance ();
-   mOtherFace->SetPosition (( pCam->GetCamSize ().x / 2) - 128, pCam->GetHeight()-16); // relative based on clock
-   mStatsFace->SetPosition (( pCam->GetCamSize ().x / 2) - 128, pCam->GetHeight()-32); // relative based on clock
+   mOtherFace->SetPosition (( pCam->GetCamSize ().x / 2) - 128, pCam->GetHeight()-16, 0); // relative based on clock
+   mStatsFace->SetPosition (( pCam->GetCamSize ().x / 2) - 128, pCam->GetHeight()-32, 0); // relative based on clock
 }
 
 void

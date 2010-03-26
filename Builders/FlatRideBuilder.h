@@ -35,6 +35,7 @@ public:
    static RideNode* AddRideNodeCableHinge (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeRotationHub (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeLiftArm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
+   static RideNode* AddRideNodeSpinCar (RideNode* pParent, ObjectNode* pGraphicObject, PartGuide& guide);
 };
 
 

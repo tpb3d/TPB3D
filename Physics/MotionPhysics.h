@@ -36,8 +36,8 @@ protected:
 
 public:  // protect these memvars and add gets
    Vector3f mPosition;
-   Vector2f mVelocity;
-   Vector2f mAcceleration;
+   Vector3f mVelocity;
+   Vector3f mAcceleration;
 
 public:
    // CTOR
@@ -52,10 +52,10 @@ public:
    Vector3f GetPosition() { return mPosition; }
    float GetVelocityX () { return mVelocity.x; }
    float GetVelocityY () { return mVelocity.y; }
-   Vector2f GetVelocity() { return mVelocity; }
+   Vector3f GetVelocity() { return mVelocity; }
    float GetAccelerationX () { return mAcceleration.x; }
    float GetAccelerationY () { return mAcceleration.y; }
-   Vector2f GetAcceleration() { return mAcceleration; }
+   Vector3f GetAcceleration() { return mAcceleration; }
 
    Vector3f GetWidthVector() { return mWidth; }
    float GetWidth() { return mWidth.x; }
@@ -67,16 +67,16 @@ public:
    // Mothods
    void DebugPrint ();
    // Depreciated!
-   void SetPosition (float x, float y);
-   void SetVelocity (float x, float y);
-   void SetAcceleration (float x, float y);
+   void SetPosition (float x, float y, float z);
+   void SetVelocity (float x, float y, float z);
+   void SetAcceleration (float x, float y, float z);
 
    void SetPosition (const Vector3f& NewPos) { mPosition = NewPos; }
-   void SetVelocity (const Vector2f& NewV) { mVelocity = NewV; }
-   void SetAcceleration (const Vector2f& NewA) { mAcceleration = NewA; }
+   void SetVelocity (const Vector3f& NewV) { mVelocity = NewV; }
+   void SetAcceleration (const Vector3f& NewA) { mAcceleration = NewA; }
 
    void Integrate (float dt);
-   void MoveTo (float x, float y, float time);
+   void MoveTo (float x, float y, float z, float time);
 };
 
 #endif

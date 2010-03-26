@@ -217,27 +217,27 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.Clear();
       // test data, the Barn Stormer ride
       ObjectNode* pHubNode = new ObjectNode (0, 31);
-      const char* kszHub = kszSpidaParts[2];
+      const char* kszHub = kszSpidaParts[6];
       rpl.Load3ds( pPath, kszHub, pHubNode );
 
-      guide.fHeight = 18;
+      guide.fHeight = 1;
       guide.nCount = 13;
       RideNode* pHub = AddRideNodeHub (NULL, pHubNode, guide);
       pRide->SetNode (pHub);
 
       // spin up
-      guide.fHeight = 12;
+      guide.fHeight = 2;
       guide.nSpeed = 35;
-      guide.fDrop = 12;
+      guide.fDrop = 0;
       RideNode* pRotHub = AddRideNodeRotationHub (pHub, NULL, guide);
 
       ObjectNode* pBaseNode = new ObjectNode (0, 33);
-      const char* kszBase = kszSpidaParts[3];
+      const char* kszBase = kszSpidaParts[7];
       rpl.Load3ds( pPath, kszBase, pBaseNode );
       // Make a base
       guide.fOffset = 2;
-      guide.fWidth = 19.2f;
-      guide.nCount = 17;
+      guide.fWidth = 2.2f;
+      guide.nCount = 8;
       RideNode* pDeck2 = AddRideNodeDeck (pHub, NULL, guide);
       pDeck2->SetPosition (0, 1.1f, 0);
       pDeck2->Render();
@@ -256,19 +256,8 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       v2 -= v1;
       float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
 
-      guide.fAngle = 0;
-      guide.fOffset = 0;
-      guide.fHeight = 12;
-      guide.fLength = 10.0f;
-      guide.fDrop = -10.0f;
-      guide.fWidth = vx;
-      guide.trig.SetY (fDegH);
-
       ObjectNode* pCarNode = new ObjectNode (0, 34);
       ObjectNode* pArmNode = new ObjectNode (0, 35);
-
-      const char* pTag1 = kszSpidaParts[4];
-      rpl.Load3ds( pPath, pTag1, pCarNode );
 
       const char* kszArm = kszSpidaParts[6];
       const char* kszArmA = kszSpidaParts[7];
@@ -277,8 +266,19 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       rpl.Load3ds( pPath, kszArmA, pArmNode );
       rpl.Load3ds( pPath, kszArmB, pArmNode );
 
-//         guide.fAngle = fAngle;
+      guide.fAngle = 90;//fAngle;
       AddRideNodeArm (pRotHub, pArmNode, guide); // do the extension arm
+
+      //guide.fAngle = 0;
+      //guide.fOffset = 0;
+      //guide.fHeight = 12;
+      //guide.fLength = 10.0f;
+      //guide.fDrop = -10.0f;
+      //guide.fWidth = vx;
+      //guide.trig.SetY (fDegH);
+      const char* pTag1 = kszSpidaParts[4];
+      rpl.Load3ds( pPath, pTag1, pCarNode );
+
 
       guide.fHeight = 9;
       guide.fLength = 11.0f;
@@ -292,8 +292,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          guide.fAngle = fAngle + fDegH;
          RideNode* pWire = AddRideNodeCableHinge (pRotHub, NULL, guide); // do the hanger
          fAngle += fDeg;
-
-         AddRideNodeCar (pWire, pCarNode, guide);
+         AddRideNodeSpinCar (pWire, pCarNode, guide);
       }
    }
    else if( iPattern == 1)
@@ -566,6 +565,15 @@ RideNode* FlatRideBuilder::AddRideNodeDeck (RideNode* pParent, ObjectBase* pGrap
 }
 
 RideNode* FlatRideBuilder::AddRideNodeCar (RideNode* pParent, ObjectNode* pGraphicObject, PartGuide& guide)
+{
+   Car* pCar = new Car (pGraphicObject);
+   pCar->SetPosition(0, guide.fHeight, guide.fOffset);
+   pCar->Render();
+   pParent->AddNode(pCar);
+   return pCar;
+}
+
+RideNode* FlatRideBuilder::AddRideNodeSpinCar (RideNode* pParent, ObjectNode* pGraphicObject, PartGuide& guide)
 {
    Car* pCar = new Car (pGraphicObject);
    pCar->SetPosition(0, guide.fHeight, guide.fOffset);

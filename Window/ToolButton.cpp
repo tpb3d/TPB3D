@@ -56,7 +56,7 @@ ToolButton::ToolButton( float x, float y, int ID)
    ImageManager * images = ImageManager::GetInstance ();
    Texture* pTex = images->GetTexture ("buttons.png", GL_RGBA);
    mpFace = new AnimationSingle (pTex, 140, 24);
-   mpFace->SetPosition(x,y);
+   mpFace->SetPosition(x,y,0);
    mpFace->SetLightingColor (kButtonLights[0]);
    pTex = images->GetTexture ("stats.png", GL_RGBA);
    mpTextTex = new AnimationSingle (pTex, 256, 22);

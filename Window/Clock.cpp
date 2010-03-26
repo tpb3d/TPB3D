@@ -71,7 +71,7 @@ void
 Clock::PosCalc ()
 {
    Camera* pCam = Camera::GetInstance ();
-   mClockFace->SetPosition ((pCam->GetCamSize ().x / 2) - 32, pCam->GetHeight()-64);
+   mClockFace->SetPosition ((pCam->GetCamSize ().x / 2) - 32, pCam->GetHeight()-64, 0);
    mHourHand.Position = Vector3f(( pCam->GetInstance()->GetCamSize ().x / 2), pCam->GetHeight() - 32, 0.2f );
    mMinuteHand.Position = Vector3f(( pCam->GetInstance()->GetCamSize ().x / 2), pCam->GetHeight() - 32, 0.1f );
 }

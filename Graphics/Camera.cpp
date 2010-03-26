@@ -273,7 +273,7 @@ void Camera::DrawModel (Scene* pModel)   // 3d interface objects
    glPushMatrix();
    {                       // brackets just keep the code in push and pop uniform
       glEnable (GL_TEXTURE_2D);
-      glTranslatef (GetPositionX(), GetPositionY(), mZoomFactor);
+      glTranslatef (GetPositionX(), GetPositionY(), GetPositionZ() + mZoomFactor);
       glColor4ub (255,255,255,255);
       glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA  );
       glEnable(GL_BLEND);
@@ -418,20 +418,17 @@ Vector3f Camera::GetOGLPos (Vector2f winVec) // NeHe Productions at GameDev
 	return Vector3f((float)posX-GetPositionX(), (float)posY+GetPositionY(), (float)posZ); // +GetPositionX());
 }
 
-bool
-Camera::GetEvent (sf::Event & event)
+bool Camera::GetEvent (sf::Event & event)
 {
    return mpWindow->GetEvent (event);
 }
 
-bool
-Camera::OnKeyUp (sf::Key::Code Key)
+bool Camera::OnKeyUp (sf::Key::Code Key)
 {
    return true;
 }
 
-bool
-Camera::OnKeyDown (sf::Key::Code Key)
+bool Camera::OnKeyDown (sf::Key::Code Key)
 {
    if (Key == sf::Key::D)
    {
@@ -440,30 +437,30 @@ Camera::OnKeyDown (sf::Key::Code Key)
       mAcceleration.x = -0.25f * mZoomFactor;
       //if (mv.x == 0) mv.x = 0.5*mZoomFactor;
    }
-   if (Key == sf::Key::S)
+   else if (Key == sf::Key::W)
    {
-      if (mVelocity.y < 0) mVelocity.y = 0;
-      mVelocity.y += -0.3f * mZoomFactor;
-      mAcceleration.y = 0.25f * mZoomFactor;
+      if (mVelocity.z < 0) mVelocity.z = 0;
+      mVelocity.z += -0.3f * mZoomFactor;
+      mAcceleration.z = 0.25f * mZoomFactor;
       //if (mv.y == 0) mv.y = -0.5*mZoomFactor;
    }
-   if (Key == sf::Key::A)
+   else if (Key == sf::Key::A)
    {
       if (mVelocity.x < 0) mVelocity.x = 0;
       mVelocity.x += -0.4f * mZoomFactor;
       mAcceleration.x = 0.25f * mZoomFactor;
       //if (mv.x == 0) mv.x = -0.5*mZoomFactor;
    }
-   if (Key == sf::Key::W)
+   else if (Key == sf::Key::S)
    {
-      if (mVelocity.y > 0) mVelocity.y = 0;
-      mVelocity.y += 0.3f * mZoomFactor;
-      mAcceleration.y = -0.25f * mZoomFactor;
+      if (mVelocity.z > 0) mVelocity.z = 0;
+      mVelocity.z += 0.3f * mZoomFactor;
+      mAcceleration.z = -0.25f * mZoomFactor;
       //if (mv.y == 0) mv.y = 0.5*mZoomFactor;
    }
    if (Key == sf::Key::E)
    {
-      SetVelocity (0, 0);
+      SetVelocity (0, 0, 0);
    }
    if (Key == sf::Key::R)
    {
@@ -487,8 +484,7 @@ Camera::OnKeyDown (sf::Key::Code Key)
    return true;
 }
 
-bool
-Camera::OnMouseWheel (int Delta)
+bool Camera::OnMouseWheel (int Delta)
 {
    if (Delta > 0)
       ZoomIn();
@@ -497,27 +493,24 @@ Camera::OnMouseWheel (int Delta)
       
    // zoom height and tilt
    float ang = mZoomFactor/ 600*90;
-   float x = cos(0.01745329 * (180.0 + ang));
-   float y = sin(0.01745329 * (180.0 - ang)) * 200;
+   float x = (float)(cos(0.01745329 * (180.0 + ang)));
+   float y = (float)(sin(0.01745329 * (180.0 - ang)) * 200);
    //mPosition.y = y-8;
    //mXrot = -ang;
    
    return true;
 }
 
-void
-Camera::ZoomIn()
+void Camera::ZoomIn()
 {
    Zoom(5);
 }
-void
-Camera::ZoomOut()
+void Camera::ZoomOut()
 {
    Zoom(-5);
 }
 
-void
-Camera::Zoom(float Factor)
+void Camera::Zoom(float Factor)
 {
    //Rectf ZoomedRect;
    // Calcuate the center
