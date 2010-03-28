@@ -1,18 +1,18 @@
 /*   This file is part of Theme Park Developer 3D The Game.
- *
- *   Theme Park Developer 3D The Game is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+*
+*   Theme Park Developer 3D The Game is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
 
- *   Theme Park Developer 3D The Game is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
- */
+*   Theme Park Developer 3D The Game is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #ifndef _CAMERA_H
 #define _CAMERA_H
@@ -43,9 +43,13 @@ private:
    bool  mIgnoreCamera;
    Vector2i mMouseStartPos;
    bool  mMovingView;
-   float mXrot;
-   float mYrot;
-   float mZrot;
+
+
+   Vector3f mTarget;
+   Vector2i mMousePos;
+
+   bool keylist[256]; // keys
+   bool btnlist[4]; // mouse buttons
 
    Camera ();
 
@@ -84,12 +88,16 @@ public:
    void Create (const std::string & caption);
    void Center (int x, int y);
    bool GetEvent (sf::Event & event);
-   void ZoomIn();
-   void ZoomOut();
+
+   Vector3f GetOGLPos2(float zFar, float zNear, Vector3f v);
+   void Move(float x, float y, float z);
+
    // Event hanlders
    bool OnKeyDown (sf::Key::Code Key);
    bool OnKeyUp (sf::Key::Code Key);
    bool OnMouseWheel (int Delta);
+   bool OnMouseDown (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam);
+   bool OnMouseUp (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam);
    bool OnResize(Vector2i);
 };
 

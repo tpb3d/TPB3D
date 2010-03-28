@@ -24,6 +24,7 @@ Body::Body (int width, int height)
    mTimeTotal = 0;
    // mMoveDest self initializes in the CTOR
    mPosition = Vector3f(0,0,0);
+   mRotation = Vector3f(0,0,0);
    mVelocity = Vector3f(0,0,0);
    mAcceleration = Vector3f(0,0,0);
    mWidth = Vector3f ((float)width, 0, 0);
@@ -42,9 +43,9 @@ Body::Body (Vector3f Pos, int width, int height)
    mDepth = Vector3f (0, 0, 1);
 }
 
-Body::Body (float x, float y, int width, int height)
+Body::Body (float x, float y, float z, int width, int height)
 {
-   mPosition = Vector3f(x,y,0);
+   mPosition = Vector3f(x,y,z);
    mVelocity = Vector3f(0,0,0);
    mAcceleration = Vector3f(0,0,0);
    mWidth = Vector3f ((float)width, 0, 0);
@@ -64,6 +65,13 @@ void Body::SetPosition (float x, float y, float z)
    mPosition.x = x;
    mPosition.y = y;
    mPosition.z = z;
+}
+
+void Body::SetRotation (float x, float y, float z)
+{
+   mRotation.x = x;
+   mRotation.y = y;
+   mRotation.z = z;
 }
 
 void Body::SetVelocity (float x, float y, float z)

@@ -38,11 +38,12 @@ public:  // protect these memvars and add gets
    Vector3f mPosition;
    Vector3f mVelocity;
    Vector3f mAcceleration;
+   Vector3f mRotation;
 
 public:
    // CTOR
    Body (int width, int height);
-   Body (float x, float y, int width, int height);
+   Body (float x, float y, float z, int width, int height);
    Body (Vector3f Pos, int width, int height);
 
    //Properties
@@ -68,10 +69,12 @@ public:
    void DebugPrint ();
    // Depreciated!
    void SetPosition (float x, float y, float z);
+   void SetRotation (float x, float y, float z);
    void SetVelocity (float x, float y, float z);
    void SetAcceleration (float x, float y, float z);
 
    void SetPosition (const Vector3f& NewPos) { mPosition = NewPos; }
+   void SetRotation (const Vector3f& NewRot) { mRotation = NewRot; }
    void SetVelocity (const Vector3f& NewV) { mVelocity = NewV; }
    void SetAcceleration (const Vector3f& NewA) { mAcceleration = NewA; }
 

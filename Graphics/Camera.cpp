@@ -1,18 +1,18 @@
 /*This file is part of Theme Park Developer 3D The Game.
- *
- *Theme Park Developer 3D The Game is free software: you can redistribute it and/or modify
- *it under the terms of the GNU General Public License as published by
- *the Free Software Foundation, either version 3 of the License, or
- *(at your option) any later version.
+*
+*Theme Park Developer 3D The Game is free software: you can redistribute it and/or modify
+*it under the terms of the GNU General Public License as published by
+*the Free Software Foundation, either version 3 of the License, or
+*(at your option) any later version.
 
- *Theme Park Developer 3D The Game is distributed in the hope that it will be useful,
- *but WITHOUT ANY WARRANTY; without even the implied warranty of
- *MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *GNU General Public License for more details.
- *
- *You should have received a copy of the GNU General Public License
- *along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
- */
+*Theme Park Developer 3D The Game is distributed in the hope that it will be useful,
+*but WITHOUT ANY WARRANTY; without even the implied warranty of
+*MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*GNU General Public License for more details.
+*
+*You should have received a copy of the GNU General Public License
+*along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #include "../Resources.h"
 
@@ -62,15 +62,22 @@ Camera::Camera ()
    mAspect = (float)(mWidth.x / mHeight.y);
    mCam.x = mWidth.x;
    mCam.y = mHeight.y;
-   mXrot = 0;
-   mYrot = 10;
-   mZrot = -1;
    mIgnoreCamera = false;
    mpInput = &(mpWindow->GetInput ());
-   mPosition.x = 0;
-   mPosition.y = -20;
-   mPosition.z = 0;
+   mPosition.x = 0.0;
+   mPosition.y = 0.0;
+   mPosition.z = 0.0;
    mpWindow->ShowMouseCursor (false);
+
+   mTarget.x = 35.0;
+   mTarget.y = 90.0;
+   mTarget.z = 0.0;
+
+   mMousePos.x = 0;
+   mMousePos.y = 0;
+
+   memset(keylist, 0, 256);
+   memset(btnlist, 0, 4);
 }
 
 const sf::Input * Camera::GetInput ()
@@ -115,20 +122,120 @@ Camera* Camera::GetInstance()
 void Camera::Clear ()
 {
    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	glLoadIdentity();
+   glLoadIdentity();
 }
 
 void Camera::SetActive()
 {
-//	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);			// Clear Screen And Depth Buffer
+   //	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);			// Clear Screen And Depth Buffer
    glViewport(0, 0, (GLsizei)mCam.x, (GLsizei)mCam.y);//this->ms.x, ms.y); these were negative need to fixe this so the
    glMatrixMode(GL_MODELVIEW);
-	glRotatef (mXrot, 1.0f, 0.0f, 0.0f);
-	glRotatef (mYrot, 0.0f, 1.0f, 0.0f);
-	glRotatef (mZrot, 0.0f, 0.0f, 1.0f);
-//   mpWindow->SetActive (true);
-	glLightfv(GL_LIGHT0, GL_POSITION, gLightPosition);	// mLightPosition// Position The Light
-	glLightfv(GL_LIGHT1, GL_POSITION, gSpotPosition);	// Position The Light
+
+   // This is probably the wrong place for these
+
+   // Move camera forward
+   if (keylist[sf::Key::W])
+   {
+      if(mZoomFactor < -5)
+      {
+         Move(0.0f, 0.0f, -0.01f * mZoomFactor);
+      }
+      else
+      {
+         Move(0.0f, 0.0f, 0.5f);
+      }
+   }
+
+   // Move camera backward
+   if (keylist[sf::Key::S])
+   {
+      if(mZoomFactor < -5)
+      {
+         Move(0.0f, 0.0f, 0.01f * mZoomFactor);
+      }
+      else
+      {
+         Move(0.0f, 0.0f, -0.5f);
+      }
+   }
+
+   // Move camera left
+   if (keylist[sf::Key::A])
+   {
+      if(mZoomFactor < -5)
+      {
+         Move (-0.01f * mZoomFactor, 0.0f, 0.0f);
+      }
+      else
+      {
+         Move (0.5f, 0.0f, 0.0f);
+      }
+   }
+
+   // Move camera right
+   if (keylist[sf::Key::D])
+   {
+      if(mZoomFactor < -5)
+      {
+         Move (0.01f * mZoomFactor, 0.0f, 0.0f);
+      }
+      else
+      {
+         Move (-0.5f, 0.0f, 0.0f);
+      }
+   }
+
+   // Change camera attitude
+   if (keylist[sf::Key::Q])
+   {
+      mTarget.x += 1.0f;
+   }
+   if (keylist[sf::Key::E])
+   {
+      mTarget.x -= 1.0f;
+   }
+
+   // Change camera angle
+   if (keylist[sf::Key::R])
+   {
+      mTarget.y += 2.0;
+   }
+   if (keylist[sf::Key::T])
+   {
+      mTarget.y -= 2.0;
+   }
+
+   // Rotate camera xy, with middle mouse button.
+   if(btnlist[sf::Mouse::Middle])
+   {
+      Vector2i mv2i;
+      mv2i.x = (GetLocalMouse().x) - (int)(mCam.x / 2);
+      mv2i.y = (GetLocalMouse().y) - (int)(mCam.y / 2);
+
+      mTarget.x += float(mv2i.y - mMousePos.y) / 4;
+      mTarget.y += float(mv2i.x - mMousePos.x) / 4;
+      mMousePos.x = mv2i.x;
+      mMousePos.y = mv2i.y;
+   } else {
+      Vector2i mv2i;
+      mv2i.x = (GetLocalMouse().x) - (int)(mCam.x / 2);
+      mv2i.y = (GetLocalMouse().y) - (int)(mCam.y / 2);
+      mMousePos.x = mv2i.x;
+      mMousePos.y = mv2i.y;
+   }
+
+   // Set camera
+   glTranslatef(0.0f, 0.0f, mZoomFactor); // Camera center, point of rotation
+   glRotatef (mTarget.x, 1.0f, 0.0f, 0.0f);
+   glRotatef (mTarget.y, 0.0f, 1.0f, 0.0f);
+   glRotatef (mTarget.z, 0.0f, 0.0f, 1.0f);
+
+   glTranslatef(mPosition.x, mPosition.y, mPosition.z); // Translate camera
+
+
+   //   mpWindow->SetActive (true);
+   glLightfv(GL_LIGHT0, GL_POSITION, gLightPosition);	// mLightPosition// Position The Light
+   glLightfv(GL_LIGHT1, GL_POSITION, gSpotPosition);	// Position The Light
    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, SpotDirection);	// Position The Light
    glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, SpotCutoff);	// Limit The Light
    glMaterialfv(GL_FRONT, GL_EMISSION, LightOff );
@@ -153,21 +260,21 @@ bool Camera::OnResize (Vector2i vi)
    mAspect = (float)(vi.x) / vi.y;
    glMatrixMode(GL_PROJECTION);
    glLoadIdentity();
-	gluPerspective (FIELD_OF_VIEW, mAspect ,0.5f,1000.0f);		// Calculate The Aspect Ratio Of The Window
+   gluPerspective (FIELD_OF_VIEW, mAspect ,0.5f,1000.0f);		// Calculate The Aspect Ratio Of The Window
    return true;
 }
 
 void Camera::InitGL()
 {
-	glShadeModel(GL_SMOOTH);												// Enable Smooth Shading
-	glClearDepth(1.0f);														// Depth Buffer Setup
+   glShadeModel(GL_SMOOTH);												// Enable Smooth Shading
+   glClearDepth(1.0f);														// Depth Buffer Setup
    glClearColor(0.f, 0.f, 0.f, 0.f);
 
    // Enable Z-buffer read and write
    glEnable(GL_DEPTH_TEST);
    glDepthMask(GL_TRUE);
-	glDepthFunc(GL_LEQUAL);
-	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);						// Really Nice Perspective Calculations
+   glDepthFunc(GL_LEQUAL);
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);						// Really Nice Perspective Calculations
 
    // Setup a perspective projection
    mAspect = (float)(mCam.x) / mCam.y;
@@ -177,21 +284,21 @@ void Camera::InitGL()
    glEnable (GL_TEXTURE_2D);
    InitLighting();
 
-const GLuint fogMode[]= { GL_EXP, GL_EXP2, GL_LINEAR };	// Storage For Three Types Of Fog
-const GLuint fogfilter= 1;					// Which Fog To Use
-const GLfloat fogColor[4]= {0.25f, 0.3f, 0.35f, 0.5f};		// Fog Color
+   const GLuint fogMode[]= { GL_EXP, GL_EXP2, GL_LINEAR };	// Storage For Three Types Of Fog
+   const GLuint fogfilter= 1;					// Which Fog To Use
+   const GLfloat fogColor[4]= {0.25f, 0.3f, 0.35f, 0.5f};		// Fog Color
 
 
-glFogi(GL_FOG_MODE, fogMode[fogfilter]);		// Fog Mode
-glFogfv(GL_FOG_COLOR, fogColor);			// Set Fog Color
-glFogf(GL_FOG_DENSITY, 0.005f);				// How Dense Will The Fog Be
-glHint(GL_FOG_HINT, GL_DONT_CARE);			// Fog Hint Value
-glFogf(GL_FOG_START, 100.0f);				// Fog Start Depth
-glFogf(GL_FOG_END, 101.0f);				// Fog End Depth
+   glFogi(GL_FOG_MODE, fogMode[fogfilter]);		// Fog Mode
+   glFogfv(GL_FOG_COLOR, fogColor);			// Set Fog Color
+   glFogf(GL_FOG_DENSITY, 0.005f);				// How Dense Will The Fog Be
+   glHint(GL_FOG_HINT, GL_DONT_CARE);			// Fog Hint Value
+   glFogf(GL_FOG_START, 100.0f);				// Fog Start Depth
+   glFogf(GL_FOG_END, 101.0f);				// Fog End Depth
 
-	//Use the color as the ambient and diffuse material
-	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
-	glEnable(GL_COLOR_MATERIAL);
+   //Use the color as the ambient and diffuse material
+   glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+   glEnable(GL_COLOR_MATERIAL);
 }
 
 void Camera::InitLighting()
@@ -230,25 +337,25 @@ void Camera::InitLighting()
    //LightPosition[1] = 30.0f;
    //LightPosition[2] = 0.0f;
    //LightPosition[3] = 1.0f;
-	glEnable(GL_DEPTH_TEST);					// Enables Depth Testing
-//   glFrontFace( GL_CCW );
-//	glEnable(GL_CULL_FACE);
-	glDepthFunc(GL_LEQUAL);						// The Type Of Depth Testing To Do
-	glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);						// Really Nice Perspective Calculations
+   glEnable(GL_DEPTH_TEST);					// Enables Depth Testing
+   //   glFrontFace( GL_CCW );
+   //	glEnable(GL_CULL_FACE);
+   glDepthFunc(GL_LEQUAL);						// The Type Of Depth Testing To Do
+   glHint(GL_PERSPECTIVE_CORRECTION_HINT, GL_NICEST);						// Really Nice Perspective Calculations
    glShadeModel (GL_SMOOTH);					// Select Smooth Shading
 
 
    glEnable(GL_LIGHTING);
    glEnable(GL_LIGHT0);
-	glLightfv(GL_LIGHT0, GL_AMBIENT,  LightAmbient);		// Setup The Ambient Light
-	glLightfv(GL_LIGHT0, GL_POSITION, gLightPosition);	// mLightPosition// Position The Light
+   glLightfv(GL_LIGHT0, GL_AMBIENT,  LightAmbient);		// Setup The Ambient Light
+   glLightfv(GL_LIGHT0, GL_POSITION, gLightPosition);	// mLightPosition// Position The Light
    glLightfv(GL_LIGHT0, GL_SPECULAR, LightSpecular);		// Setup The Specular Light
    glLightfv(GL_LIGHT0, GL_DIFFUSE,  LightDiffuse);		// Setup The Diffuse Light
    glLightf( GL_LIGHT0, GL_LINEAR_ATTENUATION,  0.025f);		// Setup The Strength of Light
    glLightfv( GL_LIGHT0, GL_SPOT_DIRECTION, LightDirection);
 
    glEnable(GL_LIGHT1);
-	glLightfv(GL_LIGHT1, GL_AMBIENT,  SpotAmbient);		// Setup The Ambient Light
+   glLightfv(GL_LIGHT1, GL_AMBIENT,  SpotAmbient);		// Setup The Ambient Light
    glLightfv(GL_LIGHT1, GL_SPECULAR, SpotSpecular);		// Setup The Specular Light
    glLightfv(GL_LIGHT1, GL_DIFFUSE,  SpotDiffuse);		// Setup The Diffuse Light
    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, SpotDirection); // Facing, down?
@@ -257,23 +364,22 @@ void Camera::InitLighting()
    glLightf( GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0025f);		// Setup The Strength of Light
    glLightf( GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0);		// Setup The Strength of Light
 
-	glLightfv(GL_LIGHT1, GL_POSITION, gSpotPosition);	// Position The Light
+   glLightfv(GL_LIGHT1, GL_POSITION, gSpotPosition);	// Position The Light
 
 
-	glEnable(GL_COLOR_MATERIAL);
-	glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
+   glEnable(GL_COLOR_MATERIAL);
+   glColorMaterial(GL_FRONT, GL_AMBIENT_AND_DIFFUSE);
 }
 
 void Camera::DrawModel (Scene* pModel)   // 3d interface objects
 {
-	//glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
+   //glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
    //glLoadIdentity();									// Reset The Projection Matrix
    glMatrixMode(GL_MODELVIEW);
    glEnable (GL_LIGHTING);
    glPushMatrix();
    {                       // brackets just keep the code in push and pop uniform
       glEnable (GL_TEXTURE_2D);
-      glTranslatef (GetPositionX(), GetPositionY(), GetPositionZ() + mZoomFactor);
       glColor4ub (255,255,255,255);
       glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA  );
       glEnable(GL_BLEND);
@@ -287,15 +393,15 @@ void Camera::DrawModel (Scene* pModel)   // 3d interface objects
 
 void Camera::DrawInterface(Interface* pI)   // 2d interface objects
 {
-	glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
-	glPushMatrix();										// Store The Projection Matrix
+   glMatrixMode(GL_PROJECTION);						// Select The Projection Matrix
+   glPushMatrix();										// Store The Projection Matrix
    {
-	   glLoadIdentity();									// Reset The Projection Matrix
-	   glOrtho( 0, mWidth.x, 0, mHeight.y, -1, 1);	   // Set Up An Ortho Screen zero is at the bottom
-	   glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
-	   glPushMatrix();										// Store The Modelview Matrix
+      glLoadIdentity();									// Reset The Projection Matrix
+      glOrtho( 0, mWidth.x, 0, mHeight.y, -1, 1);	   // Set Up An Ortho Screen zero is at the bottom
+      glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
+      glPushMatrix();										// Store The Modelview Matrix
       {
-	      glLoadIdentity();									// Reset The Modelview Matrix
+         glLoadIdentity();									// Reset The Modelview Matrix
          glEnable (GL_TEXTURE_2D);
          glColor4ub (255,255,255,255);
          glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA  );
@@ -303,11 +409,11 @@ void Camera::DrawInterface(Interface* pI)   // 2d interface objects
          pI->Draw();
          glDisable(GL_BLEND);
       }
-	   glMatrixMode(GL_MODELVIEW);						// Select The Projection Matrix
-	   glPopMatrix();										// Restore The Old Projection Matrix
+      glMatrixMode(GL_MODELVIEW);						// Select The Projection Matrix
+      glPopMatrix();										// Restore The Old Projection Matrix
    }
-	glMatrixMode(GL_PROJECTION );							// Select The Modelview Matrix
-	glPopMatrix();										// Restore The Old Projection Matrix
+   glMatrixMode(GL_PROJECTION );							// Select The Modelview Matrix
+   glPopMatrix();										// Restore The Old Projection Matrix
    glMatrixMode(GL_MODELVIEW);						// Select The Projection Matrix
    glEnable (GL_TEXTURE_2D);
    glColor4ub (255,255,255,255);
@@ -376,7 +482,7 @@ int Camera::DrawSelectionTarget (Scene* pModel, Vector2f mouse, int Pathway)
    GLuint nHit = 0;
    if(hits == 1)
    {
-//      MakeSelection(selectBuff[3]);
+      //      MakeSelection(selectBuff[3]);
       if(nHit != selectBuff[3])
       {
          iResult = selectBuff[3]; // ok what did we hit
@@ -390,124 +496,175 @@ Vector3f Camera::GetOGLPos (Vector2f winVec) // NeHe Productions at GameDev
 {
    // this little magic function takes the mouse position in view coordinates and transforms it through
    // the same GL Matrix as the scene. This is then adjusted for the building positon.
-	GLint viewport[4];
-	GLdouble modelview[16];
-	GLdouble projection[16];
+   GLint viewport[4];
+   GLdouble modelview[16];
+   GLdouble projection[16];
 
    glMatrixMode(GL_MODELVIEW);
    glPushMatrix();
 
-	glGetDoublev( GL_MODELVIEW_MATRIX, modelview );
-	glGetDoublev( GL_PROJECTION_MATRIX, projection );
-	glGetIntegerv( GL_VIEWPORT, viewport );
+   glGetDoublev( GL_MODELVIEW_MATRIX, modelview );
+   glGetDoublev( GL_PROJECTION_MATRIX, projection );
+   glGetIntegerv( GL_VIEWPORT, viewport );
 
 
-	GLfloat winX = winVec.x;
-	GLfloat winY = winVec.y;//(float)viewport[3] - winVec.y;
+   GLfloat winX = winVec.x;
+   GLfloat winY = winVec.y;//(float)viewport[3] - winVec.y;
    GLfloat winZ[16];
    memset (winZ, 0, sizeof(winZ));
-	glReadPixels ((int)winX, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, winZ );
+   glReadPixels ((int)winX, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, winZ );
 
-	GLdouble posX = 0;
+   GLdouble posX = 0;
    GLdouble posY = 0;
    GLdouble posZ = 0;
-	gluUnProject( winX, winY, winZ[0], modelview, projection, viewport, &posX, &posY, &posZ);
+   gluUnProject( winX, winY, winZ[0], modelview, projection, viewport, &posX, &posY, &posZ);
 
    glMatrixMode(GL_MODELVIEW);
    glPopMatrix();
-	return Vector3f((float)posX-GetPositionX(), (float)posY+GetPositionY(), (float)posZ); // +GetPositionX());
+
+
+   return Vector3f((float)posX-GetPositionX(), (float)posY+GetPositionY(), (float)posZ); // +GetPositionX());
 }
 
-bool Camera::GetEvent (sf::Event & event)
+bool
+Camera::GetEvent (sf::Event & event)
 {
    return mpWindow->GetEvent (event);
 }
 
+
+Vector3f Camera::GetOGLPos2(float zFar, float zNear, Vector3f v)
+{
+   //float z = t;
+   float a = zFar / ( zFar - zNear );
+   float b = zFar * zNear / ( zNear - zFar );
+   float z_buffer_value = ( a + b / v.z );
+
+   GLint viewport[4];
+   GLdouble modelview[16];
+   GLdouble projection[16];
+   GLfloat winX, winY, winZ;
+   GLdouble posX, posY, posZ;
+
+
+   glGetDoublev( GL_MODELVIEW_MATRIX, modelview );
+   glGetDoublev( GL_PROJECTION_MATRIX, projection );
+   glGetIntegerv( GL_VIEWPORT, viewport );
+
+   winX = (float)v.x;
+   winY = (float)viewport[3] - (float)v.y;
+   glReadPixels( (int)v.x, int(winY), 1, 1, GL_DEPTH_COMPONENT, GL_FLOAT, &winZ );
+
+   gluUnProject( winX, winY, z_buffer_value, modelview, projection, viewport, &posX, &posY, &posZ);
+
+   return Vector3f ((float)posX, (float)posY, (float)posZ);
+}
+
+void Camera::Move(float x, float y, float z)
+{
+   const double RAD = 57.29577851; // Radians, I don't know if this is already declared somewhere?
+   double lx = 0;
+   double lz = 0;
+
+    // Move along camera angle on the X axis
+   if(x < 0)
+   {
+      lz = +sin( -(mTarget.y / RAD) );
+      lx = -cos( -(mTarget.y / RAD) );
+
+      mPosition.x += (float)(1.0* lx * -x);
+      mPosition.z += (float)(1.0* lz * -x);
+   }
+
+   if(x > 0)
+   {
+      lz = +sin( -(mTarget.y / RAD) );
+      lx = -cos( -(mTarget.y / RAD) );
+
+      mPosition.x -= (float)(1.0 * lx * x);
+      mPosition.z -= (float)(1.0 * lz * x);
+   }
+
+   // Move along camera angle on the Z axis
+   if(z < 0)
+   {
+      lx = +sin( -(mTarget.y / RAD) );
+      lz = -cos( -(mTarget.y / RAD));
+
+      mPosition.x -= (float)(1.0 * lx * -z);
+      mPosition.z += (float)(1.0 * lz * -z);
+   }
+
+   if(z > 0)
+   {
+      lx = +sin( -(mTarget.y / RAD) );
+      lz = -cos( -(mTarget.y / RAD) );
+
+      mPosition.x += (float)(1.0 * lx * z);
+      mPosition.z -= (float)(1.0 * lz * z);
+   }
+}
+
+bool Camera::OnMouseUp (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam)
+{
+   btnlist[Button] = false;
+   return false;
+}
+
+bool Camera::OnMouseDown (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam)
+{
+   btnlist[Button] = true;
+   return true;
+}
+
 bool Camera::OnKeyUp (sf::Key::Code Key)
 {
+   keylist[Key] = false;
    return true;
 }
 
 bool Camera::OnKeyDown (sf::Key::Code Key)
 {
-   if (Key == sf::Key::D)
-   {
-      if (mVelocity.x > 0) mVelocity.x = 0;
-      mVelocity.x += 0.4f * mZoomFactor;
-      mAcceleration.x = -0.25f * mZoomFactor;
-      //if (mv.x == 0) mv.x = 0.5*mZoomFactor;
-   }
-   else if (Key == sf::Key::W)
-   {
-      if (mVelocity.z < 0) mVelocity.z = 0;
-      mVelocity.z += -0.3f * mZoomFactor;
-      mAcceleration.z = 0.25f * mZoomFactor;
-      //if (mv.y == 0) mv.y = -0.5*mZoomFactor;
-   }
-   else if (Key == sf::Key::A)
-   {
-      if (mVelocity.x < 0) mVelocity.x = 0;
-      mVelocity.x += -0.4f * mZoomFactor;
-      mAcceleration.x = 0.25f * mZoomFactor;
-      //if (mv.x == 0) mv.x = -0.5*mZoomFactor;
-   }
-   else if (Key == sf::Key::S)
-   {
-      if (mVelocity.z > 0) mVelocity.z = 0;
-      mVelocity.z += 0.3f * mZoomFactor;
-      mAcceleration.z = -0.25f * mZoomFactor;
-      //if (mv.y == 0) mv.y = 0.5*mZoomFactor;
-   }
-   if (Key == sf::Key::E)
-   {
-      SetVelocity (0, 0, 0);
-   }
-   if (Key == sf::Key::R)
-   {
-      mYrot+=5;
-   }
-   if (Key == sf::Key::T)
-   {
-      mYrot-=5;
-   }
-   if (Key == sf::Key::O)
-   {
-//      gLightPosition[2]-=2;
-
-      gSpotPosition[2]-=2;
-   }
-   if (Key == sf::Key::P)
-   {
-//      gLightPosition[2]+=2;
-      gSpotPosition[2]+=2;
-   }
+   keylist[Key] = true;
    return true;
 }
 
 bool Camera::OnMouseWheel (int Delta)
 {
    if (Delta > 0)
-      ZoomIn();
-   else
-      ZoomOut();
-      
-   // zoom height and tilt
-   float ang = mZoomFactor/ 600*90;
-   float x = (float)(cos(0.01745329 * (180.0 + ang)));
-   float y = (float)(sin(0.01745329 * (180.0 - ang)) * 200);
-   //mPosition.y = y-8;
-   //mXrot = -ang;
-   
-   return true;
-}
+   {
+      Zoom (5);
 
-void Camera::ZoomIn()
-{
-   Zoom(5);
-}
-void Camera::ZoomOut()
-{
-   Zoom(-5);
+      // Zoom in to the mouse pointer. The code doens't work perfactly, but it's pretty close.
+      Vector2i mv2i; // Mouse Vector 2i
+      mv2i.x = (GetLocalMouse().x) - (int)(mCam.x / 2);
+      mv2i.y = (GetLocalMouse().y) - (int)(mCam.y / 2);
+
+      // Figure out how much OGL space is between one mouse unit
+      glLoadIdentity(); // Reset OGL matrix, keeps rotation and translation from affecting this
+      Vector3f vf1 = GetOGLPos2(1000.0, 0.5, Vector3f( 1, 1, mZoomFactor) );
+      Vector3f vf2 = GetOGLPos2(1000.0, 0.5, Vector3f( 2, 2, mZoomFactor) );
+
+      float x = -fabs(vf1.x-vf2.x);
+      float y = -fabs(vf1.y-vf2.y);
+
+      // I don't know why I have to divide these by such a random value.
+      Move( -(mv2i.x*x) / (mZoomFactor / 6), 0, 0);
+      Move(0, 0, -(mv2i.y*y) / (mZoomFactor / 8) );
+
+   }
+   else
+   {
+      Zoom(-5.0f);
+   }
+   // zoom height and tilt
+   //float ang = mZoomFactor/ 600*90;
+   //float x = (float)(cos(0.01745329 * (180.0 + ang)));
+   //float y = (float)(sin(0.01745329 * (180.0 - ang)) * 200);
+   //mPosition.y = y-8;
+   //mTarget.x = -ang;
+
+   return true;
 }
 
 void Camera::Zoom(float Factor)
@@ -518,5 +675,5 @@ void Camera::Zoom(float Factor)
    {
       mZoomFactor += Factor;
    }
-   std::cout << "ZF=" << mZoomFactor << "\n";
+   //std::cout << "ZF=" << mZoomFactor << "\n";
 }
