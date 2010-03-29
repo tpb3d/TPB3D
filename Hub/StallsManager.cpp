@@ -26,7 +26,7 @@
 #include "../CoreObjects/Park.h"
 #include "../CoreObjects/Pathway.h"
 #include "../CoreObjects/RouteBase.h"  // (Pathways).
-#include "../Builders/TerrainFormer.h"
+#include "../CoreObjects/Stall.h"
 #include "../Scene/Scene.h"
 #include "Event.h"
 

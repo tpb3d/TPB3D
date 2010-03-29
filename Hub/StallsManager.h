@@ -19,8 +19,7 @@
 // call newPathway or newSubPathway to add floors or basement Pathways
 #pragma once
 
-class Ride;
-class RideNode;
+class Stall;
 class Scene;
 
 // Park is a ModelObject along with all the FloorSpace entities
@@ -28,7 +27,7 @@ class Scene;
 class StallsManager
 {
    Scene& mScene;
-private:
+protected:
 
 public:
    StallsManager( Scene& scene);

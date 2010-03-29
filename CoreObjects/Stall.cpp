@@ -13,6 +13,7 @@
 #include "../Graphics/Texture.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/ObjectTree.h"
+#include "../People/Person.h"
 #include "Stall.h"
 
 Stall::Stall (int StallNo, int ID)
@@ -20,8 +21,37 @@ Stall::Stall (int StallNo, int ID)
 {
 }
 
+Stall::Stall(int StallNo, int ID, StallType st)
+:  Vendor (ID)
+{
+   mStallType = st;
+}
+
 Stall::~Stall( )
 {
+}
+
+void Stall::AddPerson (Person* pPeep)
+{
+   mpQueue->AddPerson(pPeep);
+}
+
+void Stall::RemovePerson (Person* pPeep)
+{
+
+   mpQueue->RemovePerson(pPeep);
+}
+
+void Stall::ServeNextPerson (void)
+{
+   Person* pPeep = mpQueue->TakeNextPerson();
+   if (pPeep != NULL)
+   {
+      // TakeOrder;
+      // Serve or Reject
+      pPeep->SetActivity (Person::AS_Dining);   // this is just some interaction
+      pPeep->SetCurrentState (Person::CS_Walking);
+   }
 }
 
 void Stall::Update (float dt, int timeOfDay)
@@ -32,12 +62,16 @@ void Stall::Update (float dt, int timeOfDay)
    {
       return;
    }
-   delay = 3;
+   ServeNextPerson();
+   if (mpQueue->Count() > 10)
+      delay = 3;
+   else
+      delay = 5;
 }
 
 void Stall::Draw ()
 {
-//   Draw the graphics
+   mpGraphic->Draw();
 }
 
 void Stall::DrawSelectionTarget (bool bBaseOnly)

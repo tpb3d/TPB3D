@@ -15,19 +15,39 @@
 
 #pragma once
 #include "Vendor.h"
+#include "PersonQueue.h"
+
+class Person;
+
+enum StallType
+{
+   ST_Empty = 0,
+   ST_Food,
+   ST_Shop,
+   ST_Information
+};
 
 class Stall : public Vendor
 {
+protected:
    ObjectBase* mpGraphic;
+   PersonQueue* mpQueue;
+   StallType mStallType;
 
 public:
    // ctor dtor
+   Stall(int StallNo, int ID, StallType st);
    Stall(int StallNo, int ID );
    ~Stall(void);
    // properties
    // get...()
 
+   void AddPerson (Person* pPeep);
+   void RemovePerson (Person* pPeep);
+   void ServeNextPerson (void);
+
    // Time Management Methods
+   bool IsType (StallType st) { return (mStallType == st); }
    void Update (float dt, int timeOfDay);
 
    // Rendering methods

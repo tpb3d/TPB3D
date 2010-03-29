@@ -32,6 +32,12 @@ void PersonQueue::AddPerson (Person* person)
    }
 }
 
+bool PersonQueue::RemovePerson (Person* person)
+{
+   // iterate and remove one
+   return false;
+}
+
 Person* PersonQueue::TakeNextPerson ()
 {
    Person* person = 0;
@@ -41,6 +47,11 @@ Person* PersonQueue::TakeNextPerson ()
       mpQueue.pop();
    }
    return person;
+}
+
+size_t PersonQueue::Count()  // how many people in line
+{
+   return mpQueue.size();
 }
 
 void PersonQueue::Update()

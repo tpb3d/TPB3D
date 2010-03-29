@@ -21,6 +21,7 @@
 #include "CoreBase.h"
 #include "Pathway.h"
 #include "Car.h"
+#include "Stall.h"
 #include "Park.h"
 
 // even more test code
@@ -102,6 +103,25 @@ void Park::Update (float dt, int timeOfDay)
    {
       mCurPoint = 0;
    }
+}
+
+void Park::AddStall (Stall* pStall)
+{
+   mStalls.push_back (pStall);
+}
+
+Stall* Park::FindStallByType (StallType st)
+{
+   StallsIterator si;
+   for (si = mStalls.begin(); si != mStalls.end(); si++)
+   {
+      Stall* pStall = *si;
+      if (pStall->IsType (st) )
+      {
+         return pStall;
+      }
+   }
+   return NULL;
 }
 
 void Park::Draw ()

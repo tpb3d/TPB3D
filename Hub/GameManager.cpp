@@ -50,6 +50,7 @@
 #include "../CoreObjects/Ride.h"
 #include "../CoreObjects/Lamp.h"
 #include "../CoreObjects/Pathway.h"
+#include "../CoreObjects/Stall.h"
 // endtest
 
 GameManager::GameManager (Scene& scene, Park& park)
@@ -140,7 +141,11 @@ bool GameManager::LoadGame (const char *fileName)
    rpl.Load3ds( pszPath, pszFile, pTempTree );
    pOTree.AddNode (pTempTree);
 
-
+   Stall* pStall = new Stall(1,41, ST_Food);
+   mScene.GetPark()->AddStall (pStall);
+   const char* pszFileStall = "stall.3DS";
+   const char* pszPathStall = "data/Building/";
+   rpl.Load3ds( pszPathStall, pszFileStall, pStall );
    //pTempTree = new ObjectNode(0, 39);
    //const char* pszFileB = "JMORendered.3ds";
    //const char* pszPathB = "data/Building/";

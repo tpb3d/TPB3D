@@ -37,7 +37,9 @@ protected:
 public:
    PersonQueue();
    void AddPerson (Person* person);
+   bool RemovePerson (Person* person);
    Person* TakeNextPerson ();
+   size_t Count();  // how many people in line
    void Update();
    void Draw (int vx, int vy);
 };

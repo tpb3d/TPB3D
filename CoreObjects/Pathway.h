@@ -43,15 +43,15 @@ public:
    typedef std::vector<Vector2f> PathNodeVector;
    typedef std::vector<Pathway*>::iterator PathwayIterator;
    typedef std::vector<Pathway*> PathwayVector;
-   typedef std::vector<CoreBase*>::iterator VenueIterator;
-   typedef std::vector<CoreBase*> VenueVector;
+   typedef std::vector<CoreBase*>::iterator StallIterator;
+   typedef std::vector<CoreBase*> StallVector;
 
 protected:
    // implementation
    Pathway* mParent;   // if null use one of the nConnectors as a parent, check for recursion
    PathNodeVector mNodePath; // This paths nodes for movement and alignment.
    PathwayVector mConnectors; // other pathways that connect here
-   VenueVector mVenues;  // queues, shops, tras, ATM, benches and other things people may interact with.
+   StallVector mStalls;  // queues, shops, tras, ATM, benches and other things people may interact with.
    int  mID;
 
 protected:
@@ -70,10 +70,6 @@ public:
    Pathway (const Vector3f& origin, Park* parent, const char* szTex);
    // Initialize from an xml node
    virtual ~Pathway ();
-
-public:
-   // decls
-   typedef std::map<unsigned int, CoreBase*>::iterator FloorIterType;
 
    // Properties
 public:

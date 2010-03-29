@@ -27,8 +27,10 @@ class GameManager;
 class Routes;
 class Person;
 class Scene;
+class Stall;
 class BuildStairStrategy;
 class Car;
+enum StallType; // if this won't compile, comment this line and include stall.h
 
 // Park is a ModelObject
 // This renderes the Park in the ModelSpaces with perspective, pan and zoom.
@@ -38,7 +40,13 @@ class Park// : public Gfx::ModelObject
    friend class FloorAgent;
    friend class GameManager;
    friend class BuildStairStrategy;
+public:
+   typedef std::vector<Pathway*>::iterator PathwayIterator;
+   typedef std::vector<Pathway*> PathwayVector;
+   typedef std::vector<Stall*>::iterator StallsIterator;
+   typedef std::vector<Stall*> StallsVector;
 
+protected:
    int mParkNo;
    int mNo_SubPathways;
    int mPopulation;  // People in the Park currently
@@ -52,11 +60,9 @@ class Park// : public Gfx::ModelObject
 
    GhostObject mGhostObject;  // this object is rendered with the scene.
                               // it may be a bush, a ride, track or even a whole coaster
+   StallsVector mStalls;
 
 public:
-   typedef std::vector<Pathway*>::iterator PathwayIterator;
-   typedef std::vector<Pathway*> PathwayVector;
-
    // ctor/dtor
    Park( int ParkNo, int NoSubPathways, Scene& rScene );
    ~Park();
@@ -73,6 +79,10 @@ public:
 protected:
    // methods
 public:
+
+   void AddStall (Stall* pStall);
+//   Ride* FindRideByType (RideType rt);
+   Stall* FindStallByType (StallType st);
 
    void Update (float dt, int timeOfDay);
    void Draw ();
