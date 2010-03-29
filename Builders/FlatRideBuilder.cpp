@@ -9,7 +9,6 @@
 //  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
 
-#include "../Graphics/VPoint.h"
 #include "../CoreObjects/Ride.h"
 #include "../CoreObjects/RideBase.h"
 #include "../CoreObjects/RideSection.h"
@@ -166,9 +165,9 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       float fDeg = 360.0f / iTest;
       float fDegH = fDeg /2; // Half increment
       float fAngle = 0;
-      STrig trig(0, fDegH, 0, 1.0f);
-      CVPoint v1(0,0,10);
-      CVPoint v2(v1);
+      Vector3f::VectorAngle3<float> trig(0, fDegH, 0);
+      Vector3f v1(0,0,10);
+      Vector3f v2(v1);
       v2.Rotate(trig);
       v2 -= v1;
       float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
@@ -179,7 +178,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.fLength = 10.0f;
       guide.fDrop = -10.0f;
       guide.fWidth = vx;
-      guide.trig.SetY (fDegH);
+      guide.trig.Set (0, fDegH, 0);
 
       ObjectNode* pCarNode = new ObjectNode (0, 34);
       ObjectNode* pArmNode = new ObjectNode (0, 35);
@@ -249,9 +248,9 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       float fDeg = 360.0f / iTest;
       float fDegH = fDeg /2; // Half increment
       float fAngle = 0;
-      STrig trig(0, fDegH, 0, 1.0f);
-      CVPoint v1(0,0,10);
-      CVPoint v2(v1);
+      Vector3f::VectorAngle3<float> trig(0, fDegH, 0);
+      Vector3f v1(0,0,10);
+      Vector3f v2(v1);
       v2.Rotate(trig);
       v2 -= v1;
       float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
@@ -324,9 +323,9 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       float fDeg = 360.0f / iSides;
       float fDegH = fDeg /2; // Half increment
       float fAngle = 0;
-      STrig trig(0,fDegH,0, 1.0);
-      CVPoint v1 (0, 0, fRadius);
-      CVPoint v2 (v1);
+      Vector3f::VectorAngle3<float> trig(0, fDegH, 0);
+      Vector3f v1 (0, 0, fRadius);
+      Vector3f v2 (v1);
       v2.Rotate(trig);
       v2 -= v1;
       float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
@@ -339,12 +338,12 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          pHub2->AddNode(pArm);
 
          Strut* pStrut = new Strut();
-         trig.SetY (fAngle);
-         CVPoint v1( fRadius-1, 1.5, 0);
+         trig.Set (0, fAngle, 0);
+         Vector3f v1( fRadius-1, 1.5, 0);
          v1.Rotate (trig);
-         CVPoint v2( fRadius-1, -10.0, 0);
+         Vector3f v2( fRadius-1, -10.0, 0);
          v2.Rotate (trig);
-         pStrut->SetPoints (v1.GetVector3f(), v2.GetVector3f());
+         pStrut->SetPoints (sf::Vector3f(v1.x, v1.y, v1.z), sf::Vector3f(v2.x, v2.y, v2.z));
          pStrut->Render();
          pHub2->AddNode (pStrut);
 
@@ -353,12 +352,12 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          {
             // plug the gallop poles into the arm cranks
             Strut* pStrut = new Strut();
-            trig.SetY (fAngle);
-            CVPoint v1(iRad, -0.75, 0);
+            trig.Set (0, fAngle, 0);
+            Vector3f v1((float)iRad, -0.75f, 0);
             v1.Rotate (trig);
-            CVPoint v2(iRad, 10.75, 0);
+            Vector3f v2((float)iRad, 10.75f, 0);
             v2.Rotate (trig);
-            pStrut->SetPoints (v1.GetVector3f(), v2.GetVector3f());
+            pStrut->SetPoints (sf::Vector3f(v1.x, v1.y, v1.z), sf::Vector3f(v2.x, v2.y, v2.z));
             pStrut->Render();
             pArm->AddNode (pStrut);
          }
@@ -398,9 +397,9 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       float fDeg = 360.0f / iTest;
       float fDegH = fDeg /2; // Half increment
       float fAngle = 0;
-      STrig trig(0,fDegH,0, 1.0);
-      CVPoint v1(0,0,13.25);
-      CVPoint v2(v1);
+      Vector3f::VectorAngle3<float> trig(0, fDegH, 0);
+      Vector3f v1(0,0,13.25);
+      Vector3f v2(v1);
       v2.Rotate(trig);
       v2 -= v1;
       float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
@@ -413,7 +412,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.fLength = 10.75f;
       guide.fDrop = -3.0f;
       guide.fWidth = vx;
-      guide.trig.SetY (fDegH);
+      guide.trig.Set (0, fDegH, 0);
 
       for (int ix = 0; ix < iTest; ++ix)
       {
@@ -595,14 +594,14 @@ RideNode* FlatRideBuilder::AddRideNodeCarriage (RideNode* pParent, ObjectBase* p
 RideNode* FlatRideBuilder::AddRideNodeCableHinge (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
 {
    CableHingeJoint* pWire = new CableHingeJoint();
-   CVPoint v1(0, 0, -(guide.fWidth) * 2);
-   CVPoint v2(0, 0, 0);
-   CVPoint v3(0, guide.fDrop, -(guide.fWidth));
-   pWire->SetPoints (v1.GetVector3f(), v3.GetVector3f(), v2.GetVector3f());
-   CVPoint v4(11.0, guide.fHeight, -(guide.fWidth+0.5));
+   Vector3f v1(0, 0, -(guide.fWidth) * 2);
+   Vector3f v2(0, 0, 0);
+   Vector3f v3(0, guide.fDrop, -(guide.fWidth));
+   pWire->SetPoints (sf::Vector3f(v1.x, v1.y, v1.z), sf::Vector3f(v3.x, v3.y, v3.z), sf::Vector3f(v2.x, v2.y, v2.z));
+   Vector3f v4(11.0f, guide.fHeight, -(guide.fWidth+0.5f));
    v4.Rotate (guide.trig);
    pWire->SetYAngle (guide.fAngle);
-   pWire->SetPosition (v4.GetVector3f());
+   pWire->SetPosition (sf::Vector3f(v4.x, v4.y, v4.z));
    pWire->Render();
    pParent->AddNode (pWire);
    return pWire;

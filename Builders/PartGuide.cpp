@@ -22,7 +22,7 @@ const NodeType NodeTypeList[] =
 };
 
 PartGuide::PartGuide ()
-: trig(0,0,0,1.0)
+: trig(0.0f, 0.0f, 0.0f)   // vector angle
 {
    Clear ();
 }

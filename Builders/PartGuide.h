@@ -1,5 +1,4 @@
 #pragma once
-#include "../Graphics/VPoint.h"
 #include "../Types/Vector3.h"
 
 // forward decls
@@ -26,7 +25,7 @@ struct PartGuide
       RideNodeDud
    };
    TRideNodeType mNodeType;   // what part to build
-   STrig trig;
+   Vector3f::VectorAngle3<float> trig;
    short nCount;
    short nSpeed;
    float fOffset;

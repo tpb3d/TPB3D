@@ -207,7 +207,7 @@ bool GameManager::LoadGame (const char *fileName)
    Ride* pRide;
    float fx = 0;
    float fz = 80;
-   pRide = flat.CreateRide(4, mPark );
+   pRide = flat.CreateRide(0, mPark );
    pRide->SetPosition (fx,0.1f,fz);
    pOTree.AddNode(new RidePack (pRide));
 

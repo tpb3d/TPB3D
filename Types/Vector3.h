@@ -10,6 +10,39 @@ public:
    T y;
    T z;
 
+   // AC: Internal public structure matching the Vector3 class.
+   // Provides fast rotation of the vector by presetting the sines and cosines.
+   // This saves cycles by reducing time needed to redo that step reach rotation.
+   template <class T> struct VectorAngle3
+   {
+      T dCosX;
+      T dSinX;
+      T dCosY;
+      T dSinY;
+      T dCosZ;
+      T dSinZ;
+
+      VectorAngle3 (double x,double y,double z)
+      {
+         Set ((T)x, (T)y, (T)z);
+      }
+      VectorAngle3 (float x, float y, float z)
+      {
+         Set ((T)x, (T)y, (T)z);
+      }
+      inline void Set (T x, T y, T z)
+      {
+         // pre-calc all these sines and cosines so the rotates are much faster
+         dCosX = (T)cos(0.01745329 * (180.0 - x));
+         dSinX = (T)sin(0.01745329 * (180.0 - x));
+         dCosY = (T)cos(0.01745329 * (180.0 - y));
+         dSinY = (T)sin(0.01745329 * (180.0 - y));
+         dCosZ = (T)cos(0.01745329 * (180.0 - z));
+         dSinZ = (T)sin(0.01745329 * (180.0 - z));
+      }
+      typedef VectorAngle3<T> VectorAngle3T;
+   };
+
    Vector3()
    {
       x = 0;
@@ -36,20 +69,30 @@ public:
       y = Other.y;
       z = Other.z;
    }
-   template <class U>
-   Vector3& operator+(const Vector3<U>& Other)
+   template <class U> Vector3& operator+(const Vector3<U>& Other)
    {
       Vector3* temp = new Vector3(x+Other.x, y+Other.y, z+Other.z);
       return *temp;
    }
-   template <class U>
-   Vector3& operator+(const sf::Vector3<U>& Other)
+   template <class U> void operator+=(const Vector3<U>& Other)
+   {
+      x += Other.x;
+      y += Other.y;
+      z += Other.z;
+   }
+   template <class U> void operator-=(const Vector3<U>& Other)
+   {
+      x -= Other.x;
+      y -= Other.y;
+      z -= Other.z;
+   }
+
+   template <class U> Vector3& operator+(const sf::Vector3<U>& Other)
    {
       Vector3* temp = new Vector3(x+Other.x, y+Other.y);
       return *temp;
    }
-   template <class U>
-   Vector3& operator=(const Vector3<U>& Other)
+   template <class U> Vector3& operator=(const Vector3<U>& Other)
    {
       x = Other.x;
       y = Other.y;
@@ -82,6 +125,19 @@ public:
       y *= len;
       z *= len;
    }
+   void Rotate (const VectorAngle3<T>& rot)
+   {
+      double TY = y*rot.dCosX - z*rot.dSinX;
+      double TZ = y*rot.dSinX + z*rot.dCosX;
+       /*rotate around y-axis*/
+      double TX = x*rot.dCosY - TZ*rot.dSinY;
+
+      z = (float)(x*rot.dSinY + TZ*rot.dCosY);
+       /*rotate around z-axis*/
+      x = (float)(TX*rot.dCosZ - TY*rot.dSinZ);//x
+      y = (float)(TX*rot.dSinZ + TY*rot.dCosZ);//y
+   }
+
    static Vector3<T>& Cross( const Vector3<T>& a, const Vector3<T>& b)
    {
       static Vector3<T> result;
@@ -102,5 +158,5 @@ public:
 
 };
 
-typedef Vector3 <float> Vector3f; // russ
-typedef Vector3 <int> Vector3i;   // likes this
+typedef Vector3 <float> Vector3f;
+typedef Vector3 <int> Vector3i;
