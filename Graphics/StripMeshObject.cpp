@@ -203,7 +203,7 @@ void StripMeshObject::AddMesh( int VertexCount, float (* pVertexes)[3], int Grou
    }
 }
 
-void StripMeshObject::AddMesh( int VertexCount, sf::Vector3f* pVertexes, int GroupCount )
+void StripMeshObject::AddMesh( int VertexCount, Vector3f* pVertexes, int GroupCount )
 {
    mVertices = VertexCount;
    mGroups = GroupCount;

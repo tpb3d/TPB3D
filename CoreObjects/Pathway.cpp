@@ -18,11 +18,8 @@
 #include <string>
 #include <iostream>
 #include "../Physics/MotionPhysics.h"
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../Graphics/Image.h"
 #include "../Graphics/Animation.h"
-#include "../Graphics/VPoint.h"
 #include "../Graphics/Material.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/ObjectNode.h"
@@ -76,16 +73,16 @@ void Pathway::Render()
    float  fStep = 3.5;
    TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
    mpGraphic->AddMesh (pBase);
-   CVPoint pt1 (mvPosition.x, mvPosition.y, mvPosition.z-fOff);
-   CVPoint pt2 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
-   pBase->AddPoint (pt1.GetVector3f());
-   pBase->AddPoint (pt2.GetVector3f());
+   Vector3f pt1 (mvPosition.x, mvPosition.y, mvPosition.z-fOff);
+   Vector3f pt2 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
+   pBase->AddPoint (pt1);
+   pBase->AddPoint (pt2);
    for( int ix =0; ix < iSides; ++ix)
    {
       pt1.x += fStep;
       pt2.x += fStep;
-      pBase->AddPoint (pt1.GetVector3f());
-      pBase->AddPoint (pt2.GetVector3f());
+      pBase->AddPoint (pt1);
+      pBase->AddPoint (pt2);
    }
 }
 // dummy code
@@ -96,16 +93,16 @@ void Pathway::Render2()
    float  fStep = 3.5;
    TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
    mpGraphic->AddMesh (pBase);
-   CVPoint pt1 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
-   CVPoint pt2 (mvPosition.x+fOff*2, mvPosition.y, mvPosition.z+fOff);
-   pBase->AddPoint (pt1.GetVector3f());
-   pBase->AddPoint (pt2.GetVector3f());
+   Vector3f pt1 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
+   Vector3f pt2 (mvPosition.x+fOff*2, mvPosition.y, mvPosition.z+fOff);
+   pBase->AddPoint (pt1);
+   pBase->AddPoint (pt2);
    for( int ix =0; ix < iSides; ++ix)
    {
       pt1.z += fStep;
       pt2.z += fStep;
-      pBase->AddPoint (pt1.GetVector3f());
-      pBase->AddPoint (pt2.GetVector3f());
+      pBase->AddPoint (pt1);
+      pBase->AddPoint (pt2);
    }
 }
 

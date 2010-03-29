@@ -55,20 +55,27 @@ public:
       y = yv;
       z = zv;
    }
-   template <class U>
-   Vector3(const sf::Vector3<U>& Other)
+   template <class U> Vector3(const sf::Vector3<U>& Other)
    {
       x = Other.x;
       y = Other.y;
       z = Other.z;
    }
-   template <class U>
-   Vector3(const Vector3<U>& Other)
+
+   template <class U> Vector3(const Vector3<U>& Other)
    {
       x = Other.x;
       y = Other.y;
       z = Other.z;
    }
+
+   void Set (float fX, float fY, float fZ)
+   {
+      x = fX;
+      y = fY;
+      z = fZ;
+   }
+
    template <class U> Vector3& operator+(const Vector3<U>& Other)
    {
       Vector3* temp = new Vector3(x+Other.x, y+Other.y, z+Other.z);
@@ -82,9 +89,15 @@ public:
    }
    template <class U> void operator-=(const Vector3<U>& Other)
    {
-      x -= Other.x;
-      y -= Other.y;
-      z -= Other.z;
+      x -= (T)Other.x;
+      y -= (T)Other.y;
+      z -= (T)Other.z;
+   }
+   template <class U> void operator*=(const U UVal)  // generaly this is used for scaling a vector
+   {
+      x *= (T)UVal;
+      y *= (T)UVal;
+      z *= (T)UVal;
    }
 
    template <class U> Vector3& operator+(const sf::Vector3<U>& Other)
@@ -125,17 +138,26 @@ public:
       y *= len;
       z *= len;
    }
-   void Rotate (const VectorAngle3<T>& rot)
+   void Rotate (const VectorAngle3<T>& angle)
    {
-      double TY = y*rot.dCosX - z*rot.dSinX;
-      double TZ = y*rot.dSinX + z*rot.dCosX;
-       /*rotate around y-axis*/
-      double TX = x*rot.dCosY - TZ*rot.dSinY;
+      double TY = y*angle.dCosX - z*angle.dSinX;
+      double TZ = y*angle.dSinX + z*angle.dCosX;
+      double TX = x*angle.dCosY - TZ*angle.dSinY;
 
-      z = (float)(x*rot.dSinY + TZ*rot.dCosY);
-       /*rotate around z-axis*/
-      x = (float)(TX*rot.dCosZ - TY*rot.dSinZ);//x
-      y = (float)(TX*rot.dSinZ + TY*rot.dCosZ);//y
+      z = (float)( x*angle.dSinY + TZ*angle.dCosY);
+      x = (float)(TX*angle.dCosZ - TY*angle.dSinZ);//x
+      y = (float)(TX*angle.dSinZ + TY*angle.dCosZ);//y
+   }
+
+   void Transform (const VectorAngle3<T>& angle, const Vector3<T>& distance)  // rotate and move
+   {
+      double TY = y*angle.dCosX - z*angle.dSinX;
+      double TZ = y*angle.dSinX + z*angle.dCosX;
+      double TX = x*angle.dCosY - TZ*angle.dSinY;
+
+      z = (float)( x*angle.dSinY + TZ*angle.dCosY) + distance.z;
+      x = (float)(TX*angle.dCosZ - TY*angle.dSinZ) + distance.x;
+      y = (float)(TX*angle.dSinZ + TY*angle.dCosZ) + distance.y;
    }
 
    static Vector3<T>& Cross( const Vector3<T>& a, const Vector3<T>& b)

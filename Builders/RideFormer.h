@@ -9,7 +9,6 @@
 //////////////////////////////////////////////////////////////////////
 
 #pragma once
-class CVPoint;
 
 class Arm;
 class Hub;
@@ -27,6 +26,4 @@ public:
    static Ride* CreateRide();
 
    void MakeSection( RideGuide& guide, Ride& Ride );
-   TexturedStrip* CrossTie( CVPoint& RidePoint, RideGuide& guide );
-   ObjectBase* Support( CVPoint pt, RideGuide& guide, float MountAngle, float Load, float fBaseHeight );
 };

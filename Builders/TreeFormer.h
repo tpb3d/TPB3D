@@ -86,7 +86,7 @@ struct Trunk
 //   int   mFaceCount;
    int   mGroupCount;
    int   mVerticies;
-   sf::Vector3f mVertexes[256];
+   Vector3f mVertexes[256];
    PGroup mGroups[32];
    Trunk()
    {

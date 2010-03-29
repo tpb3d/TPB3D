@@ -25,7 +25,7 @@ public:
    void Draw();
    void DrawSelectionTarget();
    void Render();
-   void AddPointPair( CVPoint& pt1, CVPoint& pt2 );
+   void AddPointPair( Vector3f& pt1, Vector3f& pt2 );
 
 };
 

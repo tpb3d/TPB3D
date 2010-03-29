@@ -10,9 +10,6 @@
 
 #include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include "../Graphics/VPoint.h"
 #include "../Graphics/ObjectBase.h"
 #include "../Graphics/TexturedStrip.h"
 #include "../Graphics/ObjectFactory.h"

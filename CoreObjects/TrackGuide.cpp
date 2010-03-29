@@ -26,7 +26,7 @@ void TrackGuide::SetupTurn( double dDegRotation, double dRadius, double dRoll )
    fTiltY = (float)(dDegRotation / iSections);
    fTiltZ = 0;
    fRailTiltZ = (float)(dRoll / iSections);
-   ForwardVector.Set( 0, 0, fabs(dStep) );
+   ForwardVector.Set( 0, 0, (float)fabs(dStep) );
 }
 
 void TrackGuide::SetupPitch( double dDegPitch, double dRadius, double dRoll )
@@ -40,7 +40,7 @@ void TrackGuide::SetupPitch( double dDegPitch, double dRadius, double dRoll )
    fTiltY = 0;
    fTiltZ = 0;
    fRailTiltZ = (float)(dRoll / iSections);
-   ForwardVector.Set( 0, 0, fabs(dStep) );
+   ForwardVector.Set( 0, 0, (float)fabs(dStep) );
 }
 
 void TrackGuide::SetupStraight( double dDistance, double dRoll )

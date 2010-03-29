@@ -12,10 +12,7 @@
 //  Movable or Stationary. Think Biplanes, Octopus, monster
 
 #include "../Storage/SerializerBase.h"
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../Types/Vector3.h"
-#include "../Graphics/VPoint.h"
 #include "../Graphics/ObjectBase.h"
 #include "../Graphics/TexturedStrip.h"
 #include "../Graphics/ObjectFactory.h"
@@ -34,7 +31,7 @@ void CarouselAssembly::PresetCrank()
    for( int ix = 0; ix <36; ++ix)
    {
       double dTheta = M_PI/180 * dRad;
-      CVPoint pt (cos(dTheta) * 1.0, 0, sin(dTheta)* 1.0);
+      Vector3f pt ((float)cos(dTheta) * 0.875f, 0, (float)sin(dTheta)* 0.875f);
       dRad += dDeg;
       mRockAngle[ix] = pt.x * 2;
       mHeights[ix] = pt.z*0.5f;
@@ -103,23 +100,23 @@ void CarouselAssembly::DrawSelectionTarget()
 void CarouselAssembly::Render()
 {
    float ep = 1.0f * 0.125f;
-   STrig trig(0, mAngle, 0, 1.0);
-   CVPoint pt (mOffset, -0.125, 0);
-   CVPoint ptr = pt;
-   ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   Vector3f::VectorAngle3<float> trig(0, mAngle, 0);
+   Vector3f pt (mOffset, -0.125f, 0);
+   Vector3f ptR (pt);
+   ptR.Rotate(trig);
+   mpGraphic->AddPoint (ptR);
    pt.y += mDepth;
-   ptr = pt;
-   ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   ptR = pt;
+   ptR.Rotate(trig);
+   mpGraphic->AddPoint (ptR);
    pt.x += mLength;
-   ptr = pt;
-   ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   ptR = pt;
+   ptR.Rotate(trig);
+   mpGraphic->AddPoint (ptR);
    pt.y -= ep;
-   ptr = pt;
-   ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   ptR = pt;
+   ptR.Rotate(trig);
+   mpGraphic->AddPoint (ptR);
 }
 
 //ObjectBase* CarouselAssembly::Clone()

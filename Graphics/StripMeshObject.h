@@ -68,6 +68,6 @@ public:
    void AddMatrix( float Mat16[4][4] );
    void AddMaterials( int iMats, Material** pMats );
    void AddMesh( int VertexCount, float (* pVertexes)[3], int GroupCount );
-   void AddMesh( int VertexCount, sf::Vector3f* pVertexes, int GroupCount );
+   void AddMesh( int VertexCount, Vector3f* pVertexes, int GroupCount );
    StripGroup* AddStripGroup( int Group, int Pairs, int Mat, Gfx::Texture* pTex );
 };

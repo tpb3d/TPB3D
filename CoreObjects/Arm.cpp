@@ -12,10 +12,7 @@
 //  Movable or Stationary. Think Biplanes, Octopus, monster
 
 #include "../Storage/SerializerBase.h"
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../Types/Vector3.h"
-#include "../Graphics/VPoint.h"
 #include "../Graphics/ObjectBase.h"
 #include "../Graphics/TexturedMesh.h"
 #include "../Graphics/ObjectFactory.h"
@@ -73,9 +70,9 @@ void Arm::DrawSelectionTarget()
 void Arm::Render()
 {
    float ep = 1.0f * 0.125f;
-   STrig trig(0, mAngle, 0, 1.0);
-   CVPoint pt (mOffset, -0.125, 0);
-   CVPoint ptr = pt;
+   Vector3f::VectorAngle3<float> trig(0, mAngle, 0);
+   Vector3f pt (mOffset, -0.125f, 0);
+   Vector3f ptr (pt);
    ptr.Rotate(trig);
    //mpGraphic->AddPoint (ptr.GetVector3f());
    pt.y += mDepth;

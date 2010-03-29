@@ -535,14 +535,6 @@
 				RelativePath="..\Types\Vector3.h"
 				>
 			</File>
-			<File
-				RelativePath="..\Graphics\VPoint.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Graphics\VPoint.h"
-				>
-			</File>
 		</Filter>
 		<Filter
 			Name="AI"

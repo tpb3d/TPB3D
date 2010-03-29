@@ -10,11 +10,8 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../CoreObjects/RideBase.h"
 #include "../CoreObjects/Ride.h"
-#include "../Graphics/VPoint.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/MeshNode.h"
 #include "../Graphics/TexturedStrip.h"

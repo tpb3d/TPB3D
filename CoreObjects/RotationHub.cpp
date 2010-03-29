@@ -12,10 +12,7 @@
 #include <string>
 #include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../Types/Vector3.h"
-#include "../Graphics/VPoint.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/Material.h"
 #include "../Graphics/Texture.h"
@@ -66,14 +63,12 @@ void RotationHub::Render()
    double dDeg = 360.0/ (mSides-1);
    for( int idx = 0; idx < mSides; ++idx )
    {
-      double dTheta = M_PI/180 * dRad;
-      CVPoint pt (cos(dTheta) * this->mRadii[0], 0, sin(dTheta)* this->mRadii[0]);
-      sf::Vector3f temp = pt.GetVector3f();
-      mpGraphic->AddPoint (temp);
+      float fTheta = (float)(M_PI/180 * dRad);
+      Vector3f pt (cos(fTheta) * this->mRadii[0], 0, sin(fTheta)* this->mRadii[0]);
+      mpGraphic->AddPoint (pt);
       dRad += dDeg;
-      pt = CVPoint (cos(dTheta) * this->mRadii[1], 0 + mHeight, sin(dTheta)* this->mRadii[1]);
-      temp = sf::Vector3f (pt.GetVector3f());
-      mpGraphic->AddPoint (temp);
+      pt = Vector3f (cos(fTheta) * this->mRadii[1], 0 + mHeight, sin(fTheta)* this->mRadii[1]);
+      mpGraphic->AddPoint (pt);
    }
 }
 

@@ -9,7 +9,8 @@
 //////////////////////////////////////////////////////////////////////
 
 #pragma once
-class CVPoint;
+#include "../Types/Vector3.h"
+
 struct TrackGuide;
 
 class Track;
@@ -27,6 +28,6 @@ public:
    static Track* CreateTrack();
 
    void MakeSection( TrackGuide& guide, Track& track );
-   TexturedStrip* CrossTie( CVPoint& TrackPoint, TrackGuide& guide );
-   ObjectBase* Support( CVPoint pt, TrackGuide& guide, float MountAngle, float Load, float fBaseHeight );
+   TexturedStrip* CrossTie( Vector3f& TrackPoint, TrackGuide& guide );
+   ObjectBase* Support( Vector3f pt, TrackGuide& guide, float MountAngle, float Load, float fBaseHeight );
 };

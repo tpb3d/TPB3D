@@ -12,10 +12,7 @@
 
 #include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../Types/Vector3.h"
-#include "../Graphics/VPoint.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/Material.h"
 #include "../Graphics/Texture.h"
@@ -88,13 +85,11 @@ void Hub::Render()
    for( int idx = 0; idx < mSides; ++idx )
    {
       double dTheta = M_PI/180 * dRad;
-      CVPoint pt (cos(dTheta) * this->mRadii[0], 0, sin(dTheta)* this->mRadii[0]);
-      sf::Vector3f temp = pt.GetVector3f();
-      mpGraphic->AddPoint (temp);
+      Vector3f pt ((float)cos(dTheta) * this->mRadii[0], 0, (float)sin(dTheta)* this->mRadii[0]);
+      mpGraphic->AddPoint (pt);
       dRad += dDeg;
-      pt = CVPoint (cos(dTheta) * this->mRadii[1], mHeight, sin(dTheta)* this->mRadii[1]);
-      temp = sf::Vector3f (pt.GetVector3f());
-      mpGraphic->AddPoint (temp);
+      pt = Vector3f ((float)cos(dTheta) * this->mRadii[1], mHeight, (float)sin(dTheta)* this->mRadii[1]);
+      mpGraphic->AddPoint (pt);
    }
 }
 

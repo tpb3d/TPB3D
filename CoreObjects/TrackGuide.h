@@ -9,7 +9,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
-#include "../Graphics/VPoint.h"
+#include "../Types/Vector3.h"
 
 #pragma once
 struct TrackGuide
@@ -18,8 +18,8 @@ struct TrackGuide
    int iRailShape;
    int yDir;
    int xDir;
-   CVPoint point;
-   CVPoint ForwardVector;
+   Vector3f point;
+   Vector3f ForwardVector;
    float fCurAngleX;
    float fCurAngleY;
    float fCurAngleZ;

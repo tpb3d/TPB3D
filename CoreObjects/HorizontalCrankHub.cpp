@@ -14,10 +14,7 @@
 //  This includes the spiders and octopus.
 
 #include "../Storage/SerializerBase.h"
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../Types/Vector3.h"
-#include "../Graphics/VPoint.h"
 #include "../Graphics/ObjectBase.h"
 #include "../Graphics/TexturedStrip.h"
 #include "../Graphics/ObjectFactory.h"
@@ -36,7 +33,7 @@ void HorizontalCrankHub::PresetCrank()
    for( size_t ix = 0; ix <kCrankPositions; ++ix)
    {
       double dTheta = M_PI/180 * dRad;
-      CVPoint pt (cos(dTheta) * 1.0, 0, sin(dTheta)* 1.0);
+      Vector3f pt ((float)(cos(dTheta) * 1.25), 0, (float)(sin(dTheta)* 1.25f));
       dRad += dDeg;
       mRockAngle[ix] = pt.x * 2;
       mHeights[ix] = pt.z*0.5f;
@@ -111,23 +108,23 @@ void HorizontalCrankHub::DrawSelectionTarget()
 void HorizontalCrankHub::Render()
 {
    float ep = 1.0f * 0.125f;
-   STrig trig(0, mAngle, 0, 1.0);
-   CVPoint pt (mOffset, -0.125, 0);
-   CVPoint ptr = pt;
+   Vector3f::VectorAngle3<float> trig(0, mAngle, 0);
+   Vector3f pt (mOffset, -0.125, 0);
+   Vector3f ptr = pt;
    ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr);
    pt.y += mDepth;
    ptr = pt;
    ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr);
    pt.x += mLength;
    ptr = pt;
    ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr);
    pt.y -= ep;
    ptr = pt;
    ptr.Rotate(trig);
-   mpGraphic->AddPoint (ptr.GetVector3f());
+   mpGraphic->AddPoint (ptr);
 }
 
 //ObjectBase* HorizontalCrankHub::Clone()

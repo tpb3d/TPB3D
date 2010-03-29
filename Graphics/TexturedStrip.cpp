@@ -9,9 +9,6 @@
 //////////////////////////////////////////////////////////////////////
 
 #include <cstring>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
-#include "VPoint.h"
 #include "Texture.h"
 #include "ObjectBase.h"
 #include "TexturedStrip.h"
@@ -31,12 +28,10 @@ TexturedStrip::~TexturedStrip()
 {
 }
 
-void TexturedStrip::AddPointPair( CVPoint& pt1, CVPoint& pt2 )
+void TexturedStrip::AddPointPair( Vector3f& pt1, Vector3f& pt2 )
 {
-   sf::Vector3f temp1 =  pt1.GetVector3f();
-   sf::Vector3f temp2 =  pt2.GetVector3f();
-   AddPoint( temp1 );
-   AddPoint( temp2 );
+   AddPoint( pt1 );
+   AddPoint( pt2 );
 }
 
 void TexturedStrip::Draw()
@@ -44,7 +39,7 @@ void TexturedStrip::Draw()
    if( mPointCount < 1 )
       return;
 
-   sf::Vector3f* pQ = mpPoints;
+   Vector3f* pQ = mpPoints;
    glColor3ubv( mRGBA );
    //glBindTexture( GL_TEXTURE_2D, mTexture ); // iTex
    mpTexture->Bind();
@@ -66,7 +61,7 @@ void TexturedStrip::DrawSelectionTarget()
    if( mPointCount < 1 )
       return;
 
-   sf::Vector3f* pQ = mpPoints;
+   Vector3f* pQ = mpPoints;
    glBegin(GL_QUAD_STRIP);
    for( int ix =0; ix < mPointCount/2; ++ix )
    {

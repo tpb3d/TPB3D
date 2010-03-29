@@ -11,10 +11,7 @@
 #include <string>
 
 #include "../Storage/SerializerBase.h"
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../Types/Vector3.h"
-#include "../Graphics/VPoint.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/Material.h"
 #include "../Graphics/Texture.h"
@@ -74,10 +71,10 @@ void Lamp::Draw()
 void Lamp::Render()
 {
    int iSides = 9;
-   double dRad = 0.0;
-   double dDeg = 360.0/ (iSides-1);
-   double dBaseTop = mHeight * 0.2;
-   double dPoleTop = mHeight * 0.8;
+   float fRad = 0.0;
+   float fDeg = 360.0f/ (iSides-1);
+   float fBaseTop = mHeight * 0.2f;
+   float fPoleTop = mHeight * 0.8f;
    float  fOff = 0.35f;
    Material mat(0,0,0,0,0,0,0);
    mat.SetTexture( Gfx::ImageManager::GetInstance()->GetTexture (mTexName, 4));
@@ -86,28 +83,28 @@ void Lamp::Render()
    mats[0] = &mat;
    pBase->AddMaterials(1, mats);
    mpGraphic->AddMesh (pBase);
-   CVPoint pt1 (-fOff,0, -fOff);
-   CVPoint pt2 (-fOff,dBaseTop, -fOff);
+   Vector3f pt1 (-fOff, 0, -fOff);
+   Vector3f pt2 (-fOff, fBaseTop, -fOff);
 
-   sf::Vector3f vecs[20];   
-   vecs[0] = pt1.GetVector3f();
-   vecs[1] = pt2.GetVector3f();
+   Vector3f vecs[20];   
+   vecs[0] = pt1;
+   vecs[1] = pt2;
    pt1.x = fOff;
    pt2.x = fOff;
-   vecs[2] = pt1.GetVector3f();
-   vecs[3] = pt2.GetVector3f();
+   vecs[2] = pt1;
+   vecs[3] = pt2;
    pt1.z = fOff;
    pt2.z = fOff;
-   vecs[4] = pt1.GetVector3f();
-   vecs[5] = pt2.GetVector3f();
+   vecs[4] = pt1;
+   vecs[5] = pt2;
    pt1.x = -fOff;
    pt2.x = -fOff;
-   vecs[6] = pt1.GetVector3f();
-   vecs[7] = pt2.GetVector3f();
+   vecs[6] = pt1;
+   vecs[7] = pt2;
    pt1.z = -fOff;
    pt2.z = -fOff;
-   vecs[8] = pt1.GetVector3f();
-   vecs[9] = pt2.GetVector3f();
+   vecs[8] = pt1;
+   vecs[9] = pt2;
    pBase->AddMesh (10, vecs, 1);
    StripGroup* pGroup = pBase->AddStripGroup(0, 5, 0, Gfx::ImageManager::GetInstance()->GetTexture (mTexName, 4));
    StripPair pair[32];
@@ -157,18 +154,18 @@ void Lamp::Render()
    float fv = 0.6f;
    for( int idx = 0; idx < iSides; ++idx )
    {
-      double dTheta = M_PI/180 * dRad;
-      CVPoint pt (cos(dTheta) * this->mRadii[0], dBaseTop, sin(dTheta)* this->mRadii[0]);
+      float fTheta = (float)(M_PI/180 * fRad);
+      Vector3f pt (cos(fTheta) * this->mRadii[0], fBaseTop, sin(fTheta)* this->mRadii[0]);
       pair[idx].mPoints[0].mUV[0] = fv;
       pair[idx].mPoints[0].mUV[1] = 0.0f;
       pair[idx].mPoints[1].mUV[0] = fv;
       pair[idx].mPoints[1].mUV[1] = 0.95f;
       pair[idx].mPoints[0].Index = iv;
-      vecs[iv++] = pt.GetVector3f();
-      dRad += dDeg;
-      pt = CVPoint (cos(dTheta) * this->mRadii[1], dPoleTop, sin(dTheta)* this->mRadii[1]);
+      vecs[iv++] = pt;
+      fRad += fDeg;
+      pt = Vector3f (cos(fTheta) * this->mRadii[1], fPoleTop, sin(fTheta)* this->mRadii[1]);
       pair[idx].mPoints[1].Index = iv;
-      vecs[iv++] = pt.GetVector3f();
+      vecs[iv++] = pt;
       fv += 0.025f;
    }
    pPole->AddMesh (iSides*2, vecs, 1);
@@ -178,14 +175,14 @@ void Lamp::Render()
    fOff = 0.1f;
    TexturedStrip* pMantle = ObjectFactory::CreateTexturedStrip (2, mTexName.c_str(), 0xf0f0f0f0);
    mpGraphic->AddMesh (pMantle);
-   pt1 = CVPoint (-fOff, dPoleTop, 0);
-   pt2 = CVPoint (-fOff, (dPoleTop + 2.1f), 0);
-   pMantle->AddPoint (pt1.GetVector3f());
-   pMantle->AddPoint (pt2.GetVector3f());
+   pt1 = Vector3f (-fOff, fPoleTop, 0);
+   pt2 = Vector3f (-fOff, (fPoleTop + 2.1f), 0);
+   pMantle->AddPoint (pt1);
+   pMantle->AddPoint (pt2);
    pt1.x = fOff;
    pt2.x = fOff;
-   pMantle->AddPoint (pt1.GetVector3f());
-   pMantle->AddPoint (pt2.GetVector3f());
+   pMantle->AddPoint (pt1);
+   pMantle->AddPoint (pt2);
 
    pMantle = ObjectFactory::CreateTexturedStrip (2, mTexName.c_str(), 0xf0f0f0f0);
    mpGraphic->AddMesh (pMantle);
@@ -193,12 +190,12 @@ void Lamp::Render()
    pt2.x = 0;
    pt1.z = -fOff;
    pt2.z = -fOff;
-   pMantle->AddPoint (pt1.GetVector3f());
-   pMantle->AddPoint (pt2.GetVector3f());
+   pMantle->AddPoint (pt1);
+   pMantle->AddPoint (pt2);
    pt1.z = fOff;
    pt2.z = fOff;
-   pMantle->AddPoint (pt1.GetVector3f());
-   pMantle->AddPoint (pt2.GetVector3f());
+   pMantle->AddPoint (pt1);
+   pMantle->AddPoint (pt2);
 
    StripMeshObject* pHead = ObjectFactory::CreateStrip ();
    mpGraphic->AddMesh (pHead);
@@ -210,26 +207,26 @@ void Lamp::Render()
    pt2.x = -foff2;
    pt1.z = -fOff;
    pt2.z = -foff2;
-   pt1.y = (float)dPoleTop;
-   pt2.y = (float)mHeight;   
-   vecs[0] = pt1.GetVector3f();
-   vecs[1] = pt2.GetVector3f();
+   pt1.y = fPoleTop;
+   pt2.y = mHeight;   
+   vecs[0] = pt1;
+   vecs[1] = pt2;
    pt1.x = fOff;
    pt2.x = foff2;
-   vecs[2] = pt1.GetVector3f();
-   vecs[3] = pt2.GetVector3f();
+   vecs[2] = pt1;
+   vecs[3] = pt2;
    pt1.z = fOff;
    pt2.z = foff2;
-   vecs[4] = pt1.GetVector3f();
-   vecs[5] = pt2.GetVector3f();
+   vecs[4] = pt1;
+   vecs[5] = pt2;
    pt1.x = -fOff;
    pt2.x = -foff2;
-   vecs[6] = pt1.GetVector3f();
-   vecs[7] = pt2.GetVector3f();
+   vecs[6] = pt1;
+   vecs[7] = pt2;
    pt1.z = -fOff;
    pt2.z = -foff2;
-   vecs[8] = pt1.GetVector3f();
-   vecs[9] = pt2.GetVector3f();
+   vecs[8] = pt1;
+   vecs[9] = pt2;
    pHead->AddMesh (10, vecs, 1);
    fL = 0.10F;
    fR = 0.44F;
@@ -285,14 +282,14 @@ void Lamp::Render()
    pt1.z = -fOff;
    pt1.y = (float)mHeight;
    pt2.y = (float)mHeight;   
-   vecs[0] = pt1.GetVector3f();
+   vecs[0] = pt1;
    pt1.x = fOff;
-   vecs[1] = pt1.GetVector3f();
+   vecs[1] = pt1;
    pt1.x = -fOff;
    pt1.z = fOff;
-   vecs[2] = pt1.GetVector3f();
+   vecs[2] = pt1;
    pt1.x = fOff;
-   vecs[3] = pt1.GetVector3f();
+   vecs[3] = pt1;
    pCap->AddMesh (4, vecs, 1);
    fL = 0.10F;
    fR = 0.44F;

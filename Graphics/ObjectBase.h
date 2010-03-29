@@ -8,6 +8,7 @@
 //  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
 #pragma once
+#include "../Types/Vector3.h"
 
 class CMainFrame;
 
@@ -23,13 +24,12 @@ public:
 
 // Alocation is handled here at the base level dictated by derivation
 // You must derive from this base as it is pure virtual, but ctor/dtor must be called.
-#include <SFML/Graphics.hpp>
 class SerializerBase;
 
 class ObjectBase
 {
 protected:
-   sf::Vector3f* mpPoints;
+   Vector3f* mpPoints;
    short mPointCount;
    short mMaxPointCount;
    unsigned char mRGBA[4];
@@ -47,12 +47,12 @@ public:
    virtual void Save(SerializerBase& ser) {};
    virtual void Load(SerializerBase& ser) {};
 
-   int AddPoint( const sf::Vector3f& point );
+   int AddPoint( const Vector3f& point );
    void Resize( int width, int depth );
 
    // properties
    int  GetID() { return mID; };
-   sf::Vector3f* GetPoints() { return mpPoints; };
+   Vector3f* GetPoints() { return mpPoints; };
    void HighLight( bool bVal ) {mbHighlighted = bVal; };
 };
 

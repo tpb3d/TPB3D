@@ -10,10 +10,7 @@
 
 
 #include <cstring>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include <math.h>
-#include "VPoint.h"
 #include "Texture.h"
 #include "ObjectBase.h"
 #include "TexturedMesh.h"
@@ -44,8 +41,8 @@ void TexturedMesh::Draw()
    glColor3ubv( mRGBA );
 //   glBindTexture( GL_TEXTURE_2D, mTexture ); // iTex
    mpTexture->Bind();
-   sf::Vector3f* pQ;
-   sf::Vector3f* pR;
+   Vector3f* pQ;
+   Vector3f* pR;
    for( int iz = 0; iz < mWidth -1; ++iz )
    {
       glBegin(GL_QUAD_STRIP);
@@ -66,8 +63,8 @@ void TexturedMesh::Draw()
 
 void TexturedMesh::DrawSelectionTarget()   // just the basic geometry
 {
-   sf::Vector3f* pQ;
-   sf::Vector3f* pR;
+   Vector3f* pQ;
+   Vector3f* pR;
    for( int iz = 0; iz < mWidth -1; ++iz )
    {
       glBegin(GL_QUAD_STRIP);

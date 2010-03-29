@@ -12,10 +12,7 @@
 #include <string>
 #include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../Types/Vector3.h"
-#include "../Graphics/VPoint.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/Material.h"
 #include "../Graphics/Texture.h"
@@ -93,16 +90,16 @@ void LiftArm::Render()
    int index = 0;
    for( int ix = 0; ix < mSides; ++ix )  // 7 x 4
    {
-      CVPoint pt (LiftPairs[index].z*mWidth, -0.5f, LiftPairs[index].x*mLength);
-      mpGraphic->AddPoint (pt.GetVector3f());
-      pt = CVPoint  (LiftPairs[index].z*mWidth, 0.5f, LiftPairs[index].x*mLength);
-      mpGraphic->AddPoint (pt.GetVector3f());
+      Vector3f pt (LiftPairs[index].z*mWidth, -0.5f, LiftPairs[index].x*mLength);
+      mpGraphic->AddPoint (pt);
+      pt = Vector3f  (LiftPairs[index].z*mWidth, 0.5f, LiftPairs[index].x*mLength);
+      mpGraphic->AddPoint (pt);
       index++;
 
-      pt = CVPoint  (LiftPairs[index].z*mWidth, 0.5f, LiftPairs[index].x*mLength);
-      mpGraphic->AddPoint (pt.GetVector3f());
-      pt = CVPoint (LiftPairs[index].z*mWidth, -0.5f, LiftPairs[index].x*mLength);
-      mpGraphic->AddPoint (pt.GetVector3f());
+      pt = Vector3f  (LiftPairs[index].z*mWidth, 0.5f, LiftPairs[index].x*mLength);
+      mpGraphic->AddPoint (pt);
+      pt = Vector3f (LiftPairs[index].z*mWidth, -0.5f, LiftPairs[index].x*mLength);
+      mpGraphic->AddPoint (pt);
       index++;
    }
 }

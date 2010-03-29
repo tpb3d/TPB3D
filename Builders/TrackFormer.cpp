@@ -10,8 +10,6 @@
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-#include <SFML/System.hpp>
-#include <SFML/Graphics.hpp>
 #include "../CoreObjects/TrackBase.h"
 #include "../CoreObjects/Track.h"
 #include "../CoreObjects/TrackGuide.h"
@@ -87,10 +85,10 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
    // option for one or two more rails
 
    // Get fractional vector
-   CVPoint TrackPoint( guide.point );
-   CVPoint centerPT( 0, -guide.fRadius, 0 );
-   STrig trigXYZ( guide.fTiltX, guide.fTiltY, guide.fTiltZ, 1.0 );
-   STrig trig( guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ, 1.0 );
+   Vector3f TrackPoint( guide.point );
+   Vector3f centerPT( 0, -guide.fRadius, 0 );
+   Vector3f::VectorAngle3<float> trigXYZ ( guide.fTiltX, guide.fTiltY, guide.fTiltZ);
+   Vector3f::VectorAngle3<float> trig (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
    if( guide.iSections > 14 )
    {
       int steps = int(guide.iSections / 12) + 1;
@@ -104,20 +102,19 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
       TexturedStrip* pBar = CrossTie( TrackPoint, guide );
       pTrackSection->AddSection( pBar );
 
-      STrig trigRZ( 0, 0, guide.fCurRailAngle, 1.0 );
-      STrig trigPXYZ( guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ, 1.0 );
+      Vector3f::VectorAngle3<float> trigRZ (0, 0, guide.fCurRailAngle);
+      Vector3f::VectorAngle3<float> trigPXYZ (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
       double dRad = 0.0;
       if (pMesh != NULL)
       {
          double dDeg = 360.0/ (iTubeSections-1);
          for( int idx = 0; idx < iTubeSections; ++idx )
          {
-            double dTheta = M_PI/180 * dRad;
-            CVPoint pt( cos(dTheta) * guide.fTubeRadius, sin(dTheta)* guide.fTubeRadius, 0 );
+            float fTheta = (float)(M_PI/180 * dRad);
+            Vector3f pt( cos(fTheta) * guide.fTubeRadius, sin(fTheta)* guide.fTubeRadius, 0 );
             pt.Rotate( trigRZ );
-            pt.Transform( trigPXYZ, TrackPoint );
-            sf::Vector3f temp = pt.GetVector3f();
-            pMesh->AddPoint( temp );
+            pt.Transform (trigPXYZ, TrackPoint);
+            pMesh->AddPoint (pt);
             dRad += dDeg;
          }
       }
@@ -125,18 +122,16 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
       dRad = (bWood) ? 45.0f : 0.0;
       for( int idx = 0; idx < iRailSides; ++idx )
       {
-         double dTheta = M_PI/180 * dRad;
-         CVPoint ptA( cos(dTheta) * guide.fRailRadius-fGauge, sin(dTheta)* guide.fRailRadius + fYOffset, 0 );
-         CVPoint ptB( cos(dTheta) * guide.fRailRadius+fGauge, sin(dTheta)* guide.fRailRadius + fYOffset, 0 );
+         float fTheta = (float)(M_PI/180 * dRad);
+         Vector3f ptA( cos(fTheta) * guide.fRailRadius-fGauge, sin(fTheta)* guide.fRailRadius + fYOffset, 0 );
+         Vector3f ptB( cos(fTheta) * guide.fRailRadius+fGauge, sin(fTheta)* guide.fRailRadius + fYOffset, 0 );
          ptA.Rotate( trigRZ );
          ptA.Transform( trigPXYZ, TrackPoint ); // Transform, use matrix here
          ptB.Rotate( trigRZ );
          ptB.Transform( trigPXYZ, TrackPoint ); // Transform, use matrix here
 
-         sf::Vector3f tempA = ptA.GetVector3f();
-         sf::Vector3f tempB = ptB.GetVector3f();
-         pMeshA->AddPoint( tempA );
-         pMeshB->AddPoint( tempB );
+         pMeshA->AddPoint( ptA );
+         pMeshB->AddPoint( ptB );
 
          dRad += dRDeg;
       }
@@ -144,7 +139,7 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
       {
          if( guide.fCurPos > guide.fNextMount ) // bSupports == true
          {
-            CVPoint ptMount(TrackPoint);
+            Vector3f ptMount(TrackPoint);
             ptMount.y -= 0.75;
             pTrackSection->AddSection(Support(ptMount, guide, (float)guide.fCurRailAngle, 10, 1 ));
             guide.fCurPos = 0;
@@ -156,8 +151,8 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
          guide.fCurAngleY += guide.fTiltY;
          guide.fCurAngleZ += guide.fTiltZ;
          guide.fCurRailAngle += guide.fRailTiltZ;
-         STrig trigFV( guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ, 1.0 );
-         CVPoint pFV(guide.ForwardVector);
+         Vector3f::VectorAngle3<float> trigFV( guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
+         Vector3f pFV(guide.ForwardVector);
          pFV.Rotate(trigFV);
          guide.fCurPos += guide.fStep;
          TrackPoint += pFV; // rotate to the current vector
@@ -166,9 +161,9 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
    guide.point = TrackPoint;
 }
 
-TexturedStrip* TrackFormer::CrossTie( CVPoint& TrackPoint, TrackGuide& guide )
+TexturedStrip* TrackFormer::CrossTie( Vector3f& TrackPoint, TrackGuide& guide )
 {
-   double dTrackGuage = guide.fTrackGauge;
+   float fTrackGuage = guide.fTrackGauge;
    struct FPoint
    {
       float X1;
@@ -287,30 +282,28 @@ TexturedStrip* TrackFormer::CrossTie( CVPoint& TrackPoint, TrackGuide& guide )
    };
 
    TexturedStrip* pTBar = new TexturedStrip( iCount, mpTexture, 0x00505750 );
-   STrig trigZ( 0, 0, guide.fCurRailAngle, 1.0 );
-   STrig trig2( guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ, 1.0 );
+   Vector3f::VectorAngle3<float> trigZ (0, 0, guide.fCurRailAngle);
+   Vector3f::VectorAngle3<float> trig2 (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
    if (bWood)
    {
       float Z1 = 0;
       for( int ix = 0; ix < iCount; ++ix )
       {
-         CVPoint pt1( pPoints[ix].X1, pPoints[ix].Y1, Z1 );
-         CVPoint pt2( pPoints[ix].X2, pPoints[ix].Y2, Z1 );
+         Vector3f pt1( pPoints[ix].X1, pPoints[ix].Y1, Z1 );
+         Vector3f pt2( pPoints[ix].X2, pPoints[ix].Y2, Z1 );
 
          pt1.Rotate( trigZ );
          pt1.Rotate( trig2 );
-         pt1 *= dTrackGuage;
+         pt1 *= fTrackGuage;
          pt1 += TrackPoint;
 
          pt2.Rotate( trigZ );
          pt2.Rotate( trig2 );
-         pt2 *= dTrackGuage;
+         pt2 *= fTrackGuage;
          pt2 += TrackPoint;
 
-         sf::Vector3f temp1 = pt1.GetVector3f();
-         sf::Vector3f temp2 = pt2.GetVector3f();
-         pTBar->AddPoint( temp1 );
-         pTBar->AddPoint( temp2 );
+         pTBar->AddPoint( pt1 );
+         pTBar->AddPoint( pt2 );
          if (ix == 2)
          {
             Z1 += 0.1f;
@@ -321,62 +314,60 @@ TexturedStrip* TrackFormer::CrossTie( CVPoint& TrackPoint, TrackGuide& guide )
    {
       for( int ix = 0; ix < iCount; ++ix )
       {
-         CVPoint pt1( pPoints[ix].X1, pPoints[ix].Y1, 0 );
-         CVPoint pt2( pPoints[ix].X2, pPoints[ix].Y2, 0 );
+         Vector3f pt1( pPoints[ix].X1, pPoints[ix].Y1, 0 );
+         Vector3f pt2( pPoints[ix].X2, pPoints[ix].Y2, 0 );
 
          pt1.Rotate( trigZ );
          pt1.Rotate( trig2 );
-         pt1 *= dTrackGuage;
+         pt1 *= fTrackGuage;
          pt1 += TrackPoint;
 
          pt2.Rotate( trigZ );
          pt2.Rotate( trig2 );
-         pt2 *= dTrackGuage;
+         pt2 *= fTrackGuage;
          pt2 += TrackPoint;
 
-         sf::Vector3f temp1 = pt1.GetVector3f();
-         sf::Vector3f temp2 = pt2.GetVector3f();
-         pTBar->AddPoint( temp1 );
-         pTBar->AddPoint( temp2 );
+         pTBar->AddPoint( pt1 );
+         pTBar->AddPoint( pt2 );
       }
    }
    return pTBar;
 }
 
 // this is experimental and subject to replacement
-ObjectBase* TrackFormer::Support( CVPoint ptMount, TrackGuide& guide, float fMountAngle, float Load, float fBaseHeight )
+ObjectBase* TrackFormer::Support( Vector3f ptMount, TrackGuide& guide, float fMountAngle, float Load, float fBaseHeight )
 {
    int id = 500;  // local mesh numbering
    double dSuppRadius = 0.5;
    float fYOffset = 0.8f;
-   CVPoint ptH(0, ptMount.y, 0);
-   CVPoint ptSupport(ptMount);
+   Vector3f ptH(0, ptMount.y, 0);
+   Vector3f ptSupport(ptMount);
    MeshNode* pSupp = ObjectFactory::CreateMeshNode(4);
    //if( fMountAngle < -10 || fMountAngle > 10 )
    //{
-   //   STrig trigRZ( 0, 0, fMountAngle-90, 1.0 );
-   //   CVPoint ptVec( 0, -1.0, 0);
+   //   Vector3f::VectorAngle3<float> trigRZ( 0, 0, fMountAngle-90, 1.0 );
+   //   Vector3f ptVec( 0, -1.0, 0);
 
    //   ptVec *= 3.0;
    //   ptVec.Rotate( trigRZ);
    //   TexturedMesh *pMesh = new TexturedMesh( 2, 6, mpTexture, 0xff3f3f3f, id++ );
-   //   STrig trigPXYZ( guide.dCurAngleX, guide.dCurAngleY, guide.dCurAngleZ, 1.0 );
+   //   Vector3f::VectorAngle3<float> trigPXYZ( guide.dCurAngleX, guide.dCurAngleY, guide.dCurAngleZ, 1.0 );
    //   double dRad = 0.0;
    //   double dDeg = 360.0/ 6;
    //   for( int idx = 0; idx < 7; ++idx )
    //   {
    //      double dTheta = M_PI/180 * dRad;
-   //      CVPoint pt( cos(dTheta) * dSuppRadius, sin(dTheta)* dSuppRadius, 0 );
+   //      Vector3f pt( cos(dTheta) * dSuppRadius, sin(dTheta)* dSuppRadius, 0 );
    //      pt.Transform( trigPXYZ, ptMount );
    //      pMesh->AddPoint( pt.GetVector3f() );
    //      dRad += dDeg;
    //   }
-   //   CVPoint ptJoint(ptMount);
+   //   Vector3f ptJoint(ptMount);
    //   ptJoint += ptVec;
    //   for( int idx = 0; idx < 7; ++idx )
    //   {
    //      double dTheta = M_PI/180 * dRad;
-   //      CVPoint pt( cos(dTheta) * dSuppRadius, sin(dTheta)* dSuppRadius, 0 );
+   //      Vector3f pt( cos(dTheta) * dSuppRadius, sin(dTheta)* dSuppRadius, 0 );
    //      pt.Rotate( trigRZ );
    //      pt.Transform( trigPXYZ, ptJoint );
    //      pMesh->AddPoint( pt.GetVector3f() );
@@ -390,29 +381,27 @@ ObjectBase* TrackFormer::Support( CVPoint ptMount, TrackGuide& guide, float fMou
    pSupp->AddMesh( pMeshA );
    if( pMeshA )
    {
-      STrig trigRZ( 0, 0, fMountAngle, 1.0 );
-      STrig trigPXYZ( 0, guide.fCurAngleY, 0, 1.0 );
+      Vector3f::VectorAngle3<float> trigRZ (0, 0, fMountAngle);
+      Vector3f::VectorAngle3<float> trigPXYZ (0, guide.fCurAngleY, 0);
       double dRad = 0.0;
       double dDeg = 360.0/ 6;
       for( int idx = 0; idx < 7; ++idx )
       {
-         double dTheta = M_PI/180 * dRad;
-         CVPoint pt( cos(dTheta) * dSuppRadius, 0, sin(dTheta)* dSuppRadius );
+         float fTheta = (float)(M_PI/180 * dRad);
+         Vector3f pt( cos(fTheta) * (float)dSuppRadius, 0, sin(fTheta)* (float)dSuppRadius );
          pt.Rotate( trigRZ );
          pt.Transform( trigPXYZ, ptSupport );
-         sf::Vector3f temp = pt.GetVector3f();
-         pMeshA->AddPoint( temp );
+         pMeshA->AddPoint( pt );
          dRad += dDeg;
       }
       ptSupport.y = fBaseHeight;
       for( int idx = 0; idx < 7; ++idx )
       {
-         double dTheta = M_PI/180 * dRad;
-         CVPoint pt( cos(dTheta) * dSuppRadius, 0, sin(dTheta)* dSuppRadius );
+         float fTheta = (float)(M_PI/180 * dRad);
+         Vector3f pt( cos(fTheta) * (float)dSuppRadius, 0, sin(fTheta)* (float)dSuppRadius );
          pt.Rotate( trigRZ );
          pt.Transform( trigPXYZ, ptSupport );
-         sf::Vector3f temp = pt.GetVector3f();
-         pMeshA->AddPoint( temp );
+         pMeshA->AddPoint( pt );
          dRad += dDeg;
       }
    }

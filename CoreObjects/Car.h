@@ -11,7 +11,6 @@
 #include "../Graphics/ObjectNode.h"
 #include "RideNode.h"
 
-class CVPoint;
 class CMainFrame;
 
 class Car : public RideNode
@@ -19,9 +18,9 @@ class Car : public RideNode
    int m_BaseTexture;
    int m_SeatTexture;
    int m_SideTexture;
-   sf::Vector3f  m_vDim;
-   sf::Vector3f  m_vPosition;
-   sf::Vector3f  m_vAngle;
+   Vector3f  m_vDim;
+   Vector3f  m_vPosition;
+   Vector3f  m_vAngle;
    int      m_PartsCount;
    ObjectNode* m_BaseParts; // temp hardcode
 

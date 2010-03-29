@@ -5,6 +5,7 @@
 #include <math.h>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "../Types/Vector3.h"
 #include "ObjectBase.h"
 
 //#ifdef _DEBUG
@@ -29,7 +30,7 @@ ObjectBase::ObjectBase( int count, int id )
    try
    {
       if( count > 0 )
-         mpPoints = new sf::Vector3f[mMaxPointCount];
+         mpPoints = new Vector3f[mMaxPointCount];
    }
    catch( ... )
    {
@@ -52,7 +53,7 @@ ObjectBase::~ObjectBase()
    }
 }
 
-int ObjectBase::AddPoint( const sf::Vector3f& point )
+int ObjectBase::AddPoint( const Vector3f& point )
 {
    if( mPointCount >= mMaxPointCount )
       return -1;
@@ -70,7 +71,7 @@ void ObjectBase::Resize( int width, int depth )
       mPointCount = 0;
       mMaxPointCount = width*depth;
       if( mMaxPointCount > 0 )
-         mpPoints = new sf::Vector3f[mMaxPointCount];
+         mpPoints = new Vector3f[mMaxPointCount];
    }
    catch( ... )
    {
