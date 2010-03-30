@@ -14,6 +14,8 @@
 #include "Ride.h"
 #include "RideSection.h"
 #include "RideNode.h"
+#include "../People/Person.h"
+#include "PersonQueue.h"
 #include "../Graphics/ObjectFactory.h"
 #include "../Storage/SerializerBase.h"
 
@@ -21,16 +23,33 @@ Ride::Ride(const Vector3f& vPosition, const Park& ParkParent)
 :  CoreBase ( vPosition, Vector3f(0,0,0))
 ,  mParkParent (ParkParent)
 {
+   mpQueue = new PersonQueue();
    mvPosition = sf::Vector3f(0,0,0);
+   mRideType = RT_Empty;
+   mRideIntensity = RI_Gentle;
+   mRun = false;
 }
 
 Ride::~Ride(void)
 {
+   delete mpQueue;
 }
 
 void Ride::Update(int dt)
 {
-   mpBaseNode->Update(dt);
+   if (mRun)
+   {
+      mpBaseNode->Update(dt);
+   }
+   else
+   {
+      mpBaseNode->Update(0);  // temporary
+   }
+   if (mpQueue->Count() > 0 )
+   {
+      ServeNextPerson();
+      mRun = true;
+   }
 }
 
 void Ride::DrawSelectionTarget()
@@ -55,6 +74,28 @@ CoreBase* Ride::Clone( )
    return pRide;
 }
 
+void Ride::AddPerson (Person* pPeep)
+{
+   mpQueue->AddPerson(pPeep);
+}
+
+void Ride::RemovePerson (Person* pPeep)
+{
+
+   mpQueue->RemovePerson(pPeep);
+}
+
+void Ride::ServeNextPerson (void)
+{
+   Person* pPeep = mpQueue->TakeNextPerson();
+   if (pPeep != NULL)
+   {
+      // TakeOrder;
+      // Serve or Reject
+      pPeep->SetActivity (Person::AS_Dining);   // this is just some interaction
+      pPeep->SetCurrentState (Person::CS_Walking);
+   }
+}
 
 void Ride::Load(SerializerBase& ser)
 {

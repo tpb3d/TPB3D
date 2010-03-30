@@ -51,6 +51,7 @@ void PeepsAgent::Update (float dt, int tod)
       //Location loc; // all zeros
       Person* peep = Peeps->NewPerson();
       Peeps->Update( dt );
+      mPark.EnterPark (peep);
    }
    std::list<Person *>::iterator i;
    std::list<Person *>& persons = Peeps->get_Persons(); // get the persons collection.

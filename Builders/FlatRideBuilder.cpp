@@ -127,6 +127,9 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
 
    if( iPattern == 0)
    {
+      pRide->SetRideType (RT_FlatRide);
+      pRide->SetRideIntensity (RI_Thrill);
+      pRide->SetRideName ("Barn Stormers");
       RidePartLoader rpl;
       const char* pPath = kszBS;
       PartGuide guide;

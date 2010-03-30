@@ -28,9 +28,11 @@ class Routes;
 class Person;
 class Scene;
 class Stall;
+class Ride;
 class BuildStairStrategy;
 class Car;
 enum StallType; // if this won't compile, comment this line and include stall.h
+enum RideType; // if this won't compile, comment this line and include ride.h
 
 // Park is a ModelObject
 // This renderes the Park in the ModelSpaces with perspective, pan and zoom.
@@ -45,6 +47,8 @@ public:
    typedef std::vector<Pathway*> PathwayVector;
    typedef std::vector<Stall*>::iterator StallsIterator;
    typedef std::vector<Stall*> StallsVector;
+   typedef std::vector<Ride*>::iterator RidesIterator;
+   typedef std::vector<Ride*> RidesVector;
 
 protected:
    int mParkNo;
@@ -61,6 +65,7 @@ protected:
    GhostObject mGhostObject;  // this object is rendered with the scene.
                               // it may be a bush, a ride, track or even a whole coaster
    StallsVector mStalls;
+   RidesVector mRides;
 
 public:
    // ctor/dtor
@@ -80,9 +85,12 @@ protected:
    // methods
 public:
 
-   void AddStall (Stall* pStall);
-//   Ride* FindRideByType (RideType rt);
+   void   AddStall (Stall* pStall);
    Stall* FindStallByType (StallType st);
+
+   void  AddRide (Ride* pRide);
+   Ride* FindRideByType (RideType rt);
+   Ride* FindRideByName (const char *pszName);
 
    void Update (float dt, int timeOfDay);
    void Draw ();

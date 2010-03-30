@@ -12,11 +12,42 @@
 
 class ObjectBase;
 class RideNode;
+class Person;
+class PersonQueue;
+
+enum RideType
+{
+   RT_Empty = 0, // dead ride
+   RT_Coaster,
+   RT_FlatRide,
+   RT_OtherTrackRide,
+   RT_Tour,
+   RT_Venue       // Movies, Shows, Arenas and other gathering (non-motion attraction).
+};
+enum RideIntensity
+{
+   RI_NonMoving = 0,
+   RI_Gentle,
+   RI_Family,
+   RI_Thrill,
+   RI_Intense,
+   RI_Extreme
+   // someday we will have a level beyond extreme but it has not been invented yet
+};
 
 class Ride : public CoreBase
 {
    const Park& mParkParent;
+   std::string mRideName;
    RideNode* mpBaseNode;   // only child
+   PersonQueue* mpQueue;
+   //    PersonQueue* mpQueueFastPass;   if we can do this
+
+protected:
+   RideType mRideType;
+   RideIntensity mRideIntensity;
+   bool  mRun;
+
 public:
    Ride(const Vector3f& vPosition, const Park& ParkParent);
    virtual ~Ride();
@@ -25,6 +56,20 @@ public:
       // be sure to delete the old one if present
       mpBaseNode = pRideNode;
    }
+   const char* GetRideName () { return mRideName.c_str(); }
+   void SetRideName (const char* szName) { mRideName = szName; }
+   bool IsType (RideType rt) { return (mRideType == rt); }
+   RideType GetRideType () { return mRideType; }
+   void SetRideType (RideType rt) { mRideType = rt; }
+   RideIntensity GetRideIntensity () { return mRideIntensity; }
+   void SetRideIntensity (RideIntensity ri) { mRideIntensity = ri; }
+
+   void Start() { mRun = true; }
+   void Stop() { mRun = false; }
+
+   void AddPerson (Person* pPeep);
+   void RemovePerson (Person* pPeep);
+   void ServeNextPerson (void);
 
    void DrawSelectionTarget();
 

@@ -214,15 +214,16 @@ bool GameManager::LoadGame (const char *fileName)
    float fz = 80;
    pRide = flat.CreateRide(0, mPark );
    pRide->SetPosition (fx,0.1f,fz);
-   pOTree.AddNode(new RidePack (pRide));
+   mScene.GetPark()->AddRide (pRide);
+
 
    //pRide = flat.CreateRide(1, mPark);
    //pRide->SetPosition (fx-20,1, fz+10);
-   //pOTree.AddNode(new RidePack (pRide));
+   //mScene.GetPark()->AddRide (pRide));
    //
    //pRide = flat.CreateRide(2, mPark);
    //pRide->SetPosition (fx,1, fz+40);
-   //pOTree.AddNode(new RidePack (pRide));
+   //mScene.GetPark()->AddRide (pRide));
 
 
 //   const char* pHT = "hrtwr.3ds";

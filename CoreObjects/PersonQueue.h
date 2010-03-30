@@ -32,10 +32,11 @@ protected:
    short mCapacity;
    short mSweepIndex; // moves through the queue filling gaps
    //Person** mpQueue;
-   std::queue<Person*> mpQueue;
+   std::queue<Person*> mQueue;
 
 public:
    PersonQueue();
+   virtual ~PersonQueue();
    void AddPerson (Person* person);
    bool RemovePerson (Person* person);
    Person* TakeNextPerson ();

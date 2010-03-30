@@ -21,6 +21,7 @@
 #include "CoreBase.h"
 #include "Pathway.h"
 #include "Car.h"
+#include "Ride.h"
 #include "Stall.h"
 #include "Park.h"
 
@@ -68,7 +69,7 @@ void Park::AddTestPoint( sf::Vector3f pa, sf::Vector3f pb )
 
 void Park::Update (float dt, int timeOfDay)
 {
-   static int delay = 5; // playing physics
+   static int delay = 3; // playing physics
 
    mpTheTree->Update(dt);
    mGhostObject.GetPathNo();
@@ -76,11 +77,6 @@ void Park::Update (float dt, int timeOfDay)
 
    if( mCurPoint <= mPoints )
    {
-      if( --delay > 0 )
-      {
-         return;
-      }
-      delay = 2;//dt;
       if( mCurPoint < mPoints )
       {
          //m_xcam = m_VPoints[m_CurPoint].x;
@@ -103,6 +99,12 @@ void Park::Update (float dt, int timeOfDay)
    {
       mCurPoint = 0;
    }
+   RidesIterator iRI;
+   for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+   {
+      Ride* pRide = *iRI;
+      pRide->Update ((int)dt);
+   }
 }
 
 void Park::AddStall (Stall* pStall)
@@ -112,13 +114,46 @@ void Park::AddStall (Stall* pStall)
 
 Stall* Park::FindStallByType (StallType st)
 {
-   StallsIterator si;
-   for (si = mStalls.begin(); si != mStalls.end(); si++)
+   StallsIterator iSI;
+   for (iSI = mStalls.begin(); iSI != mStalls.end(); iSI++)
    {
-      Stall* pStall = *si;
+      Stall* pStall = *iSI;
       if (pStall->IsType (st) )
       {
          return pStall;
+      }
+   }
+   return NULL;
+}
+
+void Park::AddRide (Ride* pRide)
+{
+   mRides.push_back (pRide);
+}
+
+Ride* Park::FindRideByType (RideType rt)
+{
+   RidesIterator iRI;
+   for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+   {
+      Ride* pRide = *iRI;
+      if (pRide->IsType (rt) )
+      {
+         return pRide;
+      }
+   }
+   return NULL;
+}
+
+Ride* Park::FindRideByName (const char *pszName)
+{
+   RidesIterator iRI;
+   for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+   {
+      Ride* pRide = *iRI;
+      if (_stricmp(pRide->GetRideName(), pszName) == 0)
+      {
+         return pRide;
       }
    }
    return NULL;
@@ -133,6 +168,12 @@ void Park::Draw ()
       Stall* pStall = *si;
       pStall->Draw ();
    }
+   RidesIterator iRI;
+   for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+   {
+      Ride* pRide = *iRI;
+      pRide->Draw ();
+   }
 //   mGhostObject.Draw();
 }
 
@@ -146,6 +187,12 @@ void Park::DrawSelectionTarget (bool bPathwaysOnly)
 void Park::EnterPark (Person* pPerson)
 {
    mPopulation++;
+   // Test code for Ride Operations to put every new park guest onto the BarnStormers
+   //Ride* pRide = this->FindRideByName("Barn Stormers");
+   //if (pRide != NULL)
+   //{
+   //   pRide->AddPerson (pPerson);
+   //}
 }
 
 // AI interface

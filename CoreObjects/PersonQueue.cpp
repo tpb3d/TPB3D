@@ -23,9 +23,13 @@ PersonQueue::PersonQueue()
 {
 }
 
+PersonQueue::~PersonQueue()
+{
+}
+
 void PersonQueue::AddPerson (Person* person)
 {
-   mpQueue.push(person);
+   mQueue.push(person);
    if( mHeadIndex >= mCapacity )
    {
       mHeadIndex = 0;
@@ -41,17 +45,17 @@ bool PersonQueue::RemovePerson (Person* person)
 Person* PersonQueue::TakeNextPerson ()
 {
    Person* person = 0;
-   if (!mpQueue.empty())
+   if (!mQueue.empty())
    {
-      person = mpQueue.front();
-      mpQueue.pop();
+      person = mQueue.front();
+      mQueue.pop();
    }
    return person;
 }
 
 size_t PersonQueue::Count()  // how many people in line
 {
-   return mpQueue.size();
+   return mQueue.size();
 }
 
 void PersonQueue::Update()

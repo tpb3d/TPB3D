@@ -95,7 +95,7 @@ void RotationHub::Update(int dt)
          SetDestinVelocity( 0 );
          mIdle = 32*dt;
       }
-      else
+      else if(dt > 0) // temporary fix to stop ride
       {
          SetDestinVelocity (mDesiredSpeed);
          mRun = 60*dt;
