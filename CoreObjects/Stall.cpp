@@ -19,12 +19,14 @@
 Stall::Stall (int StallNo, int ID)
 :  Vendor (ID)
 {
+   mpGraphic = NULL;
 }
 
 Stall::Stall(int StallNo, int ID, StallType st)
 :  Vendor (ID)
 {
    mStallType = st;
+   mpGraphic = NULL;
 }
 
 Stall::~Stall( )
@@ -71,7 +73,7 @@ void Stall::Update (float dt, int timeOfDay)
 
 void Stall::Draw ()
 {
-   mpGraphic->Draw();
+   ObjectNode::Draw();
 }
 
 void Stall::DrawSelectionTarget (bool bBaseOnly)

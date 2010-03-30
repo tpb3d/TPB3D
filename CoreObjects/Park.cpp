@@ -127,6 +127,12 @@ Stall* Park::FindStallByType (StallType st)
 void Park::Draw ()
 {
    mpTheTree->Draw ();
+   StallsIterator si;
+   for (si = mStalls.begin(); si != mStalls.end(); si++)
+   {
+      Stall* pStall = *si;
+      pStall->Draw ();
+   }
 //   mGhostObject.Draw();
 }
 

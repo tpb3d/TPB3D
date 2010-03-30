@@ -357,8 +357,10 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       float pn[3];
       ObjectNode* pNode = ObjectFactory::CreateNode( pFile->nmeshes );
       float fRRLoc[4] = { -20,0.5,55,0 };
+      float fSTLoc[4] = { -31,0.5,85,0 };
       float fTALoc[4] = { 24,1,40,0 };
       float fHRLoc[4] = { 10,-60,-40,0 };
+      float fRot[4] = { 0,270,0,0 };
       float frx = 1.0f;
       if (_strnicmp(Name,"Tag",3) == 0)
       {
@@ -378,6 +380,12 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       {
          frx = 0.1f;
          pNode->Move(fTALoc);
+      }
+      else if (_strnicmp(Name,"sta",3) == 0)
+      {
+         frx = 1.0f/12; // inches to feet
+         pNode->Move(fSTLoc);
+         pNode->SetRotation(fRot);
       }
       else
       {

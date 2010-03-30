@@ -18,7 +18,6 @@
 #include "QuadMeshObject.h"
 #include "ComplexMeshObject.h"
 #include "ObjectFactory.h"
-#include "VPoint.h"
 #include "TexturedStrip.h"
 #include "TexturedMesh.h"
 #include "Image.h"
