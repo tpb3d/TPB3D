@@ -15,39 +15,26 @@
  */
 
 #pragma once
-#ifndef _INTERFACE_H
-#define _INTERFACE_H
-
-#include "Clock.h"
-#include "Stats.h"
-#include "../Hub/Event.h"
+#include <string>
+#include <map>
 
 class ToolBar;
-class EventHandler;
 
-class Interface : public EventBase
+class ToolBarDelegate
 {
-private:
 protected:
-   Clock mClock;
-   Stats mStats;
-   EventHandler& mEVH; // tap the event handler for the app
-   ToolBar* mpToolBar;
-   float m_fHeight;
+   std::string mToolSelected;
+   ToolBar& mToolBar;
 
 public:
-   Interface (EventHandler& revh);
-
-   Stats& GetStats() { return mStats; }
-   int GetTimeOfDay() { return mClock.GetTimeOfDay();  }
-
-   virtual bool OnMouseDown (sf::Mouse::Button Button, Vector2i point, Vector2i pointb);
-   virtual bool OnMouseUp (sf::Mouse::Button Button, Vector2i pointa, Vector2i pointb);
-   virtual bool OnMouseMove ( Vector2i pointa, Vector2i pointb);
-
-   void LoadToolbar ();
-   void Update (float dt);
-   void Draw ();
+   ToolBarDelegate (const char* pszToolName, const ToolBar& toolbar)
+   :  mToolBar (toolbar)
+   {
+      mToolSelected = pasToolName;
+   }
+public:
+   void OnToolHit (short ID)
+   {
+      mToolBar.Onhit();
+   }
 };
-
-#endif // _INTERFACE_H

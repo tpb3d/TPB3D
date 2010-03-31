@@ -433,6 +433,16 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
    return pRide;
 }
 
+void FlatRideBuilder::OnHit (int hit)
+{
+   // hit delegate [tool selection, select part, navigation]
+}
+
+void FlatRideBuilder::OnMove (const Vector3f& vec)
+{
+   // move delegate
+}
+
 /*
    Ride Sections or nodes that are built in this function as set in the guide.
    The guide is the UIs extension to the builder giving in build commands

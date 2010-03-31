@@ -27,6 +27,7 @@ enum HR_Events
    HR_SelectBuildCursor,      // From tools if BuildOption returns true, set cursor and/or status bar to show active tool.
    HR_SelectBuildOption,      // From tools, include Building, Elevater, Condo etc as option param
    HR_Settings,
+   HR_MainMenu,
    HR_Tools,
    HR_FRCS,
    HR_TRCS,

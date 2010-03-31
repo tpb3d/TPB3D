@@ -27,7 +27,7 @@ class Animation;
 class AnimationSingle;
 class Tiler;
 class Scene;
-class ToolBar;
+//class ToolBar;
 class Pathway;
 class PeepsAgent;
 

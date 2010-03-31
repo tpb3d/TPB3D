@@ -15,11 +15,10 @@
 #include "../CoreObjects/Routes.h"
 #include "../Graphics/Camera.h"
 #include "../Graphics/SkyBowl.h"
-#include "../Hub/Event.h"
 #include "../CoreObjects/CoreBase.h"
 #include "../CoreObjects/Pathway.h"
 #include "../CoreObjects/Park.h"
-#include "../CoreObjects/BuildStrategies.h"
+#include "../Delegates/BuildDelegate.h"
 #include "../CoreObjects/Terrain.h"
 #include "Scene.h"
 
@@ -131,6 +130,29 @@ void Scene::MoveGhostObject (Vector2f& point)
    Park* pPark = mParks[0];
    pPark->GetGhostObject().Move (vec);// asp
 }
+
+bool Scene::OnToolHit(const HR_Events Event)
+{
+   switch (Event)
+   {
+   case HR_FRCS:
+      return OnFRCS();
+   case HR_TRCS:
+      return OnTRCS();
+   }
+   return false;
+}
+
+bool Scene::OnFRCS ()
+{
+   return true;
+}
+
+bool Scene::OnTRCS ()
+{
+   return true;
+}
+
 
 void Scene::HitDown( int hit, Vector2i& Scene )  // taking a mouse hit, send it through geometry to see what we hit
 {

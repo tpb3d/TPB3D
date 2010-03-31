@@ -21,6 +21,7 @@
 #define _SCENE_H
 
 #include <map>
+#include "../Hub/Event.h"
 #include "../Types/Vector2.h"
 #include "../CoreObjects/Routes.h"
 #include "../Graphics/ModelObject.h"
@@ -81,6 +82,10 @@ public:
    void RegisterFloorSpace (int id, CoreBase* pFS);
    void UnregisterFloorSpace (int id, CoreBase* pFS);
    CoreBase* FindFloorSpace (int id);
+
+   virtual bool OnToolHit(const HR_Events Event);
+   virtual bool OnFRCS();
+   virtual bool OnTRCS();
 
    void Update (float dt, int timeOfDay);
    void Draw ();

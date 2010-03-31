@@ -263,13 +263,17 @@
 		<Unit filename="Graphics/Tiler.h" />
 		<Unit filename="Graphics/Tree.cpp" />
 		<Unit filename="Graphics/Tree.h" />
-		<Unit filename="Graphics/VPoint.cpp" />
-		<Unit filename="Graphics/VPoint.h" />
 		<Unit filename="Graphics/ViewObject.cpp" />
 		<Unit filename="Graphics/ViewObject.h" />
 		<Unit filename="Graphics/objecttree.h" />
 		<Unit filename="Hub/Event.cpp" />
-		<Unit filename="Hub/Event.h  /&gt;&#x0A;      &lt;Unit filename=" />
+		<Unit filename="Hub/Event.h" />
+		<Unit filename="Hub/GameManager.cpp" />
+		<Unit filename="Hub/GameManager.h" />
+		<Unit filename="Hub/PathManager.cpp" />
+		<Unit filename="Hub/PathManager.h" />
+		<Unit filename="Hub/RideManager.cpp" />
+		<Unit filename="Hub/RideManager.h" />
 		<Unit filename="People/GuestPerson.cpp" />
 		<Unit filename="People/GuestPerson.h" />
 		<Unit filename="People/Peeps.cpp" />

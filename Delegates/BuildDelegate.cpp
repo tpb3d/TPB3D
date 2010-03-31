@@ -18,16 +18,12 @@
 #include <list>
 #include <vector>
 #include <iostream>
-#include "Routes.h"
-#include "CoreBase.h"
-#include "Pathway.h"
-#include "Park.h"
-#include "Building.h"
-//#include "Security.h"
-//#include "MedicalClinic.h"
-#include "BuildStrategies.h"
+#include "../CoreObjects/CoreBase.h"
+#include "../CoreObjects/GhostObject.h"
+#include "../CoreObjects/Park.h"
+#include "BuildDelegate.h"
 
-//using namespace ParkObjects;
+using namespace CoreObjects;
 
 // no tool active
 bool BuildStrategyBase::BuildHere (Park* pPark, int x, int Pathway)

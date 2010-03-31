@@ -588,14 +588,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CoreObjects\BuildStrategies.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CoreObjects\BuildStrategies.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CoreObjects\CableHingeJoint.cpp"
 				>
 			</File>
@@ -1247,6 +1239,22 @@
 			</File>
 			<File
 				RelativePath="..\Utility\GameException.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="Delegates"
+			>
+			<File
+				RelativePath="..\Delegates\BuildDelegate.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\BuildDelegate.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\ToolBarDelegate.h"
 				>
 			</File>
 		</Filter>

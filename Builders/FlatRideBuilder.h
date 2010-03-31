@@ -1,5 +1,6 @@
 #pragma once
 #include "../Types/Vector3.h"
+#include "BuilderBase.h"
 
 // forward decls
 class Park;
@@ -8,7 +9,7 @@ class RideNode;
 class ObjectBase;
 struct PartGuide;
 
-class FlatRideBuilder
+class FlatRideBuilder : public BuilderBase
 {
 public:
    FlatRideBuilder(void);
@@ -16,6 +17,10 @@ public:
 
    // Game Manager Interaction
    static Ride* CreateRide(int iPattern, Park& pPark);
+
+   // events
+   void OnHit (int hit);
+   void OnMove (const Vector3f& vec);
 
    // UI Interaction
    void MakeSection( PartGuide& guide, Ride& ride );

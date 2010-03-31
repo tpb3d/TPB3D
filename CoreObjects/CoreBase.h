@@ -26,26 +26,31 @@ class Level;
 class TiXmlElement;
 class SerializerBase;
 
-enum BaseType
+namespace CoreObjects
 {
-   BaseEmpty = 0,
-   BaseGhostObject,
-   BaseFlatRide,
-   BaseTrackRide,
-   BaseOtherTrackRide,
-   BaseBuilding,
-   BaseRetail,
-   BaseRestaurant,
-   BaseVenue,
-   BaseService,
-   BaseSecurity,
-   BaseClinic,
-   BaseRestroom,
-   BaseWasteManagement,
-   BaseStair,
-   BaseElevator,
-   BaseTicketBooth
-};
+   enum BaseType
+   {
+      BaseEmpty = 0,
+      BaseGhostObject,
+      BaseFlatRide,
+      BaseTrackRide,
+      BaseOtherTrackRide,
+      BaseBuilding,
+      BaseRetail,
+      BaseRestaurant,
+      BaseVenue,
+      BaseService,
+      BaseSecurity,
+      BaseClinic,
+      BaseRestroom,
+      BaseWasteManagement,
+      BaseStair,
+      BaseElevator,
+      BaseTicketBooth
+   };
+}
+
+using namespace CoreObjects;
 
 class CoreBase
 {

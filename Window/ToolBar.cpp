@@ -24,8 +24,9 @@
 
 using namespace Gfx;
 
-ToolBar::ToolBar (int ToolCount)
+ToolBar::ToolBar (int ToolCount, short ID)
 {
+   mID = ID;
    m_ButtonCount = 0;
    m_ButtonMax = ToolCount;
    try

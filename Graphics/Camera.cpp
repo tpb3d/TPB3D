@@ -28,7 +28,7 @@
 #include "../Scene/Scene.h"
 #include "../AI/PeepAgent.h"
 #include "../AI/PeepAgent.h"
-#include "../Window/ToolBar.h"
+//#include "../Window/ToolBar.h"
 
 #include "Image.h"
 #include "Animation.h"

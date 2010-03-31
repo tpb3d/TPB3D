@@ -32,7 +32,7 @@ using namespace Gfx;
 Interface::Interface (EventHandler& revh)
 :  mEVH(revh)
 {
-   mpToolBar = new ToolBar(5);
+   mpToolBar = new ToolBar(5, HR_MainMenu);
    LoadToolbar();
 }
 

@@ -13,37 +13,18 @@
  *   You should have received a copy of the GNU General Public License
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
-// Tick Tock!
 
-#pragma once
+#include <iostream>
+#include "../Window/ToolBar.h"
+#include "ToolBarDelegate.h"
 
-#include "../Graphics/ViewObject.h"
-#include "../Graphics/Animation.h"
+// Add a toolbar object along with a delegation to handle
 
-class ToolButton;
-
-class ToolBar : public Gfx::ViewObject
+void ToolBarDelegateBase::operator += (ToolBar* pDelegation)
 {
-   SimpleQuad m_Border;
-   short m_ButtonCount;
-   short m_ButtonMax;
-   short mID;
-protected:
-   ToolButton** m_pButtons;
+   mTools.insert(std::pair<short, ToolBar*>(pDelegation->GetID(), pDelegation));
+}
 
-public:
-   ToolBar (int ButtonsNeeded, short ID);
-   ~ToolBar ();
-
-public:
-   void Clear();   // return buttons to normal
-   void AddButton (ToolButton* pButton);
-   short GetID() { return mID; }
-
-   void PosCalc ();
-//   void Update (int state);
-   void Draw ();
-   int TestHit (Vector2i point);
-
-};
-
+void ToolBarDelegateBase::OnToolHit (short ID)
+{
+}

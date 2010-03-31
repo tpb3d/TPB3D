@@ -118,16 +118,8 @@ bool GUIManager::OnToolHit (const HR_Events tool)
       return OnSettings();
    case HR_Tools:
       return OnTools();
-   case HR_FRCS:
-      return OnFRCS();
    }
    return false;
-}
-
-bool GUIManager::OnFRCS ()
-{
-   frcswin.Create (this->mpRootWind);
-   return true;
 }
 
 bool GUIManager::OnTools ()
