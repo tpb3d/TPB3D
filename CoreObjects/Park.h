@@ -5,7 +5,7 @@
 //  Park class
 //
 //  You should have received a copy of the GNU General Public License
-//  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
+//  along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
 
 // root of the Pathways and subPathways, the building/ Park.
@@ -16,6 +16,9 @@
 
 #include "../Graphics/ModelObject.h"
 #include "Routes.h"
+#include "PathCollection.h"
+#include "RideCollection.h"
+#include "StallCollection.h"
 #include "GhostObject.h" // local for speed
 
 class ObjectBase; // aggregate
@@ -43,12 +46,12 @@ class Park// : public Gfx::ModelObject
    friend class GameManager;
    friend class BuildStairStrategy;
 public:
-   typedef std::vector<Pathway*>::iterator PathwayIterator;
-   typedef std::vector<Pathway*> PathwayVector;
-   typedef std::vector<Stall*>::iterator StallsIterator;
-   typedef std::vector<Stall*> StallsVector;
-   typedef std::vector<Ride*>::iterator RidesIterator;
-   typedef std::vector<Ride*> RidesVector;
+   //typedef std::vector<Pathway*>::iterator PathwayIterator;
+   //typedef std::vector<Pathway*> PathwayVector;
+   //typedef std::vector<Stall*>::iterator StallsIterator;
+   //typedef std::vector<Stall*> StallsVector;
+   //typedef std::vector<Ride*>::iterator RidesIterator;
+   //typedef std::vector<Ride*> RidesVector;
 
 protected:
    int mParkNo;
@@ -64,8 +67,12 @@ protected:
 
    GhostObject mGhostObject;  // this object is rendered with the scene.
                               // it may be a bush, a ride, track or even a whole coaster
-   StallsVector mStalls;
-   RidesVector mRides;
+   //StallsVector mStalls;
+   //RidesVector mRides;
+   PathCollection mPaths;
+   RideCollection mRides;
+   StallCollection mStalls;
+
 
 public:
    // ctor/dtor

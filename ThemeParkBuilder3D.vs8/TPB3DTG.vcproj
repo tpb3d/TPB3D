@@ -750,6 +750,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CoreObjects\PathCollection.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\PathCollection.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CoreObjects\Pathway.cpp"
 				>
 			</File>
@@ -791,6 +799,14 @@
 			</File>
 			<File
 				RelativePath="..\CoreObjects\RideBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\RideCollection.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\RideCollection.h"
 				>
 			</File>
 			<File
@@ -859,6 +875,14 @@
 			</File>
 			<File
 				RelativePath="..\CoreObjects\Stall.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\StallCollection.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\StallCollection.h"
 				>
 			</File>
 			<File

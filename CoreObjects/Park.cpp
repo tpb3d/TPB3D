@@ -5,7 +5,7 @@
 //  Terraforming tool class
 //
 //  You should have received a copy of the GNU General Public License
-//  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
+//  along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
 
 #include <vector> // changed from list to vector so the collection can be scrolled in up and down
@@ -99,12 +99,14 @@ void Park::Update (float dt, int timeOfDay)
    {
       mCurPoint = 0;
    }
-   RidesIterator iRI;
-   for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
-   {
-      Ride* pRide = *iRI;
-      pRide->Update ((int)dt);
-   }
+   mRides.Update(dt, timeOfDay);
+   mStalls.Update(dt, timeOfDay);
+   //RidesIterator iRI;
+   //for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+   //{
+   //   Ride* pRide = *iRI;
+   //   pRide->Update ((int)dt);
+   //}
 }
 
 void Park::AddStall (Stall* pStall)
@@ -114,66 +116,71 @@ void Park::AddStall (Stall* pStall)
 
 Stall* Park::FindStallByType (StallType st)
 {
-   StallsIterator iSI;
-   for (iSI = mStalls.begin(); iSI != mStalls.end(); iSI++)
-   {
-      Stall* pStall = *iSI;
-      if (pStall->IsType (st) )
-      {
-         return pStall;
-      }
-   }
-   return NULL;
+   return mStalls.FindStallByType (st);
+   //StallsIterator iSI;
+   //for (iSI = mStalls.begin(); iSI != mStalls.end(); iSI++)
+   //{
+   //   Stall* pStall = *iSI;
+   //   if (pStall->IsType (st) )
+   //   {
+   //      return pStall;
+   //   }
+   //}
+   //return NULL;
 }
 
 void Park::AddRide (Ride* pRide)
 {
-   mRides.push_back (pRide);
+   mRides.AddRide (pRide);
 }
 
 Ride* Park::FindRideByType (RideType rt)
 {
-   RidesIterator iRI;
-   for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
-   {
-      Ride* pRide = *iRI;
-      if (pRide->IsType (rt) )
-      {
-         return pRide;
-      }
-   }
-   return NULL;
+   return mRides.FindRideByType (rt);
+   //RidesIterator iRI;
+   //for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+   //{
+   //   Ride* pRide = *iRI;
+   //   if (pRide->IsType (rt) )
+   //   {
+   //      return pRide;
+   //   }
+   //}
+   //return NULL;
 }
 
 Ride* Park::FindRideByName (const char *pszName)
 {
-   RidesIterator iRI;
-   for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
-   {
-      Ride* pRide = *iRI;
-      if (_stricmp(pRide->GetRideName(), pszName) == 0)
-      {
-         return pRide;
-      }
-   }
-   return NULL;
+   return mRides.FindRideByName (pszName);
+   //RidesIterator iRI;
+   //for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+   //{
+   //   Ride* pRide = *iRI;
+   //   if (_stricmp(pRide->GetRideName(), pszName) == 0)
+   //   {
+   //      return pRide;
+   //   }
+   //}
+   //return NULL;
 }
 
 void Park::Draw ()
 {
    mpTheTree->Draw ();
-   StallsIterator si;
-   for (si = mStalls.begin(); si != mStalls.end(); si++)
-   {
-      Stall* pStall = *si;
-      pStall->Draw ();
-   }
-   RidesIterator iRI;
-   for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
-   {
-      Ride* pRide = *iRI;
-      pRide->Draw ();
-   }
+   mStalls.Draw ();
+   mRides.Draw ();
+   //StallsIterator si;
+   //for (si = mStalls.begin(); si != mStalls.end(); si++)
+   //{
+   //   Stall* pStall = *si;
+   //   pStall->Draw ();
+   //}
+   //RidesIterator iRI;
+   //for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+   //{
+   //   Ride* pRide = *iRI;
+   //   pRide->Draw ();
+   //}
 //   mGhostObject.Draw();
 }
 

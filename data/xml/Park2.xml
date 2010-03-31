@@ -30,7 +30,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -41,7 +41,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -52,7 +52,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -63,7 +63,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -74,7 +74,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -85,7 +85,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -96,7 +96,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -107,7 +107,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -118,7 +118,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -129,7 +129,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -140,7 +140,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
                 <TrackSections>
@@ -151,7 +151,7 @@
                     <Distance>0</Distance>
                     <DegRotation>0</DegRotation>
                     <Radius>0</Radius>
-                    <PitchRadius>-4.31602e+008</PitchRadius>
+                    <PitchRadius>0</PitchRadius>
                     <Roll>0</Roll>
                 </TrackSections>
             </Branches>

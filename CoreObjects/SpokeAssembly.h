@@ -5,7 +5,7 @@
 //  SpokeAssembly class
 //
 //  You should have received a copy of the GNU General Public License
-//  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
+//  along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
 
 //  RideSpokeAssembly        Stationay Structural element such as the pylon for the yoyo and carousel.

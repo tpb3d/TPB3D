@@ -6,7 +6,7 @@
 //  Skybowl class
 //
 //  You should have received a copy of the GNU General Public License
-//  along with Theme Park Developer 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
+//  along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
 
 #include <iostream>
@@ -372,7 +372,7 @@ bool GameManager::LoadPark(TiXmlNode* pnPark, Park* pPark)
 
 bool GameManager::SavePark(TiXmlElement* pnPark, Park* pPark)
 {
-   Park::PathwayIterator it;
+   //Park::PathwayIterator it;
    ObjectTree& theTree = pPark->GetTree();     // Lobby is at mNo_SubPathways not zero
 
    TiXmlElement* pnTree = new TiXmlElement("Park");

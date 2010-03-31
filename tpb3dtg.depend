@@ -30,7 +30,7 @@
 	"../Graphics/ModelObject.h"
 	"CoreBase.h"
 
-1267890770 c:\users\ac\dev\opensource\tpb3dtg\physics\motionphysics.h
+1269439531 c:\users\ac\dev\opensource\tpb3dtg\physics\motionphysics.h
 	"../Types/Vector2.h"
 	"../Types/Vector3.h"
 
@@ -105,7 +105,7 @@
 1269259425 c:\users\ac\dev\opensource\tpb3dtg\graphics\objectbase.h
 	<SFML/Graphics.hpp>
 
-1268711829 c:\users\ac\dev\opensource\tpb3dtg\graphics\simplemeshobject.h
+1269474209 c:\users\ac\dev\opensource\tpb3dtg\graphics\simplemeshobject.h
 	"Texture.h"
 	"ObjectBase.h"
 
@@ -113,7 +113,7 @@
 	"../Graphics/ObjectBase.h"
 	"../Graphics/ObjectNode.h"
 
-1269300918 source:c:\users\ac\dev\opensource\tpb3dtg\builders\flatridebuilder.cpp
+1269474209 source:c:\users\ac\dev\opensource\tpb3dtg\builders\flatridebuilder.cpp
 	"../Graphics/VPoint.h"
 	"../CoreObjects/Ride.h"
 	"../CoreObjects/RideBase.h"
@@ -216,8 +216,9 @@
 	"RideFormer.h"
 	"../CoreObjects/Park.h"
 
-1267890773 c:\users\ac\dev\opensource\tpb3dtg\graphics\image.h
+1269474209 c:\users\ac\dev\opensource\tpb3dtg\graphics\image.h
 	<map>
+	<vector>
 	<string>
 
 1267890773 c:\users\ac\dev\opensource\tpb3dtg\graphics\meshnode.h
@@ -251,7 +252,7 @@
 1269231161 c:\users\ac\dev\opensource\tpb3dtg\graphics\objecttree.h
 	"ObjectBase.h"
 
-1267890773 c:\users\ac\dev\opensource\tpb3dtg\graphics\material.h
+1269486482 c:\users\ac\dev\opensource\tpb3dtg\graphics\material.h
 	"Texture.h"
 
 1267890773 c:\users\ac\dev\opensource\tpb3dtg\graphics\componentobject.h
@@ -699,7 +700,7 @@
 	"../Graphics/ObjectFactory.h"
 	"Terrain.h"
 
-1267890774 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\track.cpp
+1269313969 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\track.cpp
 	<SFML/System.hpp>
 	<SFML/Graphics.hpp>
 	"CamPath.h"
@@ -719,7 +720,7 @@
 	<SFML/System.hpp>
 	"TrackGuide.h"
 
-1267890774 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\tracksection.cpp
+1269313963 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\tracksection.cpp
 	<SFML/System.hpp>
 	<SFML/Graphics.hpp>
 	"CamPath.h"
@@ -872,7 +873,7 @@
 1267890773 c:\users\ac\dev\opensource\tpb3dtg\graphics\viewobject.h
 	"../Types/Vector3.h"
 
-1267890773 c:\users\ac\dev\opensource\tpb3dtg\graphics\camera.h
+1269436955 c:\users\ac\dev\opensource\tpb3dtg\graphics\camera.h
 	"../Types/Vector2.h"
 	"../Types/Rect.h"
 	"../Physics/MotionPhysics.h"
@@ -1337,4 +1338,30 @@
 	"../Graphics/ObjectFactory.h"
 	"HorizontalCrankHub.h"
 	<math.h>
+
+1268401992 source:c:\users\ac\dev\opensource\tpb3dtg\tpb3dtg.cpp
+	<iostream>
+	<CEGUI.h>
+	"Graphics/Camera.h"
+	"AI/PeepAgent.h"
+	"CoreObjects/Routes.h"
+	"CoreObjects/Park.h"
+	"Scene/Scene.h"
+	"Window/GUIManager.h"
+	"Scene/SceneEvent.h"
+	"Hub/GameManager.h"
+	"TPB3DTG.h"
+
+1269314657 c:\users\ac\dev\opensource\tpb3dtg\tpb3dtg.h
+	"Resources.h"
+	<utility>
+	<string>
+	<iostream>
+	<list>
+	<vector>
+	<SFML/System.hpp>
+	<SFML/Graphics.hpp>
+	"Window/Interface.h"
+	"Hub/Event.h"
+	"Utility/GameException.h"
 
