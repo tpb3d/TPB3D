@@ -24,17 +24,17 @@ class ToolBarDelegate
 {
 protected:
    std::string mToolSelected;
-   ToolBar& mToolBar;
+//   ToolBar& mToolBar;
 
 public:
-   ToolBarDelegate (const char* pszToolName, const ToolBar& toolbar)
-   :  mToolBar (toolbar)
+   ToolBarDelegate (const char* pszToolName) //, const ToolBar& toolbar)
+  // :  mToolBar (toolbar)
    {
-      mToolSelected = pasToolName;
+      mToolSelected = pszToolName;
    }
 public:
-   void OnToolHit (short ID)
-   {
-      mToolBar.Onhit();
-   }
+   void OnToolHit (short ID);
+//   {
+//      mToolBar.Onhit();
+//   }
 };

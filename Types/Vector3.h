@@ -13,7 +13,7 @@ public:
    // AC: Internal public structure matching the Vector3 class.
    // Provides fast rotation of the vector by presetting the sines and cosines.
    // This saves cycles by reducing time needed to redo that step reach rotation.
-   template <class T> struct VectorAngle3
+   template <class TT> struct VectorAngle3
    {
       T dCosX;
       T dSinX;
@@ -24,23 +24,23 @@ public:
 
       VectorAngle3 (double x,double y,double z)
       {
-         Set ((T)x, (T)y, (T)z);
+         Set ((TT)x, (TT)y, (TT)z);
       }
       VectorAngle3 (float x, float y, float z)
       {
-         Set ((T)x, (T)y, (T)z);
+         Set ((TT)x, (TT)y, (TT)z);
       }
-      inline void Set (T x, T y, T z)
+      inline void Set (TT x, TT y, TT z)
       {
          // pre-calc all these sines and cosines so the rotates are much faster
-         dCosX = (T)cos(0.01745329 * (180.0 - x));
-         dSinX = (T)sin(0.01745329 * (180.0 - x));
-         dCosY = (T)cos(0.01745329 * (180.0 - y));
-         dSinY = (T)sin(0.01745329 * (180.0 - y));
-         dCosZ = (T)cos(0.01745329 * (180.0 - z));
-         dSinZ = (T)sin(0.01745329 * (180.0 - z));
+         dCosX = (TT)cos(0.01745329 * (180.0 - x));
+         dSinX = (TT)sin(0.01745329 * (180.0 - x));
+         dCosY = (TT)cos(0.01745329 * (180.0 - y));
+         dSinY = (TT)sin(0.01745329 * (180.0 - y));
+         dCosZ = (TT)cos(0.01745329 * (180.0 - z));
+         dSinZ = (TT)sin(0.01745329 * (180.0 - z));
       }
-      typedef VectorAngle3<T> VectorAngle3T;
+      typedef VectorAngle3<TT> VectorAngle3T;
    };
 
    Vector3()

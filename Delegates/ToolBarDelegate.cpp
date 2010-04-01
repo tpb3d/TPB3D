@@ -20,11 +20,11 @@
 
 // Add a toolbar object along with a delegation to handle
 
-void ToolBarDelegateBase::operator += (ToolBar* pDelegation)
-{
-   mTools.insert(std::pair<short, ToolBar*>(pDelegation->GetID(), pDelegation));
-}
+//void ToolBarDelegate::operator += (ToolBar* pDelegation)
+//{
+//   mTools.insert(std::pair<short, ToolBar*>(pDelegation->GetID(), pDelegation));
+//}
 
-void ToolBarDelegateBase::OnToolHit (short ID)
+void ToolBarDelegate::OnToolHit (short ID)
 {
 }
