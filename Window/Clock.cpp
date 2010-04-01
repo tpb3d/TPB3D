@@ -17,6 +17,7 @@
 #include <cstring>
 #include <map>
 #include <string>
+#include "../Types/String.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/Animation.h"
 #include "../Graphics/Camera.h"
@@ -31,11 +32,35 @@ namespace Gfx
    const unsigned char kszColor2[] = { 172,160,52,255 }; // light gold
 }
 
+const int Clock::kDays[] = { 0,31,59,90,120,151,181,212,243,273,303,234 };
+
+const char* Clock::pszDaysOfWeek[] = // move to resources with more internationaliztion
+{
+   "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat",
+   "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", // Credit to Google for Translation
+   "Sonntag", "Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag", "Samstag", // Deutsch
+   "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado", // Espaniol
+   "Dimanche", "Lundi", "mardi", "mercredi", "Jeudi", "Vendredi", "Samedi", // Franch
+   "Sabato", "Domenica", "Lunedi", "Martedì", "Mercoledì", "Giovedi", "Venerdì" // Italiano
+};
+const char* Clock::pszMonths[] = // move to resources with more internationaliztion
+{
+   "Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec", // generic
+   "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December", // English
+   "Januar", "Februar", "Marz", "April", "Mai", "June", "Juli", "August", "September", "Oktober", "November", "Dezember", // Deutsch
+   "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre", // Espaniol
+   "Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre",  // Franch
+   "Gennaio", "Febbraio", "Marzo", "Aprile", "Maggio", "Giugno", "Luglio", "Agosto", "Settembre", "Ottobre", "Novembre", "Dicembre" // Italiano
+};
+
 Clock::Clock ()
 {
    mTimeOfDay = 0;
    mDayOfYear = 1;
-   mYear = 1950;
+   mDayOfWeek = 6;
+   mMonth = 0;
+   mYear = 2010;
+   mLanguageCode = 0;
 
    ImageManager * images = ImageManager::GetInstance ();
    Texture* pTex = images->GetTexture ("clock.png", GL_RGBA);
@@ -67,8 +92,7 @@ Clock::~Clock ()
 {
 }
 
-void
-Clock::PosCalc ()
+void Clock::PosCalc ()
 {
    Camera* pCam = Camera::GetInstance ();
    mClockFace->SetPosition ((pCam->GetCamSize ().x / 2) - 32, pCam->GetHeight()-64, 0);
@@ -76,8 +100,39 @@ Clock::PosCalc ()
    mMinuteHand.Position = Vector3f(( pCam->GetInstance()->GetCamSize ().x / 2), pCam->GetHeight() - 32, 0.1f );
 }
 
-void
-Clock::Update (int minutes)
+const char* Clock::DayOfWeekToString()
+{
+   if( mDayOfWeek < 0 || mDayOfWeek > 6 )
+      mDayOfWeek = 0;
+
+   return pszDaysOfWeek [(mDayOfWeek + mLanguageCode*7)];
+}
+
+const char* Clock::MonthToString()
+{
+   if( mMonth < 0 || mMonth > 11 )
+      mMonth = 0;
+
+   return pszMonths [(mMonth + mLanguageCode*12)];
+}
+
+const char* Clock::DateString()
+{
+   int iDay = mDayOfYear - kDays[mMonth];
+   if( !((mYear & 1000) == 0))
+   {
+      if( mMonth > 1 && (mYear % 4) == 0 ) iDay++; // month = 0 is Jan, 1 is Feb etc.
+   }
+   static std::string str;// = MonthToString();
+   str = ToString(iDay);
+   str += "-";
+   str += ToString(mMonth+1);
+   str += "-";
+   str += ToString(mYear);
+   return str.c_str();
+}
+
+void Clock::Update (int minutes)
 {
    mTimeOfDay += minutes;
    if (mTimeOfDay > 23*60+59)   // only 1440 minutes in a day
@@ -86,8 +141,26 @@ Clock::Update (int minutes)
       mDayOfYear++;
       if (mDayOfYear > 365)
       {
-         mDayOfYear = 1;
-         mYear++;
+         if( mDayOfYear > 366 || (mYear & 1000) == 0 || (mYear % 4) > 0 ) // check leap year
+         {
+            mDayOfYear = 1;
+            mYear++;
+         }
+      }
+      mDayOfWeek = (mDayOfWeek > 6) ? 0 : mDayOfWeek+1;
+      int iDays = mDayOfYear;
+      if( !((mYear & 1000) == 0))
+      {
+         if( mDayOfYear > 59 && (mYear % 4) > 0 ) iDays--; // month = 0 is Jan, 1 is Feb etc. Compensate for leap day
+      }
+      for( int idx = 11; mDayOfYear > 31 && idx > 0; ++idx )
+      {
+         if( iDays <= kDays[idx] )
+         {
+   //            iDays = Days[idx];
+            mMonth = idx;
+            break;
+         }
       }
    }
    int mins = mTimeOfDay % 60;
@@ -96,8 +169,7 @@ Clock::Update (int minutes)
    mMinuteHand.Angle =  360.0f / 60 * mins;
 }
 
-void
-Clock::Draw ()
+void Clock::Draw ()
 {
    Render( mClockFace );
    Render( &mHourHand );

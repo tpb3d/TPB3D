@@ -28,10 +28,11 @@
 
 #define LOOK "WindowsLook"
 
-GUIManager::GUIManager(EventHandler& revh) //, Park* Park) can't pass a Park as there will be more than one. Think events
-:  mpRenderer(NULL)
-,  mpSystem(NULL)
-,  mEVH(revh)
+GUIManager::GUIManager(EventHandler& revh, Interface& rInterface) //, Park* Park) can't pass a Park as there will be more than one. Think events
+:  mpRenderer (NULL)
+,  mpSystem (NULL)
+,  mEVH (revh)
+,  mInterface (rInterface)
 {
 	InitMaps();
 	try
@@ -101,7 +102,7 @@ void GUIManager::Draw()
 }
 
 static FRCSWindow frcswin;
-static SettingsWindow setwin;
+static SettingsWindow* setwin = NULL;
 static ToolsWindow ToolsWin;
 
 /* Handling events... */
@@ -130,7 +131,11 @@ bool GUIManager::OnTools ()
 
 bool GUIManager::OnSettings ()
 {
-   setwin.Create (this->mpRootWind);
+   if (setwin == NULL)
+   {
+      setwin = new SettingsWindow (mInterface);
+   }
+   setwin->Create (this->mpRootWind);
    return true;
 }
 

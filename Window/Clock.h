@@ -28,8 +28,11 @@ class Clock : public Gfx::ViewObject
 {
    AnimationSingle * mClockFace;
    int mTimeOfDay;
-   int mDayOfYear;
    int mYear;
+   int mMonth;
+   int mDayOfWeek;
+   int mDayOfYear;
+   int mLanguageCode;
 
    // These will pump directly into the transform for the hands
    float mAngleHour;  // for the render
@@ -37,18 +40,29 @@ class Clock : public Gfx::ViewObject
 
    SimpleQuad mMinuteHand;
    SimpleQuad mHourHand;
+protected:
+   static const char* pszDaysOfWeek[];
+   static const char* pszMonths[];
+   static const int kDays[];
 
 public:
    Clock ();
    ~Clock ();
 
 public:
+   // properties
    int GetTimeOfDay() { return mTimeOfDay; }
+   int GetDayOfWeek() { return mDayOfWeek; }
+   int GetDayOfYear() { return mDayOfYear; }
+   void SetLanguage( int code ) { mLanguageCode =  code; }
 
    void PosCalc ();
    void Update (int minutes);
    void Draw ();
 
+   const char* DayOfWeekToString();
+   const char* MonthToString();
+   const char* DateString();
 };
 
 #endif // _CLOCK_H

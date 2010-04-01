@@ -28,6 +28,12 @@ class EventHandler;
 class Interface : public EventBase
 {
 private:
+   bool mChangedSettings;
+   bool mSoundFxOn;
+   bool mMusicOn;
+   int mLanguageCode;
+   int mCurDay;
+
 protected:
    Clock mClock;
    Stats mStats;
@@ -37,9 +43,22 @@ protected:
 
 public:
    Interface (EventHandler& revh);
+   ~Interface ();
+
+   void SetLanguageCode( int code );
+   void SetSoundFx (bool bFX);
+   void SetMusic ( bool bMusic);
+   int GetLanguageCode() { return mLanguageCode; }
+   bool GetSoundFx() { return mSoundFxOn; }
+   bool GetMusic() { return mMusicOn; }
+
+   void LoadSettings();
+   void SaveSettings();
+
+   int GetTimeOfDay() { return mClock.GetTimeOfDay(); }
+   int GetDayOfYear() { return mClock.GetDayOfYear(); }
 
    Stats& GetStats() { return mStats; }
-   int GetTimeOfDay() { return mClock.GetTimeOfDay();  }
 
    virtual bool OnMouseDown (sf::Mouse::Button Button, Vector2i point, Vector2i pointb);
    virtual bool OnMouseUp (sf::Mouse::Button Button, Vector2i pointa, Vector2i pointb);

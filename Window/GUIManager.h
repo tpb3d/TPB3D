@@ -8,11 +8,30 @@
 class EventHandler;
 class ObjectBase;
 class Park;
+class Interface;
 
 class GUIManager : public EventBase
 {
+private:
+
+	CEGUI::System* mpSystem;
+	CEGUI::OpenGLRenderer* mpRenderer;
+	CEGUI::WindowManager* mpWM;
+	CEGUI::Window* mpRootWind;
+
+	typedef std::map<sf::Key::Code, CEGUI::Key::Scan> KeyMap;
+	typedef std::map<sf::Mouse::Button, CEGUI::MouseButton> MouseButtonMap;
+
+	KeyMap mKeyMap;
+	MouseButtonMap mMouseButtonMap;
+	//bool mPlacingRoom;
+	//ObjectBase* mRoom;
+
+   EventHandler& mEVH; // tap the event handler for the app
+   Interface& mInterface;
+
 public:
-	GUIManager(EventHandler& evh); //, Park* Park);
+	GUIManager(EventHandler& evh, Interface& rInterface); //, Park* Park);
 	~GUIManager();
 
    bool OnToolHit (const HR_Events tool);
@@ -44,23 +63,6 @@ public:
 	void setRootWindow(CEGUI::Window* Win) {mpSystem->setGUISheet(Win); mpRootWind = Win;}
 	CEGUI::Window* LoadLayout(const std::string& Name);
 	CEGUI::Window* LoadLayout(const std::string& Name, CEGUI::Window* Parent);
-
-private:
-
-	CEGUI::System* mpSystem;
-	CEGUI::OpenGLRenderer* mpRenderer;
-	CEGUI::WindowManager* mpWM;
-	CEGUI::Window* mpRootWind;
-
-	typedef std::map<sf::Key::Code, CEGUI::Key::Scan> KeyMap;
-	typedef std::map<sf::Mouse::Button, CEGUI::MouseButton> MouseButtonMap;
-
-	KeyMap mKeyMap;
-	MouseButtonMap mMouseButtonMap;
-	//bool mPlacingRoom;
-	//ObjectBase* mRoom;
-
-   EventHandler& mEVH; // tap the event handler for the app
 
 	void InitMaps();
 	CEGUI::Key::Scan CEKey(sf::Key::Code Code);

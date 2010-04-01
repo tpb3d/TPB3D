@@ -16,8 +16,8 @@
 // Tick Tock!
 
 #pragma once
-#ifndef _SETTINGSWINDOW_H
-#define _SETTINGSWINDOW_H
+
+class Interface;
 
 namespace CEGUI
 {
@@ -28,16 +28,23 @@ class SettingsWindow
 {
 protected:
    CEGUI::FrameWindow* mpWnd;
+   CEGUI::Checkbox* mpSoundFx;
+   CEGUI::Checkbox* mpMusic;
+   Interface& mInterface;
 public:
-   SettingsWindow ();
+   SettingsWindow (Interface& rInterface);
    ~SettingsWindow ();
 
 public:
    bool Create(CEGUI::Window* pRoot);
    void Destroy ();
 
-   bool OnSoundCheck(const CEGUI::EventArgs& e);
+   bool OnMusicCheck (const CEGUI::EventArgs& e);
+   bool OnSoundCheck (const CEGUI::EventArgs& e);
    bool OnClose (const CEGUI::EventArgs& e);
+   bool OnEnglish (const CEGUI::EventArgs& e);
+   bool OnSpanish (const CEGUI::EventArgs& e);
+   bool OnFrench (const CEGUI::EventArgs& e);
+   bool OnDeutsch (const CEGUI::EventArgs& e);
+   bool OnItalian (const CEGUI::EventArgs& e);
 };
-
-#endif // _SETTINGSWINDOW_H

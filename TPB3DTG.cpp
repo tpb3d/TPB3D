@@ -68,8 +68,8 @@ main ()
       SceneEvent SceneEV(&theScene, gm);
 
       EventHandler Events;
-      GUIManager Gui (Events); //, &thePark);
       Interface* pInterface = new Interface(Events);
+      GUIManager Gui (Events, *pInterface); //, &thePark);
       Events.Add (&Gui);
       Events.Add (cam);
    

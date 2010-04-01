@@ -18,6 +18,8 @@
 #include <SFML/Graphics.hpp>
 #include <string.h>
 #include <map>
+#include "../Types/String.h"
+#include "../Settings/Settings.h"
 #include "../Physics/MotionPhysics.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/Animation.h"
@@ -34,6 +36,60 @@ Interface::Interface (EventHandler& revh)
 {
    mpToolBar = new ToolBar(5, HR_MainMenu);
    LoadToolbar();
+   mLanguageCode = 0;
+   mSoundFxOn = false;
+   mMusicOn = false;
+   LoadSettings();
+   mChangedSettings = false;
+   mCurDay = 0;
+}
+
+Interface::~Interface ()
+{
+   if (mChangedSettings)
+   {
+      SaveSettings();
+   }
+}
+
+void Interface::LoadSettings()
+{
+   Settings::SettingsIni theSettings;
+   theSettings.Load();
+   bool bHasSettings = false;
+   if( theSettings.SettingsAreLoaded() )
+   {
+      int iCode = FromString<int>(theSettings.Get("Language.Code"));
+      if( iCode >0 && iCode < 5 )
+      {
+         SetLanguageCode (iCode);
+         bHasSettings = true;
+      }
+      mSoundFxOn = (theSettings.Get ("Sound.FX")[0] == '1' ? true : false ); // its a string, at the least it will have a null terminator
+      mMusicOn = (theSettings.Get ("Sound.Music")[0] == '1' ? true : false );
+   }
+   if (!bHasSettings)
+   {
+      SetLanguageCode (1);
+      theSettings.Set ("Sound.FX", (mSoundFxOn)? "1":"0", false );
+      theSettings.Set ("Sound.Music", (mMusicOn)? "1":"0", false );
+      theSettings.Set ("Language.Code", "1", true);
+   }
+}
+
+void Interface::SaveSettings()
+{
+   Settings::SettingsIni theSettings;
+   theSettings.Load();
+   bool bHasSettings = false;
+   //char buf[8];
+   if( theSettings.SettingsAreLoaded() )
+   {
+
+      theSettings.Set ("Sound.FX", (mSoundFxOn)? "1":"0", false );
+      theSettings.Set ("Sound.Music", (mMusicOn)? "1":"0", false );
+      theSettings.Set ("Language.Code", ToString(mLanguageCode), true);
+   }
 }
 
 void Interface::LoadToolbar ()
@@ -62,20 +118,50 @@ void Interface::Update (float dt)
 {
    static float count = 0;
    mClock.Update(1); // 1 minute update
-   if( ++count > dt )
+   if( count < 1)
    {
-      count = 0;
+      count = dt;
+      if( mClock.GetDayOfYear() != mCurDay )
+      {
+         mStats.SetDayOfWeek (mClock.DayOfWeekToString());
+         mStats.SetDate (mClock.DateString());
+         mCurDay = mClock.GetDayOfYear();
+      }
       mStats.Update();
    }
+   count--;
 }
 
-void
-Interface::Draw ()
+void Interface::Draw ()
 {
    
    mpToolBar->Draw ();
    mClock.Draw ();
    mStats.Draw ();
+}
+
+void Interface::SetLanguageCode (int code)
+{
+   mLanguageCode = code;
+   mClock.SetLanguage (code);
+   mChangedSettings = true;
+   mCurDay = 0;
+}
+
+void Interface::SetSoundFx (bool bFX)
+{
+   mSoundFxOn = bFX;
+   // toddle the sound fx
+   mChangedSettings = true;
+   mCurDay = 0;
+}
+
+void Interface::SetMusic ( bool bMusic)
+{
+   mMusicOn = bMusic;
+   // toggle the music player
+   mChangedSettings = true;
+   mCurDay = 0;
 }
 
 bool Interface::OnMouseDown (sf::Mouse::Button Button, Vector2i pointa, Vector2i pointb)
