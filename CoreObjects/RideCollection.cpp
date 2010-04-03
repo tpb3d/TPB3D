@@ -14,6 +14,7 @@
 #include "Park.h"
 #include "RideCollection.h"
 
+
 RideCollection::RideCollection ()
 {
 }
@@ -57,7 +58,7 @@ Ride* RideCollection::FindRideByName (const char *pszName)
    for (iRI = this->begin(); iRI != this->end(); iRI++)
    {
       Ride* pRide = *iRI;
-      if (_stricmp(pRide->GetRideName(), pszName) == 0)
+      if (strcasecmp(pRide->GetRideName(), pszName) == 0)
       {
          return pRide;
       }

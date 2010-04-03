@@ -1,5 +1,7 @@
 #pragma once
 
+#include <cstring> // GCC needs this
+
 #include "../Storage/SerializerBase.h"
 #include "PartGuide.h"
 

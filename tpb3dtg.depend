@@ -8,14 +8,20 @@
 	"../AI/PeepAgent.h"
 	"PathAgent.h"
 
+1270094343 .h"
+
 1270006125 c:\users\ac\dev\opensource\tpb3dtg\people\person.h
 	<map>
 	"../Graphics/ModelObject.h"
+
+1270094343 cs/ModelObject.h"
 
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\modelobject.h
 
 1270006121 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\routes.h
 	<vector>
+
+1267890771 
 
 1270006123 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\routebase.h
 
@@ -27,18 +33,26 @@
 	"StallCollection.h"
 	"GhostObject.h"
 
+1270006124 ct.h"
+
 1270006122 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ghostobject.h
 	"../Physics/MotionPhysics.h"
 	"../Graphics/Animation.h"
 	"../Graphics/ModelObject.h"
 	"CoreBase.h"
 
+1270006122 h"
+
 1270006125 c:\users\ac\dev\opensource\tpb3dtg\physics\motionphysics.h
 	"../Types/Vector2.h"
 	"../Types/Vector3.h"
 
+1270094343 Vector3.h"
+
 1267890774 c:\users\ac\dev\opensource\tpb3dtg\types\vector2.h
 	<SFML/Graphics.hpp>
+
+1270094644 hics.hpp>
 
 1270094644 c:\users\ac\dev\opensource\tpb3dtg\types\vector3.h
 	<SFML/Graphics.hpp>
@@ -47,9 +61,13 @@
 	"../Physics/MotionPhysics.h"
 	"Texture.h"
 
+1270008029 "
+
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\texture.h
 	<cstring>
 	"SFML/Graphics.hpp"
+
+1270006124 hics.hpp"
 
 1270094343 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\corebase.h
 	"../Types/Vector3.h"
@@ -101,9 +119,13 @@
 	"CoreBase.h"
 	"../Graphics/ObjectNode.h"
 
+1270006123 cs/ObjectNode.h"
+
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\objectnode.h
 	"ObjectBase.h"
 	"SimpleMeshObject.h"
+
+1267890773 hObject.h"
 
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\objectbase.h
 	"../Types/Vector3.h"
@@ -111,6 +133,8 @@
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\simplemeshobject.h
 	"Texture.h"
 	"ObjectBase.h"
+
+1269921060 e.h"
 
 1269308702 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridepart.h
 	"../Graphics/ObjectBase.h"
@@ -137,11 +161,15 @@
 	"PartGuide.h"
 	"FlatRideBuilder.h"
 
+1270094343 uilder.h"
+
 1269143449 c:\users\ac\dev\opensource\tpb3dtg\graphics\vpoint.h
 	"ObjectBase.h"
 
 1270006123 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridebase.h
 	"../Graphics/ObjectBase.h"
+
+1270006122 cs/ObjectBase.h"
 
 1270006123 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridesection.h
 	"../Graphics/ObjectBase.h"
@@ -168,6 +196,8 @@
 	"RideNode.h"
 	"../Physics/ServoPhysics.h"
 
+1270006123 s/ServoPhysics.h"
+
 1270006125 c:\users\ac\dev\opensource\tpb3dtg\physics\servophysics.h
 
 1270006122 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\carouselassembly.h
@@ -176,6 +206,8 @@
 1270006123 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\rotationhub.h
 	"Hub.h"
 	"../Physics/RotationPhysics.h"
+
+1270006123 s/RotationPhysics.h"
 
 1270006125 c:\users\ac\dev\opensource\tpb3dtg\physics\rotationphysics.h
 
@@ -204,6 +236,8 @@
 	"../Types/Vector3.h"
 	"BuilderBase.h"
 
+1270094343 se.h"
+
 1270006122 source:c:\users\ac\dev\opensource\tpb3dtg\builders\rideformer.cpp
 	<math.h>
 	"../CoreObjects/RideBase.h"
@@ -216,6 +250,8 @@
 	"RideFormer.h"
 	"../CoreObjects/Park.h"
 
+1270006122 jects/Park.h"
+
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\image.h
 	<map>
 	<vector>
@@ -224,6 +260,8 @@
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\meshnode.h
 	"ObjectBase.h"
 	"TexturedMesh.h"
+
+1270006124 esh.h"
 
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\texturedmesh.h
 
@@ -272,6 +310,8 @@
 	"../Graphics/QuadMeshObject.h"
 	"../Graphics/ObjectFactory.h"
 	"TerrainFormer.h"
+
+1270006122 rmer.h"
 
 1270006123 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\terrain.h
 	<vector>
@@ -350,6 +390,8 @@
 1270006122 c:\users\ac\dev\opensource\tpb3dtg\builders\treeformer.h
 	"../Graphics/SimpleMeshObject.h"
 
+1270006122 cs/SimpleMeshObject.h"
+
 1270006122 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\arm.cpp
 	"../Storage/SerializerBase.h"
 	"../Types/Vector3.h"
@@ -358,6 +400,8 @@
 	"../Graphics/ObjectFactory.h"
 	"Arm.h"
 	"../Graphics/TexturedMesh.h"
+
+1270006123 cs/TexturedMesh.h"
 
 1270006125 c:\users\ac\dev\opensource\tpb3dtg\storage\serializerbase.h
 
@@ -372,6 +416,8 @@
 	"Park.h"
 	"Building.h"
 	"BuildStrategies.h"
+
+1267890774 tegies.h"
 
 1269921060 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\pathway.h
 	<vector>
@@ -391,6 +437,8 @@
 	"../Graphics/ObjectFactory.h"
 	"../Graphics/TexturedStrip.h"
 	"CableHingeJoint.h"
+
+1270006122 eJoint.h"
 
 1269258256 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\building.cpp
 	<iostream>
@@ -446,6 +494,8 @@
 	"../Graphics/SimpleMeshObject.h"
 	"../Graphics/ObjectFactory.h"
 
+1270006122 cs/ObjectFactory.h"
+
 1270006122 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ghostobject.cpp
 	"../Graphics/Image.h"
 	"../Types/String.h"
@@ -457,6 +507,8 @@
 1270006122 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\hingejoint.cpp
 	<string>
 	"HingeJoint.h"
+
+1270006125 t.h"
 
 1270006122 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\hingejoint.h
 	"JointBase.h"
@@ -509,6 +561,8 @@
 	"../Storage/SerializerBase.h"
 	"../xml/tinyxml/tinyxml.h"
 	"../Types/String.h"
+
+1269921060 String.h"
 
 1267890771 c:\users\ac\dev\opensource\tpb3dtg\xml\tinyxml\tinyxml.h
 	<ctype.h>
@@ -573,6 +627,8 @@
 	"../People/Person.h"
 	"PersonQueue.h"
 
+1270007416 ue.h"
+
 1270006123 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\pivotjoint.cpp
 	<string>
 	"PivotJoint.h"
@@ -592,6 +648,8 @@
 	"../Graphics/ObjectFactory.h"
 	"../Storage/SerializerBase.h"
 
+1270006124 e/SerializerBase.h"
+
 1270006123 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridebase.cpp
 	<string>
 	"RideBase.h"
@@ -601,8 +659,12 @@
 	<string>
 	"RotationActuator.h"
 
+1270006123 ctuator.h"
+
 1270006123 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\rotationactuator.h
 	"ActuatorBase.h"
+
+1270006123 ase.h"
 
 1270006122 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\actuatorbase.h
 	"../Graphics/ObjectBase.h"
@@ -623,6 +685,8 @@
 1270006123 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\rotationjoint.cpp
 	<string>
 	"RotationJoint.h"
+
+1270006123 oint.h"
 
 1270006123 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\routes.cpp
 	<vector>
@@ -670,6 +734,8 @@
 1270006123 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\superstructure.cpp
 	<string>
 	"SuperStructure.h"
+
+1270006123 cture.h"
 
 1270006123 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\superstructure.h
 
@@ -732,6 +798,8 @@
 	"ObjectFactory.h"
 	"ComplexMeshObject.h"
 
+1267890773 shObject.h"
+
 1268711829 source:c:\users\ac\dev\opensource\tpb3dtg\graphics\componentobject.cpp
 	<cstring>
 	<SFML/System.hpp>
@@ -740,11 +808,15 @@
 	"ComponentObject.h"
 	"ObjectFactory.h"
 
+1270006124 tory.h"
+
 1270006124 source:c:\users\ac\dev\opensource\tpb3dtg\graphics\fireanimation.cpp
 	<vector>
 	"../Types/Vector2.h"
 	"FireAnimation.h"
 	"../Utility/GameException.h"
+
+1270006124 y/GameException.h"
 
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\fireanimation.h
 	"Animation.h"
@@ -779,6 +851,8 @@
 	"Matrix16.h"
 	"../Types/MathStuff.h"
 
+1267890773 MathStuff.h"
+
 1267890773 c:\users\ac\dev\opensource\tpb3dtg\graphics\matrix16.h
 	"../Types/Vector3.h"
 
@@ -803,6 +877,8 @@
 
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\tiler.h
 	"../Graphics/Texture.h"
+
+1270006124 cs/Texture.h"
 
 1270006123 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridenode.cpp
 	"RideNode.h"
@@ -848,6 +924,8 @@
 	"../Graphics/ViewObject.h"
 	"../Graphics/Animation.h"
 
+1270006125 cs/Animation.h"
+
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\graphics\viewobject.h
 	"../Types/Vector3.h"
 
@@ -857,6 +935,8 @@
 	"../Physics/MotionPhysics.h"
 	"../Window/Interface.h"
 	"../Hub/Event.h"
+
+1270006125 ent.h"
 
 1267890774 c:\users\ac\dev\opensource\tpb3dtg\types\rect.h
 	<SFML/Graphics.hpp>
@@ -878,6 +958,8 @@
 
 1270094343 c:\users\ac\dev\opensource\tpb3dtg\hub\event.h
 	"../Types/Vector2.h"
+
+1267890775 Vector2.h"
 
 1269921060 source:c:\users\ac\dev\opensource\tpb3dtg\graphics\objectbase.cpp
 	<math.h>
@@ -958,6 +1040,8 @@
 	"ObjectBase.h"
 	"TexturedStrip.h"
 
+1270006124 trip.h"
+
 1270006124 source:c:\users\ac\dev\opensource\tpb3dtg\graphics\tiler.cpp
 	"Tiler.h"
 	"../Utility/GameException.h"
@@ -1003,6 +1087,8 @@
 	<string>
 	"GimbalJoint.h"
 
+1270006122 nt.h"
+
 1270006122 c:\users\ac\dev\opensource\tpb3dtg\coreobjects\gimbaljoint.h
 	"JointBase.h"
 
@@ -1011,6 +1097,8 @@
 	"../Graphics/Image.h"
 	"../Graphics/Animation.h"
 	"GuestPerson.h"
+
+1270006125 on.h"
 
 1270006124 c:\users\ac\dev\opensource\tpb3dtg\people\guestperson.h
 	"Person.h"
@@ -1027,6 +1115,8 @@
 	"../Graphics/Image.h"
 	"../Graphics/Animation.h"
 	"SpecialPerson.h"
+
+1270006125 rson.h"
 
 1270006125 c:\users\ac\dev\opensource\tpb3dtg\people\specialperson.h
 	"Person.h"
@@ -1053,15 +1143,21 @@
 	<iostream>
 	"MotionPhysics.h"
 
+1270006125 sics.h"
+
 1270006125 source:c:\users\ac\dev\opensource\tpb3dtg\physics\rotationphysics.cpp
 	<math.h>
 	<iostream>
 	"RotationPhysics.h"
 
+1270006125 hysics.h"
+
 1270006125 source:c:\users\ac\dev\opensource\tpb3dtg\physics\servophysics.cpp
 	<math.h>
 	<iostream>
 	"ServoPhysics.h"
+
+1270006125 ics.h"
 
 1270094343 source:c:\users\ac\dev\opensource\tpb3dtg\scene\scene.cpp
 	<iostream>
@@ -1112,6 +1208,8 @@
 	<lib3ds.h>
 	"3DSHandler.h"
 
+1270094343 r.h"
+
 1267890774 source:c:\users\ac\dev\opensource\tpb3dtg\storage\ms3dfile.cpp
 	"MS3DFile.h"
 	<set>
@@ -1125,8 +1223,12 @@
 	"../Types/String.h"
 	"XMLSerializer.h"
 
+1270006125 izer.h"
+
 1270006125 c:\users\ac\dev\opensource\tpb3dtg\storage\xmlserializer.h
 	"SerializerBase.h"
+
+1270006125 rBase.h"
 
 1267890774 source:c:\users\ac\dev\opensource\tpb3dtg\types\mathstuff.cpp
 	"MathStuff.h"
@@ -1138,6 +1240,8 @@
 	<string>
 	<exception>
 	"GameException.h"
+
+1267890774 tion.h"
 
 1270006125 source:c:\users\ac\dev\opensource\tpb3dtg\window\clock.cpp
 	<cstring>
@@ -1177,6 +1281,8 @@
 	<CEGUI.h>
 	"FRCSWindow.h"
 
+1270006125 w.h"
+
 1270006125 c:\users\ac\dev\opensource\tpb3dtg\window\frcswindow.h
 
 1270094343 source:c:\users\ac\dev\opensource\tpb3dtg\window\guimanager.cpp
@@ -1202,6 +1308,8 @@
 	<CEGUI.h>
 	<RendererModules/OpenGLGUIRenderer/openglrenderer.h>
 
+1268711829 odules/OpenGLGUIRenderer/openglrenderer.h>
+
 1270094343 source:c:\users\ac\dev\opensource\tpb3dtg\window\interface.cpp
 	<iostream>
 	<SFML/Graphics.hpp>
@@ -1223,9 +1331,13 @@
 1267890775 source:c:\users\ac\dev\opensource\tpb3dtg\window\loadsave.cpp
 	"CEGUIPropertyHelper.h"
 
+1267890775 ertyHelper.h"
+
 1270006125 source:c:\users\ac\dev\opensource\tpb3dtg\window\settingswindow.cpp
 	<CEGUI.h>
 	"SettingsWindow.h"
+
+1270006125 indow.h"
 
 1270006125 source:c:\users\ac\dev\opensource\tpb3dtg\window\stats.cpp
 	<map>
@@ -1254,12 +1366,16 @@
 	"../Graphics/Camera.h"
 	"ToolButton.h"
 
+1270006125 n.h"
+
 1270006125 source:c:\users\ac\dev\opensource\tpb3dtg\window\toolswindow.cpp
 	<iostream>
 	"CEGUI.h"
 	"CEGUIPropertyHelper.h"
 	"../Graphics/Image.h"
 	"ToolsWindow.h"
+
+1270006125 ow.h"
 
 1267890771 source:c:\users\ac\dev\opensource\tpb3dtg\xml\tinyxml\tinystr.cpp
 	"tinystr.h"
@@ -1278,6 +1394,8 @@
 	<stddef.h>
 	"tinyxml.h"
 	<windows.h>
+
+1267890771 >
 
 1267890771 source:c:\users\ac\dev\opensource\tpb3dtg\xml\tinyxml\xmltest.cpp
 	<iostream>
@@ -1333,6 +1451,8 @@
 	"Hub/Event.h"
 	"Utility/GameException.h"
 
+1270006125 ameException.h"
+
 1269785446 c:\users\ac\dev\opensource\tpb3dtg\builders\partguide.h
 	"../Types/Vector3.h"
 
@@ -1361,6 +1481,8 @@
 	"Park.h"
 	"PathCollection.h"
 
+1270007681 ction.h"
+
 1270007681 source:c:\users\ac\dev\opensource\tpb3dtg\coreobjects\ridecollection.cpp
 	<vector>
 	"Pathway.h"
@@ -1374,6 +1496,8 @@
 	"Stall.h"
 	"Park.h"
 	"StallCollection.h"
+
+1270007555 ection.h"
 
 1270094343 c:\users\ac\dev\opensource\tpb3dtg\delegates\builddelegate.h
 	<string>
@@ -1389,12 +1513,344 @@
 	"../CoreObjects/Park.h"
 	"BuildDelegate.h"
 
+1270094343 gate.h"
+
 1270095266 source:c:\users\ac\dev\opensource\tpb3dtg\delegates\toolbardelegate.cpp
 	<iostream>
 	"../Window/ToolBar.h"
 	"ToolBarDelegate.h"
 
+1270095266 legate.h"
+
 1270095303 c:\users\ac\dev\opensource\tpb3dtg\delegates\toolbardelegate.h
 	<string>
 	<map>
+
+1270093939 source:/home/daniel/Desktop/tpb3dtg check-in svn current/AI/PathAgent.cpp
+	<vector>
+	"../People/Person.h"
+	"../CoreObjects/Routes.h"
+	"../CoreObjects/RouteBase.h"
+	"../CoreObjects/Park.h"
+	"../AI/PeepAgent.h"
+	"PathAgent.h"
+
+1270249223 /home/daniel/Desktop/tpb3dtg check-in svn current/People/Person.h
+	<map>
+	<list>
+	"../Graphics/ModelObject.h"
+	"../CoreObjects/Park.h"
+	"../Types/Vector3.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/ModelObject.h
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Park.h
+	"../Graphics/ModelObject.h"
+	"Routes.h"
+	"PathCollection.h"
+	"RideCollection.h"
+	"StallCollection.h"
+	"GhostObject.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Routes.h
+	<vector>
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/PathCollection.h
+	<string>
+	<vector>
+	"Pathway.h"
+
+1269988663 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Pathway.h
+	<vector>
+	<list>
+	"../Types/Vector2.h"
+	"CoreBase.h"
+	"../Graphics/ObjectNode.h"
+
+1269714752 /home/daniel/Desktop/tpb3dtg check-in svn current/Types/Vector2.h
+	<SFML/Graphics.hpp>
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/CoreBase.h
+	"../Types/Vector3.h"
+
+1270097913 /home/daniel/Desktop/tpb3dtg check-in svn current/Types/Vector3.h
+	<SFML/Graphics.hpp>
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/ObjectNode.h
+	"ObjectBase.h"
+	"SimpleMeshObject.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/ObjectBase.h
+	"../Types/Vector3.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/SimpleMeshObject.h
+	"Texture.h"
+	"ObjectBase.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/Texture.h
+	<cstring>
+	"SFML/Graphics.hpp"
+
+1270009352 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/RideCollection.h
+	<string>
+	<vector>
+	"Ride.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Ride.h
+	"CoreBase.h"
+	"../Graphics/ObjectNode.h"
+
+1270263736 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/StallCollection.h
+	<string>
+	<vector>
+	"Stall.h"
+
+1270009352 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Stall.h
+	"Vendor.h"
+	"PersonQueue.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Vendor.h
+	<string>
+	<vector>
+	"../Graphics/ObjectNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/PersonQueue.h
+	<queue>
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/GhostObject.h
+	"../Physics/MotionPhysics.h"
+	"../Graphics/Animation.h"
+	"../Graphics/ModelObject.h"
+	"CoreBase.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Physics/MotionPhysics.h
+	"../Types/Vector2.h"
+	"../Types/Vector3.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/Animation.h
+	"../Physics/MotionPhysics.h"
+	"Texture.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/RouteBase.h
+
+1270009335 /home/daniel/Desktop/tpb3dtg check-in svn current/AI/PeepAgent.h
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/AI/PathAgent.h
+
+1270161296 source:/home/daniel/Desktop/tpb3dtg check-in svn current/AI/PeepAgent.cpp
+	<list>
+	<vector>
+	<iostream>
+	<cstdlib>
+	"../People/Person.h"
+	"../CoreObjects/Routes.h"
+	"../CoreObjects/PersonQueue.h"
+	"../CoreObjects/RouteBase.h"
+	"../CoreObjects/Building.h"
+	"../CoreObjects/Park.h"
+	"../Utility/GameException.h"
+	"../People/Peeps.h"
+	"RideAgent.h"
+	"PathAgent.h"
+	"PeepAgent.h"
+
+1269714751 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Building.h
+	<map>
+	"CoreBase.h"
+
+1269714751 /home/daniel/Desktop/tpb3dtg check-in svn current/Utility/GameException.h
+	<string>
+
+1270009335 /home/daniel/Desktop/tpb3dtg check-in svn current/People/Peeps.h
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/AI/RideAgent.h
+
+1269714749 source:/home/daniel/Desktop/tpb3dtg check-in svn current/AI/RideAgent.cpp
+	<vector>
+	<list>
+	<algorithm>
+	"../CoreObjects/Ride.h"
+	"../CoreObjects/RidePart.h"
+	"RideAgent.h"
+
+1269714751 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/RidePart.h
+	"../Graphics/ObjectBase.h"
+	"../Graphics/ObjectNode.h"
+
+1270093940 source:/home/daniel/Desktop/tpb3dtg check-in svn current/Builders/FlatRideBuilder.cpp
+	"../CoreObjects/Ride.h"
+	"../CoreObjects/RideBase.h"
+	"../CoreObjects/RideSection.h"
+	"../CoreObjects/Arm.h"
+	"../CoreObjects/Hub.h"
+	"../CoreObjects/Deck.h"
+	"../CoreObjects/Strut.h"
+	"../CoreObjects/LiftArm.h"
+	"../CoreObjects/CarouselAssembly.h"
+	"../CoreObjects/HorizontalCrankHub.h"
+	"../CoreObjects/RotationHub.h"
+	"../CoreObjects/SpokeAssembly.h"
+	"../CoreObjects/RotationJoint.h"
+	"../CoreObjects/CableHingeJoint.h"
+	"../CoreObjects/Carriage.h"
+	"../CoreObjects/Car.h"
+	"RidePartLoader.h"
+	"PartGuide.h"
+	"FlatRideBuilder.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/RideBase.h
+	"../Graphics/ObjectBase.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/RideSection.h
+	"../Graphics/ObjectBase.h"
+	"../Graphics/ObjectNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Arm.h
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/RideNode.h
+	<vector>
+	"../Types/Vector3.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Hub.h
+	<string>
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Deck.h
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Strut.h
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/LiftArm.h
+	"RideNode.h"
+	"../Physics/ServoPhysics.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Physics/ServoPhysics.h
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/CarouselAssembly.h
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/HorizontalCrankHub.h
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/RotationHub.h
+	"Hub.h"
+	"../Physics/RotationPhysics.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Physics/RotationPhysics.h
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/SpokeAssembly.h
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/RotationJoint.h
+	"JointBase.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/JointBase.h
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/CableHingeJoint.h
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Carriage.h
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Car.h
+	"../Graphics/ObjectBase.h"
+	"../Graphics/ObjectNode.h"
+	"RideNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/Builders/RidePartLoader.h
+
+1269892852 /home/daniel/Desktop/tpb3dtg check-in svn current/Builders/PartGuide.h
+	"../Types/Vector3.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/Builders/FlatRideBuilder.h
+	"../Types/Vector3.h"
+	"BuilderBase.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/Builders/BuilderBase.h
+	"BuilderBase.h"
+	"../Types/Vector3.h"
+
+1270093940 source:/home/daniel/Desktop/tpb3dtg check-in svn current/Builders/RideFormer.cpp
+	<math.h>
+	"../CoreObjects/RideBase.h"
+	"../CoreObjects/Ride.h"
+	"../Graphics/Image.h"
+	"../Graphics/MeshNode.h"
+	"../Graphics/TexturedStrip.h"
+	"../Graphics/TexturedMesh.h"
+	"../Graphics/ObjectFactory.h"
+	"RideFormer.h"
+	"../CoreObjects/Park.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/Image.h
+	<map>
+	<vector>
+	<string>
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/MeshNode.h
+	"ObjectBase.h"
+	"TexturedMesh.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/TexturedMesh.h
+
+1269892852 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/TexturedStrip.h
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/ObjectFactory.h
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/Builders/RideFormer.h
+
+1270093940 source:/home/daniel/Desktop/tpb3dtg check-in svn current/Builders/TerrainFormer.cpp
+	<cstring>
+	<math.h>
+	<SFML/System.hpp>
+	<SFML/Graphics.hpp>
+	"../CoreObjects/Terrain.h"
+	"../Graphics/Image.h"
+	"../Graphics/QuadMeshObject.h"
+	"../Graphics/ObjectFactory.h"
+	"TerrainFormer.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Terrain.h
+	<vector>
+	"../Graphics/ObjectBase.h"
+	"../Graphics/ObjectNode.h"
+
+1270093939 /home/daniel/Desktop/tpb3dtg check-in svn current/Graphics/QuadMeshObject.h
+	"Texture.h"
+	"ObjectBase.h"
+
+1269714752 /home/daniel/Desktop/tpb3dtg check-in svn current/Builders/TerrainFormer.h
+
+1270093940 source:/home/daniel/Desktop/tpb3dtg check-in svn current/Builders/TrackFormer.cpp
+	<math.h>
+	"../CoreObjects/TrackBase.h"
+	"../CoreObjects/Track.h"
+	"../CoreObjects/TrackGuide.h"
+	"../CoreObjects/TrackSection.h"
+	"../Graphics/Image.h"
+	"../Graphics/MeshNode.h"
+	"../Graphics/TexturedStrip.h"
+	"../Graphics/TexturedMesh.h"
+	"../Graphics/ObjectFactory.h"
+	"TrackFormer.h"
+	"../CoreObjects/Park.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/TrackBase.h
+	"../Graphics/ObjectBase.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/Track.h
+	"../Graphics/ObjectBase.h"
+	"../Graphics/ObjectNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/TrackGuide.h
+	"../Types/Vector3.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/CoreObjects/TrackSection.h
+	"../Graphics/ObjectBase.h"
+	"../Graphics/ObjectNode.h"
+
+1270093940 /home/daniel/Desktop/tpb3dtg check-in svn current/Builders/TrackFormer.h
+	"../Types/Vector3.h"
 

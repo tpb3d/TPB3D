@@ -14,7 +14,7 @@
 #include <string>
 #include <vector> // changed from list to vector so the collection can be scrolled in up and down
 
-#include "stall.h"
+#include "Stall.h"
 
 typedef std::vector<Stall*>::iterator StallIterator;
 typedef std::vector<Stall*> StallVector;

@@ -19,6 +19,7 @@
 Stall::Stall (int StallNo, int ID)
 :  Vendor (ID)
 {
+    mpQueue = new PersonQueue();
    mpGraphic = NULL;
    mpQueue = new PersonQueue();
 }
@@ -27,6 +28,7 @@ Stall::Stall(int StallNo, int ID, StallType st)
 :  Vendor (ID)
 {
    mStallType = st;
+   mpQueue = new PersonQueue();
    mpGraphic = NULL;
    mpQueue = new PersonQueue();
 }
@@ -54,7 +56,7 @@ void Stall::ServeNextPerson (void)
    {
       // TakeOrder;
       // Serve or Reject
-      pPeep->SetActivity (Person::AS_Dining);   // this is just some interaction
+      pPeep->SetActivity (Person::AS_Eating);   // this is just some interaction
       pPeep->SetCurrentState (Person::CS_Walking);
    }
 }

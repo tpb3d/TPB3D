@@ -22,7 +22,12 @@
 #define _PERSON_H
 
 #include <map>
+#include <list>
+
 #include "../Graphics/ModelObject.h"
+#include "../CoreObjects/Park.h"
+#include "../Types/Vector3.h"
+
 class AnimationSingle;
 
 // temporary home for some structures
@@ -30,7 +35,62 @@ class AnimationSingle;
 // If Location is a currentLocation and mBuilding = 0 then this person is outside
 // Above subject to change.
 
-struct Location 
+
+
+
+// Temporary Base class for item
+class Item
+{
+    public:
+        enum ItemType{
+            IT_Food = 0,
+            IT_Drink,
+            IT_Souvenir,
+            IT_Information
+        };
+
+    private:
+        ItemType mType;
+        unsigned int mCost; // Cost in cents, 100 = 1 US Dollar
+
+    public:
+        Item(const ItemType &type, const unsigned int &cost)
+        {
+            mType = type;
+            mCost = cost;
+        }
+        ~Item() {}
+
+        ItemType GetType() const { return mType; }
+        void SetItemType(const ItemType &type) { mType = type; }
+
+        unsigned int GetCost() const { return mCost; }
+        void SetCost(const unsigned int &cost) { mCost = cost; }
+};
+
+class FoodItem : public Item
+{
+    private:
+        unsigned int mSubstance; // The amount of hunger the food should shave off.
+        short mConsumed;
+    public:
+
+        FoodItem(const unsigned int &substance, const unsigned int &cost) : Item(Item::IT_Food, cost)
+        {
+            mSubstance = substance;
+        }
+        ~FoodItem() {}
+
+        unsigned int GetSubstance() const {return mSubstance;}
+
+        void SetSubstance(const unsigned int &substance) { mSubstance = substance; }
+
+        void SetConsumed(const float &consumed) { mConsumed = consumed; }
+        float GetConsumed() const { return mConsumed; }
+};
+
+
+struct Location
 {
    short mRoute;   // changed from state to route meaning any path, elevator, stairs or other mode of traversal.
    short mBuilding;
@@ -70,6 +130,11 @@ struct Path // this could have been a list<T> but it would slow this high traffi
 class Person : public Gfx::ModelObject
 {
 public:
+   enum Gender {
+      Male = 0,
+      Female
+   };
+
    // enumerations
    enum Health_State
    {
@@ -77,6 +142,7 @@ public:
       HS_Dire,          // outside services are needed
       HS_NeedMedical,   // a medical center will help
       HS_Ill,           // caught a cold, may miss work is not happy.
+      HS_Weak,          // The peep is weak from hunger.
       HS_Well           // I think I'll go jogging today
    };
 
@@ -89,8 +155,34 @@ public:
       MS_Happy,      // it's great living/working here :)
       MS_Excited     // somebody got a raise.
    };
+
+    // An activity state is set when the peep needs to do something.
    enum Activity_State
    {
+      AS_None = 0, // When this is set we need to start looking for something the peep can be doing
+
+      AS_LookingForFood,
+      AS_LookingForDrink,
+      AS_LookingForTrash, // Looking for a trash can
+      AS_LookingForRest, // Looking for a place to rest, such as a bench
+      AS_LookingForRide,
+      AS_LookingForGift,
+      AS_LookingForMap,
+      AS_LookingForATM, // Peep needs money from an ATM
+      AS_LookingForGroup,
+      AS_LookingForRestroom,
+
+
+      // These should probably be current states
+      AS_UsingRestroom,
+
+      AS_Riding,
+      AS_Eating,  // The peep has food, we should probably look for a place to sit.
+      AS_Drinking, // The peep has drink, we should probably look for a place to sit.
+      AS_GoingHome, // Peep wants to go home, we need to head for the park gate.
+
+
+      // Some of these should be removed
       AS_Sleeping,   // first four are done at home (mostly).
       AS_Relaxing,
       AS_Playing,
@@ -98,7 +190,6 @@ public:
       AS_GoingToWork,
       AS_Working,
       AS_ClockingOut,
-      AS_GoingHome,
       AS_Shopping,
       AS_BreakFast,
       AS_LunchBreak, // be sure the service personell take one
@@ -114,16 +205,19 @@ public:
       AS_HotelHunting
    };
 
+
+    // Currently unsued
    enum Current_State   // had to add this to describe what a person is doing while heading to work, home or play.
    {
       // may also cover other activities. A Person.heading to work may also be stuck in an elevator queue.
-      CS_Idle = 0,      // Idle is defined as doing nothing
+      CS_Idle = 0,      // Idle is defined as doing nothing, or standing still.
       CS_Busy,          // Waiting for a timed event to trigger their next move. At work, sleeping etc.
       CS_Walking,       // Ok good, going somewhere
       CS_Riding,        // In a vehicle, elevator, train, car etc.
       CS_Disembarking,  // Car just dropped a person off;
       CS_Boarding,      // Car picking up person
-      CS_Waiting        // In queue
+      CS_Waiting,       // In queue
+      CS_Sitting        // Sitting on a bench, either resting or eating.
    };
 
 private:
@@ -131,13 +225,29 @@ private:
    Path           mWorkPath;    // To and from work, stays permanant as long as working.
    // Changes if they change jobs or the business goes bust.
    Path           mOtherPath;   // To and from other activities when they go shopping etc.
-   
+
 protected:
+   std::list <Item*> mItems;
+
+   //unsigned char  NeedToRide;
+
    // Changes almost daily
-   unsigned char  Hunger; // these four are level triggered and increase over time
-   unsigned char  Thirst;
-   unsigned char  Restroom;
-   unsigned char  NeedToRide;
+   // these four are level triggered and increase over time
+   short mHunger; // 0-200
+   short mThirst; // 0-200
+   short mRestroom;// 0-200
+
+   unsigned short mWeight;   // Peep's weight in pounds
+   unsigned short mAge;      // Peep's age in years
+   unsigned short mHeight;   // Peep's height in inches.
+
+   unsigned int mTime;
+   unsigned int mInParkTime; // Time the peep has spent in the park
+
+   float mCurTod;
+
+   Gender         mGender;
+   RideIntensity  mRidePreference;
    Health_State   mHealth;
    Mood_State     mMood;
    Activity_State mActivity;
@@ -146,14 +256,48 @@ protected:
    std::map<Mood_State, AnimationSingle *> manimations;
    // not set on if this will be a class or enum
 
-   unsigned int mHome;        // Where's the Crib
+   unsigned int mHome;     // Where's the Crib
    unsigned int mWorkID;   // number of the Building or buisinee we work in
 public:
-   // CTOR/DTOR
+    // CTOR/DTOR
    Person (Location& loc);    // x is their starting point, usually in the lobby.
+   Person( const Vector3f &loc );
    virtual ~Person (void);
 
+
+   void SetLocation( const Vector3f &loc);
+
+   bool AddItem(Item* item);
+   void RemoveItem(Item* item);
+
+   Item* GetItemByType(Item::ItemType type);
+
+   std::list<Item*> GetItemList() const;
+
    // Properties
+   Mood_State GetMood() const;
+   Health_State GetHealth() const;
+   RideIntensity GetRidePreference() const;
+   Gender GetGender() const;
+
+   unsigned short GetWeight() const { return mWeight; }
+   unsigned short GetHeight() const;
+   unsigned short GetAge() const;
+   short GetHunger() const;
+   short GetThirst() const;
+
+   unsigned int GetID() const;
+   unsigned int GetInParkTime() const;
+
+
+   void SetMood(const Mood_State &mood);
+   void SetHealth(const Health_State &health);
+   void SetHunger(const unsigned int &hunger);
+   void SetThirst(const unsigned int &thirst);
+   void SetID(const unsigned int &id);
+   void SetInParkTime(const unsigned int &t);
+
+
    Path& get_WorkPath()    // this gets called to fill and route to and from work.
    {
       return mWorkPath;
@@ -163,7 +307,7 @@ public:
       return mOtherPath;
    }
 
-   Activity_State get_Activity () // inline for faster access, same isolation, just quicker code.
+   Activity_State GetActivity () // inline for faster access, same isolation, just quicker code.
    {
       return mActivity;
    }

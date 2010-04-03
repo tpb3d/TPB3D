@@ -46,13 +46,22 @@ void PeepsAgent::Update (float dt, int tod)
 {
    // Shouldn't Peeps be a member within each Park? Supposedly you would want this seperate.
    Peeps* Peeps = Peeps::get_Instance(); // the Peeps object that holds the people collection
-   if ( (rand() % 4) == 3 )  // TODO: need a better spawn mechanism, raised to 100
+
+   if( Peeps->GetPopulation() < 1)
    {
-      //Location loc; // all zeros
       Person* peep = Peeps->NewPerson();
-      Peeps->Update( dt );
       mPark.EnterPark (peep);
+
+      Peeps->Update( dt, tod);
    }
+
+//   if ( (rand() % 4) == 3 )  // TODO: need a better spawn mechanism, raised to 100
+//   {
+//      //Location loc; // all zeros
+//   {
+//      Person* peep = Peeps->NewPerson();
+//   }
+
    std::list<Person *>::iterator i;
    std::list<Person *>& persons = Peeps->get_Persons(); // get the persons collection.
 
@@ -64,14 +73,51 @@ void PeepsAgent::Update (float dt, int tod)
       Path& workPath = peep->get_WorkPath(); // for now just doing work
       //  TODO: case statement from hell, on the refactor list
       // use a state engine to replace this
-      switch ( peep->get_Activity() )
-      {
-         case Person::AS_GoingHome:
+        switch ( peep->GetActivity() )
+        {
+            case Person::AS_LookingForFood:
+
+               cout << "Peep is looking for food" << endl;
+
+               Stall *stall;
+               stall = mPark.FindStallByType (ST_Food);
+               if(stall)
+               {
+                  stall->AddPerson(peep);
+                  stall->Update (dt, tod);
+               } else {
+                  cout << "Couldn't find a food stall " << endl;
+               }
 
             break;
-         default:
+
+            case Person::AS_LookingForDrink:
+            break;
+
+            case Person::AS_LookingForRide:
+               cout << "Peep is looking for a ride" << endl;
+
+               Ride* pRide;
+               pRide = mPark.FindRideByName("Barn Stormers");
+               if (pRide != NULL)
+               {
+                  pRide->AddPerson (peep);
+               } else {
+                  peep->SetActivity(Person::AS_None);
+               }
+            break;
+
+            case Person::AS_LookingForATM:
+            break;
+
+            case Person::AS_GoingHome:
+               Peeps->DestroyPerson(peep); // Peep is going home, just kill the peep for now.
+            break;
+
+
+            default:
             // do something
             break;   // microsoft requires this break
-      }
+        }
    }
 }
