@@ -14,6 +14,10 @@
 #include "Park.h"
 #include "RideCollection.h"
 
+#ifdef WIN32
+#define strcasecmp _stricmp
+#endif
+
 
 RideCollection::RideCollection ()
 {

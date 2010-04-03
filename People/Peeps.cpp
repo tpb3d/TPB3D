@@ -115,7 +115,7 @@ Person* Peeps::NewPerson()
 
 
    //Person* person = new Person( loc );
-   Person* person = new Person( Vector3f(0.0, -6.0, 0.0) );
+   Person* person = new Person( Vector3f(-28.0, -6.0, 60.0) );
    mPeople.push_back (person);
 
 

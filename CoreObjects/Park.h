@@ -73,6 +73,8 @@ protected:
    RideCollection mRides;
    StallCollection mStalls;
 
+   // Temp until we know where the people need to be logged while in the park
+   std::vector<Person*> mPeopleInPark;
 
 public:
    // ctor/dtor

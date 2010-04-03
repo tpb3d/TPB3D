@@ -17,6 +17,7 @@
 #include "../Graphics/Image.h"
 #include "../Graphics/ObjectTree.h"
 #include "../Scene/Scene.h"
+#include "../People/Person.h"
 #include "Routes.h"
 #include "CoreBase.h"
 #include "Pathway.h"
@@ -169,19 +170,13 @@ void Park::Draw ()
    mpTheTree->Draw ();
    mStalls.Draw ();
    mRides.Draw ();
-   //StallsIterator si;
-   //for (si = mStalls.begin(); si != mStalls.end(); si++)
-   //{
-   //   Stall* pStall = *si;
-   //   pStall->Draw ();
-   //}
-   //RidesIterator iRI;
-   //for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
-   //{
-   //   Ride* pRide = *iRI;
-   //   pRide->Draw ();
-   //}
-//   mGhostObject.Draw();
+   vector<Person*>::iterator peeps;
+   for (peeps = mPeopleInPark.begin(); peeps != mPeopleInPark.end(); peeps ++)
+   {
+      Person* pPeep = *peeps;
+      pPeep->Draw();
+   }
+   //   mGhostObject.Draw();
 }
 
 void Park::DrawSelectionTarget (bool bPathwaysOnly)
@@ -194,6 +189,8 @@ void Park::DrawSelectionTarget (bool bPathwaysOnly)
 void Park::EnterPark (Person* pPerson)
 {
    mPopulation++;
+   mPeopleInPark.push_back(pPerson);
+
    // Test code for Ride Operations to put every new park guest onto the BarnStormers
    //Ride* pRide = this->FindRideByName("Barn Stormers");
    //if (pRide != NULL)

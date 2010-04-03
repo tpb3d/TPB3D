@@ -27,6 +27,7 @@ Person::Person ( const Vector3f &loc )
 {
    float GrowthV = 0.0;
    float GrowthDrop = 0.0;
+   mHeight = 0;
 
    // Random age generator
    mAge = (rand() % 75) + 5; // random age in the range 5-80.
@@ -162,7 +163,7 @@ Person::Person ( const Vector3f &loc )
    Texture* ptexAnnoied =pImageMam->GetTexture ("person_a.png", GL_RGBA);
    Texture* ptexMad =pImageMam->GetTexture ("person_m.png", GL_RGBA);
 
-   Vector2i size = Vector2i(2, 4);
+   Vector2i size = Vector2i(mHeight/24, mHeight/12);
 
    manimations[MS_Furious] = new AnimationSingle (ptexMad, size.x, size.y);
    manimations[MS_Mad] = new AnimationSingle (ptexMad, size.x, size.y);
