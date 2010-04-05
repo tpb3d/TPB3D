@@ -35,6 +35,7 @@ enum HR_Events
    HR_PlaceBuilding,
    HR_PlaceTrackRide,
    HR_PlaceFlatRide,
+   HR_PlacePath,
    HR_PlaceTerrain,
    HR_PlaceRetail,
    HR_PlaceSecurity,

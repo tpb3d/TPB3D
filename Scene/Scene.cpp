@@ -62,6 +62,11 @@ bool Scene::SelectTool (int toolID)
       mpBuildStrategy->ShowGhostBuild (mParks[0]);
       bResult = true;
       break;
+   case HR_PlacePath:
+      mpBuildStrategy = new BuildBuildingStrategy();
+      mpBuildStrategy->ShowGhostBuild (mParks[0]);
+      bResult = true;
+      break;
    }
    if (bResult && !(pOldStrategy==NULL))
    {
@@ -158,26 +163,11 @@ void Scene::HitDown( int hit, Vector2i& Scene )  // taking a mouse hit, send it 
 {
    if( mpBuildStrategy && mpBuildStrategy->PlacingRoom() )
    {
-      //std::vector<Park *>::iterator iPark;
-      //for (iPark = mParks.begin (); iPark != mParks.end (); iPark++)
-      //{
-      //   Park* pPark = (*iPark);
-      //   Pathway* pPathway = pPark->FindPathway (hit);
-      //   if( pPathway )
-      //   {
-      //      int x = (int)(pPark->GetGhostObject().GetX() / 9);
-      //      std::cout << "Mouse on Pathway: " << pPathway->GetPathway() << " Pathway ID: " << hit << std::endl;
-      //      mpBuildStrategy->BuildHere(pPark, x, pPathway->GetPathway());
-      //      break;
-      //   }
-      //   else
-      //   {
-      //      std::cout << "Mouse on unknown Pathway, Pathway ID: " << hit << std::endl;
-      //   }
-      //}
+      // send the hit through a strategy delegate
    }
    else
    {
+      // send the hit through a strategy delegate
       //CoreBase* pFS = FindFloorSpace(hit);
       //std::vector<Park *>::iterator iPark;
       //for (iPark = mParks.begin (); iPark != mParks.end (); iPark++)
@@ -203,44 +193,11 @@ void Scene::HitUp( int hit, Vector2i& Scene )  // taking a mouse hit, send it th
 {
    if( mpBuildStrategy && mpBuildStrategy->PlacingRoom() )
    {
-      //std::vector<Park *>::iterator iPark;
-      //for (iPark = mParks.begin (); iPark != mParks.end (); iPark++)
-      //{
-      //   Park* pPark = (*iPark);
-      //   Pathway* pPathway = pPark->FindPathway (hit);
-      //   if( pPathway )
-      //   {
-      //      int x = (int)(pPark->GetGhostObject().GetX() / 9);
-      //      std::cout << "Mouse on Pathway: " << pPathway->GetPathway() << " Pathway ID: " << hit << std::endl;
-      //      mpBuildStrategy->BuildHere(pPark, x, pPathway->GetPathway());
-      //      break;
-      //   }
-      //   else
-      //   {
-      //      std::cout << "Mouse on unknown Pathway, Pathway ID: " << hit << std::endl;
-      //   }
-      //}
+      // send the hit through a strategy delegate
    }
    else
    {
-      //CoreBase* pFS = FindFloorSpace(hit);
-      //std::vector<Park *>::iterator iPark;
-      //for (iPark = mParks.begin (); iPark != mParks.end (); iPark++)
-      //{
-      //   Park* pPark = (*iPark);
-      //   Pathway* pPathway = pPark->FindPathway (hit);
-      //   if( pPathway )
-      //   {
-      //      int x = (int)(pPark->GetGhostObject().GetX() / 9);
-      //      std::cout << "Mouse on Pathway: " << pPathway->GetPathway() << " Pathway ID: " << hit << std::endl;
-      //      mpBuildStrategy->BuildHere(pPark, x, pPathway->GetPathway());
-      //      break;
-      //   }
-      //   else
-      //   {
-      //      std::cout << "Mouse landed on an unresgister object (BUG)" << " Pathway ID: " << hit  << std::endl;
-      //   }
-      //}
+      // send the hit through a strategy delegate
    }
 }
 

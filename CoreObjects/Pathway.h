@@ -85,6 +85,7 @@ public:
    virtual void Render2 ();
    Pathway* Clone() { return new Pathway (Vector3f(mLocation[0],mLocation[1],mLocation[2]), NULL, mTexName.c_str()); }
 
+   void AddConnection (Pathway* pPath);
    bool AddFloorSpace (CoreBase * floor);
    void SetFloorPositions( int x, int x2 );
    CoreBase* GetSpaceByID (int id);

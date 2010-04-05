@@ -39,8 +39,15 @@ SimpleMeshObject::~SimpleMeshObject(void)
 
    if( mpName )
       delete mpName;
-   if( mpMaterials )
-      delete [] mpMaterials;
+   try
+   {
+      if( mpMaterials )
+         delete /*[]*/ mpMaterials;
+   }
+   catch ( ...)
+   {
+      int t = 0; // debug spot
+   }
 }
 
 void SimpleMeshObject::SetMaterials( Gfx::MaterialsList* pMats )

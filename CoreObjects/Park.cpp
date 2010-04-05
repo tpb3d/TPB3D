@@ -33,9 +33,8 @@ namespace Test
    sf::Vector3f mVAngles[2048];
 }
 
-Park::Park (int ParkNo, int NoSubPathways, Scene& rScene )
+Park::Park (int ParkNo, int other, Scene& rScene )
 :  mParkNo (ParkNo)
-,  mNo_SubPathways (NoSubPathways)
 ,  mScene(rScene)
 ,  mGhostObject (Vector3f(0,0,0),0)
 {
@@ -43,23 +42,21 @@ Park::Park (int ParkNo, int NoSubPathways, Scene& rScene )
    mPopulation = 0;
    mPoints = 0;
    mCurPoint = 0;
-   int nsubs = -NoSubPathways;
-   for (int sub = nsubs; sub < 0; ++sub) // this sets a default path into the park
-   {
-      //Pathway* pPathway = new Pathway (sub, 396, sub, 396, this);
-      //mPathways.push_back (pPathway);
-   }
+   mpParkEntrance = new Pathway(Vector3f(-30.0f, 0.1f, 200.0f), this, "Stone.png");
+   mpParkEntrance->Render();
 }
 
 Park::~Park( )
 {
-   //std::vector<Pathway *>::iterator iPathway;
-   //for (iPathway = mPathways.begin (); iPathway != mPathways.end (); ++iPathway)
-   //{
-   //   Pathway *pPathway = (*iPathway);
-   //   delete pPathway;
-   //}
-   //mPathways.clear();
+   try
+   {
+      delete mpParkEntrance;
+      //delete mpTheTree;
+   }
+   catch (...)
+   {
+      // might want to do something before the whole park is sucked into a black hole.
+   }
 }
 
 void Park::AddTestPoint( sf::Vector3f pa, sf::Vector3f pb )

@@ -97,6 +97,20 @@ public:
    virtual void ShowGhostBuild (Park* pPark);
 };
 
+class BuildPathStrategy : public BuildStrategyBase
+{
+public:
+   BuildPathStrategy()
+   {
+      mType = "Path"; // May not always be the class name
+      mWidth = 1;       // 36
+      mHeight = 1;      // or 36 pixels
+   }
+public:
+   bool BuildHere (Park* pPark, int x, int y);
+   virtual bool PlacingRoom() { return true; }
+   virtual void ShowGhostBuild (Park* pPark);
+};
 // select and drag
 
 #endif // _BUILDSTRATEGIES_H

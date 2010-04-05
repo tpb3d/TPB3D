@@ -45,21 +45,14 @@ class Park// : public Gfx::ModelObject
    friend class FloorAgent;
    friend class GameManager;
    friend class BuildStairStrategy;
-public:
-   //typedef std::vector<Pathway*>::iterator PathwayIterator;
-   //typedef std::vector<Pathway*> PathwayVector;
-   //typedef std::vector<Stall*>::iterator StallsIterator;
-   //typedef std::vector<Stall*> StallsVector;
-   //typedef std::vector<Ride*>::iterator RidesIterator;
-   //typedef std::vector<Ride*> RidesVector;
 
 protected:
    int mParkNo;
-   int mNo_SubPathways;
    int mPopulation;  // People in the Park currently
 
    Scene& mScene; // this is where the Park is modeled in OpenGL.
    ObjectTree* mpTheTree;
+   Pathway* mpParkEntrance;
 
    Car* mpCar; // test part in the tree
    int mCurPoint;
@@ -67,8 +60,6 @@ protected:
 
    GhostObject mGhostObject;  // this object is rendered with the scene.
                               // it may be a bush, a ride, track or even a whole coaster
-   //StallsVector mStalls;
-   //RidesVector mRides;
    PathCollection mPaths;
    RideCollection mRides;
    StallCollection mStalls;
@@ -78,7 +69,7 @@ protected:
 
 public:
    // ctor/dtor
-   Park( int ParkNo, int NoSubPathways, Scene& rScene );
+   Park( int ParkNo, int other, Scene& rScene );
    ~Park();
 
    // properties
@@ -86,6 +77,7 @@ public:
    inline Scene& GetScene() { return mScene; }
    inline GhostObject& GetGhostObject() {  return mGhostObject; }
    inline ObjectTree& GetTree() { return *mpTheTree; }
+   inline Pathway* GetEntrance() { return mpParkEntrance; }
 
    // test
    void AddTestPoint( sf::Vector3f pa, sf::Vector3f pb );

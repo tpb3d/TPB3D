@@ -137,6 +137,11 @@ void Pathway::DrawEmptyFramework ()
    }
 }
 
+void Pathway::AddConnection (Pathway* pPath)
+{
+   mConnectors.push_back (pPath);
+}
+
 void Pathway::Load(SerializerBase& ser)
 {
    CoreBase::Load (ser);

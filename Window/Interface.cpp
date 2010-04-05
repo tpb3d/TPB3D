@@ -34,7 +34,7 @@ using namespace Gfx;
 Interface::Interface (EventHandler& revh)
 :  mEVH(revh)
 {
-   mpToolBar = new ToolBar(5, HR_MainMenu);
+   mpToolBar = new ToolBar(6, HR_MainMenu);
    LoadToolbar();
    mLanguageCode = 0;
    mSoundFxOn = false;
@@ -101,15 +101,18 @@ void Interface::LoadToolbar ()
    pB->SetText("Options");
    mpToolBar->AddButton (pB);
    pB = new ToolButton(0, m_fHeight-64, HR_Tools);
-   pB->SetText("Tools");
+   pB->SetText("FRCS");
    mpToolBar->AddButton (pB);
-   pB = new ToolButton(0, m_fHeight-96, HR_OpenScene);
+   pB = new ToolButton(0, m_fHeight-96, HR_PlacePath);
+   pB->SetText("Paths");
+   mpToolBar->AddButton (pB);
+   pB = new ToolButton(0, m_fHeight-128, HR_OpenScene);
    pB->SetText("Load");
    mpToolBar->AddButton (pB);
-   pB = new ToolButton(0, m_fHeight-128, HR_SaveScene);
+   pB = new ToolButton(0, m_fHeight-160, HR_SaveScene);
    pB->SetText("Save");
    mpToolBar->AddButton (pB);
-   pB = new ToolButton(0, m_fHeight-160, HR_Close);
+   pB = new ToolButton(0, m_fHeight-192, HR_Close);
    pB->SetText("Exit");
    mpToolBar->AddButton (pB);
 }

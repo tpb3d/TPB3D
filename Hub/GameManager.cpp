@@ -134,6 +134,15 @@ bool GameManager::LoadGame (const char *fileName)
    pPath2->Render2();
    pOTree.AddNode (pPath2);
 
+   Pathway* pPath3 = new Pathway(Vector3f(-30.0f, 0.1f, 100.0f), mScene.GetPark(), "Stone.png");
+   pPath3->Render2();
+   pOTree.AddNode (pPath3);
+
+
+   mScene.GetPark()->GetEntrance()->AddConnection (pPath3); // connect the entrance to the paths
+   pPath3->AddConnection (pPath2);
+   pPath2->AddConnection (pPath);
+
    RidePartLoader rpl;
    ObjectNode* pTempTree = new ObjectNode(0, 33);
    const char* pszFile = "restroom01.3ds";
@@ -146,6 +155,8 @@ bool GameManager::LoadGame (const char *fileName)
    const char* pszFileStall = "stall.3DS";
    const char* pszPathStall = "data/Building/";
    rpl.Load3ds( pszPathStall, pszFileStall, pStall );
+   //pPath2->AddConnection (pStall->GetQueue()); not implemented yet
+
    //pTempTree = new ObjectNode(0, 39);
    //const char* pszFileB = "JMORendered.3ds";
    //const char* pszPathB = "data/Building/";
