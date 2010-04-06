@@ -19,8 +19,10 @@
 #include "../People/Person.h"
 #include "PersonQueue.h"
 
-PersonQueue::PersonQueue()
+PersonQueue::PersonQueue (CoreBase* pParent)
+:  Pathway(Vector3f(0,0,0), NULL, "")
 {
+   mpParent = pParent;
 }
 
 PersonQueue::~PersonQueue()

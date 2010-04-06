@@ -63,13 +63,15 @@ public:
    void SetRideType (RideType rt) { mRideType = rt; }
    RideIntensity GetRideIntensity () { return mRideIntensity; }
    void SetRideIntensity (RideIntensity ri) { mRideIntensity = ri; }
-
-   void Start() { mRun = true; }
-   void Stop() { mRun = false; }
+   PersonQueue* GetQueue() { return mpQueue; }
+   virtual const char* GetName () { return mRideName.c_str(); }
 
    void AddPerson (Person* pPeep);
    void RemovePerson (Person* pPeep);
    void ServeNextPerson (void);
+
+   void Start() { mRun = true; }
+   void Stop() { mRun = false; }
 
    void DrawSelectionTarget();
 

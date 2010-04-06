@@ -52,7 +52,7 @@ void PeepsAgent::Update (float dt, int tod)
       Person* peep = Peeps->NewPerson();
       mPark.EnterPark (peep);
 
-      Peeps->Update( dt, tod);
+      Peeps->Update( dt, (float)tod);
    }
 
 //   if ( (rand() % 4) == 3 )  // TODO: need a better spawn mechanism, raised to 100

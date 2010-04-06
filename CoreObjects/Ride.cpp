@@ -23,7 +23,7 @@ Ride::Ride(const Vector3f& vPosition, const Park& ParkParent)
 :  CoreBase ( vPosition, Vector3f(0,0,0))
 ,  mParkParent (ParkParent)
 {
-   mpQueue = new PersonQueue();
+   mpQueue = new PersonQueue(this);
    mvPosition = sf::Vector3f(0,0,0);
    mRideType = RT_Empty;
    mRideIntensity = RI_Gentle;

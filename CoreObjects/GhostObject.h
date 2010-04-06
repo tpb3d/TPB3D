@@ -56,6 +56,7 @@ public:
    void SetState( Ghost_State gs );
    void Move (Vector3f& point);
    void SetWidth( int units);
+   virtual const char* GetName () { return "Unplaced Object"; }
 
 private:
    void GhostState(int tod);

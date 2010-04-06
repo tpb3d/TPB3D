@@ -383,7 +383,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       }
       else if (_strnicmp(Name,"sta",3) == 0)
       {
-         frx = 1.0f/12; // inches to feet
+         frx = 1.0f/18; // inches to feet
          pNode->Move(fSTLoc);
          pNode->SetRotation(fRot);
       }

@@ -85,7 +85,7 @@ class FoodItem : public Item
 
         void SetSubstance(const unsigned int &substance) { mSubstance = substance; }
 
-        void SetConsumed(const float &consumed) { mConsumed = consumed; }
+        void SetConsumed(const float &consumed) { mConsumed = (short)consumed; }
         float GetConsumed() const { return mConsumed; }
 };
 

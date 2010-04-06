@@ -42,8 +42,8 @@ Park::Park (int ParkNo, int other, Scene& rScene )
    mPopulation = 0;
    mPoints = 0;
    mCurPoint = 0;
-   mpParkEntrance = new Pathway(Vector3f(-30.0f, 0.1f, 200.0f), this, "Stone.png");
-   mpParkEntrance->Render();
+   mpParkEntrance = new Pathway(Vector3f(-30.0f, 1.0f, 148.0f), this, "Stone.png");
+   mpParkEntrance->Render2();
 }
 
 Park::~Park( )
@@ -165,6 +165,7 @@ Ride* Park::FindRideByName (const char *pszName)
 void Park::Draw ()
 {
    mpTheTree->Draw ();
+   mpParkEntrance->Draw();
    mStalls.Draw ();
    mRides.Draw ();
    vector<Person*>::iterator peeps;

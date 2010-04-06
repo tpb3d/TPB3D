@@ -26,7 +26,7 @@ struct SaleItem
 
 // Derive from ObjectNode so we can place one in the park as a fixture
 
-class Vendor : public ObjectNode
+class Vendor// : public ObjectNode
 {
    float mTotalSales; // Income
    float mTotalCost;  // Expenses simple balance sheet
@@ -34,7 +34,7 @@ class Vendor : public ObjectNode
 
 public:
    // ctor dtor
-   Vendor(int ID ) : ObjectNode (0,ID) {}
+   Vendor(int ID ) {}   //: ObjectNode (0,ID) {}
    virtual ~Vendor(void) {}
    // properties
    size_t ItemCount() { return mItems.size(); }

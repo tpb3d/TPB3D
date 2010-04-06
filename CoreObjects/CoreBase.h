@@ -90,6 +90,7 @@ public:
    virtual void DrawSelectionTarget () { }
    virtual BaseType GetType () { return BaseEmpty; }
    virtual CoreBase* Clone () = 0;
+   virtual const char* GetName () = 0;
 
    virtual void Load(SerializerBase& ser);// iXmlElement* pnParent)
    virtual void Save(SerializerBase& ser);// iXmlElement* pnParent)

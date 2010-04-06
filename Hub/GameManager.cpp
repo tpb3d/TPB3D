@@ -125,23 +125,28 @@ bool GameManager::LoadGame (const char *fileName)
    pOTree.AddNode( myTree);
 
 
-   Pathway* pPath = new Pathway (Vector3f(-30.0f, 0.1f, 61.0f), mScene.GetPark(), "Stone.png");
-   pPath->Render();
-   pOTree.AddNode (pPath);
+   Pathway* pPath4 = new Pathway (Vector3f(-30.0f, 0.1f, 61.0f), mScene.GetPark(), "Stone.png");
+   pPath4->Render();
+   pOTree.AddNode (pPath4);
 
    // this is BS just to show paths
-   Pathway* pPath2 = new Pathway (Vector3f(-30.0f, 0.1f, 61.0f), mScene.GetPark(), "Stone.png");
-   pPath2->Render2();
-   pOTree.AddNode (pPath2);
-
-   Pathway* pPath3 = new Pathway(Vector3f(-30.0f, 0.1f, 100.0f), mScene.GetPark(), "Stone.png");
+   Pathway* pPath3 = new Pathway (Vector3f(-30.0f, 0.1f, 61.0f), mScene.GetPark(), "Stone.png");
    pPath3->Render2();
    pOTree.AddNode (pPath3);
 
+   Pathway* pPath2 = new Pathway(Vector3f(-30.0f, 0.1f, 100.0f), mScene.GetPark(), "Stone.png");
+   pPath2->Render2();
+   pOTree.AddNode (pPath2);
+
+   Pathway* pPath1 = new Pathway(Vector3f(-30.0f, 0.1f, 100.0f), mScene.GetPark(), "Stone.png");
+   pPath1->Render();
+   pOTree.AddNode (pPath1);
+
 
    mScene.GetPark()->GetEntrance()->AddConnection (pPath3); // connect the entrance to the paths
-   pPath3->AddConnection (pPath2);
-   pPath2->AddConnection (pPath);
+   pPath1->AddConnection (pPath2);
+   pPath2->AddConnection (pPath3);
+   pPath3->AddConnection (pPath4);
 
    RidePartLoader rpl;
    ObjectNode* pTempTree = new ObjectNode(0, 33);
@@ -149,13 +154,16 @@ bool GameManager::LoadGame (const char *fileName)
    const char* pszPath = "data/Restroom 01/";
    rpl.Load3ds( pszPath, pszFile, pTempTree );
    pOTree.AddNode (pTempTree);
+   // Can't add the restroon, not yet a part object, just a graphic
 
    Stall* pStall = new Stall(1,41, ST_Food);
    mScene.GetPark()->AddStall (pStall);
    const char* pszFileStall = "stall.3DS";
    const char* pszPathStall = "data/Building/";
-   rpl.Load3ds( pszPathStall, pszFileStall, pStall );
-   //pPath2->AddConnection (pStall->GetQueue()); not implemented yet
+   pTempTree = new ObjectNode(0, 33);
+   rpl.Load3ds( pszPathStall, pszFileStall, pTempTree );
+   pStall->SetGraphic (pTempTree);
+   pPath3->AddConnection (pStall->GetQueue());  // "Stall" is now on the path
 
    //pTempTree = new ObjectNode(0, 39);
    //const char* pszFileB = "JMORendered.3ds";
@@ -211,7 +219,7 @@ bool GameManager::LoadGame (const char *fileName)
    TF.MakeSection (guide, *pTrack);
 
    pOTree.AddNode (pTrack);
-   Car* pCar = new Car( sf::Vector3f( 4, 1.8f, 6 ), sf::Vector3f( -10, 4.2f, -21 ), sf::Vector3f( 0,0,0 ),8,599 );
+   Car* pCar = new Car( sf::Vector3f( 4, 1.8f, 6 ), sf::Vector3f( 0, 4.2f, 8 ), sf::Vector3f( 0,0,0 ),8,599 );
    Ride* pCarRide = new Ride(Vector3f(0,0,0), mPark);
    pOTree.AddNode ( new RidePack (pCarRide));
    pCarRide->SetNode (pCar);
@@ -226,6 +234,7 @@ bool GameManager::LoadGame (const char *fileName)
    pRide = flat.CreateRide(0, mPark );
    pRide->SetPosition (fx,0.1f,fz);
    mScene.GetPark()->AddRide (pRide);
+   pPath4->AddConnection (pRide->GetQueue());   // join the "Barn Stormers" to the path4
 
 
    //pRide = flat.CreateRide(1, mPark);

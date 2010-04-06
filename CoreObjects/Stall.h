@@ -27,12 +27,13 @@ enum StallType
    ST_Information
 };
 
-class Stall : public Vendor
+class Stall : public Vendor, public CoreBase
 {
 protected:
    ObjectBase* mpGraphic;
    PersonQueue* mpQueue;
    StallType mStallType;
+   std::string mStallName;
 
 public:
    // ctor dtor
@@ -41,14 +42,18 @@ public:
    ~Stall(void);
    // properties
    // get...()
+   PersonQueue* GetQueue() { return mpQueue; }
 
    void AddPerson (Person* pPeep);
    void RemovePerson (Person* pPeep);
    void ServeNextPerson (void);
+   void SetGraphic (ObjectBase* pGfx) { mpGraphic = pGfx; }
+   virtual const char* GetName () { return mStallName.c_str(); }
 
    // Time Management Methods
    bool IsType (StallType st) { return (mStallType == st); }
    void Update (float dt, int timeOfDay);
+   CoreBase* Clone( );
 
    // Rendering methods
    void Draw ();

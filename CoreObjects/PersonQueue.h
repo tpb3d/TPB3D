@@ -19,27 +19,31 @@
 #ifndef _PERSONQUEUE_H
 #define _PERSONQUEUE_H
 #include <queue>
+#include "Pathway.h"
 
 class Person;
 class CitizenAgent; // to move people
 class RouteBase;
+class CoreBase;
 
-class PersonQueue // Abstract, does not even have a CPP file at this point.
+class PersonQueue : public Pathway// Abstract, does not even have a CPP file at this point.
 {
 protected:
    short mHeadIndex;
    short mTailIndex;
    short mCapacity;
    short mSweepIndex; // moves through the queue filling gaps
-   //Person** mpQueue;
+   CoreBase* mpParent;
    std::queue<Person*> mQueue;
 
 public:
-   PersonQueue();
+   PersonQueue(CoreBase* pParent);
    virtual ~PersonQueue();
    void AddPerson (Person* person);
    bool RemovePerson (Person* person);
    Person* TakeNextPerson ();
+   CoreBase* GetPatrent() { return mpParent; }
+
    size_t Count();  // how many people in line
    void Update();
    void Draw (int vx, int vy);

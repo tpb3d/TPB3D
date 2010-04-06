@@ -91,6 +91,7 @@ public:
    CoreBase* GetSpaceByID (int id);
    CoreBase* FindSpace (int x); // location
 
+   virtual const char* GetName () { return "Path"; }
    bool TestForEmptySpace (int x, int x2 );
 
    void Save(SerializerBase& ser);

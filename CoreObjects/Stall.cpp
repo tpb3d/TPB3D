@@ -19,18 +19,18 @@
 Stall::Stall (int StallNo, int ID)
 :  Vendor (ID)
 {
-    mpQueue = new PersonQueue();
    mpGraphic = NULL;
-   mpQueue = new PersonQueue();
+   mpQueue = new PersonQueue(this);
+   mStallName = "Stall"; // needs to be more specific
 }
 
 Stall::Stall(int StallNo, int ID, StallType st)
 :  Vendor (ID)
 {
    mStallType = st;
-   mpQueue = new PersonQueue();
    mpGraphic = NULL;
-   mpQueue = new PersonQueue();
+   mpQueue = new PersonQueue(this);
+   mStallName = "Stall"; // needs to be more specific
 }
 
 Stall::~Stall( )
@@ -76,9 +76,15 @@ void Stall::Update (float dt, int timeOfDay)
       delay = 5;
 }
 
+CoreBase* Stall::Clone( )
+{
+   Stall* pStall = new Stall (0, 0);
+   return pStall;
+}
+
 void Stall::Draw ()
 {
-   ObjectNode::Draw();
+   mpGraphic->Draw();
 }
 
 void Stall::DrawSelectionTarget (bool bBaseOnly)
