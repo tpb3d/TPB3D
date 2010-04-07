@@ -1254,7 +1254,35 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Delegates\DelegateBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\SelectDelegate.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Delegates\ToolBarDelegate.h"
+				>
+			</File>
+		</Filter>
+		<Filter
+			Name="SalesObjects"
+			>
+			<File
+				RelativePath="..\SalesObjects\FoodItem.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\SalesObjects\FoodItem.h"
+				>
+			</File>
+			<File
+				RelativePath="..\SalesObjects\ItemBase.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\SalesObjects\ItemBase.h"
 				>
 			</File>
 		</Filter>

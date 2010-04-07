@@ -16,6 +16,7 @@
 #pragma once
 #include "Vendor.h"
 #include "PersonQueue.h"
+#include "../SalesObjects/ItemBase.h"
 
 class Person;
 
@@ -34,6 +35,7 @@ protected:
    PersonQueue* mpQueue;
    StallType mStallType;
    std::string mStallName;
+   ItemBase::ItemVector mItemList;
 
 public:
    // ctor dtor

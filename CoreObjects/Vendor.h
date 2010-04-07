@@ -15,6 +15,8 @@
 #include <vector> // changed from list to vector so the collection can be scrolled in up and down
 #include "../Graphics/ObjectNode.h"
 
+class SaleItemBase;
+
 struct SaleItem
 {
    float Cost;    // cost to the park or vendor

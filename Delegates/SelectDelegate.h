@@ -18,24 +18,27 @@
 #include <string>
 #include <map>
 
-class ToolBar;
-// not derived from base delegate
-
-class ToolBarDelegate
+class SelectDelegate
 {
 protected:
    std::string mToolSelected;
-//   ToolBar& mToolBar;
+//   Select& mSelect;
 
 public:
-   ToolBarDelegate (const char* pszToolName) //, const ToolBar& toolbar)
-  // :  mToolBar (toolbar)
+   SelectDelegate (const char* pszName)
+  // :  mSelect (Select)
    {
       mToolSelected = pszToolName;
    }
+
 public:
-   void OnToolHit (short ID);
-//   {
-//      mToolBar.Onhit();
-//   }
+   void OnHitDown (short ID)
+   {
+//      mSelect.Onhit();
+   }
+
+   void OnHitUp (short ID)
+   {
+//      mSelect.Onhit();
+   }
 };
