@@ -2,11 +2,11 @@
 
 #include <string>
 #include <vector>
-#include "SalesObject.h"
+#include "ItemBase.h"
 
 using namespace std;
 
-class FoodItem : public SalesObject // FoodItem will have access to all public and protected members of SalesObject
+class FoodItem : public ItemBase // FoodItem will have access to all public and protected members of SalesObject
                                  // so will any class that derives from FoodItem
 {
    // these are private by default from the class declaration
