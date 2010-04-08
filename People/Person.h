@@ -29,6 +29,7 @@
 #include "../Types/Vector3.h"
 
 class AnimationSingle;
+class PathFind;
 
 // temporary home for some structures
 // If Location is a destination and mBuilding <=0 then this person is leaving.
@@ -38,44 +39,45 @@ class AnimationSingle;
 
 
 
-// Temporary Base class for item
+// Temporary base class for item
 class Item
 {
-    public:
-        enum ItemType{
-            IT_Food = 0,
-            IT_Drink,
-            IT_Souvenir,
-            IT_Information
-        };
+   public:
+      enum ItemType{
+      IT_Food = 0,
+      IT_Drink,
+      IT_Souvenir,
+      IT_Information
+      };
 
-    private:
-        ItemType mType;
-        unsigned int mCost; // Cost in cents, 100 = 1 US Dollar
+   private:
+      ItemType mType;
+      float mCost; // Item price
 
-    public:
-        Item(const ItemType &type, const unsigned int &cost)
-        {
-            mType = type;
-            mCost = cost;
-        }
-        ~Item() {}
+   public:
+      Item(const ItemType &type, const float &cost)
+      {
+      mType = type;
+      mCost = cost;
+      }
+      ~Item() {}
 
-        ItemType GetType() const { return mType; }
-        void SetItemType(const ItemType &type) { mType = type; }
+      ItemType GetType() const { return mType; }
+      void SetItemType(const ItemType &type) { mType = type; }
 
-        unsigned int GetCost() const { return mCost; }
-        void SetCost(const unsigned int &cost) { mCost = cost; }
+      float GetCost() const { return mCost; }
+      void SetCost(const float &cost) { mCost = cost; }
 };
 
+// Temporary base class for fooditem
 class FoodItem : public Item
 {
     private:
         unsigned int mSubstance; // The amount of hunger the food should shave off.
-        short mConsumed;
+        float mConsumed;
     public:
 
-        FoodItem(const unsigned int &substance, const unsigned int &cost) : Item(Item::IT_Food, cost)
+        FoodItem(const unsigned int &substance, const float &cost) : Item(Item::IT_Food, cost)
         {
             mSubstance = substance;
         }
@@ -85,7 +87,7 @@ class FoodItem : public Item
 
         void SetSubstance(const unsigned int &substance) { mSubstance = substance; }
 
-        void SetConsumed(const float &consumed) { mConsumed = (short)consumed; }
+        void SetConsumed(const float &consumed) { mConsumed = consumed; }
         float GetConsumed() const { return mConsumed; }
 };
 
@@ -161,6 +163,8 @@ public:
    {
       AS_None = 0, // When this is set we need to start looking for something the peep can be doing
 
+      AS_LookingForPath,
+      AS_LookingForEntrance,
       AS_LookingForFood,
       AS_LookingForDrink,
       AS_LookingForTrash, // Looking for a trash can
@@ -226,6 +230,8 @@ private:
    // Changes if they change jobs or the business goes bust.
    Path           mOtherPath;   // To and from other activities when they go shopping etc.
 
+   Pathway *mPath;
+   PathFind *mPathFind;
 protected:
    std::list <Item*> mItems;
 
@@ -233,9 +239,9 @@ protected:
 
    // Changes almost daily
    // these four are level triggered and increase over time
-   short mHunger; // 0-200
-   short mThirst; // 0-200
-   short mRestroom;// 0-200
+   short mHunger;    // 0-200
+   short mThirst;    // 0-200
+   short mRestroom;  // 0-200
 
    unsigned short mWeight;   // Peep's weight in pounds
    unsigned short mAge;      // Peep's age in years
@@ -245,6 +251,9 @@ protected:
    unsigned int mInParkTime; // Time the peep has spent in the park
 
    float mCurTod;
+   float mMoney;
+
+   bool inPark; // This value is set to true when the peep has entered the park
 
    Gender         mGender;
    RideIntensity  mRidePreference;
@@ -266,6 +275,7 @@ public:
 
 
    void SetLocation( const Vector3f &loc);
+   Vector3f GetLocation();
 
    bool AddItem(Item* item);
    void RemoveItem(Item* item);
@@ -283,19 +293,30 @@ public:
    unsigned short GetWeight() const { return mWeight; }
    unsigned short GetHeight() const;
    unsigned short GetAge() const;
+
    short GetHunger() const;
    short GetThirst() const;
 
    unsigned int GetID() const;
    unsigned int GetInParkTime() const;
 
+   float GetMoney() const { return mMoney; }
 
+   bool GetInPark() { return inPark; }
+
+   Pathway *GetPathway() { return mPath; }
+   PathFind *GetPathFind() { return mPathFind; }
+
+   void SetInPark(const bool &inpark) { inPark = inpark; }
    void SetMood(const Mood_State &mood);
    void SetHealth(const Health_State &health);
    void SetHunger(const unsigned int &hunger);
    void SetThirst(const unsigned int &thirst);
    void SetID(const unsigned int &id);
    void SetInParkTime(const unsigned int &t);
+
+   void SetPathway(Pathway *path);
+   void SetPathFind(PathFind *pfind) { mPathFind = pfind; }
 
 
    Path& get_WorkPath()    // this gets called to fill and route to and from work.

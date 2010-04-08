@@ -80,7 +80,7 @@ Peeps::~Peeps()
 
 // this update only needs to be called about once per second are so.
 // no need to call it on every frame
-void Peeps::Update (float dt, float tod)
+void Peeps::Update (float dt)
 {
    std::list<Person *>::iterator i;
    for (i = mPeople.begin (); i != mPeople.end(); i++)
@@ -120,7 +120,7 @@ Person* Peeps::NewPerson()
 
 
    // Temporary
-   std::string mood[] = {"Furious", "Mad", "Annoyed", "Content", "MS_Happy", "Excited"};
+   std::string mood[] = {"Furious", "Mad", "Annoyed", "Content", "Happy", "Excited"};
    std::string state[] = {"Idle", "Busy", "Walking", "Disembarking", "Boarding", "Waiting"};
    std::string health[] = {"Dead", "Dire", "Need Medical", "Ill", "Weak", "Well"};
    std::string ride[] = {"Non-Moving", "Gentle", "Family", "Thrill", "Intense", "Extreme"};
@@ -132,6 +132,7 @@ Person* Peeps::NewPerson()
    cout << "   Age: " << person->GetAge() << " years" << endl;
    cout << "   Height: " << person->GetHeight() << "\"" << endl;
    cout << "   Weight: " << person->GetWeight() << " lb" << endl;
+   cout << "   Money: " << person->GetMoney() << " credits" << endl;
    cout << "   Gender: " << gender[person->GetGender()] << endl;
    cout << "   Ride Preferences: " <<  ride[person->GetRidePreference()] << endl;
    cout << "   Hunger: " << person->GetHunger() << endl;

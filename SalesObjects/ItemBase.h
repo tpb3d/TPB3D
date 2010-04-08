@@ -37,7 +37,7 @@ public:
    ItemBase(string name, ItemCategory ic, unsigned int size);
    virtual ~ItemBase() {};
    // inlines properties
-   string ItemBase::getName()
+   string getName()
    {
       return mName;
    }

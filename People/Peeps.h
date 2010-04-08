@@ -54,7 +54,7 @@ public:
    Person* NewPerson();
    void DestroyPerson( Person* person );
 
-   void Update (float dt, float tod);
+   void Update (float dt);
    void Draw(); // draw the people here
 };
 

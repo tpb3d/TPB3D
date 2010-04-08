@@ -22,12 +22,23 @@
 #include "Person.h"
 
 
-Person::Person (Location& loc) {;}
+Person::Person (Location& loc) {;} // To make the super child happy for now.
 Person::Person ( const Vector3f &loc )
 {
    float GrowthV = 0.0;
    float GrowthDrop = 0.0;
+   short WeightV = 2;
+   short WeightD = 0;
    mHeight = 0;
+   inPark = false;
+
+   mPathFind = NULL;
+
+   // Random money generator
+   mMoney = float(20 + rand() % 180);
+   if(mMoney > 100) {
+      mMoney =  float(20 + rand() % 180);
+   }
 
    // Random age generator
    mAge = (rand() % 75) + 5; // random age in the range 5-80.
@@ -40,25 +51,23 @@ Person::Person ( const Vector3f &loc )
    mGender = Gender(rand() % 2);
 
    // Random height generator
-   if(mGender == Female) {
-     GrowthV = (rand() % 3) + 28;
-   }
+   if(mGender == Female)
+      GrowthV = 39 + (rand() % 3);
    else
-   {
-      GrowthV = (rand() % 4) + 30;
-   }
+      GrowthV = 40 + (rand() % 4);
 
-
-   for(unsigned short i = 1; i < mAge; i++)
+   for(unsigned short i = 1; i < mAge+1; i++)
    {
-      if(i < 4)
-         GrowthDrop = GrowthV - float(10 / float(i) );
-      if(i < 16 && i > 3)
-         GrowthDrop = 8.5;
+      if(i < 2)
+         GrowthDrop = GrowthV;
+      if(i < 4 && i > 1)
+         GrowthDrop = GrowthV - 45.0 / float(i);
+      if(i < 17 && i > 3)
+         GrowthDrop = 7.0; // Average growth for this age range
       if(i > 16)
-         GrowthDrop = GrowthV - float(GrowthV / 2);
+         GrowthDrop = GrowthV - (GrowthV / 2.0); // Drop off growth rate after 17
 
-      mHeight += (GrowthV) * 0.39;
+      mHeight += int(GrowthV * 0.39);
       GrowthV = GrowthDrop;
 
       if(i > 19)
@@ -66,45 +75,31 @@ Person::Person ( const Vector3f &loc )
    }
 
    // Random weight generator
-   if(mAge > 17)
+   for(unsigned short i = 1; i < mAge+1; i++)
    {
-      if(mGender == Female)
+      if(i > 6)
       {
-         short ran = mWeight = rand() % 4;
-         if(ran < 3)
+         if(mGender == Female)
          {
-            mWeight = (rand() % 20) + (mHeight + 50);
+            if(WeightV <= 5)
+               WeightV += 1;
          }
-         else if(ran == 3)
+         else
          {
-            mWeight = (rand() % 100) + (mHeight + 70);
+            if(WeightV <= 8)
+               WeightV += 1;
          }
+
+         WeightD += WeightV;
+         mWeight = mHeight + WeightD;
+      }
+      else
+      {
+         mWeight = (rand() % 3) + mHeight;
       }
 
-      if(mGender == Male)
-      {
-         short ran = mWeight = rand() % 4;
-         if(ran < 3)
-         {
-            mWeight = (rand() % 30) + (mHeight + 80);
-         }
-         else if(ran == 3)
-         {
-            mWeight = (rand() % 100) + (mHeight + 100);
-         }
-      }
-   }
-   else // People under 17, This needs work
-   {
-      if(mGender == Female)
-      {
-         mWeight = (rand() % 50) + (mHeight) + 40;
-      }
-
-      if(mGender == Male)
-      {
-         mWeight = (rand() % 50) + (mHeight) + 50;
-      }
+      if(i > 19)
+         break;
    }
 
    // Ride intensity perference
@@ -140,7 +135,8 @@ Person::Person ( const Vector3f &loc )
       mRidePreference = RideIntensity(rand() % 3);
    }
 
-   AddItem( new FoodItem(50, 500) );
+
+   AddItem( new FoodItem(50, 1.25) );
 
 
    mHealth = HS_Well;
@@ -166,17 +162,24 @@ Person::Person ( const Vector3f &loc )
    Vector2i size = Vector2i(mHeight/24, mHeight/12);
 
    manimations[MS_Furious] = new AnimationSingle (ptexMad, size.x, size.y);
+   manimations[MS_Furious]->SetPosition(loc.x, loc.y, loc.z);
+
    manimations[MS_Mad] = new AnimationSingle (ptexMad, size.x, size.y);
+   manimations[MS_Mad]->SetPosition(loc.x, loc.y, loc.z);
+
    manimations[MS_Annoyed] = new AnimationSingle (ptexAnnoied, size.x, size.y);
    manimations[MS_Annoyed]->SetPosition(loc.x, loc.y, loc.z);
+
    manimations[MS_Content] = new AnimationSingle (ptexHappy, size.x, size.y);
    manimations[MS_Content]->SetPosition(loc.x, loc.y, loc.z);
+
    manimations[MS_Happy] = new AnimationSingle (ptexHappy, size.x, size.y);
    manimations[MS_Happy]->SetPosition(loc.x, loc.y, loc.z);
+
    manimations[MS_Excited] = new AnimationSingle (ptexHappy, size.x, size.y);
    manimations[MS_Excited]->SetPosition(loc.x, loc.y, loc.z);
-
 }
+
 Person::~Person (void)
 {
 }
@@ -228,57 +231,63 @@ void Person::Update (int tod)   //actual time
       mCurTod = tod;
    }
 
-   // Peep is doing nothing
-   if( mActivity == AS_None)
-   {
-      mActivity = AS_LookingForRide; // Just ride for now
-   }
+   if(inPark) {
 
-    // Peep has food
-   if( mActivity == AS_Eating )
-   {
-      short bite = 2;
-
-      FoodItem *item = (FoodItem*)GetItemByType(Item::IT_Food);
-      if(!item)
+      // Peep is doing nothing
+      if( mActivity == AS_None)
       {
-         mActivity = AS_None;
-         return;
+         mActivity = AS_LookingForRide; // Just ride for now
       }
 
-      cout << "Peep is eating, hunger: " << mHunger << endl;
-
-      item->SetConsumed( item->GetConsumed()+bite );
-      mHunger = (mHunger-bite);
-
-      if(mHunger <= 0 || item->GetConsumed() >= item->GetSubstance() )
+       // Peep has food
+      if( mActivity == AS_Eating )
       {
-         cout << "Peep is full" << endl;
+         short bite = 2;
 
-         mActivity = AS_None;
-         if(mHunger < 0)
+         FoodItem *item = (FoodItem*)GetItemByType(Item::IT_Food);
+         if(!item)
          {
-            mHunger = 0;
+            mActivity = AS_None;
+            return;
          }
 
-         // Only remove food item if it's depleted.
-         if(item->GetConsumed() >= item->GetSubstance())
+         cout << "Peep is eating, hunger: " << mHunger << endl;
+
+         item->SetConsumed( item->GetConsumed()+bite );
+         mHunger = (mHunger-bite);
+
+         if(mHunger <= 0 || item->GetConsumed() >= item->GetSubstance() )
          {
-            RemoveItem(item); // Remove food item
-            cout << "Peep finished his food" << endl;
-         }
-         else
-         {
-            cout << "Peep didn't finish his food" << endl;
+            cout << "Peep is full" << endl;
+
+            mActivity = AS_None;
+            if(mHunger < 0)
+            {
+               mHunger = 0;
+            }
+
+            // Only remove food item if it's depleted.
+            if(item->GetConsumed() >= item->GetSubstance())
+            {
+               RemoveItem(item); // Remove food item
+               cout << "Peep finished his food" << endl;
+            }
+            else
+            {
+               cout << "Peep didn't finish his food" << endl;
+            }
          }
       }
-   }
 
-   if( mActivity == AS_Riding)
+      if( mActivity == AS_Riding)
+      {
+        // TODO: Need to keep track of how long a peep has been in a riding state.
+      }
+   }
+   else
    {
-     // TODO: Need to keep track of how long a peep has been in a riding state.
+      mActivity = AS_LookingForEntrance;
    }
-
 
 
 
@@ -381,6 +390,12 @@ void Person::SetLocation( const Vector3f &loc)
    manimations[MS_Content]->SetPosition(loc.x, loc.y, loc.z);
 }
 
+Vector3f Person::GetLocation()
+{
+   return Vector3f(manimations[MS_Content]->GetPositionX(),
+                   manimations[MS_Content]->GetPositionY(),
+                   manimations[MS_Content]->GetPositionZ());
+}
 
 void Person::Draw()
 {
@@ -453,6 +468,7 @@ bool Person::AddItem(Item* item)
    }
 
    mItems.push_back(item);
+   return true;
 }
 void Person::RemoveItem(Item* item)
 {
@@ -552,4 +568,13 @@ void Person::SetThirst(const unsigned int &thirst)
 void Person::SetInParkTime(const unsigned int &t)
 {
    mInParkTime = t;
+}
+
+void Person::SetPathway(Pathway *path)
+{
+   if(path)
+   {
+      this->SetLocation( Vector3f( path->GetX(), -path->GetY() - 6, path->GetZ()) );
+      mPath = path;
+   }
 }
