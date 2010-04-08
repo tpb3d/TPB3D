@@ -11,6 +11,8 @@
 // root of the Pathways and subPathways, the building/ Park.
 // create an instance of this. The lobby is created empty.
 // call newPathway or newSubPathway to add floors or basement Pathways
+
+#pragma once
 #ifndef _PARK_H
 #define _PARK_H
 
@@ -34,10 +36,13 @@ class Stall;
 class Ride;
 class BuildStairStrategy;
 class Car;
+class SerializerBase;
+
+#include "../Storage/SerializerBase.h"
 
 #include "../CoreObjects/Stall.h"
 #include "../CoreObjects/Ride.h"
-#include "../People/Peeps.h"
+//#include "../People/Peeps.h"
 //enum StallType; // if this won't compile, comment this line and include stall.h
 //enum RideType; // if this won't compile, comment this line and include ride.h
 
@@ -88,6 +93,8 @@ public:
 
 protected:
    // methods
+   void ClearStalls (); // deletes all the stalls
+
 public:
 
    void   AddStall (Stall* pStall);
@@ -105,6 +112,8 @@ public:
    void EnterPark (Person* pPerson);
    void LeavePark (Person* pPerson);
 
+   void Load(SerializerBase& ser);
+   void Save(SerializerBase& ser);
 };
 
 #endif //_PARK_H

@@ -51,6 +51,7 @@
 #include "../CoreObjects/Lamp.h"
 #include "../CoreObjects/Pathway.h"
 #include "../CoreObjects/Stall.h"
+#include "../SalesObjects/FoodItem.h"
 // endtest
 
 GameManager::GameManager (Scene& scene, Park& park)
@@ -189,6 +190,10 @@ bool GameManager::LoadGame (const char *fileName)
    pTempTree = new ObjectNode(0, 33);
    rpl.Load3ds( pszPathStall, pszFileStall, pTempTree );
    pStall->SetGraphic (pTempTree);
+   pStall->AddItem (FoodItem::Create ("Deluxe Pizza", 4, 1));
+   pStall->AddItem (FoodItem::Create ("Cheese Pizza", 1, 1));
+   pStall->AddItem (FoodItem::Create ("Burger", 3, 1));
+   pStall->AddItem (FoodItem::Create ("Chicken Sandwich", 5, 1));
    pPath3->AddConnection (pStall->GetQueue());  // "Stall" is now on the path
 
    //pTempTree = new ObjectNode(0, 39);

@@ -13,7 +13,10 @@
       RideTelescopeVendor Vendor that has an extenstion that slides out to extend the Vendor up to 1.8 times its collapsed length.
 */
 
-#pragma once
+#pragma once   // An battle is brweing over pragma once but the VS is slow with out them, Guards are not as effective with VS.
+#ifndef _Stall
+#define _Stall
+
 #include "Vendor.h"
 #include "PersonQueue.h"
 #include "../SalesObjects/ItemBase.h"
@@ -61,4 +64,7 @@ public:
    void Draw ();
    void DrawSelectionTarget (bool bBaseOnly);
 
+   void Load(SerializerBase& ser);
+   void Save(SerializerBase& ser);
 };
+#endif // _Stall

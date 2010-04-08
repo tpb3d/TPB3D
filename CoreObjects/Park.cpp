@@ -12,6 +12,7 @@
 #include <list>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "../Storage/SerializerBase.h"
 #include "../Physics/MotionPhysics.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/Image.h"
@@ -50,6 +51,8 @@ Park::~Park( )
 {
    try
    {
+      ClearStalls();
+      // ClearRides();
       delete mpParkEntrance;
       //delete mpTheTree;
    }
@@ -125,6 +128,16 @@ Stall* Park::FindStallByType (StallType st)
    //   }
    //}
    //return NULL;
+}
+
+void Park::ClearStalls()
+{
+   while (mStalls.end() != mStalls.begin())
+   {
+      Stall* pBase = *(mStalls.end()-1);
+      delete pBase;
+      mStalls.pop_back();
+   }
 }
 
 void Park::AddRide (Ride* pRide)
@@ -206,4 +219,30 @@ void Park::LeavePark (Person* pPerson)
    mPopulation--;
    if (mPopulation < 0 )
       mPopulation = 0;
+}
+
+// Serialization
+void Park::Load(SerializerBase& ser)
+{
+   SerializerBase* pSer = ser.GetFirstChild ("Stalls");
+   while (pSer != NULL)
+   {
+      int ist = pSer->GetInt ("stall type");
+      StallType st = (ist > ST_Empty && ist <= ST_Information) ? StallType(st) : ST_Empty;
+      Stall* pStall = new Stall (0, pSer->GetInt("id"), st);
+      mStalls.push_back (pStall);
+      pSer = ser.GetNextSibling ("Stalls");
+   }
+}
+
+void Park::Save(SerializerBase& ser)
+{
+   ser.Add("park name", "First Park");
+   SerializerBase* pSer = ser.Spawn("Stalls"); // create a locale serializer of the type used for Stall
+   StallCollection::iterator si;
+   for (si = mStalls.begin(); si != mStalls.end(); ++si)
+   {
+      (*si)->Save(*pSer);
+   }
+   delete pSer;
 }

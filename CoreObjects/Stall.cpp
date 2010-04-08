@@ -10,6 +10,7 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
+#include "../Storage/SerializerBase.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/ObjectTree.h"
@@ -17,7 +18,6 @@
 #include "Stall.h"
 
 Stall::Stall (int StallNo, int ID)
-:  Vendor (ID)
 {
    mpGraphic = NULL;
    mpQueue = new PersonQueue(this);
@@ -25,7 +25,6 @@ Stall::Stall (int StallNo, int ID)
 }
 
 Stall::Stall(int StallNo, int ID, StallType st)
-:  Vendor (ID)
 {
    mStallType = st;
    mpGraphic = NULL;
@@ -36,6 +35,7 @@ Stall::Stall(int StallNo, int ID, StallType st)
 Stall::~Stall( )
 {
    delete mpQueue;
+   ClearItems();
 }
 
 void Stall::AddPerson (Person* pPeep)
@@ -91,4 +91,31 @@ void Stall::DrawSelectionTarget (bool bBaseOnly)
 
 {
 //   draw select geometry
+}
+
+void Stall::Load(SerializerBase& ser)
+{
+   SerializerBase* pSer = ser.GetFirstChild ("Items");
+   int st = ser.GetInt ("stall type");
+   mStallType = (st > ST_Empty && st <= ST_Shop) ? StallType(st) : ST_Empty;
+   while (pSer != NULL)
+   {
+      ItemBase* pItem = ItemBase::Create (*pSer); // Factory
+      mItems.push_back (pItem);
+      pSer = ser.GetNextSibling ("Items");
+   }
+}
+
+void Stall::Save(SerializerBase& ser)
+{
+   ser.Add("type", "Stall");
+   ser.Add("stall name", mStallName.c_str());
+   ser.Add("id", mID);
+   SerializerBase* pSer = ser.Spawn("Items"); // create a locale serializer of the type used for Stall
+   ItemBase::ItemIterator ii;
+   for (ii = mItems.begin(); ii != mItems.end(); ++ii)
+   {
+      (*ii)->Save(*pSer);
+   }
+   delete pSer;
 }

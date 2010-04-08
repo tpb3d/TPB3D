@@ -18,7 +18,7 @@ public:
    FoodItem(const string& name ,int top, int size);
    virtual ~FoodItem() {};
 
-   static FoodItem* Create (const char* name, int totalSize, int initialSize); // mini factory specific to this class
+   static FoodItem* Create (const char* name, int topings, int initialSize); // mini factory specific to this class
    static FoodItem* Create (const char* name, ItemCategory ic); // simpler override
    // methods
    virtual void drawItem();
@@ -28,5 +28,7 @@ public:
    // properties
    string getTopings();
    void displayTopings();
-
+   // Serialization
+   void Load(SerializerBase& ser);
+   void Save(SerializerBase& ser);
 };
