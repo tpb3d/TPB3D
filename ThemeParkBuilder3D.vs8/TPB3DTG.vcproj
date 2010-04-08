@@ -802,6 +802,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CoreObjects\RideController.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\RideController.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CoreObjects\RideNode.cpp"
 				>
 			</File>

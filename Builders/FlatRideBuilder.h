@@ -7,6 +7,7 @@ class Park;
 class Ride;
 class RideNode;
 class ObjectBase;
+class RideController;
 struct PartGuide;
 
 class FlatRideBuilder : public BuilderBase
@@ -38,7 +39,7 @@ public:
    static RideNode* AddRideNodeDisc (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeCarriage (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeCableHinge (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
-   static RideNode* AddRideNodeRotationHub (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
+   static RideNode* AddRideNodeRotationHub (RideController* pRCU, RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeLiftArm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeSpinCar (RideNode* pParent, ObjectNode* pGraphicObject, PartGuide& guide);
 };

@@ -14,6 +14,7 @@
 #include "Ride.h"
 #include "RideSection.h"
 #include "RideNode.h"
+#include "RideController.h"
 #include "../People/Person.h"
 #include "PersonQueue.h"
 #include "../Graphics/ObjectFactory.h"
@@ -23,6 +24,7 @@ Ride::Ride(const Vector3f& vPosition, const Park& ParkParent)
 :  CoreBase ( vPosition, Vector3f(0,0,0))
 ,  mParkParent (ParkParent)
 {
+   mpRCU = NULL;
    mpQueue = new PersonQueue(this);
    mvPosition = sf::Vector3f(0,0,0);
    mRideType = RT_Empty;
@@ -33,6 +35,15 @@ Ride::Ride(const Vector3f& vPosition, const Park& ParkParent)
 Ride::~Ride(void)
 {
    delete mpQueue;
+}
+
+RideController* Ride::GetController()
+{
+   if ( mpRCU == NULL)
+   {
+      mpRCU = new RideController(1);
+   }
+   return mpRCU;
 }
 
 void Ride::Update(int dt)

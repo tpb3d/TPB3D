@@ -18,16 +18,19 @@
 #include "../Graphics/Texture.h"
 #include "../Graphics/ObjectBase.h"
 #include "../Graphics/TexturedMesh.h"
+#include "RideController.h"
 #include "RotationHub.h"
 
 
 #define _USE_MATH_DEFINES
 #include <math.h>
 
-RotationHub::RotationHub (int ID, float height, short sides, const char* TexName)
+RotationHub::RotationHub (RideController* pRCU, int ID, float height, short sides, const char* TexName)
 :  Hub (height, sides, TexName)
 ,  RotationPhysics (0, 0.1f, 2000.0f, 1000.0f)
 {
+   mpRCUnit = pRCU;
+   mpRCUnit->Register (this);  // Connect this rotational assembly to the Ride Control Unit (motor physics);
    mIdle = 10;
    mRun = 0;
    mDesiredSpeed = 5;
@@ -40,6 +43,7 @@ RotationHub::RotationHub (int ID, float height, short sides, const char* TexName
 
 RotationHub::~RotationHub(void)
 {
+   mpRCUnit->Unregister(this);
 }
 
 void RotationHub::Draw()

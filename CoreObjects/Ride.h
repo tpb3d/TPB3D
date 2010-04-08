@@ -14,6 +14,7 @@ class ObjectBase;
 class RideNode;
 class Person;
 class PersonQueue;
+class RideController; // the ride controller that the operator uses
 
 enum RideType
 {
@@ -41,6 +42,7 @@ class Ride : public CoreBase
    std::string mRideName;
    RideNode* mpBaseNode;   // only child
    PersonQueue* mpQueue;
+   RideController* mpRCU;
    //    PersonQueue* mpQueueFastPass;   if we can do this
 
 protected:
@@ -65,6 +67,7 @@ public:
    void SetRideIntensity (RideIntensity ri) { mRideIntensity = ri; }
    PersonQueue* GetQueue() { return mpQueue; }
    virtual const char* GetName () { return mRideName.c_str(); }
+   RideController* GetController();
 
    void AddPerson (Person* pPeep);
    void RemovePerson (Person* pPeep);

@@ -14,16 +14,23 @@
 */
 
 #pragma once
+#ifndef _RotationHub
+#define _RotationHub
+
 #include "Hub.h"
 #include "../Physics/RotationPhysics.h"
+
+class RideController;
 
 class RotationHub : public Hub, public RotationPhysics
 {
    int mIdle;
    int mRun;
    float mDesiredSpeed;
+protected:
+   RideController* mpRCUnit;
 public:
-   RotationHub(int ID, float height, short sides, const char* TexName );
+   RotationHub(RideController* pRCU, int ID, float height, short sides, const char* TexName );
    ~RotationHub(void);
 
    void SetYPosition(float y) { mvPosition.y = y; }
@@ -32,3 +39,4 @@ public:
    void Update(int dt);
    void Draw ();
 };
+#endif // _RotationHub

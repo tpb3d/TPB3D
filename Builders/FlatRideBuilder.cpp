@@ -12,6 +12,7 @@
 #include "../CoreObjects/Ride.h"
 #include "../CoreObjects/RideBase.h"
 #include "../CoreObjects/RideSection.h"
+#include "../CoreObjects/RideController.h"
 #include "../CoreObjects/Arm.h"
 #include "../CoreObjects/Hub.h"
 #include "../CoreObjects/Deck.h"
@@ -148,7 +149,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.fHeight = 12;
       guide.nSpeed = 35;
       guide.fDrop = 12;
-      RideNode* pRotHub = AddRideNodeRotationHub (pHub, NULL, guide);
+      RideNode* pRotHub = AddRideNodeRotationHub (pRide->GetController(), pHub, NULL, guide);
 
       ObjectNode* pBaseNode = new ObjectNode (0, 33);
       const char* kszBase = "brnstrbase.3ds";
@@ -231,7 +232,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.fHeight = 2;
       guide.nSpeed = 35;
       guide.fDrop = 0;
-      RideNode* pRotHub = AddRideNodeRotationHub (pHub, NULL, guide);
+      RideNode* pRotHub = AddRideNodeRotationHub (pRide->GetController(), pHub, NULL, guide);
 
       ObjectNode* pBaseNode = new ObjectNode (0, 33);
       const char* kszBase = kszSpidaParts[7];
@@ -313,7 +314,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       pHub->Render();
 
       // rotating hub
-      RotationHub* pHub2 = new RotationHub (1, 3, iSides, "Chips.png");
+      RotationHub* pHub2 = new RotationHub (pRide->GetController(), 1, 3, iSides, "Chips.png");
       pHub->AddNode(pHub2);
       pHub2->Render();
       pHub2->SetDesiredSpeed(15);
@@ -393,7 +394,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.fHeight = 4;
       guide.nSpeed = 75;
       guide.fDrop = 1.0f;
-      RideNode* pRotHub = AddRideNodeRotationHub (pHubNode, NULL, guide);
+      RideNode* pRotHub = AddRideNodeRotationHub (pRide->GetController(), pHubNode, NULL, guide);
 
       // put what ever tub, arm assembly or deck here
       // test with 8 arms, the laundery ride
@@ -620,9 +621,9 @@ RideNode* FlatRideBuilder::AddRideNodeCableHinge (RideNode* pParent, ObjectBase*
    return pWire;
 }
 
-RideNode* FlatRideBuilder::AddRideNodeRotationHub (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
+RideNode* FlatRideBuilder::AddRideNodeRotationHub (RideController* pRCU, RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide)
 {
-   RotationHub* pHub2 = new RotationHub (guide.TakeANumber(), guide.fHeight, guide.nCount, "Chips.png");
+   RotationHub* pHub2 = new RotationHub (pRCU, guide.TakeANumber(), guide.fHeight, guide.nCount, "Chips.png");
    pParent->AddNode (pHub2);
  //  pHub2->Render ();
    pHub2->SetDesiredSpeed (guide.nSpeed);
