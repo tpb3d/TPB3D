@@ -92,8 +92,8 @@ void Ride::ServeNextPerson (void)
    {
       // TakeOrder;
       // Serve or Reject
-      pPeep->SetActivity (Person::AS_Dining);   // this is just some interaction
-      pPeep->SetCurrentState (Person::CS_Walking);
+      pPeep->SetActivity (Person::AS_Riding);   // this is just some interaction
+      pPeep->SetCurrentState (Person::CS_Riding);
    }
 }
 

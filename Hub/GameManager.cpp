@@ -143,7 +143,33 @@ bool GameManager::LoadGame (const char *fileName)
    pOTree.AddNode (pPath1);
 
 
-   mScene.GetPark()->GetEntrance()->AddConnection (pPath3); // connect the entrance to the paths
+   // Added to make the path finding more clear
+   Pathway* pPath5 = new Pathway(Vector3f(-30.0f, 0.1f, 250.0f), mScene.GetPark(), "Stone.png");
+   pPath5->Render3();
+   pOTree.AddNode (pPath5);
+
+   Pathway* pPath6 = new Pathway(Vector3f(-76.0f, 0.1f, 250.0f), mScene.GetPark(), "Stone.png");
+   pPath6->Render2();
+   pOTree.AddNode (pPath6);
+
+   Pathway* pPath7 = new Pathway(Vector3f(-76.0f, 0.1f, 300.0f), mScene.GetPark(), "Stone.png");
+   pPath7->Render();
+   pOTree.AddNode (pPath7);
+
+   Pathway* pPath8 = new Pathway(Vector3f(-30.0f, 0.1f, 200.0f), mScene.GetPark(), "Stone.png");
+   pPath8->Render2();
+   pOTree.AddNode (pPath8);
+
+   Pathway* pPath9 = new Pathway(Vector3f(-30.0f, 0.1f, 150.0f), mScene.GetPark(), "Stone.png");
+   pPath9->Render2();
+   pOTree.AddNode (pPath9);
+
+   mScene.GetPark()->GetEntrance()->AddConnection (pPath7); // connect the entrance to the paths
+   pPath7->AddConnection (pPath6);
+   pPath6->AddConnection (pPath5);
+   pPath5->AddConnection (pPath8);
+   pPath8->AddConnection (pPath9);
+   pPath9->AddConnection (pPath2);
    pPath1->AddConnection (pPath2);
    pPath2->AddConnection (pPath3);
    pPath3->AddConnection (pPath4);
@@ -249,11 +275,11 @@ bool GameManager::LoadGame (const char *fileName)
 //   const char* pHT = "hrtwr.3ds";
 //   const char* pHT2 = "data/HighRide/";
 //   rpl.Load3ds( pHT2, pHT );
-   
+
    //const char* pFC5A = "gondola.3ds";
    //const char* pFC5B = "data/Flyncircusride/5-Gondola/";
    //rpl.Load3ds( pFC5B, pFC5A, );
-   
+
    SaveGame("data/xml/Park.xml");
 
    return true;

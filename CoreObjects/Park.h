@@ -34,8 +34,12 @@ class Stall;
 class Ride;
 class BuildStairStrategy;
 class Car;
-enum StallType; // if this won't compile, comment this line and include stall.h
-enum RideType; // if this won't compile, comment this line and include ride.h
+
+#include "../CoreObjects/Stall.h"
+#include "../CoreObjects/Ride.h"
+#include "../People/Peeps.h"
+//enum StallType; // if this won't compile, comment this line and include stall.h
+//enum RideType; // if this won't compile, comment this line and include ride.h
 
 // Park is a ModelObject
 // This renderes the Park in the ModelSpaces with perspective, pan and zoom.

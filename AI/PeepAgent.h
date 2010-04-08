@@ -17,9 +17,40 @@
 #ifndef _PeepsAGENT_H
 #define _PeepsAGENT_H
 
+#include <stack>
+
 struct Location; // from person
 class Person;
 class Park;
+class Pathway;
+
+class PathFind
+{
+   public:
+      PathFind(Person *peep, Pathway *distPath);
+      ~PathFind() {;}
+
+      bool Update();
+      bool Find(Pathway *p);
+
+      bool HasPath() { return mFound; }
+
+      Pathway *GetDestination() { return dest; }
+
+   private:
+      Pathway *start;
+      Pathway *dest;
+      Person *mPeep;
+
+      bool mFound;
+
+      std::vector<Pathway *> path;
+      std::stack<Pathway *> stack;
+
+      // Used for interpolation
+      std::vector<Vector3f> Interpolation;
+      int iter;
+};
 
 class PeepsAgent
 {

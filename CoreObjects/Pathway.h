@@ -77,13 +77,17 @@ public:
    inline int GetID () { return mID; }
    inline float GetX () { return m_Point.x; }
    inline float GetY () { return m_Point.y; }
+   inline float GetZ () { return m_Point.z; }
 
    // Methods
    virtual void Update (float dt, int tod);
    virtual void Draw ();
    virtual void Render ();
    virtual void Render2 ();
+   virtual void Render3 ();
    Pathway* Clone() { return new Pathway (Vector3f(mLocation[0],mLocation[1],mLocation[2]), NULL, mTexName.c_str()); }
+
+   PathwayVector GetConnections() { return mConnectors; }
 
    void AddConnection (Pathway* pPath);
    bool AddFloorSpace (CoreBase * floor);

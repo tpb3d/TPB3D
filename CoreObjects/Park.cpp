@@ -42,7 +42,7 @@ Park::Park (int ParkNo, int other, Scene& rScene )
    mPopulation = 0;
    mPoints = 0;
    mCurPoint = 0;
-   mpParkEntrance = new Pathway(Vector3f(-30.0f, 1.0f, 148.0f), this, "Stone.png");
+   mpParkEntrance = new Pathway(Vector3f(-30.0f, 1.0f, 300.0f), this, "Stone.png");
    mpParkEntrance->Render2();
 }
 
@@ -149,25 +149,27 @@ Ride* Park::FindRideByType (RideType rt)
 
 Ride* Park::FindRideByName (const char *pszName)
 {
-   return mRides.FindRideByName (pszName);
-   //RidesIterator iRI;
-   //for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
-   //{
-   //   Ride* pRide = *iRI;
-   //   if (_stricmp(pRide->GetRideName(), pszName) == 0)
-   //   {
-   //      return pRide;
-   //   }
-   //}
-   //return NULL;
+    return mRides.FindRideByName(pszName);
+//   RidesIterator iRI;
+//   for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+//   {
+//      Ride* pRide = *iRI;
+//      if (_stricmp(pRide->GetRideName(), pszName) == 0)
+//      {
+//         return pRide;
+//      }
+//   }
+//   return NULL;
 }
 
 void Park::Draw ()
 {
+
    mpTheTree->Draw ();
    mpParkEntrance->Draw();
    mStalls.Draw ();
    mRides.Draw ();
+
    vector<Person*>::iterator peeps;
    for (peeps = mPeopleInPark.begin(); peeps != mPeopleInPark.end(); peeps ++)
    {

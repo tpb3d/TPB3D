@@ -43,6 +43,7 @@ Pathway::Pathway (const Vector3f& origin, Park * ParkParent, const char* szTex)
 :  CoreBase(origin, Vector3f(0,45,0))
 ,  ObjectNode(0, ObjectFactory::TakeANumber())
 {
+   m_Point = origin;
    mTexName = szTex;
    mID = CoreBase::GetNextID();
    mpGraphic = ObjectFactory::CreateNode(1);
@@ -101,6 +102,27 @@ void Pathway::Render2()
    {
       pt1.z += fStep;
       pt2.z += fStep;
+      pBase->AddPoint (pt1);
+      pBase->AddPoint (pt2);
+   }
+}
+
+// dummy code
+void Pathway::Render3()
+{
+   int iSides = 15;
+   float  fOff = 1.75f;
+   float  fStep = 3.5;
+   TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
+   mpGraphic->AddMesh (pBase);
+   Vector3f pt1 (mvPosition.x*2.53, mvPosition.y, mvPosition.z-fOff);
+   Vector3f pt2 (mvPosition.x*2.53, mvPosition.y, mvPosition.z+fOff);
+   pBase->AddPoint (pt1);
+   pBase->AddPoint (pt2);
+   for( int ix =0; ix < iSides; ++ix)
+   {
+      pt1.x += fStep;
+      pt2.x += fStep;
       pBase->AddPoint (pt1);
       pBase->AddPoint (pt2);
    }
