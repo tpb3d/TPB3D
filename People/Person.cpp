@@ -103,6 +103,7 @@ Person::Person ( const Vector3f &loc )
    }
 
    // Ride intensity perference
+   mRidePreference = RI_Thrill;
    if(mAge > 10)
    {
       if(mAge > 60)

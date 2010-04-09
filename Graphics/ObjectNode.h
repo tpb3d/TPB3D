@@ -38,7 +38,7 @@ public:
    void AddMesh( ObjectBase* pNode );
    void AddNode( ObjectNode* pChild );
    ObjectNode* GetNode( int index );
-   void Move( float Location[3] );
+   void Move( const float Location[3] );
    //void Rotate( float Rotation[3] );
    void SetRotation( float rotate[3] )
    {

@@ -73,7 +73,7 @@ ObjectNode* ObjectNode::GetNode( int index )
    return pNode;
 }
 
-void ObjectNode::Move(float Location[])
+void ObjectNode::Move(const float Location[])
 {
    mLocation[0] = Location[0]; // this optimizes nicely
    mLocation[1] = Location[1];

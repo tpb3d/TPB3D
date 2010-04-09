@@ -15,6 +15,7 @@
 
 RideController::RideController( int ID )
 {
+   mSpeed = 30;
    pPrimaryRotation = NULL;
    pSecondaryRotation = NULL;
    pPrimaryServo = NULL;
@@ -71,4 +72,78 @@ void RideController::Unregister (ServoPhysics* pSP)
    {
       pSecondaryServo = NULL;
    }
+}
+
+void RideController::Start ()
+{
+   if (pPrimaryRotation)
+   {
+      pPrimaryRotation->SetDestinVelocity (mSpeed);
+      pPrimaryRotation->Integrate (1.0f);
+   }
+}
+
+void RideController::Stop ()
+{
+   if (pPrimaryRotation)
+      pPrimaryRotation->SetDestinVelocity (0);
+}
+
+void RideController::Sequence (int no)
+{
+}
+
+void RideController::SetCycles (int cycles)
+{
+}
+
+void RideController::SetSpeed (float speed)
+{
+   mSpeed = speed;
+}
+
+void RideController::SetPosition ( int pos)
+{
+}
+
+void RideController::LockRestraints ()
+{
+}
+
+void RideController::UnlockRestraints ()
+{
+}
+
+bool RideController::IsStopped()
+{
+   if (pPrimaryRotation)
+      return (pPrimaryRotation->Velocity () == 0);
+   return false;
+}
+
+bool RideController::IsRunning()
+{
+   if (pPrimaryRotation)
+      return (pPrimaryRotation->Velocity () != 0);
+   return false;
+}
+
+bool RideController::IsRestraintsLocked ()
+{
+   return false;
+}
+
+bool RideController::IsRestraintsUnlocked ()
+{
+   return false;
+}
+
+float RideController::CurrentSpeed ()
+{
+   return pPrimaryRotation->Velocity ();
+}
+
+int  RideController::CurrentPosition ()
+{
+   return 0;
 }

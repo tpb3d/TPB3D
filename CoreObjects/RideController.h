@@ -19,6 +19,7 @@ class RotationPhysics;
 class ServoPhysics;
 class RideController
 {
+   float mSpeed;
 protected:
    RotationPhysics* pPrimaryRotation;
    RotationPhysics* pSecondaryRotation;
@@ -33,6 +34,22 @@ public:
    void Register (ServoPhysics* pSP);
    void Unregister (RotationPhysics* pRP);
    void Unregister (ServoPhysics* pSP);
+
+   void Start ();
+   void Stop ();
+   void Sequence (int no);
+   void SetCycles (int cycles);
+   void SetSpeed (float speed);
+   void SetPosition ( int pos);
+   void LockRestraints ();
+   void UnlockRestraints ();
+
+   bool IsStopped();
+   bool IsRunning();
+   bool IsRestraintsLocked ();
+   bool IsRestraintsUnlocked ();
+   float CurrentSpeed ();
+   int  CurrentPosition ();
 };
 
 #endif // _RideController

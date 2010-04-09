@@ -25,7 +25,12 @@ Ride::Ride(const Vector3f& vPosition, const Park& ParkParent)
 ,  mParkParent (ParkParent)
 {
    mpRCU = NULL;
+   mSeats = 2;
+   mRunTime = 0;
+   mMaxRunTime = 3000;
    mpQueue = new PersonQueue(this);
+   const float fLoc[] = {45,1,0};
+   mpQueue->Move (fLoc);
    mvPosition = sf::Vector3f(0,0,0);
    mRideType = RT_Empty;
    mRideIntensity = RI_Gentle;
@@ -51,15 +56,38 @@ void Ride::Update(int dt)
    if (mRun)
    {
       mpBaseNode->Update(dt);
+      if (mpRCU->IsRunning())
+      {
+         mRunTime += dt;
+         if (mRunTime > this->mMaxRunTime)
+         {
+            mpRCU->Stop();
+         }
+      }
+      else
+      {
+         if (mpRCU->IsStopped())
+         {
+            mpRCU->UnlockRestraints();
+            UnloadPeople();
+         }
+      }
    }
    else
    {
       mpBaseNode->Update(0);  // temporary
-   }
-   if (mpQueue->Count() > 0 )
-   {
-      ServeNextPerson();
-      mRun = true;
+      if (mpQueue->Count() > 0 && mRiders.size() < mSeats)
+      {
+         ServeNextPerson();
+      }
+      else
+      {
+         if (mRiders.size() > 0)
+         {
+            mpRCU->Start();
+            mRun = true;
+         }
+      }
    }
 }
 
@@ -105,6 +133,18 @@ void Ride::ServeNextPerson (void)
       // Serve or Reject
       pPeep->SetActivity (Person::AS_Riding);   // this is just some interaction
       pPeep->SetCurrentState (Person::CS_Riding);
+      mRiders.push (pPeep);
+   }
+}
+
+void Ride::UnloadPeople()
+{
+   while (mRiders.size() > 0)
+   {
+      Person* pPeep = mRiders.back();
+      mRiders.pop();
+      pPeep->SetActivity (Person::AS_None);
+      pPeep->SetCurrentState (Person::CS_Disembarking);
    }
 }
 

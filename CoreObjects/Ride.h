@@ -39,9 +39,13 @@ enum RideIntensity
 class Ride : public CoreBase
 {
    const Park& mParkParent;
+   int   mSeats;
+   int   mRunTime;      // how long the ride has been running
+   int   mMaxRunTime;   // how long is the ride going to run
    std::string mRideName;
    RideNode* mpBaseNode;   // only child
    PersonQueue* mpQueue;
+   std::queue<Person*> mRiders;
    RideController* mpRCU;
    //    PersonQueue* mpQueueFastPass;   if we can do this
 
@@ -72,6 +76,7 @@ public:
    void AddPerson (Person* pPeep);
    void RemovePerson (Person* pPeep);
    void ServeNextPerson (void);
+   void UnloadPeople(void);
 
    void Start() { mRun = true; }
    void Stop() { mRun = false; }

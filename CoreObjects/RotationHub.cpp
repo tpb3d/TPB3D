@@ -79,34 +79,8 @@ void RotationHub::Render()
 
 void RotationHub::Update(int dt)
 {
-   if( mRun > 0)
-   {
-      mRun--;
-      mIdle = 0;
-      Integrate (1);//(float)dt);
-      mvAngle.y = mPosition;
-   }
-   else if( mIdle > 0)
-   {
-      mIdle--;
-      Integrate (1);//(float)dt);
-      mvAngle.y = mPosition;
-   }
-   else
-   {
-      if(this->mVelocity > 0)
-      {
-         SetDestinVelocity( 0 );
-         mIdle = 32*dt;
-      }
-      else if(dt > 0) // temporary fix to stop ride
-      {
-         SetDestinVelocity (mDesiredSpeed);
-         mRun = 60*dt;
-      }
-   }
    if(this->mVelocity > 0)
    {
-      RideNode::Update (int (mVelocity));
+      Integrate (1);//(float)dt);
    }
 }

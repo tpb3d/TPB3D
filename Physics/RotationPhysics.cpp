@@ -28,7 +28,7 @@ RotationPhysics::RotationPhysics (float mDestinedVelocity, float drag, float wei
    mTime = 0;
    mTimeTotal = 0;
    mVelocity = 0;
-   this->mMass = 1;   
+   mMass = 1;   
 }
 
 void RotationPhysics::DebugPrint ()
@@ -48,6 +48,7 @@ void RotationPhysics::Integrate (float dt)
    }
    if( mDestinedVelocity >= 0)
    {
+      mIsMoving = true;
       if( fabs(mVelocity - mDestinedVelocity) < 0.2f)
       {
          mVelocity = mDestinedVelocity;
@@ -64,5 +65,9 @@ void RotationPhysics::Integrate (float dt)
          }
          mVelocity += mAcceleration * dt_secs;
       }
+   }
+   else
+   {
+      mIsMoving = false;
    }
 }
