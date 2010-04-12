@@ -17,6 +17,7 @@
 #include "../Graphics/ObjectNode.h"
 
 class ItemBase;
+class SpecialPerson;
 
 // Derive from ObjectNode so we can place one in the park as a fixture
 
@@ -24,15 +25,25 @@ class Vendor// : public ObjectNode
 {
    float mTotalSales; // Income
    float mTotalCost;  // Expenses simple balance sheet
+   char  mCurrencySymbol;
+   char  mDecimal;
+
 protected:
+   static const char* mHeader1[4];
    ItemBase::ItemVector mItems;
 
 public:
    // ctor dtor
    Vendor() { }   //: ObjectNode (0,ID) {}
    virtual ~Vendor(void) {}
+
    // properties
    size_t ItemCount() { return mItems.size(); }
+   void SetCurrency( char symbol, char decimal)
+   {
+      mCurrencySymbol = symbol;
+      mDecimal = decimal;
+   }
 
 protected:
    // local methods
@@ -67,18 +78,26 @@ public:
          mItems.pop_back();
       }
    }
+   void drawHeader()
+   {
+//       cout << mHeader1[0] << setw(20) << mHeader1[1] << setw(20) << mHeader1[2] << setw(20) << mHeader1[3];
+//       cout << endl;
+//       cout << setw(45) << mCurrencySymbol;
+   }
+
+   void drawFooter() //string, double,string,int);
+   {
+   }
+
+   void drawFooter2() //string,double,int);
+   {
+   }
+
    // TODO
    //  Sell item deduct cost of item and cost of condements
    //  Add cost to mTotalCost and sale price to mTotalSales.
    //  in a real business there would be a lot more expenses but this is a game
-   /*
+
 public:
-   inline void Tally (ParkCOO* pComp)  // Comptroll visitor collect sales
-   {
-      // Lock();  // stop sales until we finish tallying and clearing the till
-      pComp->ShopSales(mTotalSales - mTotalCost);  // Park Contribution, park owns this vendor
-      ClearBalance();
-      // Unlock();
-   }
-   */
+   void Tally (SpecialPerson* pComp);  // Comptroll visitor collect sales
 };

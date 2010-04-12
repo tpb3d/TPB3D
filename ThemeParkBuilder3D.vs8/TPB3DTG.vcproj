@@ -886,6 +886,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CoreObjects\Store.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\Store.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CoreObjects\Strut.cpp"
 				>
 			</File>
@@ -939,6 +947,10 @@
 			</File>
 			<File
 				RelativePath="..\CoreObjects\TrackSection.h"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\Vendor.cpp"
 				>
 			</File>
 			<File
@@ -1277,6 +1289,14 @@
 		<Filter
 			Name="SalesObjects"
 			>
+			<File
+				RelativePath="..\SalesObjects\DrinkItem.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\SalesObjects\DrinkItem.h"
+				>
+			</File>
 			<File
 				RelativePath="..\SalesObjects\FoodItem.cpp"
 				>
