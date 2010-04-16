@@ -18,11 +18,12 @@
 #define _BUILDSTRATEGIES_H
 #include <string>
 #include <map>
+#include "DelegateBase.h"
 
 class Park;
 
 // these are hard coded now but will be modifiable
-class BuildStrategyBase
+class BuildStrategyBase : public DelegateBase
 {
 protected:
    std::string mType;  // Building, Apt, Condo
@@ -32,15 +33,25 @@ protected:
 
 public:
    BuildStrategyBase()
+      :  DelegateBase ("Build")
    {
    }
    // get/set properties
    int GetWidth() { return mWidth; };
    int GetHeight() { return mHeight; };
 public:
-   virtual bool PlacingRoom() { return false; }
-   virtual bool BuildHere (Park* pPark, int x, int y);
-   virtual void ShowGhostBuild (Park* pPark);
+   void OnHitDown (short ID)
+   {
+//      mPlaceItem.Onhit();
+   }
+
+   void OnHitUp (short ID)
+   {
+//      mPlaceItem.Onhit();
+   }
+   void Draw()
+   {
+   }
 };
 
 class BuildStrategyFactory

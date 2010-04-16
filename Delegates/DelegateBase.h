@@ -31,4 +31,7 @@ public:
 public:
    virtual void OnHitDown (short ID) = 0;
    virtual void OnHitUp (short ID) = 0;
+   virtual void Draw()
+   {
+   }
 };

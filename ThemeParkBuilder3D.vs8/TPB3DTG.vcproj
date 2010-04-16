@@ -1278,6 +1278,10 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Delegates\PlaceItemDelegate.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Delegates\SelectDelegate.h"
 				>
 			</File>

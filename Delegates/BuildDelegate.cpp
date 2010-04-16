@@ -25,20 +25,6 @@
 
 using namespace CoreObjects;
 
-// no tool active
-bool BuildStrategyBase::BuildHere (Park* pPark, int x, int Pathway)
-{
-   return false;  // no tool selection
-}
-void BuildStrategyBase::ShowGhostBuild(Park* pPark)
-{
-}
-
-// Buildings
-bool BuildBuildingStrategy::BuildHere (Park* pPark, int x, int PathwayNo)
-{
-   return false;
-}
 void BuildBuildingStrategy::ShowGhostBuild (Park* pPark)
 {
    GhostObject& GR = pPark->GetGhostObject();

@@ -28,7 +28,8 @@
 
 class CoreBase; // aggregate of floor spaces for Buildings, condos and hotels
 class Park;
-class BuildStrategyBase;
+class DelegateBase;
+class SelectDelegate;
 class GameManager;
 class SkyBowl;
 class Terrain;
@@ -52,7 +53,8 @@ private:
    std::map<int,CoreBase*> mFloorSpaces;
 
    //Routes mRoutes;
-   BuildStrategyBase* mpBuildStrategy;  // Place floor objects
+   SelectDelegate* mpDefaultStrategy;
+   DelegateBase* mpStrategy;  //  Select, place and build delegates
    SkyBowl* mpSky;
    Terrain* mpTerrain;
 
@@ -86,6 +88,7 @@ public:
    virtual bool OnToolHit(const HR_Events Event);
    virtual bool OnFRCS();
    virtual bool OnTRCS();
+   virtual bool OnPlacePathItem();
 
    void Update (float dt, int timeOfDay);
    void Draw ();

@@ -18,7 +18,11 @@
 #include "../CoreObjects/CoreBase.h"
 #include "../CoreObjects/Pathway.h"
 #include "../CoreObjects/Park.h"
+#include "../CoreObjects/Stall.h"
+//#include "../CoreObjects/Bench.h"
 #include "../Delegates/BuildDelegate.h"
+#include "../Delegates/SelectDelegate.h"
+#include "../Delegates/PlaceItemDelegate.h"
 #include "../CoreObjects/Terrain.h"
 #include "Scene.h"
 
@@ -26,14 +30,20 @@
 Scene::Scene ()
 {
    mpTerrain = NULL;
-   mpBuildStrategy = NULL;
    mpSky = new SkyBowl();
    mpSky->Init( 800 );
+   mpDefaultStrategy = new SelectDelegate("Default");
+   mpStrategy = NULL;
 }
 
 Scene::~Scene ()
 {
    delete mpSky;
+   if (! (mpStrategy == NULL || mpStrategy == mpDefaultStrategy))
+   {
+      delete mpStrategy;
+   }
+   delete mpDefaultStrategy;
 }
 
 void Scene::AddPark (Park* pPark)
@@ -54,21 +64,21 @@ void Scene::SetTerrain (Terrain* pTerrain)
 bool Scene::SelectTool (int toolID)
 {
    bool bResult = false;
-   BuildStrategyBase* pOldStrategy = mpBuildStrategy;
+   DelegateBase* pOldStrategy = mpStrategy;
    switch (toolID)
    {
    case HR_PlaceBuilding:
-      mpBuildStrategy = new BuildBuildingStrategy();
-      mpBuildStrategy->ShowGhostBuild (mParks[0]);
+      mpStrategy = new BuildBuildingStrategy();
+      mpStrategy->Draw();
       bResult = true;
       break;
    case HR_PlacePath:
-      mpBuildStrategy = new BuildBuildingStrategy();
-      mpBuildStrategy->ShowGhostBuild (mParks[0]);
+      mpStrategy = new BuildBuildingStrategy();
+      mpStrategy->Draw();
       bResult = true;
       break;
    }
-   if (bResult && !(pOldStrategy==NULL))
+   if (bResult && ! (mpStrategy == NULL || mpStrategy == mpDefaultStrategy))
    {
       try
       {
@@ -114,7 +124,7 @@ void Scene::Draw ()
 
 void Scene::DrawSelectionTarget (int PathwayNo)
 {
-   bool bPathwaysOnly = (this->mpBuildStrategy==NULL) ? false : true;
+   bool bPathwaysOnly = (this->mpStrategy==NULL) ? false : true;
    std::vector<Park *>::iterator iPark;
    for (iPark = mParks.begin (); iPark != mParks.end (); iPark++)
    {
@@ -144,6 +154,8 @@ bool Scene::OnToolHit(const HR_Events Event)
       return OnFRCS();
    case HR_TRCS:
       return OnTRCS();
+   case HR_PlacePathItem:
+      return OnPlacePathItem();
    }
    return false;
 }
@@ -158,10 +170,31 @@ bool Scene::OnTRCS ()
    return true;
 }
 
+bool Scene::OnPlacePathItem ()
+{
+   bool bResult = false;
+   DelegateBase* pOldStrategy = mpStrategy;
+   mpStrategy = new PlaceItemDelegate<Stall*>("Generic Bench"); //<CBench*>();
+   mpStrategy->Draw();
+   bResult = true;
+
+   if (bResult && ! (mpStrategy == NULL || mpStrategy == mpDefaultStrategy))
+   {
+      try
+      {
+         delete pOldStrategy;
+      }
+      catch (...)
+      {
+         std::cout << "Error deleting old BuildStrategy in Scene";
+      }
+   }
+   return bResult;
+}
 
 void Scene::HitDown( int hit, Vector2i& Scene )  // taking a mouse hit, send it through geometry to see what we hit
 {
-   if( mpBuildStrategy && mpBuildStrategy->PlacingRoom() )
+   if( mpStrategy ) //&& mpStrategy->Placing() )
    {
       // send the hit through a strategy delegate
    }
@@ -178,7 +211,7 @@ void Scene::HitDown( int hit, Vector2i& Scene )  // taking a mouse hit, send it 
       //   {
       //      int x = (int)(pPark->GetGhostObject().GetX() / 9);
       //      std::cout << "Mouse on Pathway: " << pPathway->GetPathway() << " Pathway ID: " << hit << std::endl;
-      //      mpBuildStrategy->BuildHere(pPark, x, pPathway->GetPathway());
+      //      mpStrategy->BuildHere(pPark, x, pPathway->GetPathway());
       //      break;
       //   }
       //   else
@@ -191,7 +224,7 @@ void Scene::HitDown( int hit, Vector2i& Scene )  // taking a mouse hit, send it 
 
 void Scene::HitUp( int hit, Vector2i& Scene )  // taking a mouse hit, send it through geometry to see what we hit
 {
-   if( mpBuildStrategy && mpBuildStrategy->PlacingRoom() )
+   if( mpStrategy ) //&& mpStrategy->Placing() )
    {
       // send the hit through a strategy delegate
    }

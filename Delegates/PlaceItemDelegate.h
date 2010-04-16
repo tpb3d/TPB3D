@@ -15,29 +15,36 @@
  */
 
 #pragma once
-#include <string>
-#include <map>
-#include "DelegateBase.h"
+#include "DelegateBase.h" // includes map and string
 
-class SelectDelegate : public DelegateBase
+template <class T> class PlaceItemDelegate : public DelegateBase
 {
 protected:
-//   Select& mSelect;
+   std::string mToolPlaceItemed;
+   T* mpGhostItem;
 
 public:
-   SelectDelegate (const char* pszName)
+   PlaceItemDelegate (const char* pszName)
    :  DelegateBase (pszName)
    {
+//      pGhostItem = T::CreateGhost();
    }
 
 public:
    void OnHitDown (short ID)
    {
-//      mSelect.Onhit();
+//      mPlaceItem.Onhit();
    }
 
    void OnHitUp (short ID)
    {
-//      mSelect.Onhit();
+//      mPlaceItem.Onhit();
+   }
+   void Draw()
+   {
+      // gfx set alpha to 45%
+// bug      mpGhostItem->Draw();
+      // gfx set alpha to normal
    }
 };
+

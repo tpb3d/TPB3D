@@ -43,6 +43,7 @@ enum HR_Events
    HR_PlaceWasteManagement,
    HR_PlaceElevator,
    HR_PlaceStairs,
+   HR_PlacePathItem,
    HR_PlaceNone,
    HR_NewScene,
    HR_OpenScene,
