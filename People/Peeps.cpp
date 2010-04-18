@@ -120,24 +120,24 @@ Person* Peeps::NewPerson()
 
 
    // Temporary
-   std::string mood[] = {"Furious", "Mad", "Annoyed", "Content", "Happy", "Excited"};
-   std::string state[] = {"Idle", "Busy", "Walking", "Disembarking", "Boarding", "Waiting"};
-   std::string health[] = {"Dead", "Dire", "Need Medical", "Ill", "Weak", "Well"};
-   std::string ride[] = {"Non-Moving", "Gentle", "Family", "Thrill", "Intense", "Extreme"};
-   std::string gender[] = {"Male", "Female"};
-
-   cout << "Added Peep" << endl;
-   cout << "   Mood: " <<  mood[person->GetMood()] << endl;
-   cout << "   State: " << state[person->GetCurrentState()] << endl;
-   cout << "   Age: " << person->GetAge() << " years" << endl;
-   cout << "   Height: " << person->GetHeight() << "\"" << endl;
-   cout << "   Weight: " << person->GetWeight() << " lb" << endl;
-   cout << "   Money: " << person->GetMoney() << " credits" << endl;
-   cout << "   Gender: " << gender[person->GetGender()] << endl;
-   cout << "   Ride Preferences: " <<  ride[person->GetRidePreference()] << endl;
-   cout << "   Hunger: " << person->GetHunger() << endl;
-   cout << "   Thirst: " << person->GetThirst() << endl;
-   cout << "   Health: " << health[person->GetHealth()] << endl;
+//   std::string mood[] = {"Furious", "Mad", "Annoyed", "Content", "Happy", "Excited"};
+//   std::string state[] = {"Idle", "Busy", "Walking", "Disembarking", "Boarding", "Waiting"};
+//   std::string health[] = {"Dead", "Dire", "Need Medical", "Ill", "Weak", "Well"};
+//   std::string ride[] = {"Non-Moving", "Gentle", "Family", "Thrill", "Intense", "Extreme"};
+//   std::string gender[] = {"Male", "Female"};
+//
+//   cout << "Added Peep" << endl;
+//   cout << "   Mood: " <<  mood[person->GetMood()] << endl;
+//   cout << "   State: " << state[person->GetCurrentState()] << endl;
+//   cout << "   Age: " << person->GetAge() << " years" << endl;
+//   cout << "   Height: " << person->GetHeight() << "\"" << endl;
+//   cout << "   Weight: " << person->GetWeight() << " lb" << endl;
+//   cout << "   Money: " << person->GetMoney() << " credits" << endl;
+//   cout << "   Gender: " << gender[person->GetGender()] << endl;
+//   cout << "   Ride Preferences: " <<  ride[person->GetRidePreference()] << endl;
+//   cout << "   Hunger: " << person->GetHunger() << endl;
+//   cout << "   Thirst: " << person->GetThirst() << endl;
+//   cout << "   Health: " << health[person->GetHealth()] << endl;
 
    return person;
 }

@@ -51,6 +51,7 @@
 #include "../CoreObjects/Lamp.h"
 #include "../CoreObjects/Pathway.h"
 #include "../CoreObjects/Stall.h"
+#include "../CoreObjects/Bench.h"
 #include "../SalesObjects/FoodItem.h"
 // endtest
 
@@ -126,61 +127,74 @@ bool GameManager::LoadGame (const char *fileName)
    pOTree.AddNode( myTree);
 
 
-   Pathway* pPath4 = new Pathway (Vector3f(-30.0f, 0.1f, 61.0f), mScene.GetPark(), "Stone.png");
-   pPath4->Render();
-   pOTree.AddNode (pPath4);
+   // Define paths
+   Pathway* pPath1 = new Pathway (Vector3f(-30.0f, 1.0f, 300.0f), mScene.GetPark(), "Stone.png");
+   pPath1->Rotate( Vector3f(0, 180, 0) );
 
-   // this is BS just to show paths
-   Pathway* pPath3 = new Pathway (Vector3f(-30.0f, 0.1f, 61.0f), mScene.GetPark(), "Stone.png");
-   pPath3->Render2();
-   pOTree.AddNode (pPath3);
+   Pathway* pPath2 = new Pathway (Vector3f(-79.0f, 1.0f, 300.0f), mScene.GetPark(), "Stone.png");
+   pPath2->Rotate( Vector3f(0, 90, 0) );
 
-   Pathway* pPath2 = new Pathway(Vector3f(-30.0f, 0.1f, 100.0f), mScene.GetPark(), "Stone.png");
-   pPath2->Render2();
-   pOTree.AddNode (pPath2);
+   Pathway* pPath3 = new Pathway (Vector3f(-79.0f, 1.0f, 251.0f), mScene.GetPark(), "Stone.png");
+   pPath3->Rotate( Vector3f(0, 0, 0) );
 
-   Pathway* pPath1 = new Pathway(Vector3f(-30.0f, 0.1f, 100.0f), mScene.GetPark(), "Stone.png");
-   pPath1->Render();
-   pOTree.AddNode (pPath1);
+   Pathway* pPath4 = new Pathway (Vector3f(-30.0f, 1.0f, 251.0f), mScene.GetPark(), "Stone.png");
+   pPath4->Rotate( Vector3f(0, 100, 0) );
+
+   Pathway* pPath5 = new Pathway (Vector3f(-38.5f, 1.0f, 202.0f), mScene.GetPark(), "Stone.png");
+   pPath5->Rotate( Vector3f(0, 80, 0) );
+
+   Pathway* pPath6 = new Pathway (Vector3f(-30.0f, 1.0f, 153.0f), mScene.GetPark(), "Stone.png");
+   pPath6->Rotate( Vector3f(0, 90, 0) );
+
+   Pathway* pPath7 = new Pathway (Vector3f(-30.0f, 1.0f, 104.0f), mScene.GetPark(), "Stone.png");
+   pPath7->Rotate( Vector3f(0, 90, 0) );
 
 
-   // Added to make the path finding more clear
-   Pathway* pPath5 = new Pathway(Vector3f(-30.0f, 0.1f, 250.0f), mScene.GetPark(), "Stone.png");
-   pPath5->Render3();
-   pOTree.AddNode (pPath5);
-
-   Pathway* pPath6 = new Pathway(Vector3f(-76.0f, 0.1f, 250.0f), mScene.GetPark(), "Stone.png");
-   pPath6->Render2();
-   pOTree.AddNode (pPath6);
-
-   Pathway* pPath7 = new Pathway(Vector3f(-76.0f, 0.1f, 300.0f), mScene.GetPark(), "Stone.png");
-   pPath7->Render();
-   pOTree.AddNode (pPath7);
-
-   Pathway* pPath8 = new Pathway(Vector3f(-30.0f, 0.1f, 200.0f), mScene.GetPark(), "Stone.png");
-   pPath8->Render2();
-   pOTree.AddNode (pPath8);
-
-   Pathway* pPath9 = new Pathway(Vector3f(-30.0f, 0.1f, 150.0f), mScene.GetPark(), "Stone.png");
-   pPath9->Render2();
-   pOTree.AddNode (pPath9);
-
-   mScene.GetPark()->GetEntrance()->AddConnection (pPath7); // connect the entrance to the paths
-   pPath7->AddConnection (pPath6);
-   pPath6->AddConnection (pPath5);
-   pPath5->AddConnection (pPath8);
-   pPath8->AddConnection (pPath9);
-   pPath9->AddConnection (pPath2);
+   // Connect paths
+   mScene.GetPark()->GetEntrance()->AddConnection (pPath1); // connect the entrance to the paths
    pPath1->AddConnection (pPath2);
+   pPath2->AddConnection (pPath1);
+
    pPath2->AddConnection (pPath3);
+   pPath3->AddConnection (pPath2);
+
    pPath3->AddConnection (pPath4);
+   pPath4->AddConnection (pPath3);
+
+   pPath4->AddConnection (pPath5);
+   pPath5->AddConnection (pPath4);
+
+   pPath5->AddConnection (pPath6);
+   pPath6->AddConnection (pPath5);
+
+   pPath6->AddConnection (pPath7);
+   pPath7->AddConnection (pPath6);
+
+   // Add paths to the park collection
+   mScene.GetPark()->AddPath(pPath1);
+   mScene.GetPark()->AddPath(pPath2);
+   mScene.GetPark()->AddPath(pPath3);
+   mScene.GetPark()->AddPath(pPath4);
+   mScene.GetPark()->AddPath(pPath5);
+   mScene.GetPark()->AddPath(pPath6);
+   mScene.GetPark()->AddPath(pPath7);
+
+   // Render paths
+   pOTree.AddNode (pPath1->GetGraphic());
+   pOTree.AddNode (pPath2->GetGraphic());
+   pOTree.AddNode (pPath3->GetGraphic());
+   pOTree.AddNode (pPath4->GetGraphic());
+   pOTree.AddNode (pPath5->GetGraphic());
+   pOTree.AddNode (pPath6->GetGraphic());
+   pOTree.AddNode (pPath7->GetGraphic());
+
 
    RidePartLoader rpl;
    ObjectNode* pTempTree = new ObjectNode(0, 33);
    const char* pszFile = "restroom01.3ds";
    const char* pszPath = "data/Restroom 01/";
    rpl.Load3ds( pszPath, pszFile, pTempTree );
-   pOTree.AddNode (pTempTree);
+   //pOTree.AddNode (pTempTree);
    // Can't add the restroon, not yet a part object, just a graphic
 
    Stall* pStall = new Stall(1,41, ST_Food);
@@ -194,7 +208,7 @@ bool GameManager::LoadGame (const char *fileName)
    pStall->AddItem (FoodItem::Create ("Cheese Pizza", 1, 1));
    pStall->AddItem (FoodItem::Create ("Burger", 3, 1));
    pStall->AddItem (FoodItem::Create ("Chicken Sandwich", 5, 1));
-   pPath3->AddConnection (pStall->GetQueue());  // "Stall" is now on the path
+   pPath5->AddConnection (pStall->GetQueue());  // "Stall" is now on the path
 
    //pTempTree = new ObjectNode(0, 39);
    //const char* pszFileB = "JMORendered.3ds";
@@ -207,6 +221,35 @@ bool GameManager::LoadGame (const char *fileName)
    pLamp->Render();
    pLamp->Move (fLoc);
    pOTree.AddNode (pLamp);
+
+
+   // Park Bench
+   ObjectNode* pbench = new ObjectNode(0, 36);
+
+   const char* pszFileBench = "bench01.3ds";
+   const char* pszPathBench = "data/Benches/";
+   rpl.Load3ds( pszPathBench, pszFileBench, pbench );
+
+   Bench *bench = new Bench(pbench, pPath5, 20, Bench::IH_Left,  2);
+   pOTree.AddNode ( bench->GetGraphic() );
+
+   Bench *bench2 = new Bench(pbench, pPath5, 30, Bench::IH_Right,  2);
+   pOTree.AddNode ( bench2->GetGraphic() );
+
+   Bench *bench3 = new Bench(pbench, pPath2, 30, Bench::IH_Right,  2);
+   pOTree.AddNode ( bench3->GetGraphic() );
+
+   Bench *bench4 = new Bench(pbench, pPath1, 20, Bench::IH_Left,  2);
+   pOTree.AddNode ( bench4->GetGraphic() );
+
+   Bench *bench5 = new Bench(pbench, pPath7, 25, Bench::IH_Left,  2);
+   pOTree.AddNode ( bench5->GetGraphic() );
+
+   Bench *bench6 = new Bench(pbench, pPath4, 8, Bench::IH_Left,  2);
+   pOTree.AddNode ( bench6->GetGraphic() );
+
+   Bench *bench7 = new Bench(pbench, pPath3, 40, Bench::IH_Left,  2);
+   pOTree.AddNode ( bench7->GetGraphic() );
 
 
    // test build coaster track
@@ -265,7 +308,7 @@ bool GameManager::LoadGame (const char *fileName)
    pRide = flat.CreateRide(0, mPark );
    pRide->SetPosition (fx,0.1f,fz);
    mScene.GetPark()->AddRide (pRide);
-   pPath4->AddConnection (pRide->GetQueue());   // join the "Barn Stormers" to the path4
+//   pPath4->AddConnection (pRide->GetQueue());   // join the "Barn Stormers" to the path4
 
 
    //pRide = flat.CreateRide(1, mPark);

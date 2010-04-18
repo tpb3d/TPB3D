@@ -27,25 +27,26 @@ class Pathway;
 class PathFind
 {
    public:
-      PathFind(Person *peep, Pathway *distPath);
+      PathFind(Person *peep);
       ~PathFind() {;}
 
+      bool Calculate(Pathway *dest);
       bool Update();
-      bool Find(Pathway *p);
 
-      bool HasPath() { return mFound; }
-
-      Pathway *GetDestination() { return dest; }
-
+      Pathway *GetDestination() { return mDest; }
    private:
+      bool BuildPathModel();
+
+      bool Find(Pathway *p, Pathway *root);
+
       Pathway *start;
-      Pathway *dest;
+      Pathway *mDest;
       Person *mPeep;
 
       bool mFound;
 
       std::vector<Pathway *> path;
-      std::stack<Pathway *> stack;
+      std::stack<Pathway *> *mStack;
 
       // Used for interpolation
       std::vector<Vector3f> Interpolation;

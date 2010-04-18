@@ -17,6 +17,8 @@
 #include "../People/Person.h"
 #include "Stall.h"
 
+#include <iostream> // temporary
+
 Stall::Stall (int StallNo, int ID)
 {
    mpGraphic = NULL;
@@ -54,10 +56,19 @@ void Stall::ServeNextPerson (void)
    Person* pPeep = mpQueue->TakeNextPerson();
    if (pPeep != NULL)
    {
-      // TakeOrder;
-      // Serve or Reject
-      pPeep->SetActivity (Person::AS_Eating);   // this is just some interaction
-      pPeep->SetCurrentState (Person::CS_Walking);
+      ItemBase *item = mItemList.at( (rand() % mItemList.size()) );
+      if( pPeep->GetMoney() >= item->getCost() )
+      {
+         std::cout << "Peep bought a " << item->getName() << std::endl;
+         pPeep->AddItem(item);
+         pPeep->SetActivity (Person::AS_Eating);   // this is just some interaction
+         pPeep->SetCurrentState (Person::CS_Walking);
+      }
+      else // Not enough money, go look for an ATM
+      {
+         pPeep->SetActivity(Person::AS_LookingForATM);
+         pPeep->SetCurrentState (Person::CS_Walking);
+      }
    }
 }
 

@@ -32,43 +32,51 @@
 #include "PathAgent.h"
 #include "PeepAgent.h"
 
-PathFind::PathFind(Person *peep, Pathway *distPath)
+PathFind::PathFind(Person *peep)
 {
-   mFound = false;
-   iter = 0;
-
-   start = peep->GetPathway();
-   dest = distPath;
    mPeep = peep;
+   mStack = new stack<Pathway* >;
+}
+
+bool PathFind::Calculate(Pathway *dest)
+{
+   iter = 0;
+   mDest = dest;
+   mFound = false;
+   start = mPeep->GetPathway();
+
+   path.clear();
+   Interpolation.clear();
 
    for(unsigned int i = 0; i < start->GetConnections().size(); i++)
    {
       Pathway *p = start->GetConnections().at(i);
 
-      if( Find(p) )
+      //cout << "Finding Connections" << endl;
+      if( Find(p, start) )
       {
-         stack.pop();
-         while (true)
+         //cout << "Found" << endl;
+         if(!mStack->empty())
          {
-            path.insert ( path.begin(), stack.top() );
-            stack.pop();
+            while (true)
+            {
+               //cout << "Adding" << endl;
+               path.insert ( path.begin(), mStack->top() );
+               mStack->pop();
 
-            if(stack.empty()) break;
+               if(mStack->empty()) break;
+            }
          }
 
          path.insert ( path.begin(), p );
          mFound = true;
          break;
       }
-      else
-      {
-         cout << "Didn't find path" << endl;
-      }
    }
 
    if(mFound) {
       path.insert ( path.begin(), start );
-      path.push_back(dest);
+      path.push_back(mDest);
 
       // Build interpolation path
       for(unsigned int i = 0; i < path.size(); i++)
@@ -103,17 +111,19 @@ PathFind::PathFind(Person *peep, Pathway *distPath)
             Interpolation.push_back(v1);
          }
       }
+      return true;
    }
-   cout << path.size() << endl;
+   return false;
 }
 
-bool PathFind::Find(Pathway *p)
+
+bool PathFind::Find(Pathway *p, Pathway *root)
 {
    //cout << "Step Up" << endl;
 
    for(unsigned int i = 0; i < p->GetConnections().size(); i++)
    {
-      if(p->GetConnections().at(i) == dest)
+      if(p->GetConnections().at(i) == mDest)
       {
          return true;
       }
@@ -122,17 +132,22 @@ bool PathFind::Find(Pathway *p)
    // Look up a layer for paths
    for(unsigned int i = 0; i < p->GetConnections().size(); i++)
    {
-      stack.push(p->GetConnections().at(i));
+      if(p->GetConnections().at(i) != root) {
 
-      if(Find(p->GetConnections().at(i)))
-      {
-         cout << "Found connection" << endl;
-         return true;
+         mStack->push( p->GetConnections().at(i) );
+         if(Find(p->GetConnections().at(i), p))
+         {
+            //cout << "Found connection" << endl;
+            return true;
+         }
+         else {
+            //cout << "No Route" << endl;
+            if(!mStack->empty())
+               mStack->pop();
+         }
+
       }
-      else {
-         stack.pop();
-         cout << "No Route" << endl;
-      }
+
    }
    return false;
 }
@@ -157,9 +172,6 @@ bool PathFind::Update()
 }
 
 
-
-
-
 PeepsAgent::PeepsAgent (Park& Park) // use a Park agent for multiple Parks
       :  mPark (Park)
 {
@@ -174,22 +186,26 @@ void PeepsAgent::Update (float dt, int tod)
 {
    // Shouldn't Peeps be a member within each Park? Supposedly you would want this seperate.
    Peeps* Peeps = Peeps::get_Instance(); // the Peeps object that holds the people collection
-
-//   if( Peeps->GetPopulation() < 1)
-//   {
-//      Person* peep = Peeps->NewPerson();
-//      mPark.EnterPark (peep);
 //
-//      Peeps->Update( dt );
-//   }
-//
-   if ( (rand() % 4) == 3 )  // TODO: need a better spawn mechanism, raised to 100
+   if( Peeps->GetPopulation() < 1)
    {
-      //Location loc; // all zeros
       Person* peep = Peeps->NewPerson();
+      peep->SetPathFind( new PathFind(peep) );
       mPark.EnterPark (peep);
+
       Peeps->Update( dt );
    }
+
+//   if ( (rand() % 4) == 3 )  // TODO: need a better spawn mechanism, raised to 100
+//   {
+//      //Location loc; // all zeros
+//      Person* peep = Peeps->NewPerson();
+//      peep->SetPathFind( new PathFind(peep) );
+//
+//      mPark.EnterPark (peep);
+//      Peeps->Update( dt );
+//   }
+
 
    std::list<Person *>::iterator i;
    std::list<Person *>& persons = Peeps->get_Persons(); // get the persons collection.
@@ -208,10 +224,9 @@ void PeepsAgent::Update (float dt, int tod)
       switch ( peep->GetActivity() )
       {
          case Person::AS_LookingForEntrance:
-            Pathway *entrance;
-
+         {
             cout << "Peep is looking for the park entrance." << endl;
-            entrance = mPark.GetEntrance();
+            Pathway *entrance = mPark.GetEntrance();
             if(entrance)
             {
                peep->SetPathway(entrance);
@@ -224,86 +239,122 @@ void PeepsAgent::Update (float dt, int tod)
             {
                Peeps->DestroyPerson(peep);
             }
-
+         }
          break;
 
 
          case Person::AS_LookingForFood:
-
-         cout << "Peep is looking for food" << endl;
-
-         Stall *stall;
-         stall = mPark.FindStallByType (ST_Food);
-         if(stall)
-         {
-            peep->SetLocation( Vector3f( stall->GetQueue()->GetX(), -stall->GetQueue()->GetY() - 6, stall->GetQueue()->GetZ()) );
-
-            stall->AddPerson(peep);
-            stall->Update (dt, tod);
-         } else {
-            cout << "Couldn't find a food stall " << endl;
-         }
+//
+//         cout << "Peep is looking for food" << endl;
+//
+//         Stall *stall;
+//         stall = mPark.FindStallByType (ST_Food);
+//         if(stall)
+//         {
+//            peep->SetLocation( Vector3f( stall->GetQueue()->GetX(), -stall->GetQueue()->GetY() - 6, stall->GetQueue()->GetZ()) );
+//
+//            stall->AddPerson(peep);
+//            stall->Update (dt, tod);
+//         } else {
+//            cout << "Couldn't find a food stall " << endl;
+//         }
 
          break;
 
          case Person::AS_LookingForDrink:
          break;
 
-         case Person::AS_LookingForRide:
-            cout << "Peep is looking for a ride..." << endl;
+         case Person::AS_Wandering:
+         {
+            Pathway *p = NULL;
 
-            Ride* pRide;
-            pRide = mPark.FindRideByName("Barn Stormers");
-            if (pRide != NULL)
+            cout << "Peep is wandering" << endl;
+            Pathway::PathwayVector v = mPark.GetPaths();
+
+            //p = v.at( 5 );
+            while ( p == peep->GetPathway() || p == NULL)
             {
-               cout << "Looking for Path..." << endl;
-               peep->SetPathFind( new PathFind(peep, pRide->GetQueue() ) );
-               if( peep->GetPathFind()->HasPath() )
-               {
-                  peep->SetActivity(Person::AS_LookingForPath);
-               }
-               else
-               {
-                  delete peep->GetPathFind();
-                  peep->SetActivity(Person::AS_None);
-               }
+               int n = (rand() % (v.size()-1));
+               cout << n << " " << v.size() << endl;
+               p = v.at( n );
 
-//
-//               cout << "Peep found ride: " << pRide->GetName() << endl;
-//               peep->SetLocation( Vector3f( pRide->GetQueue()->GetX(), -pRide->GetQueue()->GetY() - 6, pRide->GetQueue()->GetZ()) );
-//
-//               pRide->AddPerson (peep);
-            } else {
-               peep->SetActivity(Person::AS_None);
             }
+
+            cout << "Calculating" << endl;
+            if( peep->GetPathFind()->Calculate( p ) )
+            {
+               peep->SetActivity(Person::AS_LookingForPath);
+            }
+            else
+            {
+               peep->SetActivity(Person::AS_None);
+               cout << "No Path" << endl;
+            }
+            cout << "Done" << endl;
+         }
+         break;
+
+
+         case Person::AS_LookingForRide:
+            cout << "Peep is looking for a ride" << endl;
+//            cout << "Peep is looking for a ride..." << endl;
+//
+//            Ride* pRide;
+//            pRide = mPark.FindRideByName("Barn Stormers");
+//            if (pRide != NULL)
+//            {
+//               cout << "Looking for Path..." << endl;
+//
+//               if( peep->GetPathFind()->Calculate( pRide->GetQueue() ) )
+//               {
+//                  peep->SetActivity(Person::AS_LookingForPath);
+//               }
+//               else
+//               {
+//                  peep->SetActivity(Person::AS_None);
+//               }
+//
+////
+////               cout << "Peep found ride: " << pRide->GetName() << endl;
+////               peep->SetLocation( Vector3f( pRide->GetQueue()->GetX(), -pRide->GetQueue()->GetY() - 6, pRide->GetQueue()->GetZ()) );
+////
+////               pRide->AddPerson (peep);
+//            } else {
+//               peep->SetActivity(Person::AS_None);
+//            }
          break;
 
          case Person::AS_LookingForPath:
-            PathFind *pfind;
-            pfind = peep->GetPathFind();
-
-            if(pfind)
+         {
+            PathFind *find = peep->GetPathFind();
+            if(find->Update())
             {
-               if(pfind->Update())
-               {
-                  PersonQueue *dest = (PersonQueue*)pfind->GetDestination();
-                  dest->AddPerson(peep);
+               Pathway *dest = (Pathway*)find->GetDestination();
+               peep->SetPathway(dest);
+               //peep->SetActivity( peep->GetLastActivity() );
+               peep->SetActivity( Person::AS_None );
 
-                  cout << "Arrived at Destination" << endl;
-                  delete pfind;
-               }
+               cout << "Arrived at Destination" << endl;
             }
-            else // Shouldn't happen
-            {
-               peep->SetActivity(Person::AS_None);
-            }
+         }
          break;
 
          case Person::AS_LookingForATM:
          break;
 
          case Person::AS_GoingHome:
-            Peeps->DestroyPerson(peep); // Peep is going home, just kill the peep for now.
+         {
+            Pathway *entrance = mPark.GetEntrance();
+
+            if(peep->GetPathway() != entrance) {
+               if( peep->GetPathFind()->Calculate( entrance ) )
+                  peep->SetActivity( Person::AS_LookingForPath );
+               else
+                  Peeps->DestroyPerson(peep);
+            } else {
+               Peeps->DestroyPerson(peep);
+            }
+         }
          break;
 
 

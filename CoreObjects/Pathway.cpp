@@ -41,12 +41,18 @@ using namespace Gfx;
 
 Pathway::Pathway (const Vector3f& origin, Park * ParkParent, const char* szTex)
 :  CoreBase(origin, Vector3f(0,45,0))
-,  ObjectNode(0, ObjectFactory::TakeANumber())
 {
-   m_Point = origin;
+   mPosition = origin;
    mTexName = szTex;
    mID = CoreBase::GetNextID();
    mpGraphic = ObjectFactory::CreateNode(1);
+   this->Move(origin);
+
+   mPathName = "Path";
+
+   mLength = 15;
+
+   Render();
 }
 
 //Pathway::Pathway(TiXmlNode* pnPathway)
@@ -69,63 +75,102 @@ void Pathway::Update (float dt, int tod)
 
 void Pathway::Render()
 {
-   int iSides = 15;
+   int iSides = mLength;
    float  fOff = 1.75f;
    float  fStep = 3.5;
    TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
    mpGraphic->AddMesh (pBase);
-   Vector3f pt1 (mvPosition.x, mvPosition.y, mvPosition.z-fOff);
-   Vector3f pt2 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
+   Vector3f pt1 (0, 0, 0-fOff);
+   Vector3f pt2 (0, 0, 0+fOff);
    pBase->AddPoint (pt1);
    pBase->AddPoint (pt2);
-   for( int ix =0; ix < iSides; ++ix)
+
+   for( int ix = 0; ix < iSides; ++ix)
    {
       pt1.x += fStep;
       pt2.x += fStep;
-      pBase->AddPoint (pt1);
-      pBase->AddPoint (pt2);
-   }
-}
-// dummy code
-void Pathway::Render2()
-{
-   int iSides = 15;
-   float  fOff = 1.75f;
-   float  fStep = 3.5;
-   TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
-   mpGraphic->AddMesh (pBase);
-   Vector3f pt1 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
-   Vector3f pt2 (mvPosition.x+fOff*2, mvPosition.y, mvPosition.z+fOff);
-   pBase->AddPoint (pt1);
-   pBase->AddPoint (pt2);
-   for( int ix =0; ix < iSides; ++ix)
-   {
-      pt1.z += fStep;
-      pt2.z += fStep;
       pBase->AddPoint (pt1);
       pBase->AddPoint (pt2);
    }
 }
 
-// dummy code
-void Pathway::Render3()
+//void Pathway::Render()
+//{
+//   int iSides = 15;
+//   float  fOff = 1.75f;
+//   float  fStep = 3.5;
+//   TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
+//   Vector3f pt1 (mvPosition.x, mvPosition.y, mvPosition.z-fOff);
+//   Vector3f pt2 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
+//   pBase->AddPoint (pt1);
+//   pBase->AddPoint (pt2);
+//   for( int ix =0; ix < iSides; ++ix)
+//   {
+//      pt1.x += fStep;
+//      pt2.x += fStep;
+//      pBase->AddPoint (pt1);
+//      pBase->AddPoint (pt2);
+//   }
+//   mpGraphic->AddMesh (pBase);
+//}
+//// dummy code
+//void Pathway::Render2()
+//{
+//   int iSides = 15;
+//   float  fOff = 1.75f;
+//   float  fStep = 3.5;
+//   TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
+//   mpGraphic->AddMesh (pBase);
+//   Vector3f pt1 (mvPosition.x, mvPosition.y, mvPosition.z+fOff);
+//   Vector3f pt2 (mvPosition.x+fOff*2, mvPosition.y, mvPosition.z+fOff);
+//   pBase->AddPoint (pt1);
+//   pBase->AddPoint (pt2);
+//   for( int ix =0; ix < iSides; ++ix)
+//   {
+//      pt1.z += fStep;
+//      pt2.z += fStep;
+//      pBase->AddPoint (pt1);
+//      pBase->AddPoint (pt2);
+//   }
+//}
+//
+//// dummy code
+//void Pathway::Render3()
+//{
+//   int iSides = 15;
+//   float  fOff = 1.75f;
+//   float  fStep = 3.5;
+//   TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
+//   mpGraphic->AddMesh (pBase);
+//   Vector3f pt1 (mvPosition.x*2.53, mvPosition.y, mvPosition.z-fOff);
+//   Vector3f pt2 (mvPosition.x*2.53, mvPosition.y, mvPosition.z+fOff);
+//   pBase->AddPoint (pt1);
+//   pBase->AddPoint (pt2);
+//   for( int ix =0; ix < iSides; ++ix)
+//   {
+//      pt1.x += fStep;
+//      pt2.x += fStep;
+//      pBase->AddPoint (pt1);
+//      pBase->AddPoint (pt2);
+//   }
+//}
+
+
+void Pathway::Render2() {}
+void Pathway::Render3() {}
+
+void Pathway::Move( const Vector3f &loc)
 {
-   int iSides = 15;
-   float  fOff = 1.75f;
-   float  fStep = 3.5;
-   TexturedStrip* pBase = ObjectFactory::CreateTexturedStrip (iSides, mTexName.c_str(), 0xf0f0f0f0);
-   mpGraphic->AddMesh (pBase);
-   Vector3f pt1 (mvPosition.x*2.53, mvPosition.y, mvPosition.z-fOff);
-   Vector3f pt2 (mvPosition.x*2.53, mvPosition.y, mvPosition.z+fOff);
-   pBase->AddPoint (pt1);
-   pBase->AddPoint (pt2);
-   for( int ix =0; ix < iSides; ++ix)
-   {
-      pt1.x += fStep;
-      pt2.x += fStep;
-      pBase->AddPoint (pt1);
-      pBase->AddPoint (pt2);
-   }
+   float locf[] = {loc.x, loc.y, loc.z};
+   mpGraphic->Move( locf );
+   mPosition = loc;
+}
+
+void Pathway::Rotate( const Vector3f &rot )
+{
+   float rotf[] = {rot.x, rot.y, rot.z};
+   mpGraphic->SetRotation( rotf );
+   mRotation = rot;
 }
 
 // Function that calls the OpenGL rendering in the subclass.

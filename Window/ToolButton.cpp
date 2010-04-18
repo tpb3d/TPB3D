@@ -25,7 +25,7 @@ using namespace Gfx;
 
 namespace Gfx
 {
-   const unsigned char kButtonLights[3][4] = 
+   const unsigned char kButtonLights[3][4] =
    {
       { 195,195,195,128 },    // Mormal
       { 195,255,255,255 },    // Lit

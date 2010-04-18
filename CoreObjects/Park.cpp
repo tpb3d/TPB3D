@@ -43,8 +43,9 @@ Park::Park (int ParkNo, int other, Scene& rScene )
    mPopulation = 0;
    mPoints = 0;
    mCurPoint = 0;
-   mpParkEntrance = new Pathway(Vector3f(-30.0f, 1.0f, 300.0f), this, "Stone.png");
-   mpParkEntrance->Render2();
+
+   mpParkEntrance = new Pathway(Vector3f(-30.0f, 1.0f, 349.0f), this, "Stone.png");
+   mpParkEntrance->Rotate( Vector3f(0, 90, 0) );
 }
 
 Park::~Park( )
@@ -108,6 +109,10 @@ void Park::Update (float dt, int timeOfDay)
    //   Ride* pRide = *iRI;
    //   pRide->Update ((int)dt);
    //}
+}
+
+void Park::AddPath(Pathway *path) {
+   mPaths.push_back(path);
 }
 
 void Park::AddStall (Stall* pStall)

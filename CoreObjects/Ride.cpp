@@ -29,8 +29,9 @@ Ride::Ride(const Vector3f& vPosition, const Park& ParkParent)
    mRunTime = 0;
    mMaxRunTime = 3000;
    mpQueue = new PersonQueue(this);
-   const float fLoc[] = {45,1,0};
-   mpQueue->Move (fLoc);
+   //const float fLoc[] = {45,1,0};
+   //mpQueue->Move ( fLoc );
+   mpQueue->Move ( Vector3f(45, 1, 0) );
    mvPosition = sf::Vector3f(0,0,0);
    mRideType = RT_Empty;
    mRideIntensity = RI_Gentle;

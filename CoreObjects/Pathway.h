@@ -32,7 +32,7 @@ class GameManager;
 class PathAgent;
 class ObjectNode;
 
-class Pathway : public CoreBase, public ObjectNode
+class Pathway : public CoreBase
 {
    friend class GameManager;
    friend class PathAgent;
@@ -55,9 +55,13 @@ protected:
    int  mID;
 
 protected:
-   Vector3f m_Point;
+   Vector3f mPosition;
+   Vector3f mRotation;
+   float mLength;
    std::string mTexName;
    ObjectNode* mpGraphic;
+
+   char *mPathName;
 
 public:
    void  DrawEmptySpace();
@@ -68,16 +72,24 @@ public:
 public:
    // CTOR
    Pathway (const Vector3f& origin, Park* parent, const char* szTex);
+   Pathway (const Vector3f& origin, CoreBase *parent);
    // Initialize from an xml node
    virtual ~Pathway ();
 
    // Properties
 public:
+   // Tranform properties
    inline Pathway* GetParent () { return mParent; }
    inline int GetID () { return mID; }
-   inline float GetX () { return m_Point.x; }
-   inline float GetY () { return m_Point.y; }
-   inline float GetZ () { return m_Point.z; }
+   inline float GetX () { return mPosition.x; }
+   inline float GetY () { return mPosition.y; }
+   inline float GetZ () { return mPosition.z; }
+   const Vector3f &GetPosition() { return mPosition; }
+   const Vector3f &GetRotation() { return mRotation; }
+
+   // Transformation
+   void Move( const Vector3f &loc);
+   void Rotate( const Vector3f &rot );
 
    // Methods
    virtual void Update (float dt, int tod);
@@ -85,17 +97,23 @@ public:
    virtual void Render ();
    virtual void Render2 ();
    virtual void Render3 ();
-   Pathway* Clone() { return new Pathway (Vector3f(mLocation[0],mLocation[1],mLocation[2]), NULL, mTexName.c_str()); }
+
+   ObjectNode* GetGraphic() { return mpGraphic; }
+   Pathway* Clone() { return new Pathway (Vector3f( mPosition.x, mPosition.y, mPosition.z), NULL, mTexName.c_str()); }
 
    PathwayVector GetConnections() { return mConnectors; }
 
    void AddConnection (Pathway* pPath);
+
    bool AddFloorSpace (CoreBase * floor);
    void SetFloorPositions( int x, int x2 );
    CoreBase* GetSpaceByID (int id);
    CoreBase* FindSpace (int x); // location
 
-   virtual const char* GetName () { return "Path"; }
+   float GetWidth() { return 2.7; }
+
+   virtual const char* GetName () { return mPathName; }
+   void SetName(char *name) { mPathName = name; }
    bool TestForEmptySpace (int x, int x2 );
 
    void Save(SerializerBase& ser);

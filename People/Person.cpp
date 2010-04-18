@@ -137,12 +137,13 @@ Person::Person ( const Vector3f &loc )
    }
 
 
-   AddItem( new FoodItem(50, 1.25) );
+   //AddItem( new FoodItem(50, 1.25) );
 
 
    mHealth = HS_Well;
    mMood = MS_Content;
    mActivity = AS_None; // Peep starts out doing nothing.
+   mLastActivity = AS_None;
    mCurrentState = CS_Idle;
 
    mCurTod = 0;
@@ -190,6 +191,7 @@ void Person::Update (int tod)   //actual time
    // Time in park for each peep
    if(mTime > (tod % 60) )
    {
+      mInStateTime += 60;
       mInParkTime += 60;
       mTime = tod;
    }
@@ -232,60 +234,70 @@ void Person::Update (int tod)   //actual time
       mCurTod = tod;
    }
 
+
+   if(mLastActivity != mActivity) {
+      mInStateTime = 0;
+      mLastActivity = mActivity;
+   }
+
+
    if(inPark) {
 
       // Peep is doing nothing
       if( mActivity == AS_None)
       {
-         mActivity = AS_LookingForRide; // Just ride for now
+         mActivity = AS_Wandering;
+//         int n = rand() % 3;
+//
+//         if(n == 1) mActivity = AS_Wandering;
+//         if(n == 2) mActivity = AS_LookingForRide;
       }
 
-       // Peep has food
+      if(mActivity == AS_Wandering) {
+         if(mInStateTime > 60*12)
+         {
+            mActivity = AS_None;
+         }
+      }
+
+      // Peep has food, so let the peep eat it
       if( mActivity == AS_Eating )
       {
          short bite = 2;
 
-         FoodItem *item = (FoodItem*)GetItemByType(Item::IT_Food);
-         if(!item)
+         FoodItem *item = (FoodItem*)GetItemByType(ItemBase::IC_Food);
+         if(item)
          {
-            mActivity = AS_None;
-            return;
-         }
+            cout << "Peep is eating. Hunger: " << mHunger << endl;
+            mHunger = (mHunger-bite);
 
-         cout << "Peep is eating, hunger: " << mHunger << endl;
-
-         item->SetConsumed( item->GetConsumed()+bite );
-         mHunger = (mHunger-bite);
-
-         if(mHunger <= 0 || item->GetConsumed() >= item->GetSubstance() )
-         {
-            cout << "Peep is full" << endl;
-
-            mActivity = AS_None;
-            if(mHunger < 0)
+            if( mHunger <= 0 )
             {
-               mHunger = 0;
-            }
+               cout << "Peep is full" << endl;
 
-            // Only remove food item if it's depleted.
-            if(item->GetConsumed() >= item->GetSubstance())
-            {
+               mActivity = AS_None;
+               if(mHunger < 0) mHunger = 0;
+
                RemoveItem(item); // Remove food item
-               cout << "Peep finished his food" << endl;
+               // Need to add a trash item here.
             }
-            else
-            {
-               cout << "Peep didn't finish his food" << endl;
-            }
+         }
+         else
+         {
+            mActivity = AS_None;
          }
       }
 
+      // Peep is on a ride
       if( mActivity == AS_Riding)
       {
-        // TODO: Need to keep track of how long a peep has been in a riding state.
+         if(mInStateTime > 60*24)
+         {
+            mMood = MS_Furious;
+         }
       }
    }
-   else
+   else // Not in the park yet, look for the entrance
    {
       mActivity = AS_LookingForEntrance;
    }
@@ -416,49 +428,49 @@ void Person::SetResidence (int Pathway)
    mHome = 1; // pResidence
 }
 
-bool Person::AddItem(Item* item)
+bool Person::AddItem(ItemBase* item)
 {
    unsigned int nItems = 0;
 
-   std::list<Item *>::iterator i;
+   ItemBase::ItemIterator i;
    for (i = mItems.begin (); i != mItems.end (); i++)
    {
-      Item* itm = (*i);
+      ItemBase* itm = (*i);
 
       // Peep can only have one food item at a time.
-      if(item->GetType() == Item::IT_Food)
+      if(item->getCategory() == ItemBase::IC_Food)
       {
-         if( item->GetType() == itm->GetType())
+         if( item->getCategory() == itm->getCategory())
          {
             return false;
          }
       }
 
       // Peep can only have one dirnk item at a time.
-      if(item->GetType() == Item::IT_Drink)
+      if(item->getCategory() == ItemBase::IC_Drink)
       {
-         if( item->GetType() == itm->GetType())
+         if( item->getCategory() == itm->getCategory())
          {
             return false;
          }
       }
 
       // Peep can only have 3 souvenir items at a time.
-      if(item->GetType() == Item::IT_Souvenir)
-      {
-         if( item->GetType() == itm->GetType())
-         {
-            nItems++;
-            if(nItems == 3) {
-               return false;
-            }
-         }
-      }
+//      if(item->GetType() == ItemCategory::IT_Souvenir)
+//      {
+//         if( item->GetType() == itm->GetType())
+//         {
+//            nItems++;
+//            if(nItems == 3) {
+//               return false;
+//            }
+//         }
+//      }
 
       // Peep can only have 2 information items at a time.
-      if(item->GetType() == Item::IT_Information)
+      if(item->getCategory() == ItemBase::IC_Brocure)
       {
-         if( item->GetType() == itm->GetType())
+         if( item->getCategory() == itm->getCategory())
          {
             nItems++;
             if(nItems == 2) {
@@ -471,19 +483,27 @@ bool Person::AddItem(Item* item)
    mItems.push_back(item);
    return true;
 }
-void Person::RemoveItem(Item* item)
+void Person::RemoveItem(ItemBase* item)
 {
-   mItems.remove(item);
-}
-
-Item* Person::GetItemByType(Item::ItemType type)
-{
-   std::list<Item *>::iterator i;
+   ItemBase::ItemIterator i;
    for (i = mItems.begin (); i != mItems.end (); i++)
    {
-      Item* item = (*i);
+      ItemBase* itm = (*i);
+      if(itm == item)
+      {
+         mItems.erase(i);
+      }
+   }
+}
 
-      if(type == item->GetType()) {
+ItemBase* Person::GetItemByType(ItemBase::ItemCategory type)
+{
+   ItemBase::ItemIterator  i;
+   for (i = mItems.begin (); i != mItems.end (); i++)
+   {
+      ItemBase* item = (*i);
+
+      if(type == item->getCategory()) {
          return item;
       }
    }
@@ -491,7 +511,7 @@ Item* Person::GetItemByType(Item::ItemType type)
    return NULL;
 }
 
-std::list<Item*> Person::GetItemList() const
+ItemBase::ItemVector Person::GetItemList() const
 {
    return mItems;
 }
@@ -575,7 +595,7 @@ void Person::SetPathway(Pathway *path)
 {
    if(path)
    {
-      this->SetLocation( Vector3f( path->GetX(), -path->GetY() - 6, path->GetZ()) );
+      //this->SetLocation( Vector3f( path->GetX(), -path->GetY() - 6, path->GetZ()) );
       mPath = path;
    }
 }

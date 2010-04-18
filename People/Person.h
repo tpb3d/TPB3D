@@ -27,6 +27,8 @@
 #include "../Graphics/ModelObject.h"
 #include "../CoreObjects/Park.h"
 #include "../Types/Vector3.h"
+#include "../SalesObjects/ItemBase.h"
+#include "../SalesObjects/FoodItem.h"
 
 class AnimationSingle;
 class PathFind;
@@ -35,62 +37,6 @@ class PathFind;
 // If Location is a destination and mBuilding <=0 then this person is leaving.
 // If Location is a currentLocation and mBuilding = 0 then this person is outside
 // Above subject to change.
-
-
-
-
-// Temporary base class for item
-class Item
-{
-   public:
-      enum ItemType{
-      IT_Food = 0,
-      IT_Drink,
-      IT_Souvenir,
-      IT_Information
-      };
-
-   private:
-      ItemType mType;
-      float mCost; // Item price
-
-   public:
-      Item(const ItemType &type, const float &cost)
-      {
-      mType = type;
-      mCost = cost;
-      }
-      ~Item() {}
-
-      ItemType GetType() const { return mType; }
-      void SetItemType(const ItemType &type) { mType = type; }
-
-      float GetCost() const { return mCost; }
-      void SetCost(const float &cost) { mCost = cost; }
-};
-
-// Temporary base class for fooditem
-class FoodItem : public Item
-{
-    private:
-        unsigned int mSubstance; // The amount of hunger the food should shave off.
-        float mConsumed;
-    public:
-
-        FoodItem(const unsigned int &substance, const float &cost) : Item(Item::IT_Food, cost)
-        {
-            mSubstance = substance;
-        }
-        ~FoodItem() {}
-
-        unsigned int GetSubstance() const {return mSubstance;}
-
-        void SetSubstance(const unsigned int &substance) { mSubstance = substance; }
-
-        void SetConsumed(const float &consumed) { mConsumed = consumed; }
-        float GetConsumed() const { return mConsumed; }
-};
-
 
 struct Location
 {
@@ -176,11 +122,14 @@ public:
       AS_LookingForGroup,
       AS_LookingForRestroom,
 
+      AS_Wandering,
+
 
       // These should probably be current states
       AS_UsingRestroom,
 
       AS_Riding,
+      AS_Sitting,
       AS_Eating,  // The peep has food, we should probably look for a place to sit.
       AS_Drinking, // The peep has drink, we should probably look for a place to sit.
       AS_GoingHome, // Peep wants to go home, we need to head for the park gate.
@@ -225,6 +174,7 @@ public:
    };
 
 private:
+   Activity_State mLastActivity;
    Location       mLocation;
    Path           mWorkPath;    // To and from work, stays permanant as long as working.
    // Changes if they change jobs or the business goes bust.
@@ -233,7 +183,7 @@ private:
    Pathway *mPath;
    PathFind *mPathFind;
 protected:
-   std::list <Item*> mItems;
+   ItemBase::ItemVector mItems;
 
    //unsigned char  NeedToRide;
 
@@ -249,6 +199,7 @@ protected:
 
    unsigned int mTime;
    unsigned int mInParkTime; // Time the peep has spent in the park
+   unsigned int mInStateTime;
 
    float mCurTod;
    float mMoney;
@@ -274,15 +225,16 @@ public:
    virtual ~Person (void);
 
 
+   // Location
    void SetLocation( const Vector3f &loc);
    Vector3f GetLocation();
 
-   bool AddItem(Item* item);
-   void RemoveItem(Item* item);
+   // Items
+   bool AddItem(ItemBase* item);
+   void RemoveItem(ItemBase* item);
 
-   Item* GetItemByType(Item::ItemType type);
-
-   std::list<Item*> GetItemList() const;
+   ItemBase* GetItemByType(ItemBase::ItemCategory type);
+   ItemBase::ItemVector GetItemList() const;
 
    // Properties
    Mood_State GetMood() const;
@@ -328,10 +280,10 @@ public:
       return mOtherPath;
    }
 
-   Activity_State GetActivity () // inline for faster access, same isolation, just quicker code.
-   {
-      return mActivity;
-   }
+   // inline for faster access, same isolation, just quicker code.
+   Activity_State GetActivity () { return mActivity; }
+   Activity_State GetLastActivity () { return mLastActivity; }
+
    void SetActivity (Activity_State state )
    {
       mActivity = state;

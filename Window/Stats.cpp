@@ -50,7 +50,7 @@ Stats::Stats ()
    mstrDate = "1-1-2010";
 
    ImageManager * images = ImageManager::GetInstance ();
-   Texture* pTex = images->GetTexture ("Stats.png", GL_RGBA);
+   Texture* pTex = images->GetTexture ("stats.png", GL_RGBA);
    mOtherFace = new AnimationSingle (pTex, 256, 16);
    mStatsFace = new AnimationSingle (pTex, 256, 16);
 

@@ -94,6 +94,17 @@ ObjectNode* ObjectNode::Clone( )
    //   CObjectNode* pChild = mpNodes[idx];
    //   pChild->Draw();
    //}
+
+   for( int idx = 0; idx < mNodeCount; ++idx )
+   {
+      pNode->AddNode(mpNodes[idx]);
+   }
+
+   for( int idx = 0; idx < mMeshCount; ++idx )
+   {
+      pNode->AddMesh(mpMeshes[idx]);
+   }
+
    return pNode;
 }
 
@@ -128,6 +139,7 @@ void ObjectNode::Draw()
       pChild->Draw();
       glPopMatrix();
    }
+
 //   glDisable( GL_BLEND );
 }
 

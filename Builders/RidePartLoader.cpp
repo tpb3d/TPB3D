@@ -9,6 +9,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include <cstring>
+
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "../Graphics/ObjectTree.h"
@@ -24,6 +25,11 @@
 #include "RidePartLoader.h"
 
 #include <lib3ds.h>
+
+#ifdef LINUX
+#define _strnicmp strncasecmp
+#endif
+
 //#include "../libASE-1.0/libASE.h"
 //#include "png.h"
 
@@ -355,7 +361,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       //}
 
       float pn[3];
-      ObjectNode* pNode = ObjectFactory::CreateNode( pFile->nmeshes );
+      //ObjectNode* pNode = ObjectFactory::CreateNode( pFile->nmeshes );
       float fRRLoc[4] = { -20,0.5,55,0 };
       float fSTLoc[4] = { -31,0.5,85,0 };
       float fTALoc[4] = { 24,1,40,0 };
@@ -365,12 +371,14 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       if (_strnicmp(Name,"Tag",3) == 0)
       {
          frx = 4;
-         pNode->Move(fTALoc);
+         //pNode->Move(fTALoc);
+         pBaseNode->Move(fTALoc);
       }
       else if (_strnicmp(Name,"hrt",3) == 0)
       {
          frx = 5;
-         pNode->Move(fHRLoc);
+         //pNode->Move(fHRLoc);
+         pBaseNode->Move(fHRLoc);
       }
       else if (_strnicmp(Name,"brn",3) == 0)
       {
@@ -379,21 +387,25 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       else if (_strnicmp(Name,"JMO",3) == 0)
       {
          frx = 0.1f;
-         pNode->Move(fTALoc);
+         //pNode->Move(fTALoc);
+         pBaseNode->Move(fTALoc);
       }
       else if (_strnicmp(Name,"sta",3) == 0)
       {
          frx = 1.0f/18; // inches to feet
-         pNode->Move(fSTLoc);
-         pNode->SetRotation(fRot);
+         //pNode->Move(fSTLoc);
+         //pNode->SetRotation(fRot);
+         pBaseNode->Move(fSTLoc);
+         pBaseNode->SetRotation(fRot);
       }
       else
       {
          frx = 3;
-         pNode->Move(fRRLoc);
+         //pNode->Move(fRRLoc);
+         pBaseNode->Move(fRRLoc);
       }
 
-      pBaseNode->AddNode( pNode );
+      //pBaseNode->AddNode( pNode );
       int MatIndexes[32];
       memset (MatIndexes, 0, sizeof(MatIndexes));
       for( int idx = 0; idx < pFile->nmeshes; idx++ )
@@ -415,7 +427,8 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
          }
          SimpleMeshObject* pGLMesh = ObjectFactory::CreateMesh();
          pGLMesh->SetScale (frx);
-         pNode->AddMesh( pGLMesh );
+         //pNode->AddMesh( pGLMesh );
+         pBaseNode->AddMesh( pGLMesh );
 
          pGLMesh->AddMatrix( pMesh->matrix );
          pGLMesh->SetMaterials (MatList);

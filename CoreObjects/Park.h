@@ -96,6 +96,8 @@ protected:
    void ClearStalls (); // deletes all the stalls
 
 public:
+   void AddPath (Pathway *path);
+   Pathway::PathwayVector GetPaths () { return mPaths; }
 
    void   AddStall (Stall* pStall);
    Stall* FindStallByType (StallType st);

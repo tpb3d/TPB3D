@@ -70,15 +70,15 @@ public:
    CoreBase (const Vector3f& vPosition);
    CoreBase (const Vector3f& vPosition, const Vector3f& vAngle);
    ~CoreBase ();
-   
+
 protected:
    void Initialize();
 
-public:   
+public:
    // Properties
    inline float GetX() { return mvPosition.x; }
    inline float GetY() { return mvPosition.y; }
-   inline float GetZ() {return mvPosition.z; }
+   inline float GetZ() { return mvPosition.z; }
    inline int   GetPathNo() { return mLevel; }
    inline int   GetID () { return mID; }
 

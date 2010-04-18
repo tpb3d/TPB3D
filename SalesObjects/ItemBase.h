@@ -54,7 +54,7 @@ public:
    float getCost () { return mCost; }
    float getPrice () { return mPrice; }
    // methods
-   static ItemBase* ItemBase::Create (SerializerBase& ser);
+   static ItemBase* Create (SerializerBase& ser);
    void SetPricing (float Cost, float Price);
    virtual const char* getCategoryName() { return "Nothing"; }
    virtual void DrawItem(string& name,ItemCategory itemCategory, int size);

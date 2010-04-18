@@ -121,8 +121,9 @@
 					<Add option="-Wextra" />
 					<Add option="-Wall" />
 					<Add option="-ansi" />
-					<Add directory="lib/include" />
+					<Add option="-DLINUX" />
 					<Add directory="/usr/include/CEGUI" />
+					<Add directory="/usr/include/lib3ds" />
 				</Compiler>
 				<Linker>
 					<Add library="sfml-graphics" />
@@ -162,6 +163,8 @@
 		<Unit filename="CoreObjects/ActuatorBase.h" />
 		<Unit filename="CoreObjects/Arm.cpp" />
 		<Unit filename="CoreObjects/Arm.h" />
+		<Unit filename="CoreObjects/Bench.cpp" />
+		<Unit filename="CoreObjects/Bench.h" />
 		<Unit filename="CoreObjects/Building.cpp" />
 		<Unit filename="CoreObjects/Building.h" />
 		<Unit filename="CoreObjects/CableHingeJoint.cpp" />
@@ -178,7 +181,6 @@
 		<Unit filename="CoreObjects/CoreBase.h" />
 		<Unit filename="CoreObjects/Deck.cpp" />
 		<Unit filename="CoreObjects/Deck.h" />
-		<Unit filename="CoreObjects/FoodItems.h" />
 		<Unit filename="CoreObjects/GhostObject.cpp" />
 		<Unit filename="CoreObjects/GhostObject.h" />
 		<Unit filename="CoreObjects/GimbalJoint.cpp" />
@@ -188,8 +190,6 @@
 		<Unit filename="CoreObjects/HorizontalCrankHub.h" />
 		<Unit filename="CoreObjects/Hub.cpp" />
 		<Unit filename="CoreObjects/Hub.h" />
-		<Unit filename="CoreObjects/Items.cpp" />
-		<Unit filename="CoreObjects/Items.h" />
 		<Unit filename="CoreObjects/Lamp.cpp" />
 		<Unit filename="CoreObjects/Lamp.h" />
 		<Unit filename="CoreObjects/LiftArm.cpp" />
@@ -199,6 +199,8 @@
 		<Unit filename="CoreObjects/Park.h" />
 		<Unit filename="CoreObjects/PathCollection.cpp" />
 		<Unit filename="CoreObjects/PathCollection.h" />
+		<Unit filename="CoreObjects/PathItem.cpp" />
+		<Unit filename="CoreObjects/PathItem.h" />
 		<Unit filename="CoreObjects/Pathway.cpp" />
 		<Unit filename="CoreObjects/Pathway.h" />
 		<Unit filename="CoreObjects/PersonQueue.cpp" />
@@ -212,6 +214,8 @@
 		<Unit filename="CoreObjects/RideBase.h" />
 		<Unit filename="CoreObjects/RideCollection.cpp" />
 		<Unit filename="CoreObjects/RideCollection.h" />
+		<Unit filename="CoreObjects/RideController.cpp" />
+		<Unit filename="CoreObjects/RideController.h" />
 		<Unit filename="CoreObjects/RideNode.cpp" />
 		<Unit filename="CoreObjects/RideNode.h" />
 		<Unit filename="CoreObjects/RideSection.cpp" />
@@ -331,6 +335,10 @@
 		<Unit filename="Physics/RotationPhysics.h" />
 		<Unit filename="Physics/ServoPhysics.cpp" />
 		<Unit filename="Physics/ServoPhysics.h" />
+		<Unit filename="SalesObjects/FoodItem.cpp" />
+		<Unit filename="SalesObjects/FoodItem.h" />
+		<Unit filename="SalesObjects/ItemBase.cpp" />
+		<Unit filename="SalesObjects/ItemBase.h" />
 		<Unit filename="Scene/Scene.cpp" />
 		<Unit filename="Scene/Scene.h" />
 		<Unit filename="Scene/SceneEvent.cpp" />
