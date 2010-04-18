@@ -580,14 +580,6 @@
 				>
 			</File>
 			<File
-				RelativePath="..\CoreObjects\Bench.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CoreObjects\Bench.h"
-				>
-			</File>
-			<File
 				RelativePath="..\CoreObjects\Building.cpp"
 				>
 			</File>
@@ -755,14 +747,6 @@
 			</File>
 			<File
 				RelativePath="..\CoreObjects\PathCollection.h"
-				>
-			</File>
-			<File
-				RelativePath="..\CoreObjects\PathItem.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\CoreObjects\PathItem.h"
 				>
 			</File>
 			<File

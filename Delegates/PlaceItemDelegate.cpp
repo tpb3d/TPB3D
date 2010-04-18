@@ -14,39 +14,31 @@
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#pragma once
-#include "DelegateBase.h" // includes map and string
+#include <map>
+#include <list>
+#include <vector>
+#include <iostream>
+#include "../CoreObjects/CoreBase.h"
+#include "../CoreObjects/GhostObject.h"
+#include "../CoreObjects/Park.h"
+#include "PlaceItemDelegate.h"
 
-template <class T> class PlaceItemDelegate : public DelegateBase
+using namespace CoreObjects;
+
+void PlaceItemDelegate<class T>::OnHitDown (short ID)
 {
-protected:
-   //std::string mToolPlaceItemed;
-   T* mpGhostItem;
+   T* pCB = mpGhostItem;
+//   T* pNew = pCB->Clone();
+//      mPlaceItem.Onhit();
+}
 
-public:
-   PlaceItemDelegate (const char* pszName)
-   :  DelegateBase (pszName)
-   {
-//      pGhostItem = T::CreateGhost();
-   }
-
-public:
-   void OnHitDown (short ID)
-   {
-      T* pCB = mpGhostItem;
-//      T* pNew = pCB->Clone();
-   //      mPlaceItem.Onhit();
-   }
-
-   void OnHitUp (short ID)
-   {
-   //      mPlaceItem.Onhit();
-   }
-   void Draw()
-   {
-      // gfx set alpha to 45%
-   // bug      mpGhostItem->Draw();
-      // gfx set alpha to normal
-   }
-};
-
+void PlaceItemDelegate<class T>::OnHitUp (short ID)
+{
+//      mPlaceItem.Onhit();
+}
+void PlaceItemDelegate<class T>::Draw()
+{
+   // gfx set alpha to 45%
+// bug      mpGhostItem->Draw();
+   // gfx set alpha to normal
+}

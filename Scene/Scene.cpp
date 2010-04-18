@@ -196,7 +196,7 @@ void Scene::HitDown( int hit, Vector2i& Scene )  // taking a mouse hit, send it 
 {
    if( mpStrategy ) //&& mpStrategy->Placing() )
    {
-      // send the hit through a strategy delegate
+      mpStrategy->OnHitDown(hit);
    }
    else
    {
@@ -226,40 +226,10 @@ void Scene::HitUp( int hit, Vector2i& Scene )  // taking a mouse hit, send it th
 {
    if( mpStrategy ) //&& mpStrategy->Placing() )
    {
-      // send the hit through a strategy delegate
+      mpStrategy->OnHitUp(hit);
    }
    else
    {
       // send the hit through a strategy delegate
    }
-}
-
-void Scene::RegisterFloorSpace (int id, CoreBase* pFS)
-{
-   mFloorSpaces.insert (mFloorSpaces.end(),TypeFloorSpaceMap(id, pFS));
-}
-
-void Scene::UnregisterFloorSpace (int id, CoreBase* pFS)
-{
-   mFloorSpaces.erase (id);
-}
-
-CoreBase* Scene::FindFloorSpace (int id)
-{
-   CoreBase* pFS = NULL;
-   try
-   {
-      TypeFloorSpaceIterator it = mFloorSpaces.find(id);
-      if( !(it == mFloorSpaces.end()))
-      {
-         TypeFloorSpaceMap& FSM = (TypeFloorSpaceMap&)(*it);
-         pFS = FSM.second;
-      }
-   }
-   catch(...)
-   {
-      // find failed
-   }
-
-   return pFS;
 }

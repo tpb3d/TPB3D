@@ -103,7 +103,7 @@ void Interface::LoadToolbar ()
    pB = new ToolButton(0, m_fHeight-64, HR_Tools);
    pB->SetText("FRCS");
    mpToolBar->AddButton (pB);
-   pB = new ToolButton(0, m_fHeight-96, HR_PlacePath);
+   pB = new ToolButton(0, m_fHeight-96, HR_PlacePathItem);
    pB->SetText("Paths");
    mpToolBar->AddButton (pB);
    pB = new ToolButton(0, m_fHeight-128, HR_OpenScene);

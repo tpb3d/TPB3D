@@ -614,7 +614,7 @@ bool Camera::OnMouseUp (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam)
 bool Camera::OnMouseDown (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam)
 {
    btnlist[Button] = true;
-   return true;
+   return false;
 }
 
 bool Camera::OnKeyUp (sf::Key::Code Key)

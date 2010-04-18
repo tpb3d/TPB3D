@@ -81,14 +81,21 @@ public:
    //Park* GetPark (int no); // positive gets you a Pathway above, negative gets you a basement Pathway
 
    bool SelectTool( int ToolID );
-   void RegisterFloorSpace (int id, CoreBase* pFS);
-   void UnregisterFloorSpace (int id, CoreBase* pFS);
-   CoreBase* FindFloorSpace (int id);
 
    virtual bool OnToolHit(const HR_Events Event);
    virtual bool OnFRCS();
    virtual bool OnTRCS();
    virtual bool OnPlacePathItem();
+   virtual bool OnMouseDown (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam)
+   {
+      HitDown (Button, Scene);
+      return false;
+   }
+   virtual bool OnMouseUp (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam)
+   {
+      HitUp (Button, Scene);
+      return false;
+   }
 
    void Update (float dt, int timeOfDay);
    void Draw ();

@@ -52,8 +52,8 @@ class Bench : public PathItem
 
 
       void Update (float dt, int tod) {;}
-      BaseType GetType () {;}
-      Bench* Clone() {;}
+      BaseType GetType () { return BasePathItem;}
+      Bench* Clone() { return NULL;} // this might end ugly until we implement
 
       void DrawSelectionTarget() {;}
 

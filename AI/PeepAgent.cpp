@@ -31,6 +31,7 @@
 
 #include "PathAgent.h"
 #include "PeepAgent.h"
+#include "../Utility/GameException.h"
 
 PathFind::PathFind(Person *peep)
 {
@@ -74,7 +75,9 @@ bool PathFind::Calculate(Pathway *dest)
       }
    }
 
-   if(mFound) {
+   if(mFound)
+   {
+
       path.insert ( path.begin(), start );
       path.push_back(mDest);
 
@@ -109,6 +112,10 @@ bool PathFind::Calculate(Pathway *dest)
                v1.z -= (d.z / 15);
             }
             Interpolation.push_back(v1);
+            if ( Interpolation.size() > 100000)
+            {
+               throw new GameException ("Interpolation Exceeded 100k limit in PeepAgent.PathFind");
+            }
          }
       }
       return true;

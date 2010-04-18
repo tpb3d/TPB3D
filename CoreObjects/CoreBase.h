@@ -38,6 +38,7 @@ namespace CoreObjects
       BaseBuilding,
       BaseRetail,
       BaseRestaurant,
+      BasePathItem,
       BaseVenue,
       BaseService,
       BaseSecurity,

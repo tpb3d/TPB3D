@@ -162,6 +162,7 @@ void ObjectNode::AddMesh( ObjectBase* pNode )
 {
    if( !mpMeshes )
    {
+      mAllocatedCount+=4;
       mpMeshes = new ObjectBase*[mAllocatedCount];
    }
    else if( mMeshCount+1 > mAllocatedCount )

@@ -30,6 +30,8 @@ SimpleMeshObject::SimpleMeshObject( int id )
    mpFaces = NULL;
    mfScale = 1.0;
    mpMaterials = NULL;
+   mIndexes = 0;
+   mUVCount = 0;
 }
 
 SimpleMeshObject::~SimpleMeshObject(void)
