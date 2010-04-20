@@ -42,5 +42,6 @@ public:
    virtual void Update(int dt);
    virtual void Render();
    virtual void Draw();
+   virtual void DrawSelectionTarget(int mode);
 //   virtual ObjectBase* Clone( ) { return new CableHingeJoint(); }
 };

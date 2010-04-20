@@ -38,7 +38,7 @@ public:
    virtual void Update(int dt);
    void Render();
    void Draw();
-   void DrawSelectionTarget();
+   void DrawSelectionTarget(int mode);
 
    void Load(SerializerBase& ser);
    void Save(SerializerBase& ser);

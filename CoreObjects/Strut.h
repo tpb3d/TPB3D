@@ -35,5 +35,6 @@ public:
    void SetLength (float len) { mLength = len; }     // current length of cable (some rides will change this
 
    void Draw();
+   void DrawSelectionTarget(int mode);
    void Render();
 };

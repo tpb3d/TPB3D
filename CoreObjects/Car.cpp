@@ -71,6 +71,10 @@ void Car::Draw()
    glPopMatrix();
 }
 
+void Car::DrawSelectionTarget(int mode)
+{
+}
+
 // simple object management - to be replaced
 void Car::AddSection( ObjectBase* pBase )
 {

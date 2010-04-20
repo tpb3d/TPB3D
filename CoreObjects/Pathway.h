@@ -110,7 +110,7 @@ public:
    CoreBase* GetSpaceByID (int id);
    CoreBase* FindSpace (int x); // location
 
-   float GetWidth() { return 2.7; }
+   float GetWidth() { return 2.7f; }
 
    virtual const char* GetName () { return mPathName; }
    void SetName(char *name) { mPathName = name; }

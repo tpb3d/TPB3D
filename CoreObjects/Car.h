@@ -30,6 +30,7 @@ public:
    virtual ~Car(void);
 
    void Draw();
+   void DrawSelectionTarget(int mode);
    void Render() { Render(0); };
    int Render( int lod ); // render returning the poly count
 //   int GetPathCount() { return m_PointsCount; };

@@ -42,6 +42,20 @@ void RideCollection::AddRide (Ride* pRide)
    this->push_back (pRide);
 }
 
+Ride* RideCollection::FindRideById (int id)
+{
+   RideIterator iRI;
+   for (iRI = this->begin(); iRI != this->end(); iRI++)
+   {
+      Ride* pRide = *iRI;
+      if (pRide->GetID() == id)
+      {
+         return pRide;
+      }
+   }
+   return NULL;
+}
+
 Ride* RideCollection::FindRideByType (RideType rt)
 {
    RideIterator iRI;
@@ -82,6 +96,11 @@ void RideCollection::Draw ()
 
 void RideCollection::DrawSelectionTarget (bool bFrameOnly)
 {
-//   mRoutes.DrawSelectionTarget(); do these later
+   RideIterator iRI;
+   for (iRI = this->begin(); iRI != this->end(); iRI++)
+   {
+      Ride* pRide = *iRI;
+      pRide->DrawSelectionTarget ();
+   }
 }
 

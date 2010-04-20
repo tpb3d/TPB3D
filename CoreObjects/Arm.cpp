@@ -63,7 +63,7 @@ void Arm::Draw()
    glPopMatrix();
 }
 
-void Arm::DrawSelectionTarget()
+void Arm::DrawSelectionTarget(int mode)
 {
 }
 

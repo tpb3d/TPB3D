@@ -1290,11 +1290,19 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Delegates\DelegateBase.cpp"
+				>
+			</File>
+			<File
 				RelativePath="..\Delegates\DelegateBase.h"
 				>
 			</File>
 			<File
 				RelativePath="..\Delegates\PlaceItemDelegate.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\SelectDelegate.cpp"
 				>
 			</File>
 			<File

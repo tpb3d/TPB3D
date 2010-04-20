@@ -34,6 +34,6 @@ public:
 
    virtual void Render();
    virtual void Draw();
-   virtual void DrawSelectionTarget(); // base can't draw
+   virtual void DrawSelectionTarget(int mode); // base can't draw
    //virtual ObjectBase* Clone( );
 };

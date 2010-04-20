@@ -145,17 +145,19 @@ void ObjectNode::Draw()
 
 void ObjectNode::DrawSelectionTarget()
 {
-   glPassThrough((GLfloat)mID );
+	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
+	glTranslatef( mLocation[0],mLocation[1],mLocation[2] );
+	glRotatef(mRotation[0],1.0f,0.0f,0.0f);
+	glRotatef(mRotation[1],0.0f,1.0f,0.0f);
+	glRotatef(mRotation[2],0.0f,0.0f,1.0f);
+//   glPassThrough((GLfloat)mID );
    glLoadName( mID );
-   glBegin(GL_QUADS);
-   float fx = mLocation[0];
-   float fy = mLocation[1];
-   float fz = mLocation[2];
-   glVertex3f( fx, fy, fz );  // needs to be a cube
-   glVertex3f( fx+5, fy, fz );
-   glVertex3f( fx+5, fy+10, fz );
-   glVertex3f( fx, fy+10, fz );
-   glEnd();
+   for( int idx = 0; idx < mMeshCount; ++idx )
+   {
+      ObjectBase* pMesh = mpMeshes[idx];
+      pMesh->DrawSelectionTarget();
+   }
+   glPopMatrix();
 }
 
 void ObjectNode::AddMesh( ObjectBase* pNode )

@@ -30,6 +30,7 @@ protected:
 
 public:
    void  AddRide (Ride* pRide);
+   Ride* FindRideById (int id);
    Ride* FindRideByType (RideType rt);
    Ride* FindRideByName (const char *pszName);
 

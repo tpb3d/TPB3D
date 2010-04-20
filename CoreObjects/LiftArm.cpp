@@ -84,6 +84,10 @@ void LiftArm::Draw()
    glPopMatrix();
 }
 
+void LiftArm::DrawSelectionTarget(int mode)
+{
+}
+
 void LiftArm::Render()
 {
 //   using namespace CoreObjects;

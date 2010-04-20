@@ -14,19 +14,21 @@
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <map>
-#include <list>
-#include <vector>
 #include <iostream>
-#include "../CoreObjects/CoreBase.h"
-#include "../CoreObjects/GhostObject.h"
-#include "../CoreObjects/Park.h"
+#include "../Graphics/ObjectBase.h"
+#include "../Graphics/ObjectNode.h"
 #include "../Scene/Scene.h"
-#include "BuildDelegate.h"
+#include "DelegateBase.h"
 
-using namespace CoreObjects;
+#include "../Builders/RidePartLoader.h"
 
-BuildStrategyBase* BuildStrategyFactory::MakeStrategy(int type, Scene* pScene)
+ObjectNode* DelegateBase::LoadGraphic ()
 {
-   return new BuildStrategyBase(pScene);
+   const char* pszFileStall = "stall.3DS";
+   const char* pszPathStall = "data/Building/";
+   ObjectNode* pTempTree = new ObjectNode(0, 39);
+   RidePartLoader rpl;
+   rpl.Load3ds( pszPathStall, pszFileStall, pTempTree );
+   return pTempTree;
 }
+

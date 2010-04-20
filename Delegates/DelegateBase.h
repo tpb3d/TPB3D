@@ -18,15 +18,20 @@
 #include <string>
 #include <map>
 
+class ObjectNode;
+class Scene;
+
 class DelegateBase
 {
 protected:
-   std::string mToolSelected;
-//   Select& mSelect;
+   std::string mName;
+   Scene* mpScene;
 
 public:
-   DelegateBase (const char* pszName)
+   DelegateBase (const char* pszName, Scene* pScene)
    {
+      mName = pszName;
+      mpScene = pScene;
    }
 public:
    virtual void OnHitDown (short ID) = 0;
@@ -34,4 +39,7 @@ public:
    virtual void Draw()
    {
    }
+protected:
+
+   ObjectNode* DelegateBase::LoadGraphic ();
 };

@@ -219,7 +219,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       PartGuide guide;
       guide.Clear();
       // test data, the Barn Stormer ride
-      ObjectNode* pHubNode = new ObjectNode (0, 31);
+      ObjectNode* pHubNode = new ObjectNode (0, 32);
       const char* kszHub = kszSpidaParts[6];
       rpl.Load3ds( pPath, kszHub, pHubNode );
 

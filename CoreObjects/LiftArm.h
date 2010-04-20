@@ -36,4 +36,5 @@ public:
    void Render();
    void Update(int dt);
    void Draw ();
+   void DrawSelectionTarget(int mode);
 };

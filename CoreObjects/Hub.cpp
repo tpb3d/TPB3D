@@ -93,8 +93,9 @@ void Hub::Render()
    }
 }
 
-void Hub::DrawSelectionTarget()
+void Hub::DrawSelectionTarget(int mode)
 {
+   mpGraphic->DrawSelectionTarget();
 }
 
 void Hub::Update(int dt)

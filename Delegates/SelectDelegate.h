@@ -25,19 +25,12 @@ protected:
 //   Select& mSelect;
 
 public:
-   SelectDelegate (const char* pszName)
-   :  DelegateBase (pszName)
+   SelectDelegate (const char* pszName, Scene* pScene)
+   :  DelegateBase (pszName, pScene)
    {
    }
 
 public:
-   void OnHitDown (short ID)
-   {
-//      mSelect.Onhit();
-   }
-
-   void OnHitUp (short ID)
-   {
-//      mSelect.Onhit();
-   }
+   void OnHitDown (short ID);
+   void OnHitUp (short ID);
 };

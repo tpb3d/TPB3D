@@ -32,8 +32,8 @@ protected:
    int mHeight;   // Pathways (1,2 or 3)
 
 public:
-   BuildStrategyBase()
-      :  DelegateBase ("Build")
+   BuildStrategyBase (Scene* pScene)
+      :  DelegateBase ("Build", pScene)
    {
    }
    // get/set properties
@@ -56,62 +56,17 @@ public:
 
 class BuildStrategyFactory
 {
+public:
    BuildStrategyFactory();
 //   BuildStrategyBase* MakeStrategy (const char* type );
-   BuildStrategyBase* MakeStrategy (int type );
-};
-
-// Buildings
-class BuildBuildingStrategy : public BuildStrategyBase
-{
-public:
-   BuildBuildingStrategy()
-   {
-      mType = "Building"; // May not always be the class name
-      mWidth = 8;       // 72/9
-      mHeight = 1;      // or 36 pixels
-   }
-public:
-   bool BuildHere (Park* pPark, int x, int y);
-   virtual bool PlacingRoom() { return true; }
-   virtual void ShowGhostBuild (Park* pPark);
-};
-
-// 
-class BuildRetailStrategy : public BuildStrategyBase
-{
-public:
-   BuildRetailStrategy()
-   {
-      mType = "RetailShop"; // May not always be the class name
-      mWidth = 12;       // 108/9
-      mHeight = 1;      // or 36 pixels
-   }
-public:
-   bool BuildHere (Park* pPark, int x, int y);
-   virtual bool PlacingRoom() { return true; }
-   virtual void ShowGhostBuild (Park* pPark);
-};
-
-class BuildRestaurantStrategy : public BuildStrategyBase
-{
-public:
-   BuildRestaurantStrategy()
-   {
-      mType = "Restaurant"; // May not always be the class name
-      mWidth = 12;       // 108/9
-      mHeight = 1;      // or 36 pixels
-   }
-public:
-   bool BuildHere (Park* pPark, int x, int y);
-   virtual bool PlacingRoom() { return true; }
-   virtual void ShowGhostBuild (Park* pPark);
+   static BuildStrategyBase* MakeStrategy (int type, Scene* pScene);
 };
 
 class BuildPathStrategy : public BuildStrategyBase
 {
 public:
-   BuildPathStrategy()
+   BuildPathStrategy(Scene* pScene)
+   :  BuildStrategyBase (pScene)
    {
       mType = "Path"; // May not always be the class name
       mWidth = 1;       // 36

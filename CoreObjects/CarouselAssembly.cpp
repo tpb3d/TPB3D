@@ -93,7 +93,7 @@ void CarouselAssembly::Draw()
    glPopMatrix();
 }
 
-void CarouselAssembly::DrawSelectionTarget()
+void CarouselAssembly::DrawSelectionTarget(int mode)
 {
 }
 

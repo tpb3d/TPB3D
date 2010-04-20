@@ -8,23 +8,13 @@
             <ID>1</ID>
             <Branches>
                 <type>Lamp</type>
-                <type>Pathway</type>
-                <ID>-842150451</ID>
-                <PositionX>-30</PositionX>
-                <PositionY>0.1</PositionY>
-                <PositionZ>61</PositionZ>
-                <type>Pathway</type>
-                <ID>-842150451</ID>
-                <PositionX>-30</PositionX>
-                <PositionY>0.1</PositionY>
-                <PositionZ>61</PositionZ>
                 <type>Track</type>
                 <height>5</height>
                 <angle>0</angle>
-                <ID>18</ID>
+                <ID>76</ID>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>19</ID>
+                    <ID>77</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -35,7 +25,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>20</ID>
+                    <ID>78</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -46,7 +36,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>22</ID>
+                    <ID>80</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -57,7 +47,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>23</ID>
+                    <ID>81</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -68,7 +58,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>25</ID>
+                    <ID>83</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -79,7 +69,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>26</ID>
+                    <ID>84</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -90,7 +80,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>28</ID>
+                    <ID>86</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -101,7 +91,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>32</ID>
+                    <ID>90</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -112,7 +102,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>38</ID>
+                    <ID>96</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -123,7 +113,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>41</ID>
+                    <ID>99</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -134,7 +124,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>48</ID>
+                    <ID>106</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>
@@ -145,7 +135,7 @@
                 </TrackSections>
                 <TrackSections>
                     <Type>TrackSection</Type>
-                    <ID>50</ID>
+                    <ID>108</ID>
                     <Format>83</Format>
                     <DegPitch>0</DegPitch>
                     <Distance>0</Distance>

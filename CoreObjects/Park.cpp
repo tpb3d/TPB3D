@@ -150,6 +150,11 @@ void Park::AddRide (Ride* pRide)
    mRides.AddRide (pRide);
 }
 
+Ride* Park::FindRideById (int id)
+{
+   return mRides.FindRideById (id);
+}
+
 Ride* Park::FindRideByType (RideType rt)
 {
    return mRides.FindRideByType (rt);
@@ -200,7 +205,10 @@ void Park::Draw ()
 void Park::DrawSelectionTarget (bool bPathwaysOnly)
 
 {
-//   mRoutes.DrawSelectionTarget(); do these later
+   mpTheTree->DrawSelectionTarget ();
+   mpParkEntrance->DrawSelectionTarget (false);
+   mStalls.DrawSelectionTarget (false);
+   mRides.DrawSelectionTarget (false);
 }
 
 // AI interface

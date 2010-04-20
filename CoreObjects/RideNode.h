@@ -46,6 +46,7 @@ public:
    virtual void Update (int dt);
    virtual void Render() = 0;   // force each derivative to 
    virtual void Draw();
+   virtual void DrawSelectionTarget(int mode) = 0;
    void Load(SerializerBase& ser);
    void Save(SerializerBase& ser);
 };

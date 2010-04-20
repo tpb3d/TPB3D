@@ -47,6 +47,10 @@ bool SceneEvent::OnToolHit (const HR_Events tool)
 //      return mGameManager.Settings();
    case HR_FRCS:
       return mGameManager.FRCS();
+   case HR_TRCS:
+      return mpScene->OnTRCS();
+   case HR_PlacePathItem:
+      return mpScene->OnPlacePathItem();
    }
 
    return false;

@@ -58,6 +58,10 @@ void CableHingeJoint::Draw()
    glPopMatrix();
 }
 
+void CableHingeJoint::DrawSelectionTarget(int mode)
+{
+}
+
 void CableHingeJoint::Render()
 {
    sf::Vector3f tv = mV1;

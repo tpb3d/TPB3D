@@ -43,6 +43,6 @@ public:
    virtual void Update(int dt);
    virtual void Render();
    virtual void Draw();
-   virtual void DrawSelectionTarget(); // base can't draw
+   virtual void DrawSelectionTarget(int node); // base can't draw
    //virtual ObjectBase* Clone( );
 };

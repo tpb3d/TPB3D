@@ -74,7 +74,7 @@ void Deck::Render()
    }
 }
 
-void Deck::DrawSelectionTarget()
+void Deck::DrawSelectionTarget(int mode)
 {
 }
 

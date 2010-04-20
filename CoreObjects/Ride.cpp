@@ -24,6 +24,7 @@ Ride::Ride(const Vector3f& vPosition, const Park& ParkParent)
 :  CoreBase ( vPosition, Vector3f(0,0,0))
 ,  mParkParent (ParkParent)
 {
+   mID = 31;
    mpRCU = NULL;
    mSeats = 2;
    mRunTime = 0;
@@ -94,6 +95,14 @@ void Ride::Update(int dt)
 
 void Ride::DrawSelectionTarget()
 {
+ 	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
+   glTranslatef( mvPosition.x, mvPosition.y, mvPosition.z );										// Move Left 1.5 Units And Into The Screen 6.0
+	glRotatef(mvAngle.x,1.0f,0.0f,0.0f);
+	glRotatef(-mvAngle.y,0.0f,1.0f,0.0f);
+	glRotatef(mvAngle.z,0.0f,0.0f,1.0f);
+
+   mpBaseNode->DrawSelectionTarget(0); // base only
+   glPopMatrix();
 }
 
 void Ride::Draw()

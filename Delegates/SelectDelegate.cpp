@@ -14,19 +14,28 @@
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <map>
-#include <list>
-#include <vector>
 #include <iostream>
-#include "../CoreObjects/CoreBase.h"
-#include "../CoreObjects/GhostObject.h"
-#include "../CoreObjects/Park.h"
+#include "../Graphics/ObjectBase.h"
+#include "../Graphics/ObjectNode.h"
 #include "../Scene/Scene.h"
-#include "BuildDelegate.h"
+#include "../CoreObjects/CoreBase.h"
+#include "../CoreObjects/Park.h"
+#include "DelegateBase.h"
+#include "SelectDelegate.h"
 
-using namespace CoreObjects;
+#include "../Builders/RidePartLoader.h"
 
-BuildStrategyBase* BuildStrategyFactory::MakeStrategy(int type, Scene* pScene)
+void SelectDelegate::OnHitDown (short ID)
 {
-   return new BuildStrategyBase(pScene);
+   Park* pPark = mpScene->GetPark();
+   CoreBase* pCB = pPark->FindRideById (ID);
+   if (pCB != NULL)
+   {
+      cout << "Selected: " << pCB->GetName() << std::endl;
+   }
 }
+
+void SelectDelegate::OnHitUp (short ID)
+{
+}
+

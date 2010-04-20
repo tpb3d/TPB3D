@@ -19,7 +19,7 @@
 #include "../CoreObjects/Pathway.h"
 #include "../CoreObjects/Park.h"
 #include "../CoreObjects/Stall.h"
-//#include "../CoreObjects/Bench.h"
+#include "../CoreObjects/Bench.h"
 #include "../Delegates/BuildDelegate.h"
 #include "../Delegates/SelectDelegate.h"
 #include "../Delegates/PlaceItemDelegate.h"
@@ -32,8 +32,8 @@ Scene::Scene ()
    mpTerrain = NULL;
    mpSky = new SkyBowl();
    mpSky->Init( 800 );
-   mpDefaultStrategy = new SelectDelegate("Default");
-   mpStrategy = NULL;
+   mpDefaultStrategy = new SelectDelegate("Default", this);
+   mpStrategy = mpDefaultStrategy;
 }
 
 Scene::~Scene ()
@@ -68,12 +68,12 @@ bool Scene::SelectTool (int toolID)
    switch (toolID)
    {
    case HR_PlaceBuilding:
-      mpStrategy = new BuildBuildingStrategy();
+      mpStrategy = BuildStrategyFactory::MakeStrategy(0, this); // this does not really work
       mpStrategy->Draw();
       bResult = true;
       break;
    case HR_PlacePath:
-      mpStrategy = new BuildBuildingStrategy();
+      mpStrategy = BuildStrategyFactory::MakeStrategy(0, this); // this does not really work
       mpStrategy->Draw();
       bResult = true;
       break;
@@ -146,20 +146,6 @@ void Scene::MoveGhostObject (Vector2f& point)
    pPark->GetGhostObject().Move (vec);// asp
 }
 
-bool Scene::OnToolHit(const HR_Events Event)
-{
-   switch (Event)
-   {
-   case HR_FRCS:
-      return OnFRCS();
-   case HR_TRCS:
-      return OnTRCS();
-   case HR_PlacePathItem:
-      return OnPlacePathItem();
-   }
-   return false;
-}
-
 bool Scene::OnFRCS ()
 {
    return true;
@@ -174,11 +160,11 @@ bool Scene::OnPlacePathItem ()
 {
    bool bResult = false;
    DelegateBase* pOldStrategy = mpStrategy;
-   mpStrategy = new PlaceItemDelegate<Stall*>("Generic Bench"); //<CBench*>();
+   mpStrategy = new PlaceItemDelegate<Stall>("Generic Bench", this); //<CBench*>();
    mpStrategy->Draw();
    bResult = true;
 
-   if (bResult && ! (mpStrategy == NULL || mpStrategy == mpDefaultStrategy))
+   if (bResult && ! (pOldStrategy == NULL || pOldStrategy == mpDefaultStrategy))
    {
       try
       {

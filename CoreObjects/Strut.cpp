@@ -31,6 +31,11 @@ void Strut::Draw()
    mpGraphic->Draw();
 }
 
+void Strut::DrawSelectionTarget(int mode)
+{
+   mpGraphic->DrawSelectionTarget();
+}
+
 void Strut::Render()
 {
    sf::Vector3f tv1 = mV1;

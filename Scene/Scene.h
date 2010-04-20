@@ -82,7 +82,6 @@ public:
 
    bool SelectTool( int ToolID );
 
-   virtual bool OnToolHit(const HR_Events Event);
    virtual bool OnFRCS();
    virtual bool OnTRCS();
    virtual bool OnPlacePathItem();

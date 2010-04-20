@@ -471,6 +471,7 @@ int Camera::DrawSelectionTarget (Scene* pModel, Vector2f mouse, int Pathway)
    // Collect the hits
    hits = glRenderMode(GL_RENDER);
 
+   glPopName();
    // Restore the projection matrix
    glMatrixMode(GL_PROJECTION);
    glPopMatrix();
