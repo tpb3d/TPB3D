@@ -259,10 +259,10 @@ bool GameManager::LoadGame (const char *fileName)
    TrackGuide guide;
    guide.fCurAngleY = 0;
    guide.fCurAngleZ = 0;
-   guide.fTubeRadius = 0.0f;
+   guide.fTubeRadius = 0.4f;
    guide.fRailRadius = 0.2f;
    guide.fTrackGauge = 2;
-   guide.iRailShape = 8;
+   guide.iRailShape = 3;
    guide.point.Set (0,12,23);
 
    guide.SetupStraight( 20, 45 );
@@ -308,7 +308,7 @@ bool GameManager::LoadGame (const char *fileName)
    pRide = flat.CreateRide(0, mPark );
    pRide->SetPosition (fx,0.1f,fz);
    mScene.GetPark()->AddRide (pRide);
-//   pPath4->AddConnection (pRide->GetQueue());   // join the "Barn Stormers" to the path4
+   pPath4->AddConnection (pRide->GetQueue());   // join the "Barn Stormers" to the path4
 
 
    //pRide = flat.CreateRide(1, mPark);

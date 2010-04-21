@@ -20,6 +20,7 @@
 #include "../Graphics/Image.h"
 #include "../Graphics/Camera.h"
 #include "ToolButton.h"
+#include "../Scene/Scene.h"
 
 using namespace Gfx;
 

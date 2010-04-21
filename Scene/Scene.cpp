@@ -20,11 +20,12 @@
 #include "../CoreObjects/Park.h"
 #include "../CoreObjects/Stall.h"
 #include "../CoreObjects/Bench.h"
+#include "../CoreObjects/Terrain.h"
+#include "Scene.h"
+
 #include "../Delegates/BuildDelegate.h"
 #include "../Delegates/SelectDelegate.h"
 #include "../Delegates/PlaceItemDelegate.h"
-#include "../CoreObjects/Terrain.h"
-#include "Scene.h"
 
 //using namespace Gfx;
 Scene::Scene ()

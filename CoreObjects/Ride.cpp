@@ -55,6 +55,7 @@ RideController* Ride::GetController()
 
 void Ride::Update(int dt)
 {
+   static int count = 0;
    if (mRun)
    {
       mpBaseNode->Update(dt);
@@ -88,6 +89,16 @@ void Ride::Update(int dt)
          {
             mpRCU->Start();
             mRun = true;
+         }
+         else
+         {
+            count++;
+            if (mpRCU && count > 100)
+            {
+               count = 0;
+               mpRCU->Start();
+               mRun = true;
+            }
          }
       }
    }

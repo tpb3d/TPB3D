@@ -40,7 +40,8 @@ public:
       Park* pPark = mpScene->GetPark();
       T* pT = static_cast<T*>(mpGhostItem->Clone());
       pT->SetGraphic (LoadGraphic());
-      pT->SetvPosition( Vector3f(20,1, 20));
+      Vector3f tv(20,1, 20);
+      pT->SetvPosition (tv);
       pPark->AddStall (pT);
    }
 

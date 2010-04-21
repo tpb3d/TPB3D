@@ -178,6 +178,7 @@ bool PathFind::Update()
    return false;
 }
 
+#define WithRide
 
 PeepsAgent::PeepsAgent (Park& Park) // use a Park agent for multiple Parks
       :  mPark (Park)
@@ -304,31 +305,33 @@ void PeepsAgent::Update (float dt, int tod)
 
          case Person::AS_LookingForRide:
             cout << "Peep is looking for a ride" << endl;
-//            cout << "Peep is looking for a ride..." << endl;
+#ifdef WithRide
+            cout << "Peep is looking for a ride..." << endl;
+
+            Ride* pRide;
+            pRide = mPark.FindRideByName("Barn Stormers");
+            if (pRide != NULL)
+            {
+               cout << "Looking for Path..." << endl;
+
+               if( peep->GetPathFind()->Calculate( pRide->GetQueue() ) )
+               {
+                  peep->SetActivity(Person::AS_LookingForPath);
+               }
+               else
+               {
+                  peep->SetActivity(Person::AS_None);
+               }
+
 //
-//            Ride* pRide;
-//            pRide = mPark.FindRideByName("Barn Stormers");
-//            if (pRide != NULL)
-//            {
-//               cout << "Looking for Path..." << endl;
+//               cout << "Peep found ride: " << pRide->GetName() << endl;
+//               peep->SetLocation( Vector3f( pRide->GetQueue()->GetX(), -pRide->GetQueue()->GetY() - 6, pRide->GetQueue()->GetZ()) );
 //
-//               if( peep->GetPathFind()->Calculate( pRide->GetQueue() ) )
-//               {
-//                  peep->SetActivity(Person::AS_LookingForPath);
-//               }
-//               else
-//               {
-//                  peep->SetActivity(Person::AS_None);
-//               }
-//
-////
-////               cout << "Peep found ride: " << pRide->GetName() << endl;
-////               peep->SetLocation( Vector3f( pRide->GetQueue()->GetX(), -pRide->GetQueue()->GetY() - 6, pRide->GetQueue()->GetZ()) );
-////
-////               pRide->AddPerson (peep);
-//            } else {
-//               peep->SetActivity(Person::AS_None);
-//            }
+//               pRide->AddPerson (peep);
+            } else {
+               peep->SetActivity(Person::AS_None);
+            }
+#endif
          break;
 
          case Person::AS_LookingForPath:
