@@ -16,6 +16,7 @@
 
 Bench::Bench(ObjectNode *node, Pathway *path, float alignment, ItemHeading heading, unsigned short seats)
 : PathItem(path, alignment, heading)
+, mQueue (path)
 {
    mpGraphic = NULL;
    if(node)

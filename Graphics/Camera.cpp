@@ -463,7 +463,11 @@ int Camera::DrawSelectionTarget (Scene* pModel, Vector2f mouse, int Pathway)
 
    // Apply perspective matrix
    gluPerspective (FIELD_OF_VIEW, mAspect, 0.5f, 1000.f);		// Calculate The Aspect Ratio Of The Window
-   glTranslatef (GetPositionX(), GetPositionY(), mZoomFactor);
+   glTranslatef(0.0f, 0.0f, mZoomFactor); // Camera center, point of rotation
+   glRotatef (mTarget.x, 1.0f, 0.0f, 0.0f);
+   glRotatef (mTarget.y, 0.0f, 1.0f, 0.0f);
+   glRotatef (mTarget.z, 0.0f, 0.0f, 1.0f);
+   glTranslatef (GetPositionX(), GetPositionY(), GetPositionZ());
 
    // Draw the scene
    pModel->DrawSelectionTarget (Pathway); // is Pathway is not Zero then we run a render check on that Pathway else we do the whole Park

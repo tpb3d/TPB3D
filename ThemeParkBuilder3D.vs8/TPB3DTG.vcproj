@@ -1142,6 +1142,32 @@
 			Name="Builders"
 			>
 			<File
+				RelativePath="..\Builders\CoastlineGen.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)\$(InputName)1.obj"
+						XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)\$(InputName)1.obj"
+						XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Builders\CoastlineGen.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Builders\FlatRideBuilder.cpp"
 				>
 			</File>
@@ -1295,6 +1321,10 @@
 			</File>
 			<File
 				RelativePath="..\Delegates\DelegateBase.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\PlaceItemDelegate.cpp"
 				>
 			</File>
 			<File
