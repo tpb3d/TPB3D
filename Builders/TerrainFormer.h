@@ -11,6 +11,8 @@ public:
    ~TerrainFormer(void);
 
    Terrain* DefaultMesh();
+	Terrain* IslandTestMesh();
+
    Terrain* DocsMesh();
 };
 

@@ -49,7 +49,6 @@ public:
    {
 //      mpGhostItem->Onhit();
    }
-   void Draw() {};
 };
 /*
 template <class T>

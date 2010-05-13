@@ -118,3 +118,40 @@
 //        - b1*det2x2(a2,a3,c2,c3)
 //        + c1*det2x2(a2,a3,b2,b3);
 //}
+
+
+short ShortRand(void){
+	short r;		static short ncalls=0;		short callThreshold=10;
+	if(ncalls>=callThreshold)	{	srand(time(NULL));ncalls=0;	}
+	else						++ncalls;
+	r=rand()%0x8000;
+	//std::cout<<r<<" "<<inited<<"\r\n";
+	return(r);
+	}
+
+short RandSign(void)	{	return((ShortRand()%2==0)?1:-1);	}
+
+float frand(){
+	float fr=(float)(ShortRand())/0x8000l;
+	//std::cout<<fr<<"\r\n";
+	return(fr);
+	}
+float frandCenter(float c,float distFrom)	{
+	distFrom=abs(distFrom);
+	return(frand()*distFrom*2+c-distFrom);
+	}
+float SignedFloatRand(){	return(RandSign()*frand());	}
+float ScaledRand(float scale){			return(frand()*scale);		}
+float SignedScaledRand(float span){			return(frand()*span-(span/2));		}
+float nzsign(float n){	return(n>=0?1:-1);	}
+
+
+// ! rand, sign, and range functions by Parkitect
+
+//	logarithmic function by Parkitect
+
+float ln(float v){	return(log(v));	}
+float logb(float v,float base){	return(log(v)/log(base));	}
+
+
+//	!	logarithmic function by Parkitect

@@ -41,5 +41,5 @@ public:
    }
 protected:
 
-   ObjectNode* LoadGraphic ();
+   ObjectNode* /*DelegateBase::*/LoadGraphic ();
 };

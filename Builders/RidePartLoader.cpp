@@ -33,8 +33,6 @@
 //#include "../libASE-1.0/libASE.h"
 //#include "png.h"
 
-
-
 //static void png_cexcept_error(png_structp png_ptr, png_const_charp msg)
 //{
 //   if(png_ptr)

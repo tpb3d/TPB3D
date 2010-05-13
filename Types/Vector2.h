@@ -57,6 +57,27 @@ class Vector2
     {
        return *(new Vector2(-Other.x, -Other.y));
     }
+    Vector2<T>& operator-()
+    {
+       return *(new Vector2(-x,-y));
+    }
+    //* scalar multiplication
+    template<class U>
+    Vector2<T> operator*(U a)	{
+		Vector2<T> av(x*a,y*a);
+		return av;
+    	}
+    // %: get average of two vectors
+	template<class U>
+    Vector2<T> operator%(const Vector2<U>& v2)	{
+		Vector2<T> av((x+v2.x)/2,(y+v2.y)/2);
+		return av;
+    	}
+	// || : magnitude
+	template<class U>
+    T operator||(const Vector2<U>& v2)	{
+		return (T)sqrt(pow(x-v2.x,2)+pow(y-v2.y,2));
+    	}
     T x;
     T y;
 };

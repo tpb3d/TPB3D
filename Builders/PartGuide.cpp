@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstring> // GCC needs this
 
 #include "../Storage/SerializerBase.h"
@@ -12,7 +14,7 @@ const NodeType NodeTypeList[] =
    { PartGuide::RideNodeArm, "Arm" },
    { PartGuide::RideNodeDeck, "Deck" },
    { PartGuide::RideNodeCar, "Car" },
-   { PartGuide::RideNodeDisc, "Disc" },
+   { PartGuide::RideNodeDisc, "Disc" }, 
    { PartGuide::RideNodeCarriage, "Carriage" },
    { PartGuide::RideNodeCableHinge, "CableHinge" },
    { PartGuide::RideNodeRotationHub, "RotationHub" },
@@ -65,7 +67,7 @@ PartGuide::TRideNodeType PartGuide::GetNodeType (const char* szNodeName)
    }
    return RideNodeDud;
 }
-
+   
 void PartGuide::Save(SerializerBase& ser)
 {
    try
@@ -83,5 +85,5 @@ void PartGuide::Save(SerializerBase& ser)
    catch (...)
    {
       // tell the user this line if borked
-   }
+   }      
 }

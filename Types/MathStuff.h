@@ -10,6 +10,8 @@ a few simple mathematical routines; not the most efficient ones, but easy to und
 
 #include <math.h>
 #include <float.h>
+#include <stdlib.h>
+#include <time.h>
 
 // no cpp source for this
 
@@ -23,7 +25,8 @@ a few simple mathematical routines; not the most efficient ones, but easy to und
 #define PI_180 M_PI/180
 
 #ifndef max
-#define max( a, b) (a > b)? a : b
+//fixed parenthesis on max function
+#define max( a, b) (((a) > (b))? (a) : (b))
 #endif
 
 #define maximum max
@@ -77,3 +80,33 @@ inline double det3x3(const double a1, const double a2, const double a3,
         + c1*det2x2(a2,a3,b2,b3);
 }
 
+// rand, sign, and range functions by Parkitect
+#pragma once
+short ShortRand(void);
+short RandSign(void);
+template<class InRangeType>
+	bool InRange(InRangeType a,InRangeType l,InRangeType h){	return(l>h?InRange(a,h,l):a>=l&&a<=h);	}
+
+float frand();
+float frandCenter(float c,float distFrom);
+float SignedFloatRand();
+float ScaledRand(float scale);
+float SignedScaledRand(float span);
+float nzsign(float n);
+
+template<class T>
+T Max(T a,T b){		return(a>b?a:b);	}
+template<class T>
+T Min(T a,T b){		return(a<b?a:b);	}
+template<class T>
+T Avg(T a,T b){		return((a+b)/2);	}
+
+// ! rand, sign, and range functions by Parkitect
+
+//	logarithmic function by Parkitect
+
+float ln(float v);
+float logb(float v,float base);
+
+
+//	!	logarithmic function by Parkitect
