@@ -13,7 +13,6 @@
 #include "../Graphics/ObjectFactory.h"
 #include "Terrain.h"
 
-
 Terrain::Terrain(void)
 :  ObjectNode( 5, ObjectFactory::TakeANumber() )
 {

@@ -121,7 +121,7 @@
 
 
 short ShortRand(void){
-	short r;		static short ncalls=0;		short callThreshold=10;
+	short r;		static short ncalls=0;		short callThreshold=100;
 	if(ncalls>=callThreshold)	{	srand(time(NULL));ncalls=0;	}
 	else						++ncalls;
 	r=rand()%0x8000;
@@ -145,13 +145,25 @@ float ScaledRand(float scale){			return(frand()*scale);		}
 float SignedScaledRand(float span){			return(frand()*span-(span/2));		}
 float nzsign(float n){	return(n>=0?1:-1);	}
 
+// Gaussian Weight Function by Parkitect
+// CalcGaussian Weight()
+//		in: x offset from origin, y offset from origin, radius, standard deviation of dataset
+float CalcGaussianWeight(float xo,float yo,float radius,float dev){
+	float expNume=sqrt(pow(xo,2)+pow(yo,2));
+	float expDenom=2*pow(dev,2);//
+	float denom=sqrt(expDenom*PI);
+	float gw=exp(-expNume/expDenom)/denom;
+	return(gw);
+	}
+// ! Gaussian Weight Function by Parkitect
+
 
 // ! rand, sign, and range functions by Parkitect
 
 //	logarithmic function by Parkitect
 
 float ln(float v){	return(log(v));	}
-float logb(float v,float base){	return(log(v)/log(base));	}
+float logb(float base,float v){	return(log(v)/log(base));	}
 
 
 //	!	logarithmic function by Parkitect

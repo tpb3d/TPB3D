@@ -14,7 +14,7 @@
 #include "../Graphics/Texture.h"
 #include "SkyBowl.h"
 
-#define _USE_MATH_DEFINES 
+#define _USE_MATH_DEFINES
 #include <math.h>
 
 SkyBowl::SkyBowl(void)
@@ -36,7 +36,7 @@ void SkyBowl::Init( double dWorldSize )
    double dTop = 300;
 
    double lastTheta = PI * 2;
-   double bumpTheta = lastTheta/(kBowlFacets-1); 
+   double bumpTheta = lastTheta/(kBowlFacets-1);
    double theta = 0.0;
    double dLU = 0;
    double dLInc = 0.25;
@@ -85,6 +85,7 @@ void SkyBowl::Init( double dWorldSize )
 
 void SkyBowl::Draw ()
 {
+#if 1
    glEnable( GL_TEXTURE_2D );
    mTexture[0]->Bind();
    glColor4f( 1.0f, 1.0f, 1.0f, 0.95f);
@@ -117,4 +118,5 @@ void SkyBowl::Draw ()
    }
    glEnd();
    glDisable( GL_TEXTURE_2D );
+#endif
 }

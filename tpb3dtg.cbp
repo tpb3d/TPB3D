@@ -48,6 +48,7 @@
 					<Add library="libpng" />
 					<Add library="lib3ds" />
 					<Add library="CEGUIOpenGLRenderer" />
+					<Add library="libglpng" />
 					<Add directory="/Dev/VC++/SFML-1.5/lib/vc2005" />
 					<Add directory="C:/Program Files (x86)/Microsoft Visual Studio 8/VC/lib" />
 					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8/lib" />
@@ -62,10 +63,10 @@
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
+					<Add option="-W" />
 					<Add option="-DWIN32" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_CONSOLE" />
-					<Add option="-W" />
 					<Add directory="/Dev/VC++/SFML-1.5/include" />
 					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8/include" />
 					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8" />
@@ -86,6 +87,7 @@
 					<Add library="CEGUIBase" />
 					<Add library="OpenGLGUIRenderer" />
 					<Add library="CEGUITinyXMLParser_Static" />
+					<Add library="libglpng" />
 					<Add directory="/Dev/VC++/SFML-1.5/lib/vc2005" />
 					<Add directory="C:/Program Files (x86)/Microsoft Visual Studio 8/VC/lib" />
 					<Add directory="/Dev/VC++/CEGUI-SDK-0.6.2-vc8/lib" />
@@ -135,7 +137,9 @@
 					<Add library="libpng" />
 					<Add library="lib3ds" />
 					<Add library="CEGUIOpenGLRenderer" />
+					<Add library="libglpng" />
 					<Add directory="lib/lib" />
+					<Add directory="/usr/lib" />
 				</Linker>
 			</Target>
 			<Target title="Debug Linux">
@@ -184,7 +188,9 @@
 					<Add library="libpng" />
 					<Add library="lib3ds" />
 					<Add library="CEGUIOpenGLRenderer" />
+					<Add library="libglpng" />
 					<Add directory="lib/lib" />
+					<Add directory="/usr/lib" />
 				</Linker>
 			</Target>
 		</Build>
@@ -363,6 +369,9 @@
 		<Unit filename="Graphics/Tree.h" />
 		<Unit filename="Graphics/ViewObject.cpp" />
 		<Unit filename="Graphics/ViewObject.h" />
+		<Unit filename="Graphics/glpng.h" />
+		<Unit filename="Graphics/pngFile.cpp" />
+		<Unit filename="Graphics/pngFile.h" />
 		<Unit filename="Hub/Event.cpp" />
 		<Unit filename="Hub/Event.h" />
 		<Unit filename="Hub/GameManager.cpp" />
@@ -445,6 +454,7 @@
 		<Unit filename="Window/ToolButton.h" />
 		<Unit filename="Window/ToolsWindow.cpp" />
 		<Unit filename="Window/ToolsWindow.h" />
+		<Unit filename="data/FractalHeightInput.txt" />
 		<Unit filename="dumpCoastalGen1.txt" />
 		<Unit filename="xml/tinyxml/tinystr.cpp" />
 		<Unit filename="xml/tinyxml/tinystr.h" />

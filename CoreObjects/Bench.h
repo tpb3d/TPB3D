@@ -24,7 +24,7 @@ class Bench : public PathItem
 
    protected:
 
-      PersonQueue mQueue;
+
       const char *mObjName;
       ObjectNode* mpGraphic;
 
@@ -53,7 +53,7 @@ class Bench : public PathItem
 
       void Update (float dt, int tod) {;}
       BaseType GetType () { return BasePathItem;}
-      CoreBase* Clone() { return NULL;} // this might end ugly until we implement
+      Bench* Clone() { return NULL;} // this might end ugly until we implement
 
       void DrawSelectionTarget() {;}
 

@@ -1,0 +1,29 @@
+Tp3dFractInput
+
+pngHtMap
+	" "
+startWidth
+	16
+startDepth
+	16
+baseHeight
+	-25
+maxHeight
+	125
+targetSize
+	128
+spikiness
+	2
+varspike
+	2
+snowLevel
+	1.1
+rockLevel
+	0.9
+waterTableHeight
+	-10
+pctExponentialSeeds
+	0.1
+gaussianSmoothRadius
+	5
+

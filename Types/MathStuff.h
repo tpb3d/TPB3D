@@ -20,7 +20,9 @@ a few simple mathematical routines; not the most efficient ones, but easy to und
 #endif
 
 
+#ifndef PI
 #define PI M_PI
+#endif
 #define PI_2 M_PI/2
 #define PI_180 M_PI/180
 
@@ -97,9 +99,58 @@ float nzsign(float n);
 template<class T>
 T Max(T a,T b){		return(a>b?a:b);	}
 template<class T>
+T Max(T a[]){
+	T maxv=a[0]; int nentries=sizeof(a)/sizeof(a[0]);
+	for(int i=0;i<nentries;i++){	maxv=Max(a[i],maxv);	}
+	return(maxv);
+	}
+template<class T>
 T Min(T a,T b){		return(a<b?a:b);	}
 template<class T>
+T Min(T a[]){
+	T minv=a[0]; int nentries=sizeof(a)/sizeof(a[0]);
+	for(int i=0;i<nentries;i++){	minv=Min(a[i],minv);	}
+	return(minv);
+	}
+template<class T>
 T Avg(T a,T b){		return((a+b)/2);	}
+template<class T>
+T Abs(T a){		return(a>0?+a:-a);	}
+template<class T>
+T Sum(T a[]){
+	T s=(T)0; int nentries=sizeof(a)/sizeof(a[0]);
+	for(int i=0;i<nentries;i++){	s+=a[i];	}
+	return(s);
+	}
+template<class T>
+T Avg(T a[]){
+	T s=Sum(a);	int nentries=sizeof(a)/sizeof(a[0]);
+	T avgv=s/nentries;	return(avgv);
+	}
+//WAvg: weighted Average
+//		in: data array, weight array, entry count
+template<class T>
+T WAvg(T*d,T*w,int nentries)	{
+	T sumprod=0;	T wsum=0;
+	for(int i=0;i<nentries;i++)	{	sumprod+=d[i]*w[i];		wsum+=w[i];		}
+	if(wsum==0)		return 0; //div by zero
+	else			return(sumprod/wsum);
+	}
+template<class T>
+T RoundPlaces(T a,short places){	return(round(a*pow(10,places))/pow(10,places));		}
+
+template<class T>
+
+T Stdev(T*a,int nvalues){
+	T sum=0;
+	for(int i=0;i<nvalues;i++){
+		sum+=a[i]*a[i];
+		}
+	T rv=sqrt(sum/nvalues);
+	return(rv);
+	}
+template<class T>
+T Stdev(T a[]){	int nvalues=sizeof(a)/sizeof(a[0])	;	return(Stdev(a,nvalues));	}
 
 // ! rand, sign, and range functions by Parkitect
 
@@ -110,3 +161,13 @@ float logb(float v,float base);
 
 
 //	!	logarithmic function by Parkitect
+
+// Gaussian Weight Function by Parkitect
+// CalcGaussian Weight()
+//		in: x offset from origin, y offset from origin, radius, standard deviation of dataset
+float CalcGaussianWeight(float xo,float yo,float radius,float dev);
+// ! Gaussian Weight Function by Parkitect
+
+
+
+

@@ -4,6 +4,9 @@
 
 class Terrain;
 
+#define doCoastline 0
+#define doFractal 1
+
 class TerrainFormer
 {
 public:
@@ -11,8 +14,12 @@ public:
    ~TerrainFormer(void);
 
    Terrain* DefaultMesh();
+	#if doCoastline
 	Terrain* IslandTestMesh();
-
+	#endif
+	#if doFractal
+	Terrain*FractalHeightTestMesh();
+	#endif
    Terrain* DocsMesh();
 };
 
