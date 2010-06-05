@@ -1,0 +1,1012 @@
+; Top 1000+ American surnames
+TPB3DpeepNameList
+;Name List Internal name (<=31 characters)
+UnitedStatesNtl
+; Note: only weight and appearancelbl are needed; the rest of the fields will be set to 0 if not used.
+;		4 is the max that will be read, and the rest will be ignored
+;Name	Weight	apperancelbl	appearncwgt	apperancelbl	appearncwgt	apperancelbl	appearncwgt	apperancelbl	appearncwgt
+"Smith"	110	hfNEurope	11	hfAfrican	3
+"Johnson"	86	hfNEurope	9	hfAfrican	5
+"Williams"	71	hfNEurope	7	hfAfrican	7
+"Brown"	64	hfNEurope	9	hfAfrican	5
+"Jones"	63	hfNEurope	9	hfAfrican	6
+"Miller"	52	hfNEurope	13	hfAfrican	2
+"Davis"	50	hfNEurope	10	hfAfrican	5
+"Garcia"	40	hfLatAmr	14	hfMeditrn	1
+"Rodriguez"	37	hfLatAmr	14	hfMeditrn	1
+"Wilson"	36	hfNEurope	10	hfAfrican	4
+"Martinez"	36	hfLatAmr	14	hfMeditrn	1
+"Anderson"	35	hfNEurope	12	hfAfrican	3
+"Taylor"	33	hfNEurope	10	hfAfrican	4
+"Thomas"	33	hfNEurope	8	hfAfrican	6
+"Hernandez"	33	hfLatAmr	14	hfMeditrn	1
+"Moore"	32	hfNEurope	10	hfAfrican	4
+"Martin"	31	hfNEurope	12	hfAfrican	2	hfLatAmr	1
+"Jackson"	31	hfAfrican	8	hfNEurope	6
+"Thompson"	30	hfNEurope	11	hfAfrican	3
+"White"	30	hfNEurope	10	hfAfrican	4
+"Lopez"	29	hfLatAmr	14	hfMeditrn	1
+"Lee"	28	hfNEurope	6	hfEAsian	6	hfAfrican	3
+"Gonzalez"	28	hfLatAmr	14	hfMeditrn	1
+"Harris"	28	hfNEurope	8	hfAfrican	6
+"Clark"	25	hfNEurope	12	hfAfrican	3
+"Lewis"	24	hfNEurope	9	hfAfrican	5
+"Robinson"	23	hfNEurope	8	hfAfrican	7
+"Walker"	23	hfNEurope	9	hfAfrican	5
+"Perez"	23	hfLatAmr	14	hfMeditrn	1
+"Hall"	22	hfNEurope	11	hfAfrican	3
+"Young"	22	hfNEurope	10	hfAfrican	4
+"Allen"	21	hfNEurope	11	hfAfrican	4
+"Sanchez"	20	hfLatAmr	14	hfMeditrn	1
+"Wright"	20	hfNEurope	10	hfAfrican	4
+"King"	20	hfNEurope	11	hfAfrican	3
+"Scott"	19	hfNEurope	9	hfAfrican	5
+"Green"	19	hfNEurope	9	hfAfrican	5
+"Baker"	19	hfNEurope	12	hfAfrican	2
+"Adams"	19	hfNEurope	11	hfAfrican	3
+"Nelson"	19	hfNEurope	12	hfAfrican	2
+"Hill"	19	hfNEurope	10	hfAfrican	4
+"Ramirez"	18	hfLatAmr	14	hfMeditrn	1
+"Campbell"	17	hfNEurope	11	hfAfrican	3
+"Mitchell"	17	hfNEurope	10	hfAfrican	5
+"Roberts"	17	hfNEurope	12	hfAfrican	2
+"Carter"	17	hfNEurope	9	hfAfrican	5
+"Phillips"	16	hfNEurope	12	hfAfrican	2
+"Evans"	16	hfNEurope	11	hfAfrican	4
+"Turner"	16	hfNEurope	10	hfAfrican	4
+"Torres"	15	hfLatAmr	14	hfMeditrn	1
+"Parker"	15	hfNEurope	11	hfAfrican	4
+"Collins"	15	hfNEurope	11	hfAfrican	3
+"Edwards"	15	hfNEurope	10	hfAfrican	5
+"Stewart"	14	hfNEurope	11	hfAfrican	4
+"Flores"	14	hfLatAmr	14	hfMeditrn	1
+"Morris"	14	hfNEurope	11	hfAfrican	3
+"Nguyen"	14	hfEAsian	14
+"Murphy"	14	hfNEurope	13	hfAfrican	2
+"Rivera"	14	hfLatAmr	14	hfMeditrn	1
+"Cook"	14	hfNEurope	13	hfAfrican	2
+"Rogers"	14	hfNEurope	12	hfAfrican	3
+"Morgan"	13	hfNEurope	12	hfAfrican	2
+"Peterson"	13	hfNEurope	13	hfAfrican	1
+"Cooper"	13	hfNEurope	11	hfAfrican	4
+"Reed"	12	hfNEurope	11	hfAfrican	3
+"Bailey"	12	hfNEurope	11	hfAfrican	3
+"Bell"	12	hfNEurope	10	hfAfrican	5
+"Gomez"	12	hfLatAmr	14	hfMeditrn	1
+"Kelly"	12	hfNEurope	12	hfAfrican	2
+"Howard"	12	hfNEurope	10	hfAfrican	4
+"Ward"	12	hfNEurope	12	hfAfrican	3
+"Cox"	12	hfNEurope	13	hfAfrican	2
+"Diaz"	12	hfLatAmr	14	hfMeditrn	1
+"Richardson"	12	hfNEurope	9	hfAfrican	5
+"Wood"	11	hfNEurope	14	hfAfrican	1
+"Watson"	11	hfNEurope	10	hfAfrican	4
+"Brooks"	11	hfNEurope	9	hfAfrican	5
+"Bennett"	11	hfNEurope	12	hfAfrican	2
+"Gray"	11	hfNEurope	11	hfAfrican	4
+"James"	11	hfNEurope	8	hfAfrican	6
+"Reyes"	11	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Cruz"	11	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Hughes"	11	hfNEurope	12	hfAfrican	2
+"Price"	11	hfNEurope	11	hfAfrican	3
+"Myers"	10	hfNEurope	13	hfAfrican	1
+"Long"	10	hfNEurope	12	hfAfrican	2
+"Foster"	10	hfNEurope	11	hfAfrican	3
+"Sanders"	10	hfNEurope	10	hfAfrican	5
+"Ross"	10	hfNEurope	11	hfAfrican	4
+"Morales"	10	hfLatAmr	14	hfMeditrn	1
+"Powell"	10	hfNEurope	10	hfAfrican	4
+"Sullivan"	10	hfNEurope	13	hfAfrican	1
+"Russell"	10	hfNEurope	12	hfAfrican	2
+"Ortiz"	10	hfLatAmr	14	hfMeditrn	1
+"Jenkins"	10	hfNEurope	9	hfAfrican	5
+"Gutierrez"	10	hfLatAmr	14	hfMeditrn	1
+"Perry"	10	hfNEurope	11	hfAfrican	4
+"Butler"	10	hfNEurope	10	hfAfrican	5
+"Barnes"	10	hfNEurope	10	hfAfrican	4
+"Fisher"	10	hfNEurope	13	hfAfrican	2
+"Henderson"	10	hfNEurope	9	hfAfrican	5
+"Coleman"	10	hfNEurope	8	hfAfrican	7
+"Simmons"	9	hfNEurope	9	hfAfrican	5
+"Patterson"	9	hfNEurope	11	hfAfrican	4
+"Jordan"	9	hfNEurope	10	hfAfrican	5
+"Reynolds"	9	hfNEurope	12	hfAfrican	2
+"Hamilton"	9	hfNEurope	11	hfAfrican	3
+"Graham"	9	hfNEurope	11	hfAfrican	3
+"Kim"	9	hfEAsian	14
+"Gonzales"	9	hfLatAmr	13	hfMeditrn	2
+"Alexander"	9	hfNEurope	9	hfAfrican	5
+"Ramos"	9	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Wallace"	9	hfNEurope	11	hfAfrican	4
+"Griffin"	9	hfNEurope	10	hfAfrican	4
+"West"	9	hfNEurope	12	hfAfrican	3
+"Cole"	9	hfNEurope	12	hfAfrican	3
+"Hayes"	9	hfNEurope	11	hfAfrican	4
+"Chavez"	9	hfLatAmr	14	hfMeditrn	1
+"Gibson"	9	hfNEurope	11	hfAfrican	3
+"Bryant"	9	hfNEurope	9	hfAfrican	5
+"Ellis"	8	hfNEurope	11	hfAfrican	3
+"Stevens"	8	hfNEurope	13	hfAfrican	2
+"Murray"	8	hfNEurope	12	hfAfrican	3
+"Ford"	8	hfNEurope	10	hfAfrican	5
+"Marshall"	8	hfNEurope	10	hfAfrican	4
+"Owens"	8	hfNEurope	10	hfAfrican	4
+"McDonald"	8	hfNEurope	12	hfAfrican	2
+"Harrison"	8	hfNEurope	11	hfAfrican	4
+"Ruiz"	8	hfLatAmr	14	hfMeditrn	1
+"Kennedy"	8	hfNEurope	12	hfAfrican	2
+"Wells"	8	hfNEurope	11	hfAfrican	3
+"Alvarez"	8	hfLatAmr	14	hfMeditrn	1
+"Woods"	8	hfNEurope	9	hfAfrican	5
+"Mendoza"	8	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Castillo"	8	hfLatAmr	13	hfMeditrn	1
+"Olson"	8	hfNEurope	14
+"Webb"	8	hfNEurope	12	hfAfrican	3
+"Washington"	8	hfAfrican	13	hfNEurope	1
+"Tucker"	8	hfNEurope	11	hfAfrican	4
+"Freeman"	8	hfNEurope	10	hfAfrican	4
+"Burns"	8	hfNEurope	12	hfAfrican	2
+"Henry"	7	hfNEurope	10	hfAfrican	4
+"Vasquez"	7	hfLatAmr	14	hfMeditrn	1
+"Snyder"	7	hfNEurope	14
+"Simpson"	7	hfNEurope	11	hfAfrican	3
+"Crawford"	7	hfNEurope	11	hfAfrican	4
+"Jimenez"	7	hfLatAmr	14	hfMeditrn	1
+"Porter"	7	hfNEurope	11	hfAfrican	4
+"Mason"	7	hfNEurope	11	hfAfrican	4
+"Shaw"	7	hfNEurope	11	hfAfrican	3
+"Gordon"	7	hfNEurope	10	hfAfrican	4
+"Wagner"	7	hfNEurope	14
+"Hunter"	7	hfNEurope	9	hfAfrican	5
+"Romero"	7	hfLatAmr	13	hfMeditrn	2
+"Hicks"	7	hfNEurope	10	hfAfrican	4
+"Dixon"	7	hfNEurope	9	hfAfrican	6
+"Hunt"	7	hfNEurope	11	hfAfrican	2	hfAmerind	1
+"Palmer"	7	hfNEurope	12	hfAfrican	3
+"Robertson"	7	hfNEurope	11	hfAfrican	3
+"Black"	7	hfNEurope	11	hfAfrican	3
+"Holmes"	7	hfNEurope	9	hfAfrican	5
+"Stone"	7	hfNEurope	13	hfAfrican	1
+"Meyer"	7	hfNEurope	14
+"Boyd"	7	hfNEurope	10	hfAfrican	4
+"Mills"	7	hfNEurope	12	hfAfrican	2
+"Warren"	7	hfNEurope	11	hfAfrican	3
+"Fox"	7	hfNEurope	13	hfAfrican	1
+"Rose"	7	hfNEurope	13	hfAfrican	2
+"Rice"	7	hfNEurope	12	hfAfrican	2
+"Moreno"	7	hfLatAmr	14	hfMeditrn	1
+"Schmidt"	7	hfNEurope	14
+"Patel"	7	hfSAsian	14
+"Ferguson"	7	hfNEurope	12	hfAfrican	3
+"Nichols"	7	hfNEurope	13	hfAfrican	2
+"Herrera"	7	hfLatAmr	14	hfMeditrn	1
+"Medina"	6	hfLatAmr	14	hfMeditrn	1
+"Ryan"	6	hfNEurope	14
+"Fernandez"	6	hfLatAmr	12	hfMeditrn	2	hfEAsian	1
+"Weaver"	6	hfNEurope	13	hfAfrican	2
+"Daniels"	6	hfNEurope	9	hfAfrican	6
+"Stephens"	6	hfNEurope	11	hfAfrican	3
+"Gardner"	6	hfNEurope	12	hfAfrican	3
+"Payne"	6	hfNEurope	11	hfAfrican	3
+"Kelley"	6	hfNEurope	13	hfAfrican	2
+"Dunn"	6	hfNEurope	12	hfAfrican	2
+"Pierce"	6	hfNEurope	12	hfAfrican	2
+"Arnold"	6	hfNEurope	13	hfAfrican	2
+"Tran"	6	hfEAsian	14
+"Spencer"	6	hfNEurope	11	hfAfrican	3
+"Peters"	6	hfNEurope	13	hfAfrican	1
+"Hawkins"	6	hfNEurope	10	hfAfrican	5
+"Grant"	6	hfNEurope	9	hfAfrican	5
+"Hansen"	6	hfNEurope	14
+"Castro"	6	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Hoffman"	6	hfNEurope	7	hfMeditrn	7
+"Hart"	6	hfNEurope	12	hfAfrican	2
+"Elliott"	6	hfNEurope	13	hfAfrican	2
+"Cunningham"	6	hfNEurope	11	hfAfrican	3
+"Knight"	6	hfNEurope	11	hfAfrican	3
+"Bradley"	6	hfNEurope	11	hfAfrican	4
+"Carroll"	6	hfNEurope	13	hfAfrican	2
+"Hudson"	6	hfNEurope	10	hfAfrican	4
+"Duncan"	6	hfNEurope	12	hfAfrican	2
+"Armstrong"	6	hfNEurope	11	hfAfrican	3
+"Berry"	6	hfNEurope	11	hfAfrican	3
+"Andrews"	6	hfNEurope	11	hfAfrican	3
+"Johnston"	6	hfNEurope	14
+"Ray"	6	hfNEurope	12	hfAfrican	3
+"Lane"	6	hfNEurope	12	hfAfrican	2
+"Riley"	6	hfNEurope	11	hfAfrican	3
+"Carpenter"	6	hfNEurope	13	hfAfrican	1
+"Perkins"	6	hfNEurope	11	hfAfrican	4
+"Aguilar"	6	hfLatAmr	14	hfMeditrn	1
+"Silva"	6	hfLatAmr	9	hfMeditrn	5
+"Richards"	6	hfNEurope	12	hfAfrican	2
+"Willis"	6	hfNEurope	10	hfAfrican	5
+"Matthews"	6	hfNEurope	10	hfAfrican	4
+"Chapman"	6	hfNEurope	12	hfAfrican	2
+"Lawrence"	6	hfNEurope	11	hfAfrican	3
+"Garza"	6	hfLatAmr	14	hfMeditrn	1
+"Vargas"	6	hfLatAmr	14	hfMeditrn	1
+"Watkins"	6	hfNEurope	10	hfAfrican	5
+"Wheeler"	6	hfNEurope	12	hfAfrican	2
+"Larson"	6	hfNEurope	14
+"Carlson"	6	hfNEurope	14
+"Harper"	6	hfNEurope	11	hfAfrican	4
+"George"	6	hfNEurope	11	hfAfrican	3	hfEAsian	1
+"Greene"	6	hfNEurope	5	hfMeditrn	5	hfAfrican	4
+"Burke"	6	hfNEurope	13	hfAfrican	1
+"Guzman"	5	hfLatAmr	14	hfMeditrn	1
+"Morrison"	5	hfNEurope	12	hfAfrican	2
+"Munoz"	5	hfLatAmr	14	hfMeditrn	1
+"Jacobs"	5	hfNEurope	6	hfMeditrn	6	hfAfrican	2	hfAmerind	1
+"O'Brien"	5	hfNEurope	14
+"Lawson"	5	hfNEurope	11	hfAfrican	3
+"Franklin"	5	hfNEurope	9	hfAfrican	6
+"Lynch"	5	hfNEurope	13	hfAfrican	2
+"Bishop"	5	hfNEurope	13	hfAfrican	1
+"Carr"	5	hfNEurope	11	hfAfrican	3
+"Salazar"	5	hfLatAmr	14	hfMeditrn	1
+"Austin"	5	hfNEurope	10	hfAfrican	4
+"Mendez"	5	hfLatAmr	14	hfMeditrn	1
+"Gilbert"	5	hfNEurope	12	hfAfrican	2
+"Jensen"	5	hfNEurope	14
+"Williamson"	5	hfNEurope	12	hfAfrican	3
+"Montgomery"	5	hfNEurope	11	hfAfrican	4
+"Harvey"	5	hfNEurope	11	hfAfrican	4
+"Oliver"	5	hfNEurope	10	hfAfrican	4
+"Howell"	5	hfNEurope	12	hfAfrican	2
+"Dean"	5	hfNEurope	12	hfAfrican	2
+"Hanson"	5	hfNEurope	14
+"Weber"	5	hfNEurope	14
+"Garrett"	5	hfNEurope	11	hfAfrican	4
+"Sims"	5	hfNEurope	9	hfAfrican	6
+"Burton"	5	hfNEurope	10	hfAfrican	4
+"Fuller"	5	hfNEurope	11	hfAfrican	3
+"Soto"	5	hfLatAmr	14	hfMeditrn	1
+"McCoy"	5	hfNEurope	10	hfAfrican	4
+"Welch"	5	hfNEurope	13	hfAfrican	1
+"Chen"	5	hfEAsian	14
+"Schultz"	5	hfNEurope	14
+"Walters"	5	hfNEurope	13	hfAfrican	2
+"Reid"	5	hfNEurope	9	hfAfrican	5
+"Fields"	5	hfNEurope	9	hfAfrican	5
+"Walsh"	5	hfNEurope	14
+"Little"	5	hfNEurope	11	hfAfrican	4
+"Fowler"	5	hfNEurope	13	hfAfrican	2
+"Bowman"	5	hfNEurope	12	hfAfrican	2
+"Davidson"	5	hfNEurope	13	hfAfrican	1
+"May"	5	hfNEurope	13	hfAfrican	1
+"Day"	5	hfNEurope	13	hfAfrican	2
+"Schneider"	5	hfNEurope	7	hfMeditrn	7
+"Newman"	5	hfNEurope	6	hfMeditrn	6	hfAfrican	2
+"Brewer"	5	hfNEurope	13	hfAfrican	2
+"Lucas"	5	hfNEurope	11	hfAfrican	3	hfLatAmr	1
+"Holland"	5	hfNEurope	12	hfAfrican	3
+"Wong"	5	hfEAsian	13
+"Banks"	5	hfAfrican	8	hfNEurope	6
+"Santos"	5	hfLatAmr	9	hfMeditrn	3	hfEAsian	2
+"Curtis"	5	hfNEurope	12	hfAfrican	2
+"Pearson"	5	hfNEurope	11	hfAfrican	3
+"Delgado"	5	hfLatAmr	14	hfMeditrn	1
+"Valdez"	5	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Pena"	5	hfLatAmr	14	hfMeditrn	1
+"Rios"	4	hfLatAmr	14	hfMeditrn	1
+"Douglas"	4	hfNEurope	9	hfAfrican	5
+"Sandoval"	4	hfLatAmr	14	hfMeditrn	1
+"Barrett"	4	hfNEurope	12	hfAfrican	2
+"Hopkins"	4	hfNEurope	11	hfAfrican	3
+"Keller"	4	hfNEurope	14	hfAfrican	1
+"Guerrero"	4	hfLatAmr	14	hfMeditrn	1
+"Stanley"	4	hfNEurope	12	hfAfrican	2
+"Bates"	4	hfNEurope	12	hfAfrican	3
+"Alvarado"	4	hfLatAmr	14	hfMeditrn	1
+"Beck"	4	hfNEurope	14	hfAfrican	1
+"Ortega"	4	hfLatAmr	14	hfMeditrn	1
+"Wade"	4	hfNEurope	10	hfAfrican	4
+"Estrada"	4	hfLatAmr	14	hfMeditrn	1
+"Contreras"	4	hfLatAmr	14	hfMeditrn	1
+"Barnett"	4	hfNEurope	12	hfAfrican	2
+"Caldwell"	4	hfNEurope	11	hfAfrican	4
+"Santiago"	4	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Lambert"	4	hfNEurope	13	hfAfrican	1
+"Powers"	4	hfNEurope	14	hfAfrican	1
+"Chambers"	4	hfNEurope	10	hfAfrican	4
+"Nunez"	4	hfLatAmr	14	hfMeditrn	1
+"Craig"	4	hfNEurope	12	hfAfrican	2
+"Leonard"	4	hfNEurope	12	hfAfrican	2
+"Lowe"	4	hfNEurope	6	hfMeditrn	6	hfAfrican	3
+"Rhodes"	4	hfNEurope	12	hfAfrican	3
+"Byrd"	4	hfNEurope	9	hfAfrican	5
+"Gregory"	4	hfNEurope	12	hfAfrican	2
+"Shelton"	4	hfNEurope	11	hfAfrican	3
+"Frazier"	4	hfNEurope	9	hfAfrican	5
+"Becker"	4	hfNEurope	14
+"Maldonado"	4	hfLatAmr	14	hfMeditrn	1
+"Fleming"	4	hfNEurope	11	hfAfrican	3
+"Vega"	4	hfLatAmr	14	hfMeditrn	1
+"Sutton"	4	hfNEurope	11	hfAfrican	3
+"Cohen"	4	hfNEurope	7	hfMeditrn	7	hfAfrican	1
+"Jennings"	4	hfNEurope	11	hfAfrican	3
+"Parks"	4	hfNEurope	11	hfAfrican	4
+"McDaniel"	4	hfNEurope	12	hfAfrican	3
+"Watts"	4	hfNEurope	11	hfAfrican	4
+"Barker"	4	hfNEurope	13	hfAfrican	1
+"Norris"	4	hfNEurope	12	hfAfrican	2
+"Vaughn"	4	hfNEurope	11	hfAfrican	3
+"Vazquez"	4	hfLatAmr	14	hfMeditrn	1
+"Holt"	4	hfNEurope	12	hfAfrican	2
+"Schwartz"	4	hfNEurope	15
+"Steele"	4	hfNEurope	12	hfAfrican	2
+"Benson"	4	hfNEurope	12	hfAfrican	2
+"Neal"	4	hfNEurope	10	hfAfrican	5
+"Dominguez"	4	hfLatAmr	14	hfMeditrn	1
+"Horton"	4	hfNEurope	11	hfAfrican	4
+"Terry"	4	hfNEurope	10	hfAfrican	4
+"Wolfe"	4	hfNEurope	14	hfAfrican	1
+"Hale"	4	hfNEurope	13	hfAfrican	2
+"Lyons"	4	hfNEurope	12	hfAfrican	3
+"Graves"	4	hfNEurope	11	hfAfrican	4
+"Haynes"	4	hfNEurope	10	hfAfrican	5
+"Miles"	4	hfNEurope	10	hfAfrican	5
+"Park"	4	hfEAsian	10	hfNEurope	5
+"Warner"	4	hfNEurope	13	hfAfrican	1
+"Padilla"	4	hfLatAmr	13	hfMeditrn	1
+"Bush"	4	hfNEurope	11	hfAfrican	3
+"Thornton"	4	hfNEurope	10	hfAfrican	4
+"McCarthy"	4	hfNEurope	14
+"Mann"	4	hfNEurope	12	hfAfrican	1
+"Zimmerman"	4	hfNEurope	14
+"Erickson"	4	hfNEurope	14
+"Fletcher"	4	hfNEurope	11	hfAfrican	3
+"McKinney"	4	hfNEurope	11	hfAfrican	4
+"Page"	4	hfNEurope	12	hfAfrican	3
+"Dawson"	4	hfNEurope	11	hfAfrican	4
+"Joseph"	4	hfAfrican	7	hfNEurope	5	hfEAsian	1
+"Marquez"	4	hfLatAmr	13	hfMeditrn	1
+"Reeves"	4	hfNEurope	12	hfAfrican	2
+"Klein"	4	hfNEurope	14
+"Espinoza"	4	hfLatAmr	14	hfMeditrn	1
+"Baldwin"	4	hfNEurope	12	hfAfrican	2
+"Moran"	4	hfNEurope	11	hfLatAmr	4
+"Love"	4	hfNEurope	9	hfAfrican	5
+"Robbins"	4	hfNEurope	13	hfAfrican	1
+"Higgins"	4	hfNEurope	13	hfAfrican	2
+"Ball"	4	hfNEurope	13	hfAfrican	2
+"Cortez"	4	hfLatAmr	13	hfMeditrn	1
+"Le"	4	hfEAsian	14
+"Griffith"	4	hfNEurope	13	hfAfrican	1
+"Bowen"	4	hfNEurope	13	hfAfrican	2
+"Sharp"	4	hfNEurope	13	hfAfrican	2
+"Cummings"	4	hfNEurope	11	hfAfrican	3
+"Ramsey"	4	hfNEurope	12	hfAfrican	2
+"Hardy"	4	hfNEurope	10	hfAfrican	5
+"Swanson"	4	hfNEurope	14	hfAfrican	1
+"Barber"	4	hfNEurope	12	hfAfrican	3
+"Acosta"	4	hfLatAmr	13	hfMeditrn	1
+"Luna"	4	hfLatAmr	13	hfMeditrn	1
+"Chandler"	4	hfNEurope	12	hfAfrican	3
+"Blair"	3	hfNEurope	12	hfAfrican	2
+"Daniel"	3	hfNEurope	10	hfAfrican	4	hfLatAmr	1
+"Cross"	3	hfNEurope	12	hfAfrican	3
+"Simon"	3	hfNEurope	10	hfAfrican	3	hfLatAmr	1
+"Dennis"	3	hfNEurope	10	hfAfrican	4
+"O'Connor"	3	hfNEurope	14
+"Quinn"	3	hfNEurope	13	hfAfrican	1
+"Gross"	3	hfNEurope	13	hfAfrican	1
+"Navarro"	3	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Moss"	3	hfNEurope	11	hfAfrican	4
+"Fitzgerald"	3	hfNEurope	13	hfAfrican	1
+"Doyle"	3	hfNEurope	14	hfAfrican	1
+"McLaughlin"	3	hfNEurope	13	hfAfrican	1
+"Rojas"	3	hfLatAmr	14	hfMeditrn	1
+"Rodgers"	3	hfNEurope	11	hfAfrican	3
+"Stevenson"	3	hfNEurope	10	hfAfrican	4
+"Singh"	3	hfSAsian	11	hfNEurope	1
+"Yang"	3	hfEAsian	14
+"Figueroa"	3	hfLatAmr	14	hfMeditrn	1
+"Harmon"	3	hfNEurope	12	hfAfrican	2
+"Newton"	3	hfNEurope	12	hfAfrican	3
+"Paul"	3	hfNEurope	11	hfAfrican	2	hfEAsian	1
+"Manning"	3	hfNEurope	11	hfAfrican	3
+"Garner"	3	hfNEurope	11	hfAfrican	3
+"McGee"	3	hfNEurope	10	hfAfrican	5
+"Reese"	3	hfNEurope	10	hfAfrican	4
+"Francis"	3	hfNEurope	10	hfAfrican	4
+"Burgess"	3	hfNEurope	12	hfAfrican	3
+"Adkins"	3	hfNEurope	13	hfAfrican	1
+"Goodman"	3	hfNEurope	12	hfAfrican	2
+"Curry"	3	hfNEurope	9	hfAfrican	5
+"Brady"	3	hfNEurope	13	hfAfrican	1
+"Christensen"	3	hfNEurope	14
+"Potter"	3	hfNEurope	14	hfAfrican	1
+"Walton"	3	hfNEurope	9	hfAfrican	5
+"Goodwin"	3	hfNEurope	12	hfAfrican	3
+"Mullins"	3	hfNEurope	13	hfAfrican	1
+"Molina"	3	hfLatAmr	13	hfMeditrn	1
+"Webster"	3	hfNEurope	11	hfAfrican	3
+"Fischer"	3	hfNEurope	14
+"Campos"	3	hfLatAmr	13	hfMeditrn	1
+"Avila"	3	hfLatAmr	13	hfMeditrn	1
+"Sherman"	3	hfNEurope	13	hfAfrican	2
+"Todd"	3	hfNEurope	12	hfAfrican	2
+"Chang"	3	hfEAsian	14
+"Blake"	3	hfNEurope	11	hfAfrican	3
+"Malone"	3	hfNEurope	10	hfAfrican	4
+"Wolf"	3	hfNEurope	14
+"Hodges"	3	hfNEurope	11	hfAfrican	3
+"Juarez"	3	hfLatAmr	14	hfMeditrn	1
+"Gill"	3	hfNEurope	11	hfAfrican	2	hfEAsian	1	hfLatAmr	1
+"Farmer"	3	hfNEurope	12	hfAfrican	3
+"Hines"	3	hfNEurope	9	hfAfrican	5
+"Gallagher"	3	hfNEurope	14
+"Duran"	3	hfLatAmr	13	hfMeditrn	2
+"Hubbard"	3	hfNEurope	11	hfAfrican	3
+"Cannon"	3	hfNEurope	11	hfAfrican	4
+"Miranda"	3	hfLatAmr	12	hfMeditrn	2	hfEAsian	1
+"Wang"	3	hfEAsian	14
+"Saunders"	3	hfNEurope	10	hfAfrican	4
+"Tate"	3	hfNEurope	9	hfAfrican	6
+"Mack"	3	hfNEurope	7	hfAfrican	7
+"Hammond"	3	hfNEurope	12	hfAfrican	2
+"Carrillo"	3	hfLatAmr	14	hfMeditrn	1
+"Townsend"	3	hfNEurope	11	hfAfrican	4
+"Wise"	3	hfNEurope	12	hfAfrican	2
+"Ingram"	3	hfNEurope	10	hfAfrican	5
+"Barton"	3	hfNEurope	13	hfAfrican	1
+"Mejia"	3	hfLatAmr	14	hfMeditrn	1
+"Ayala"	3	hfLatAmr	14	hfMeditrn	1
+"Schroeder"	3	hfNEurope	15
+"Hampton"	3	hfNEurope	8	hfAfrican	6
+"Rowe"	3	hfNEurope	12	hfAfrican	2
+"Parsons"	3	hfNEurope	14	hfAfrican	1
+"Frank"	3	hfNEurope	13	hfAfrican	1
+"Waters"	3	hfNEurope	11	hfAfrican	3
+"Strickland"	3	hfNEurope	12	hfAfrican	2
+"Osborne"	3	hfNEurope	13	hfAfrican	2
+"Maxwell"	3	hfNEurope	11	hfAfrican	3
+"Chan"	3	hfEAsian	14
+"Deleon"	3	hfLatAmr	12	hfMeditrn	1	hfEAsian	1
+"Norman"	3	hfNEurope	11	hfAfrican	4
+"Harrington"	3	hfNEurope	13	hfAfrican	2
+"Casey"	3	hfNEurope	13	hfAfrican	1
+"Patton"	3	hfNEurope	11	hfAfrican	3
+"Logan"	3	hfNEurope	10	hfAfrican	4
+"Bowers"	3	hfNEurope	13	hfAfrican	2
+"Mueller"	3	hfNEurope	15
+"Glover"	3	hfNEurope	8	hfAfrican	6
+"Floyd"	3	hfNEurope	10	hfAfrican	4
+"Hartman"	3	hfNEurope	14
+"Buchanan"	3	hfNEurope	12	hfAfrican	2
+"Cobb"	3	hfNEurope	11	hfAfrican	4
+"French"	3	hfNEurope	13	hfAfrican	1
+"Kramer"	3	hfNEurope	14
+"McCormick"	3	hfNEurope	13	hfAfrican	1
+"Clarke"	3	hfNEurope	10	hfAfrican	4
+"Tyler"	3	hfNEurope	10	hfAfrican	5
+"Gibbs"	3	hfNEurope	10	hfAfrican	4
+"Moody"	3	hfNEurope	11	hfAfrican	3
+"Conner"	3	hfNEurope	12	hfAfrican	2
+"Sparks"	3	hfNEurope	13	hfAfrican	2
+"McGuire"	3	hfNEurope	13	hfAfrican	1
+"Leon"	3	hfLatAmr	12	hfMeditrn	2
+"Bauer"	3	hfNEurope	14
+"Norton"	3	hfNEurope	13	hfAfrican	1
+"Pope"	3	hfNEurope	11	hfAfrican	3
+"Flynn"	3	hfNEurope	14
+"Hogan"	3	hfNEurope	12	hfAfrican	2
+"Robles"	3	hfLatAmr	14	hfMeditrn	1
+"Salinas"	3	hfLatAmr	14	hfMeditrn	1
+"Yates"	3	hfNEurope	12	hfAfrican	2
+"Lindsey"	3	hfNEurope	11	hfAfrican	4
+"Lloyd"	3	hfNEurope	11	hfAfrican	3
+"Marsh"	3	hfNEurope	13	hfAfrican	2
+"McBride"	3	hfNEurope	11	hfAfrican	3
+"Owen"	3	hfNEurope	14
+"Solis"	3	hfLatAmr	14	hfMeditrn	1
+"Pham"	3	hfEAsian	14
+"Lang"	3	hfNEurope	13	hfAfrican	1
+"Pratt"	3	hfNEurope	12	hfAfrican	2
+"Lara"	3	hfLatAmr	14	hfMeditrn	1
+"Brock"	3	hfNEurope	13	hfAfrican	2
+"Ballard"	3	hfNEurope	12	hfAfrican	3
+"Trujillo"	3	hfLatAmr	13	hfMeditrn	1
+"Shaffer"	3	hfNEurope	14
+"Drake"	3	hfNEurope	12	hfAfrican	2
+"Roman"	3	hfLatAmr	11	hfMeditrn	4
+"Aguirre"	3	hfLatAmr	14	hfMeditrn	1
+"Morton"	3	hfNEurope	11	hfAfrican	3
+"Stokes"	3	hfNEurope	9	hfAfrican	5
+"Lamb"	3	hfNEurope	13	hfAfrican	1
+"Pacheco"	3	hfLatAmr	12	hfMeditrn	3
+"Patrick"	3	hfNEurope	11	hfAfrican	3
+"Cochran"	3	hfNEurope	13	hfAfrican	1
+"Shepherd"	3	hfNEurope	12	hfAfrican	2
+"Cain"	3	hfNEurope	12	hfAfrican	2
+"Burnett"	3	hfNEurope	11	hfAfrican	3
+"Hess"	3	hfNEurope	14
+"Li"	3	hfEAsian	14
+"Cervantes"	3	hfLatAmr	14	hfMeditrn	1
+"Olsen"	3	hfNEurope	14
+"Briggs"	3	hfNEurope	12	hfAfrican	3
+"Ochoa"	3	hfLatAmr	14	hfMeditrn	1
+"Cabrera"	3	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Velasquez"	3	hfLatAmr	14	hfMeditrn	1
+"Montoya"	3	hfLatAmr	13	hfMeditrn	1
+"Roth"	3	hfNEurope	7	hfMeditrn	7
+"Meyers"	3	hfNEurope	14	hfAfrican	1
+"Cardenas"	3	hfLatAmr	14	hfMeditrn	1
+"Fuentes"	3	hfLatAmr	14	hfMeditrn	1
+"Weiss"	3	hfNEurope	14
+"Hoover"	3	hfNEurope	14
+"Wilkins"	3	hfNEurope	10	hfAfrican	5
+"Nicholson"	3	hfNEurope	12	hfAfrican	3
+"Underwood"	3	hfNEurope	12	hfAfrican	2
+"Short"	3	hfNEurope	13	hfAfrican	1
+"Carson"	3	hfNEurope	11	hfAfrican	3
+"Morrow"	3	hfNEurope	12	hfAfrican	2
+"Colon"	3	hfLatAmr	13	hfMeditrn	1
+"Holloway"	3	hfNEurope	9	hfAfrican	5
+"Summers"	3	hfNEurope	12	hfAfrican	2
+"Bryan"	3	hfNEurope	13	hfAfrican	2
+"Petersen"	3	hfNEurope	14
+"McKenzie"	3	hfNEurope	10	hfAfrican	4
+"Serrano"	3	hfLatAmr	13	hfMeditrn	1
+"Wilcox"	3	hfNEurope	13	hfAfrican	1
+"Carey"	3	hfNEurope	12	hfAfrican	2
+"Clayton"	3	hfNEurope	11	hfAfrican	4
+"Poole"	3	hfNEurope	11	hfAfrican	3
+"Calderon"	3	hfLatAmr	14	hfMeditrn	1
+"Gallegos"	3	hfLatAmr	13	hfMeditrn	1
+"Greer"	3	hfNEurope	11	hfAfrican	3
+"Rivas"	3	hfLatAmr	14	hfMeditrn	1
+"Guerra"	3	hfLatAmr	13	hfMeditrn	2
+"Decker"	3	hfNEurope	14
+"Collier"	3	hfNEurope	10	hfAfrican	4
+"Wall"	3	hfNEurope	13	hfAfrican	1
+"Whitaker"	3	hfNEurope	11	hfAfrican	3
+"Bass"	3	hfNEurope	11	hfAfrican	4
+"Flowers"	3	hfNEurope	8	hfAfrican	6
+"Davenport"	3	hfNEurope	11	hfAfrican	3
+"Conley"	3	hfNEurope	12	hfAfrican	2
+"Houston"	3	hfNEurope	8	hfAfrican	6
+"Huff"	2	hfNEurope	12	hfAfrican	2
+"Copeland"	2	hfNEurope	10	hfAfrican	4
+"Hood"	2	hfNEurope	11	hfAfrican	3
+"Monroe"	2	hfNEurope	10	hfAfrican	4
+"Massey"	2	hfNEurope	11	hfAfrican	3
+"Roberson"	2	hfNEurope	8	hfAfrican	6
+"Combs"	2	hfNEurope	13	hfAfrican	1
+"Franco"	2	hfLatAmr	12	hfMeditrn	3
+"Larsen"	2	hfNEurope	14
+"Pittman"	2	hfNEurope	10	hfAfrican	5
+"Randall"	2	hfNEurope	11	hfAfrican	3
+"Skinner"	2	hfNEurope	12	hfAfrican	2
+"Wilkinson"	2	hfNEurope	13	hfAfrican	1
+"Kirby"	2	hfNEurope	13	hfAfrican	1
+"Cameron"	2	hfNEurope	12	hfAfrican	3
+"Bridges"	2	hfNEurope	11	hfAfrican	4
+"Anthony"	2	hfNEurope	10	hfAfrican	5
+"Richard"	2	hfNEurope	11	hfAfrican	3
+"Kirk"	2	hfNEurope	13	hfAfrican	2
+"Bruce"	2	hfNEurope	12	hfAfrican	2
+"Singleton"	2	hfNEurope	7	hfAfrican	7
+"Mathis"	2	hfNEurope	10	hfAfrican	5
+"Bradford"	2	hfNEurope	10	hfAfrican	4
+"Boone"	2	hfNEurope	10	hfAfrican	5
+"Abbott"	2	hfNEurope	14	hfAfrican	1
+"Charles"	2	hfAfrican	7	hfNEurope	6	hfLatAmr	1
+"Allison"	2	hfNEurope	12	hfAfrican	2
+"Sweeney"	2	hfNEurope	14	hfAfrican	1
+"Atkinson"	2	hfNEurope	12	hfAfrican	2
+"Horn"	2	hfNEurope	13	hfAfrican	1
+"Jefferson"	2	hfAfrican	11	hfNEurope	3
+"Rosales"	2	hfLatAmr	14	hfMeditrn	1
+"York"	2	hfNEurope	13	hfAfrican	1
+"Christian"	2	hfNEurope	10	hfAfrican	4
+"Phelps"	2	hfNEurope	13	hfAfrican	1
+"Farrell"	2	hfNEurope	14	hfAfrican	1
+"Castaneda"	2	hfLatAmr	14	hfMeditrn	1
+"Nash"	2	hfNEurope	11	hfAfrican	4
+"Dickerson"	2	hfNEurope	10	hfAfrican	5
+"Bond"	2	hfNEurope	12	hfAfrican	3
+"Wyatt"	2	hfNEurope	12	hfAfrican	3
+"Foley"	2	hfNEurope	14
+"Chase"	2	hfNEurope	13	hfAfrican	2
+"Gates"	2	hfNEurope	12	hfAfrican	3
+"Vincent"	2	hfNEurope	12	hfAfrican	2
+"Mathews"	2	hfNEurope	12	hfAfrican	2
+"Hodge"	2	hfNEurope	11	hfAfrican	4
+"Garrison"	2	hfNEurope	13	hfAfrican	2
+"Trevino"	2	hfLatAmr	14	hfMeditrn	1
+"Villarreal"	2	hfLatAmr	14	hfMeditrn	1
+"Heath"	2	hfNEurope	12	hfAfrican	2
+"Dalton"	2	hfNEurope	13	hfAfrican	1
+"Valencia"	2	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Callahan"	2	hfNEurope	14	hfAfrican	1
+"Hensley"	2	hfNEurope	14
+"Atkins"	2	hfNEurope	11	hfAfrican	4
+"Huffman"	2	hfNEurope	14	hfAfrican	1
+"Roy"	2	hfNEurope	12	hfEAsian	1	hfAfrican	1
+"Boyer"	2	hfNEurope	14	hfAfrican	1
+"Shields"	2	hfNEurope	12	hfAfrican	3
+"Lin"	2	hfEAsian	14
+"Hancock"	2	hfNEurope	13	hfAfrican	1
+"Grimes"	2	hfNEurope	12	hfAfrican	3
+"Glenn"	2	hfNEurope	10	hfAfrican	5
+"Cline"	2	hfNEurope	14
+"Delacruz"	2	hfLatAmr	11	hfEAsian	3	hfMeditrn	1
+"Camacho"	2	hfLatAmr	13	hfMeditrn	1
+"Dillon"	2	hfNEurope	13	hfAfrican	1
+"Parrish"	2	hfNEurope	12	hfAfrican	2
+"O'Neill"	2	hfNEurope	14
+"Melton"	2	hfNEurope	12	hfAfrican	2
+"Booth"	2	hfNEurope	13	hfAfrican	2
+"Kane"	2	hfNEurope	14	hfAfrican	1
+"Berg"	2	hfNEurope	14
+"Harrell"	2	hfNEurope	10	hfAfrican	4
+"Pitts"	2	hfNEurope	10	hfAfrican	5
+"Savage"	2	hfNEurope	12	hfAfrican	3
+"Wiggins"	2	hfNEurope	9	hfAfrican	6
+"Brennan"	2	hfNEurope	14
+"Salas"	2	hfLatAmr	13	hfMeditrn	1
+"Marks"	2	hfNEurope	12	hfAfrican	2
+"Russo"	2	hfNEurope	14
+"Sawyer"	2	hfNEurope	12	hfAfrican	2
+"Baxter"	2	hfNEurope	12	hfAfrican	2
+"Golden"	2	hfNEurope	12	hfAfrican	3
+"Hutchinson"	2	hfNEurope	12	hfAfrican	3
+"Liu"	2	hfEAsian	14
+"Walter"	2	hfNEurope	14	hfAfrican	1
+"McDowell"	2	hfNEurope	11	hfAfrican	4
+"Wiley"	2	hfNEurope	10	hfAfrican	4
+"Rich"	2	hfNEurope	13	hfAfrican	1
+"Humphrey"	2	hfNEurope	11	hfAfrican	3
+"Johns"	2	hfNEurope	12	hfAfrican	2
+"Koch"	2	hfNEurope	15
+"Suarez"	2	hfLatAmr	13	hfMeditrn	1
+"Hobbs"	2	hfNEurope	12	hfAfrican	2
+"Beard"	2	hfNEurope	12	hfAfrican	3
+"Gilmore"	2	hfNEurope	10	hfAfrican	4
+"Ibarra"	2	hfLatAmr	14
+"Keith"	2	hfNEurope	12	hfAfrican	2
+"Macias"	2	hfLatAmr	14	hfMeditrn	1
+"Khan"	2	hfEAsian	11	hfNEurope	1
+"Andrade"	2	hfLatAmr	11	hfMeditrn	3
+"Ware"	2	hfNEurope	8	hfAfrican	7
+"Stephenson"	2	hfNEurope	12	hfAfrican	2
+"Henson"	2	hfNEurope	13	hfAfrican	2
+"Wilkerson"	2	hfNEurope	10	hfAfrican	4
+"Dyer"	2	hfNEurope	13	hfAfrican	2
+"McClure"	2	hfNEurope	13	hfAfrican	1
+"Blackwell"	2	hfNEurope	10	hfAfrican	4
+"Mercado"	2	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Tanner"	2	hfNEurope	13	hfAfrican	2
+"Eaton"	2	hfNEurope	13	hfAfrican	1
+"Clay"	2	hfNEurope	8	hfAfrican	6
+"Barron"	2	hfNEurope	8	hfLatAmr	5	hfAfrican	1
+"Beasley"	2	hfNEurope	10	hfAfrican	4
+"O'Neal"	2	hfNEurope	10	hfAfrican	4
+"Preston"	2	hfNEurope	11	hfAfrican	3
+"Small"	2	hfNEurope	10	hfAfrican	5
+"Wu"	2	hfEAsian	14
+"Zamora"	2	hfLatAmr	14	hfMeditrn	1
+"Macdonald"	2	hfNEurope	14
+"Vance"	2	hfNEurope	13	hfAfrican	2
+"Snow"	2	hfNEurope	13	hfAfrican	1
+"McClain"	2	hfNEurope	10	hfAfrican	5
+"Stafford"	2	hfNEurope	12	hfAfrican	2
+"Orozco"	2	hfLatAmr	14	hfMeditrn	1
+"Barry"	2	hfNEurope	13	hfAfrican	1
+"English"	2	hfNEurope	11	hfAfrican	3
+"Shannon"	2	hfNEurope	12	hfAfrican	3
+"Kline"	2	hfNEurope	14
+"Jacobson"	2	hfNEurope	14
+"Woodard"	2	hfNEurope	9	hfAfrican	5
+"Huang"	2	hfEAsian	15
+"Kemp"	2	hfNEurope	11	hfAfrican	3
+"Mosley"	2	hfAfrican	8	hfNEurope	6
+"Prince"	2	hfNEurope	11	hfAfrican	4
+"Merritt"	2	hfNEurope	12	hfAfrican	3
+"Hurst"	2	hfNEurope	13	hfAfrican	2
+"Villanueva"	2	hfLatAmr	12	hfEAsian	2	hfMeditrn	1
+"Roach"	2	hfNEurope	12	hfAfrican	2
+"Nolan"	2	hfNEurope	13	hfAfrican	1
+"Lam"	2	hfEAsian	13	hfNEurope	1
+"Yoder"	2	hfNEurope	15
+"McCullough"	2	hfNEurope	11	hfAfrican	3
+"Lester"	2	hfNEurope	12	hfAfrican	3
+"Santana"	2	hfLatAmr	14	hfMeditrn	1
+"Valenzuela"	2	hfLatAmr	13	hfMeditrn	1
+"Winters"	2	hfNEurope	12	hfAfrican	2
+"Barrera"	2	hfLatAmr	14	hfMeditrn	1
+"Leach"	2	hfNEurope	12	hfAfrican	2
+"Orr"	2	hfNEurope	12	hfAfrican	2
+"Berger"	2	hfNEurope	14
+"McKee"	2	hfNEurope	13	hfAfrican	1
+"Strong"	2	hfNEurope	10	hfAfrican	4
+"Conway"	2	hfNEurope	13	hfAfrican	2
+"Stein"	2	hfNEurope	7	hfMeditrn	7
+"Whitehead"	2	hfNEurope	11	hfAfrican	3
+"Bullock"	2	hfNEurope	10	hfAfrican	5
+"Escobar"	2	hfLatAmr	14	hfMeditrn	1
+"Knox"	2	hfNEurope	10	hfAfrican	5
+"Meadows"	2	hfNEurope	12	hfAfrican	2
+"Solomon"	2	hfNEurope	9	hfAfrican	4
+"Velez"	2	hfLatAmr	14	hfMeditrn	1
+"O'Donnell"	2	hfNEurope	14
+"Kerr"	2	hfNEurope	13	hfAfrican	1
+"Stout"	2	hfNEurope	14
+"Blankenship"	2	hfNEurope	14
+"Browning"	2	hfNEurope	13	hfAfrican	1
+"Kent"	2	hfNEurope	13	hfAfrican	1
+"Lozano"	2	hfLatAmr	14	hfMeditrn	1
+"Bartlett"	2	hfNEurope	14	hfAfrican	1
+"Pruitt"	2	hfNEurope	11	hfAfrican	3
+"Buck"	2	hfNEurope	13	hfAfrican	1
+"Barr"	2	hfNEurope	13	hfAfrican	2
+"Gaines"	2	hfAfrican	8	hfNEurope	7
+"Durham"	2	hfNEurope	11	hfAfrican	3
+"Gentry"	2	hfNEurope	13	hfAfrican	2
+"McIntyre"	2	hfNEurope	12	hfAfrican	2
+"Sloan"	2	hfNEurope	12	hfAfrican	2
+"Melendez"	2	hfLatAmr	14	hfMeditrn	1
+"Rocha"	2	hfLatAmr	12	hfMeditrn	3
+"Herman"	2	hfNEurope	14
+"Sexton"	2	hfNEurope	14	hfAfrican	1
+"Moon"	2	hfNEurope	11	hfEAsian	2	hfAfrican	2
+"Hendricks"	2	hfNEurope	12	hfAfrican	2
+"Rangel"	2	hfLatAmr	14	hfMeditrn	1
+"Stark"	2	hfNEurope	14
+"Lowery"	2	hfNEurope	11	hfAfrican	3	hfAmerind	1
+"Hardin"	2	hfNEurope	12	hfAfrican	2
+"Hull"	2	hfNEurope	13	hfAfrican	1
+"Sellers"	2	hfNEurope	12	hfAfrican	3
+"Ellison"	2	hfNEurope	10	hfAfrican	4
+"Calhoun"	2	hfNEurope	10	hfAfrican	5
+"Gillespie"	2	hfNEurope	13	hfAfrican	2
+"Mora"	2	hfLatAmr	13	hfMeditrn	1
+"Knapp"	2	hfNEurope	14
+"McCall"	2	hfNEurope	10	hfAfrican	4
+"Morse"	2	hfNEurope	14	hfAfrican	1
+"Dorsey"	2	hfAfrican	8	hfNEurope	7
+"Weeks"	2	hfNEurope	13	hfAfrican	1
+"Nielsen"	2	hfNEurope	14
+"Livingston"	2	hfNEurope	11	hfAfrican	3
+"Leblanc"	2	hfNEurope	13	hfAfrican	1
+"McLean"	2	hfNEurope	11	hfAfrican	4
+"Bradshaw"	2	hfNEurope	12	hfAfrican	2
+"Glass"	2	hfNEurope	12	hfAfrican	2
+"Middleton"	2	hfNEurope	10	hfAfrican	4
+"Buckley"	2	hfNEurope	13	hfAfrican	2
+"Schaefer"	2	hfNEurope	14
+"Frost"	2	hfNEurope	13	hfAfrican	1
+"Howe"	2	hfNEurope	14
+"House"	2	hfNEurope	12	hfAfrican	3
+"McIntosh"	2	hfNEurope	11	hfAfrican	3
+"Ho"	2	hfEAsian	14
+"Pennington"	2	hfNEurope	13	hfAfrican	1
+"Reilly"	2	hfNEurope	14
+"Hebert"	2	hfNEurope	14	hfAfrican	1
+"McFarland"	2	hfNEurope	12	hfAfrican	2
+"Hickman"	2	hfNEurope	12	hfAfrican	3
+"Noble"	2	hfNEurope	12	hfAfrican	2
+"Spears"	2	hfNEurope	10	hfAfrican	4
+"Conrad"	2	hfNEurope	14
+"Arias"	2	hfLatAmr	14	hfMeditrn	1
+"Galvan"	2	hfLatAmr	14	hfMeditrn	1
+"Velazquez"	2	hfLatAmr	14	hfMeditrn	1
+"Huynh"	2	hfEAsian	14
+"Frederick"	2	hfNEurope	12	hfAfrican	2
+"Randolph"	2	hfNEurope	9	hfAfrican	6
+"Cantu"	2	hfLatAmr	14	hfMeditrn	1
+"Fitzpatrick"	2	hfNEurope	13	hfAfrican	1
+"Mahoney"	2	hfNEurope	14	hfAfrican	1
+"Peck"	2	hfNEurope	14	hfAfrican	1
+"Villa"	2	hfLatAmr	13	hfMeditrn	2
+"Michael"	2	hfNEurope	13	hfAfrican	1
+"Donovan"	2	hfNEurope	14
+"McConnell"	2	hfNEurope	14	hfAfrican	1
+"Walls"	2	hfNEurope	11	hfAfrican	4
+"Boyle"	2	hfNEurope	14
+"Mayer"	2	hfNEurope	14
+"Zuniga"	2	hfLatAmr	14	hfMeditrn	1
+"Giles"	2	hfNEurope	10	hfAfrican	4	hfLatAmr	1
+"Pineda"	2	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Pace"	2	hfNEurope	12	hfAfrican	2
+"Hurley"	2	hfNEurope	14	hfAfrican	1
+"Mays"	2	hfNEurope	9	hfAfrican	6
+"McMillan"	2	hfNEurope	11	hfAfrican	4
+"Crosby"	2	hfNEurope	11	hfAfrican	3
+"Ayers"	2	hfNEurope	13	hfAfrican	2
+"Case"	2	hfNEurope	14
+"Bentley"	2	hfNEurope	13	hfAfrican	2
+"Shepard"	2	hfNEurope	12	hfAfrican	3
+"Everett"	2	hfNEurope	11	hfAfrican	3
+"Pugh"	2	hfNEurope	10	hfAfrican	4
+"David"	2	hfNEurope	10	hfEAsian	2	hfAfrican	2	hfLatAmr	1
+"McMahon"	2	hfNEurope	14
+"Dunlap"	2	hfNEurope	12	hfAfrican	3
+"Bender"	2	hfNEurope	14	hfAfrican	1
+"Hahn"	2	hfNEurope	14	hfEAsian	1
+"Harding"	2	hfNEurope	12	hfAfrican	2
+"Acevedo"	2	hfLatAmr	14	hfMeditrn	1
+"Raymond"	2	hfNEurope	12	hfAfrican	2
+"Blackburn"	2	hfNEurope	13	hfAfrican	1
+"Duffy"	2	hfNEurope	14	hfAfrican	1
+"Landry"	2	hfNEurope	13	hfAfrican	2
+"Dougherty"	2	hfNEurope	14
+"Bautista"	2	hfLatAmr	11	hfEAsian	3	hfMeditrn	1
+"Shah"	2	hfEAsian	13	hfNEurope	1
+"Potts"	2	hfNEurope	12	hfAfrican	2
+"Arroyo"	2	hfLatAmr	14	hfMeditrn	1
+"Valentine"	2	hfMeditrn	10	hfAfrican	3	hfLatAmr	1
+"Meza"	2	hfLatAmr	14	hfMeditrn	1
+"Gould"	2	hfNEurope	13	hfAfrican	1
+"Vaughan"	2	hfNEurope	13	hfAfrican	2
+"Fry"	2	hfNEurope	14
+"Rush"	2	hfNEurope	12	hfAfrican	3
+"Avery"	2	hfNEurope	11	hfAfrican	3
+"Herring"	2	hfNEurope	11	hfAfrican	3
+"Dodson"	2	hfNEurope	12	hfAfrican	2
+"Clements"	2	hfNEurope	13	hfAfrican	1
+"Sampson"	2	hfNEurope	9	hfAfrican	4	hfAmerind	1
+"Tapia"	2	hfLatAmr	14	hfMeditrn	1
+"Bean"	2	hfNEurope	12	hfAfrican	2
+"Lynn"	2	hfNEurope	13	hfAfrican	1
+"Crane"	2	hfNEurope	14	hfAfrican	1
+"Farley"	2	hfNEurope	13	hfAfrican	2
+"Cisneros"	2	hfLatAmr	14	hfMeditrn	1
+"Benton"	2	hfNEurope	11	hfAfrican	4
+"Ashley"	2	hfNEurope	11	hfAfrican	3
+"McKay"	2	hfNEurope	12	hfAfrican	2
+"Finley"	2	hfNEurope	11	hfAfrican	3
+"Best"	2	hfNEurope	11	hfAfrican	3
+"Blevins"	2	hfNEurope	14	hfAfrican	1
+"Friedman"	2	hfNEurope	14
+"Moses"	2	hfNEurope	9	hfAfrican	5
+"Sosa"	2	hfLatAmr	14	hfMeditrn	1
+"Blanchard"	2	hfNEurope	13	hfAfrican	1
+"Huber"	2	hfNEurope	14
+"Frye"	2	hfNEurope	13	hfAfrican	2
+"Krueger"	2	hfNEurope	15
+"Bernard"	2	hfNEurope	10	hfAfrican	3	hfLatAmr	1
+"Rosario"	2	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Rubio"	2	hfLatAmr	14	hfMeditrn	1
+"Mullen"	2	hfNEurope	13	hfAfrican	1
+"Benjamin"	2	hfNEurope	8	hfAfrican	6
+"Haley"	2	hfNEurope	12	hfAfrican	2
+"Chung"	2	hfEAsian	14
+"Moyer"	2	hfNEurope	14
+"Choi"	2	hfEAsian	14
+"Horne"	2	hfNEurope	11	hfAfrican	3
+"Yu"	2	hfEAsian	14
+"Woodward"	2	hfNEurope	14	hfAfrican	1
+"Ali"	2	hfSAsian	6	hfAfrican	3	hfNEurope	2
+"Nixon"	2	hfNEurope	10	hfAfrican	4
+"Hayden"	2	hfNEurope	12	hfAfrican	2
+"Rivers"	2	hfAfrican	8	hfNEurope	6
+"Estes"	2	hfNEurope	13	hfAfrican	1
+"McCarty"	2	hfNEurope	14	hfAfrican	1
+"Richmond"	2	hfNEurope	11	hfAfrican	3
+"Stuart"	2	hfNEurope	13	hfAfrican	1
+"Maynard"	2	hfNEurope	13	hfAfrican	1
+"Brandt"	2	hfNEurope	14
+"O'Connell"	2	hfNEurope	14
+"Hanna"	2	hfNEurope	13	hfAfrican	1
+"Sanford"	2	hfNEurope	12	hfAfrican	3
+"Sheppard"	2	hfNEurope	11	hfAfrican	4
+"Church"	2	hfNEurope	14	hfAfrican	1
+"Burch"	2	hfNEurope	12	hfAfrican	2
+"Levy"	2	hfNEurope	12	hfAfrican	2	hfLatAmr	1
+"Rasmussen"	2	hfNEurope	14
+"Coffey"	2	hfNEurope	13	hfAfrican	1
+"Ponce"	2	hfLatAmr	14	hfMeditrn	1
+"Faulkner"	2	hfNEurope	12	hfAfrican	2
+"Donaldson"	2	hfNEurope	11	hfAfrican	3
+"Schmitt"	2	hfNEurope	15
+"Novak"	2	hfNEurope	15
+"Costa"	2	hfNEurope	13	hfLatAmr	1
+"Montes"	2	hfLatAmr	14	hfMeditrn	1
+"Booker"	2	hfAfrican	10	hfNEurope	5
+"Cordova"	2	hfLatAmr	13	hfMeditrn	2
+"Waller"	2	hfNEurope	11	hfAfrican	4
+"Arellano"	2	hfLatAmr	14	hfMeditrn	1
+"Maddox"	2	hfNEurope	11	hfAfrican	4
+"Mata"	2	hfLatAmr	14	hfMeditrn	1
+"Bonilla"	2	hfLatAmr	14	hfMeditrn	1
+"Stanton"	2	hfNEurope	13	hfAfrican	2
+"Compton"	2	hfNEurope	13	hfAfrican	1
+"Kaufman"	2	hfNEurope	14
+"Dudley"	2	hfNEurope	10	hfAfrican	4
+"McPherson"	2	hfNEurope	12	hfAfrican	3
+"Beltran"	2	hfLatAmr	13	hfMeditrn	1	hfEAsian	1
+"Dickson"	2	hfNEurope	12	hfAfrican	2
+"McCann"	2	hfNEurope	14	hfAfrican	1
+"Villegas"	2	hfLatAmr	14	hfMeditrn	1
+"Proctor"	2	hfNEurope	11	hfAfrican	3
+"Hester"	2	hfNEurope	11	hfAfrican	3
+"Cantrell"	2	hfNEurope	14	hfAfrican	1
+"Daugherty"	2	hfNEurope	14	hfAfrican	1
+"Cherry"	2	hfNEurope	9	hfAfrican	5
+"Bray"	2	hfNEurope	12	hfAfrican	2
+"Davila"	2	hfLatAmr	14	hfMeditrn	1
+"Rowland"	2	hfNEurope	13	hfAfrican	1
+"Levine"	2	hfNEurope	14	hfAfrican	1
+"Madden"	2	hfNEurope	13	hfAfrican	1
+"Spence"	2	hfNEurope	11	hfAfrican	3
+"Good"	2	hfNEurope	14	hfAfrican	1
+"Irwin"	2	hfNEurope	14
+"Werner"	2	hfNEurope	14
+"Krause"	2	hfNEurope	14
+"Petty"	2	hfNEurope	11	hfAfrican	3
+"Whitney"	2	hfNEurope	13	hfAfrican	1
+"Baird"	2	hfNEurope	14
+"Hooper"	2	hfNEurope	12	hfAfrican	2
+"Pollard"	2	hfNEurope	10	hfAfrican	5
+"Zavala"	2	hfLatAmr	14	hfMeditrn	1
+"Jarvis"	2	hfNEurope	13	hfAfrican	1
+"Holden"	2	hfNEurope	12	hfAfrican	3
+"Haas"	2	hfNEurope	15
+"Hendrix"	2	hfNEurope	12	hfAfrican	2
+"McGrath"	2	hfNEurope	14
+"Bird"	2	hfNEurope	14
+"Lucero"	2	hfLatAmr	12	hfMeditrn	2
+"Terrell"	2	hfNEurope	9	hfAfrican	6
+"Riggs"	2	hfNEurope	13	hfAfrican	1
+"Joyce"	2	hfNEurope	13	hfAfrican	1
+"Mercer"	2	hfNEurope	13	hfAfrican	2
+"Rollins"	2	hfNEurope	11	hfAfrican	4
+"Galloway"	2	hfNEurope	11	hfAfrican	4
+"Duke"	2	hfNEurope	13	hfAfrican	1
+"Odom"	2	hfNEurope	11	hfAfrican	4
+"Andersen"	2	hfNEurope	14
+"Downs"	2	hfNEurope	13	hfAfrican	1
+"Hatfield"	2	hfNEurope	14
+"Benitez"	2	hfLatAmr	14	hfMeditrn	1
+"Archer"	2	hfNEurope	12	hfAfrican	2
+"Huerta"	2	hfLatAmr	14	hfMeditrn	1
+"Travis"	2	hfNEurope	11	hfAfrican	3
+"McNeil"	2	hfNEurope	8	hfAfrican	6
+"Hinton"	2	hfNEurope	8	hfAfrican	6
+"Zhang"	2	hfEAsian	15
+"Hays"	2	hfNEurope	14	hfAfrican	1
+"Mayo"	2	hfNEurope	10	hfAfrican	3	hfLatAmr	1
+"Fritz"	2	hfNEurope	14
+"Branch"	2	hfNEurope	7	hfAfrican	7
+"Mooney"	2	hfNEurope	14	hfAfrican	1
+"Ewing"	2	hfNEurope	12	hfAfrican	3
+"Ritter"	2	hfNEurope	14
+"Esparza"	2	hfLatAmr	14	hfMeditrn	1
+"Frey"	2	hfNEurope	14
+"Braun"	2	hfNEurope	14
+"Gay"	2	hfNEurope	11	hfAfrican	3
+"Riddle"	2	hfNEurope	13	hfAfrican	1
+"Haney"	2	hfNEurope	13	hfAfrican	1
+"Kaiser"	2	hfNEurope	14
+"Holder"	2	hfNEurope	11	hfAfrican	3
+"Chaney"	2	hfNEurope	11	hfAfrican	3
+"McKnight"	2	hfNEurope	9	hfAfrican	5
+"Gamble"	2	hfNEurope	9	hfAfrican	5
+"Vang"	1	hfEAsian	14
+"Cooley"	1	hfNEurope	12	hfAfrican	2
+"Carney"	1	hfNEurope	13	hfAfrican	1
+"Cowan"	1	hfNEurope	12	hfAfrican	2
+"Forbes"	1	hfNEurope	11	hfAfrican	3
+"Ferrell"	1	hfNEurope	12	hfAfrican	3
+"Davies"	1	hfNEurope	14	hfAfrican	1
+"Barajas"	1	hfLatAmr	14
+"Shea"	1	hfNEurope	14
+"Osborn"	1	hfNEurope	14
+"Bright"	1	hfNEurope	11	hfAfrican	3
+"Cuevas"	1	hfLatAmr	13	hfMeditrn	1
+"Bolton"	1	hfNEurope	11	hfAfrican	3
+"Murillo"	1	hfLatAmr	14	hfMeditrn	1
+"Lutz"	1	hfNEurope	14
+"Duarte"	1	hfLatAmr	11	hfMeditrn	3
+"Kidd"	1	hfNEurope	12	hfAfrican	3
+"Key"	1	hfNEurope	11	hfAfrican	4
+"Cooke"	1	hfNEurope	12	hfAfrican	2
+"Russo"	2	hfMeditrn	15
+"Romano"	1	hfMeditrn	15
+"Marino"	2	hfMeditrn	15
+"Bruno"	1	hfMeditrn	15
+"Esposito"	1	hfMeditrn	15

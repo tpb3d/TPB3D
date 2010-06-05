@@ -7,15 +7,15 @@ startWidth
 startDepth
 	16
 baseHeight
-	-25
+	-50
 maxHeight
-	125
+	200
 targetSize
 	128
 spikiness
-	2
+	2.5
 varspike
-	2
+	1
 snowLevel
 	1.1
 rockLevel
@@ -23,7 +23,9 @@ rockLevel
 waterTableHeight
 	-10
 pctExponentialSeeds
-	0.1
+	0.0
 gaussianSmoothRadius
-	5
+	16
+pctarcSeeds
+	1.0
 

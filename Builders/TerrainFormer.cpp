@@ -226,16 +226,20 @@ TerrainFormer::
 		float snowLevel=0.7f;
 		float rockLevel=0.4f;
 		float waterTableHeight=25.f;
-		float pctexpseeds=100;
+		float pctexpseeds=100.f;
 		float gaussianSmoothRadius=1.f;
+		short circularflagScan=false;
+		float pctarcSeeds=0.f;	//arcseeds
 		// /media/B81D-8323/game projects/tpb3d/source/00-current/tpb3dtg/Builders/TerrainFormer.cpp|227|error: ‘TerrainFormer::FractalHeightTestMesh()::<anonymous union>::<anonymous enum> TerrainFormer::FractalHeightTestMesh()::<anonymous union>::balanced’ invalid; an anonymous union can only have non-static data members|
 
 		FILE*inf;
 		if(inf=fopen("data/FractalHeightInput.txt","r+")){
 			fscanf(inf,	" Tp3dFractInput pngHtMap \"%[^\"\t\n]\" startWidth %hd startDepth %hd baseHeight %f maxHeight %f targetSize"
-						" %hd spikiness %f varspike %hd snowLevel %f rockLevel %f waterTableHeight %f \pctExponentialSeeds %f gaussianSmoothRadius %f"
+						" %hd spikiness %f varspike %hd snowLevel %f rockLevel %f waterTableHeight %f pctExponentialSeeds %f gaussianSmoothRadius"
+						" %f pctarcSeeds %f"
 						,pngHtMap,&startWidth,&startDepth,&baseHeight,&maxHeight,&targetSize,&spikiness
-						,&varspikeScan,&snowLevel,&rockLevel,&waterTableHeight,&pctexpseeds,&gaussianSmoothRadius);
+						,&varspikeScan,&snowLevel,&rockLevel,&waterTableHeight,&pctexpseeds,&gaussianSmoothRadius
+						,&pctarcSeeds);
 			varspike=(bool)varspikeScan;
 			///media/B81D-8323/game projects/tpb3d/source/00-current/tpb3dtg/Builders/TerrainFormer.cpp|236|error: invalid conversion from ‘short int’ to ‘TerrainFormer::FractalHeightTestMesh()::<anonymous enum>’|
 			fclose(inf);
@@ -243,8 +247,9 @@ TerrainFormer::
 
 
 		//create fractal height map
+		//std::cout<<"pctarcSeeds="<<pctarcSeeds<<std::endl;
 
-		FractalTerrainMap fractmap(pngHtMap,startWidth,startDepth,baseHeight,maxHeight,spikiness,varspike,pctexpseeds,gaussianSmoothRadius);
+		FractalTerrainMap fractmap(pngHtMap,startWidth,startDepth,baseHeight,maxHeight,spikiness,varspike,pctexpseeds,gaussianSmoothRadius,pctarcSeeds);
 
 		startWidth=fractmap.w;	startDepth=fractmap.d;
 		startPoints=Max(startWidth,startDepth);

@@ -32,6 +32,10 @@
 #include "PathAgent.h"
 #include "PeepAgent.h"
 #include "../Utility/GameException.h"
+#define testNames 1
+#if testNames
+#include "../People/PeepNames.h"
+#endif
 
 PathFind::PathFind(Person *peep)
 {
@@ -183,7 +187,15 @@ bool PathFind::Update()
 PeepsAgent::PeepsAgent (Park& Park) // use a Park agent for multiple Parks
       :  mPark (Park)
 {
-
+	#define testNames 1
+	#if testNames
+		#if doAmericanTest
+			TestAmericanNames();
+		#endif
+		#if doTestNameTree
+			TestNameTree();
+		#endif
+	#endif
 }
 
 PeepsAgent::~PeepsAgent ()

@@ -65,6 +65,7 @@ main ()
    std::cout << "Basic loading finished....\n";
    try
    {
+
       SceneEvent SceneEV(&theScene, gm);
 
       EventHandler Events;
@@ -72,7 +73,7 @@ main ()
       GUIManager Gui (Events, *pInterface); //, &thePark);
       Events.Add (&Gui);
       Events.Add (cam);
-   
+
       MainEvent mev;
       Events.Add(&SceneEV);
       Events.Add (&mev);
@@ -116,7 +117,7 @@ main ()
          case 2:
             thePark.Update (5, pInterface->GetTimeOfDay());
             break;
-            
+
          default:
             static int cc_count = 30; //only once in a while
             if( cc_count < 1 )

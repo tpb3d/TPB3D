@@ -24,13 +24,15 @@ class FractalTerrainMap{
 	bool varspike;	//use spikiness as a random range rather than a static scale in height calculation
 	typedef enum{	diag=0,axis=1	}direction;
 	float pctexpseeds;
+	float pctarcSeeds;	//circular seeding percentage
 	float gaussianSmoothRadius;
 	short curRound;	short nrounds;
 	FractalTerrainMap(char*pngfile,short swidth,short sdepth,float base,float shi,float sspikiness
-					,bool svarspike,float spctexpseeds,float sgaussianSmoothRadius){
+					,bool svarspike,float spctexpseeds,float sgaussianSmoothRadius,float spctarcSeeds){
 		nrounds=1;
 		gaussianSmoothRadius=sgaussianSmoothRadius;
 		pctexpseeds=spctexpseeds;
+		pctarcSeeds=spctarcSeeds;
 		hi=shi-base;		lo=base;
 		lnhi=ln(hi);		lnlo=-lnhi;
 		PngImage png;
@@ -55,28 +57,49 @@ class FractalTerrainMap{
 		}
 	void GetStartHeights(float base){
 		srand(time(NULL));
-		float totalHeight=0.f;	short npoints=w*d;	float avgVal=0.f;
-		for(int iy=0;iy<d;iy++){
-			for(int ix=0;ix<w;ix++){
-				float rv=frand();
-				enum	{	balanced=1,exponential=2	}	seedmode;
-				if(rv<pctexpseeds)		seedmode=exponential;
-				else					seedmode=balanced;
-				if(seedmode==balanced)		{
-					float randVal=frand()*(hi-lo)+lo;
-					ht(ix,iy)=base+randVal;			}
-				else /*if(seedmode==this->exponential)*/	{
-					float randPwr=frand()*(lnhi-lnlo)+lnlo;
-					ht(ix,iy)=base+exp(randPwr);			}
-				totalHeight+=ht(ix,iy);
-				}//for x
-			}//for y
+		float htsum=0;	short htsdone=0;	float htmax=-1e+6;	float htmin=+1e+6;	float htavg=0;
+		float ll=lo;	float hh=hi;		short htsdoneThreshold=5;	float tlnlo;	float tlnhi;
+		float totalHeight=0.f;	short npoints=w*d;	float avgVal=0.f;	float rangeval;	bool isRandLimited=false;
+		float rad=Abs(hi-lo);	float radp2=pow(rad,2);
+		for(int iy=0;iy<d;iy++){	for(int ix=0;ix<w;ix++){
+			float rv=frand();
+			enum	{	balanced=1,exponential=2,circular=3	}	seedmode;
+			// this part limits the random to a range if there are enough values already generated
+			if(htsdone>=htsdoneThreshold)
+				//isRandLimited=(bool)(rand()%2);
+				//isRandLimited=true;
+				isRandLimited=false;
+			if(isRandLimited)	{
+				rangeval=Min(Abs(htmax-htavg),Abs(htavg-htmin));
+				hh=htavg-rangeval;	ll=htavg+rangeval;
+				}
+			else{	hh=hi;	ll=lo;	}
+			rad=Abs(hi-lo);	radp2=rad*rad;
+			//this block sets temp ln low and high
+			tlnhi=ln(hi-lo);tlnhi=-tlnlo;
+			if(rv<pctexpseeds)					seedmode=exponential;
+			else if(rv<pctexpseeds+pctarcSeeds)	seedmode=circular;
+			else								seedmode=balanced;
+			if(seedmode==balanced)		{
+				float randVal=frand()*(hh-ll);
+				ht(ix,iy)=ll+randVal;			}
+			else if(seedmode==circular)	{
+				float randx=frand()*rad;
+				ht(ix,iy)=ll+rad-sqrt(radp2-pow(randx,2));
+				}
+			else /*if(seedmode==this->exponential)*/	{
+				float randPwr=frand()*(tlnhi-tlnlo)+tlnlo;
+				ht(ix,iy)=ll+exp(randPwr);			}
+			htsum=totalHeight+=ht(ix,iy);	htavg=htsum/htsdone;
+			htmin=Min(htmin,ht(ix,iy));	htmax=Max(htmax,ht(ix,iy));
+			htsdone++;
+			}	}//for ix and iy
 		avgVal=totalHeight/npoints;
 		std::cout<<"GetStartHeights():\tAverage="<<avgVal<<"\r\n";
 		}
 	//Fractalize(): double the vertices and fractalize
 	void Fractalize(){
-		#define dumpFractMap 1
+		#define dumpFractMap 0
 		#if dumpFractMap
 		for(int iy=0;iy<d;iy++){
 			std::cout<<"line y="<<iy<<": ";
@@ -221,36 +244,30 @@ class FractalTerrainMap{
 		float radius=gaussianSmoothRadius;
 		float unitsz=hi-lo;
 		typedef float*fp;	short r=round(radius);
-		if(r==0)	return;
+		if(r==0)
+			return;
 		short ww;	short dd;		ww=dd=r*2+1;
 		short nentries=ww*dd;
 		fp neighbors=(float*)malloc(nentries*sizeof(float));	fp&n=neighbors;
 		fp gausswts=(float*)malloc(nentries*sizeof(float));	fp&gw=gausswts;
 		//calc blurs;
 		std::cout<<"================= FractalTerrainMap::AltSmooth() =================\r\n";
+		for(int yy=-r;yy<=r;yy++){	for(int xx=-r;xx<=r;xx++){
+			const float distadd=1.f/sqrt(2);
+			//set gaussian weight
+			int xxx=xx;		int yyy=yy;	float curwt;
+			curwt=1/(pow(Abs(xxx)+distadd,2)+pow(Abs(yyy)+distadd,2));
+			xxx+=r;		yyy+=r;
+			gw[yyy*ww+xxx]=curwt;
+			}	}//for xx and yy
 		for(int y=0;y<d;y++){	for(int x=0;x<d;x++){
-			for(int pass=0;pass<2;pass++){
-				float dev;
-				if(pass==1)
-					dev=Stdev(n,nentries);
-				for(int yy=y-r;yy<=y+r;yy++){	for(int xx=x-r;xx<=x+r;xx++){
-					if(pass==0)													{
-						int xxx=xx;	int yyy=yy;
-						if(xxx<0||xxx>=w)	xxx=x;
-						if(yyy<0||yyy>=y)	yyy=y;
-						//set neighbor array entry
-						n[(yy-(y-r))*ww+(xx-(x-r))]=(ht(xxx,yyy)-lo)/unitsz;	}
-					else if(pass==1)	{
-						//set gaussian weight
-						float centerWt=1.5;
-						int xxx=xx-x;		int yyy=yy-y;	float curwt;
-						if(xx==x&&yy==y)	curwt=centerWt;
-						else	{	curwt=1/(pow(xxx,2)+pow(yyy,2));	}
-						xxx+=r;		yyy+=r;
-						gw[yyy*ww+xxx]=curwt;
-						}
-					}	}//for xx and yy
-				}//for pass
+			for(int yy=y-r;yy<=y+r;yy++){	for(int xx=x-r;xx<=x+r;xx++){
+				int xxx=xx;	int yyy=yy;
+				if(xxx<0||xxx>=w)	xxx=x;
+				if(yyy<0||yyy>=y)	yyy=y;
+				//set neighbor array entry
+				n[(yy-(y-r))*ww+(xx-(x-r))]=(ht(xxx,yyy)-lo)/unitsz;
+				}	}//for xx and yy
 			float tht=WAvg(neighbors,gausswts,nentries)*unitsz+lo;
 			//std::cout<<((float)round(ht(x,y)*10)/10)<<"<--"<<((float)round(tht*10)/10)<<"\t";
 			ht(x,y)=tht;
