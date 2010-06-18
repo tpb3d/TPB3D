@@ -36,9 +36,9 @@ void PlaceItemDelegate<class T>::OnHitUp (short ID)
 {
 //      mPlaceItem.Onhit();
 }
-void PlaceItemDelegate<class T>::Draw()
-{
+//void PlaceItemDelegate<class T>::Draw()
+//{
    // gfx set alpha to 45%
 // bug      mpGhostItem->Draw();
    // gfx set alpha to normal
-}
+//}

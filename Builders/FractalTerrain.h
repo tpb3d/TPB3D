@@ -1,7 +1,7 @@
 #pragma once
 
 //Builders/FractalTerrain.h
-#include "../Types/MathStuff.h"
+#include "../Types/MathStuff.h" 
 #include "../Graphics/pngFile.h"
 #include <iostream>
 
@@ -97,6 +97,13 @@ class FractalTerrainMap{
 		avgVal=totalHeight/npoints;
 		std::cout<<"GetStartHeights():\tAverage="<<avgVal<<"\r\n";
 		}
+#ifndef isnan
+   bool isnan(float fn) \
+   {\
+      return false; \
+   }
+#endif
+
 	//Fractalize(): double the vertices and fractalize
 	void Fractalize(){
 		#define dumpFractMap 0
@@ -240,20 +247,23 @@ class FractalTerrainMap{
 	}
 	long TotalEntries(){	return((long)width*depth);	}
 	//AltSmooth() - work on this
-	void AltSmooth(){
+	void AltSmooth()
+   {
 		float radius=gaussianSmoothRadius;
 		float unitsz=hi-lo;
-		typedef float*fp;	short r=round(radius);
+		typedef float*fp;	short r=floor (radius); //round(radius);
 		if(r==0)
 			return;
+
 		short ww;	short dd;		ww=dd=r*2+1;
 		short nentries=ww*dd;
 		fp neighbors=(float*)malloc(nentries*sizeof(float));	fp&n=neighbors;
 		fp gausswts=(float*)malloc(nentries*sizeof(float));	fp&gw=gausswts;
 		//calc blurs;
 		std::cout<<"================= FractalTerrainMap::AltSmooth() =================\r\n";
-		for(int yy=-r;yy<=r;yy++){	for(int xx=-r;xx<=r;xx++){
-			const float distadd=1.f/sqrt(2);
+		for(int yy=-r;yy<=r;yy++){	for(int xx=-r;xx<=r;xx++)
+      {
+			const float distadd=1.f / sqrt(2.0);
 			//set gaussian weight
 			int xxx=xx;		int yyy=yy;	float curwt;
 			curwt=1/(pow(Abs(xxx)+distadd,2)+pow(Abs(yyy)+distadd,2));
@@ -273,46 +283,65 @@ class FractalTerrainMap{
 			ht(x,y)=tht;
 			}//for x
 			//std::cout<<"\r\n";
-			}//for y
-		free(neighbors);
-		free(gausswts);
-		}
-	//Gaussian Smooth - still needs work
-	void GaussianSmooth(){
-		float radius=gaussianSmoothRadius;
-		float unitsz=hi-lo;
-		typedef float*fp;	short r=round(radius);
-		if(r==0)	return;
-		short ww;	short dd;		ww=dd=r*2+1;
-		short nentries=ww*dd;
-		fp neighbors=(float*)malloc(nentries*sizeof(float));	fp&n=neighbors;
-		fp gausswts=(float*)malloc(nentries*sizeof(float));	fp&gw=gausswts;
-		//calc blurs;
-		for(int y=0;y<d;y++){	for(int x=0;x<d;x++){
-			for(int pass=0;pass<2;pass++){
-				float dev;
-				if(pass==1)
-					dev=Stdev(n,nentries);
-				for(int yy=y-r;yy<=y+r;yy++){	for(int xx=x-r;xx<=x+r;xx++){
-					if(pass==0)												{
-						int xxx=xx;	int yyy=yy;
-						if(xxx<0||xxx>=w)	xxx=xx;
-						if(yyy<0||yyy>=y)	yyy=yy;
-						//set neighbor array entry
-						n[(yy-(y-r))*ww+(xx-(x-r))]=(ht(xxx,yyy)-lo)/unitsz;								}
-					else if(pass==1)											{
-						//set gaussian weight
-						gw[(yy-(y-r))*ww+(xx-(x-r))]=CalcGaussianWeight(xx-x,yy-y,radius,dev);	}
-					}	}//for xx and yy
-				}//for pass
-			float tht=WAvg(neighbors,gausswts,nentries)*unitsz+lo;
-			ht(x,y)=tht;
-			}	}//for x and y
-		free(neighbors);
-		free(gausswts);
-		}
+		}//for y
+	free(neighbors);
+	free(gausswts);
+	}
 
+   //Gaussian Smooth - still needs work
+   void GaussianSmooth()
+   {
+	   float radius=gaussianSmoothRadius;
+	   float unitsz=hi-lo;
+	   typedef float*fp;
+      short r=floor(radius); //round(radius);
+	   if(r==0)	return;
 
-	};//class FractalTerrainMap
+	   short ww;
+      short dd;		
+      ww=dd=r*2+1;
+	   short nentries=ww*dd;
+	   float* neighbors = new float[nentries];
+      fp& n = neighbors;
+	   float* gausswts = new float[nentries];
+      fp&gw=gausswts;
+	   //calc blurs;
+	   for(int y=0;y<d;y++)
+      {
+         for(int x=0;x<d;x++)
+         {
+			   for(int pass=0;pass<2;pass++)
+            {
+				   float dev;
+				   if(pass==1)
+					   dev=Stdev(n,nentries);
+
+				   for(int yy=y-r;yy<=y+r;yy++){	for(int xx=x-r;xx<=x+r;xx++)
+               {
+					   if(pass==0)
+                  {
+						   int xxx=xx;	int yyy=yy;
+						   if(xxx<0||xxx>=w)	xxx=xx;
+						   if(yyy<0||yyy>=y)	yyy=yy;
+						   //set neighbor array entry
+						   n[(yy-(y-r))*ww+(xx-(x-r))]=(ht(xxx,yyy)-lo)/unitsz;
+                  }
+					   else if(pass==1)
+                  {
+						   //set gaussian weight
+						   gw[(yy-(y-r))*ww+(xx-(x-r))]=CalcGaussianWeight(xx-x,yy-y,radius,dev);
+                  }
+   			   }
+            }//for xx and yy
+   	   }//for pass
+	      float tht=WAvg(neighbors,gausswts,nentries)*unitsz+lo;
+		   ht(x,y)=tht;
+		   }
+      }//for x and y
+      delete neighbors;
+	   delete gausswts;
+   }
+
+};//class FractalTerrainMap
 //=========================================================================================
 

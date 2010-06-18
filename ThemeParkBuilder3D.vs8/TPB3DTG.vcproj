@@ -520,6 +520,14 @@
 			Name="Types"
 			>
 			<File
+				RelativePath="..\Types\MathStuff.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Types\MathStuff.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Types\rect.h"
 				>
 			</File>
@@ -1098,6 +1106,40 @@
 				>
 			</File>
 			<File
+				RelativePath="..\People\Locations.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\People\Locations.h"
+				>
+			</File>
+			<File
+				RelativePath="..\People\NameListTree.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)\$(InputName)1.obj"
+						XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)\$(InputName)1.obj"
+						XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\People\NameListTree.h"
+				>
+			</File>
+			<File
 				RelativePath="..\People\Peeps.cpp"
 				>
 			</File>
@@ -1173,6 +1215,14 @@
 			</File>
 			<File
 				RelativePath="..\Builders\FlatRideBuilder.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Builders\FractalTerrain.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Builders\FractalTerrain.h"
 				>
 			</File>
 			<File
@@ -1372,6 +1422,10 @@
 				>
 			</File>
 		</Filter>
+		<File
+			RelativePath="..\NameListTree.cpp"
+			>
+		</File>
 		<File
 			RelativePath="..\Resources.h"
 			>

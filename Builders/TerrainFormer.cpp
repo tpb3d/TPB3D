@@ -255,11 +255,11 @@ TerrainFormer::
 		startPoints=Max(startWidth,startDepth);
 		float lv;
 		short numRefinements=ceil(lv=logb(2,(float)targetSize/startPoints));
-		float estPoints=(float)startPoints*pow(2,numRefinements);
+		float estPoints = (float)startPoints * pow(2.0,numRefinements);
 
 		fractmap.Fractalize(numRefinements);
-		float ha[fractmap.depth][fractmap.width];
-		memcpy(ha,fractmap.heights,sizeof(ha));
+		float* ha = new float[fractmap.depth * fractmap.width];
+		memcpy(ha, fractmap.heights, sizeof(ha));
 
 		// Terrain - entity
 		Terrain* pTerra = new Terrain();
@@ -278,8 +278,10 @@ TerrainFormer::
 		const unsigned char rock[] = {	0x3f,0x3f,0x3f,0xff,0 };
 		const unsigned char watercolor[] = {	0x0f,0x2f,0x5f,0xff,0 };
 
-		for(int ix=0;ix<fractmap.width;++ix)		{
-			for(int iz=0;iz<fractmap.depth;++iz)		  {
+		for(int ix=0;ix<fractmap.width;++ix)
+      {
+			for(int iz=0;iz<fractmap.depth;++iz)
+         {
 				//float fy = float(rand()%100)/25-2.0f;
 				float fy=fractmap.ht(ix,iz);
 				float hl=(fy-baseHeight)/maxHeight;
@@ -292,9 +294,8 @@ TerrainFormer::
 
 				//memcpy(pVerts[index].Color, grass, 4);
 
-				if(hl>=snowLevel){
+				if(hl>=snowLevel)
 					memcpy(pVerts[index].Color, snow, 4);
-					}
 				else if(hl>=rockLevel)
 					memcpy(pVerts[index].Color, rock, 4);
 				else
@@ -352,6 +353,8 @@ TerrainFormer::
 			int iChan = pTex->SupportsAlpha() ? 4 : 3;
 			gluBuild2DMipmaps( GL_TEXTURE_2D, iChan, pTex->GetWidth(), pTex->GetHeight(),
 								GL_RGBA, GL_UNSIGNED_BYTE, pTex->GetPixelsPtr());
+
+         delete [] ha;
 			return pTerra;
 			}//TerrainFormer::FractalHeightTestMesh()
 

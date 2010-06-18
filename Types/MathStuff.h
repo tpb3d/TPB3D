@@ -8,10 +8,10 @@ a few simple mathematical routines; not the most efficient ones, but easy to und
 
 #define DOUBLE_MAX DBL_MAX
 
-#include <math.h>
-#include <float.h>
-#include <stdlib.h>
-#include <time.h>
+#include <cmath>
+#include <cfloat>
+#include <cstdlib>
+#include <ctime>
 
 // no cpp source for this
 
