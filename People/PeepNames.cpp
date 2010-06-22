@@ -9,14 +9,20 @@
 
 //  NameString method implementations
 
-char*
-NameString::
-	Text(){	return(&buffer[0]);	}
-NameString::
-	NameString(){	memset(&buffer[0],0,sizeof(buffer));	}
-NameString
-NameString::
-	operator=(char*s){	strncpy(&buffer[0],s,personNameMaxSize);	}
+char* NameString::Text()
+{
+   return(&buffer[0]);
+}
+
+NameString::NameString()
+{
+   memset(&buffer[0],0,sizeof(buffer));
+}
+
+void NameString::	operator =(char*s)
+{
+   strncpy(&buffer[0],s,personNameMaxSize);
+}
 
 // ! NameString method implementations
 

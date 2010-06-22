@@ -15,7 +15,7 @@ struct NameString{
 	char buffer[personNameMaxSize];
 	//NameString method declarations
 	NameString();
-	NameString operator=(char*s);
+	void operator=(char*s);
 	char*Text();
 	//NameString(char*s)	{	(*this)=s;	}
 	};

@@ -372,7 +372,7 @@ class LocationLineageString	{
 	WorldLocations*wloc;
 	char sep[locseparatorStringSize];
 	char bufr[loclineageStringBufferSize];
-	inline int Len(){	return(strlen(bufr));	}
+	inline int Len(){	return (int)strlen(bufr);	}
 	//unary suffix operator !: length of string
 	inline int operator!(){	this->Len();	}
 	inline int MaxCatLen(){	return(loclineageStringBufferSize-Len());	}

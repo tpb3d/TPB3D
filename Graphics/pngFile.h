@@ -5,7 +5,7 @@
 
 //#include "/usr/include/GL/glpng.h"
 #ifdef WIN32
-#include "glpng.h"
+#include "png.h"
 #else
 #include <GL/glpng.h>
 #endif

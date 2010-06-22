@@ -1140,6 +1140,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\People\PeepNames.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\People\PeepNames.h"
+				>
+			</File>
+			<File
 				RelativePath="..\People\Peeps.cpp"
 				>
 			</File>
@@ -1215,14 +1223,6 @@
 			</File>
 			<File
 				RelativePath="..\Builders\FlatRideBuilder.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Builders\FractalTerrain.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Builders\FractalTerrain.h"
 				>
 			</File>
 			<File
