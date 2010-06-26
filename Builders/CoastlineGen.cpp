@@ -43,46 +43,53 @@ float nzsign(float n){	return(n>=0?1:-1);	}
 
 bool operator == (Vector2f a,Vector2f b){		return(a.x==b.x&&a.y==b.y);		}
 
-Vector2f PointAvg(Vector2f point1,Vector2f point2){
+Vector2f PointAvg(Vector2f point1,Vector2f point2)
+{
    Vector2f pavg=point1%point2;
    return(pavg);
 }
 
-Vector2f
-World::
-GetRandPoint(){
+Vector2f World::GetRandPoint()
+{
    Vector2f point(SignedScaledRand(width),SignedScaledRand(height));
    return(point);
 }
-void
-IslandCoastline::
-RefineCoastPointNoX(int i){
+
+IslandCoastline::~IslandCoastline()
+{
+   delete [] points;
+}
+
+void IslandCoastline::RefineCoastPointNoX(int i)
+{
    int maxTries=10;
    bool xingCheck=false;int tries=0;
-   do{
+   do
+   {
       RefineCoastPoint(i);
       xingCheck=CheckForXing(i,i);
       ;
    }	while(xingCheck&&(++tries)<maxTries);
 }
-void
-IslandCoastline::
-RefineCoast(){
+void IslandCoastline::RefineCoast()
+{
    //Add more random points between the existing ones
    numPoints=2*numPoints-1;//double the points
    Vector2f*oldPoints=points;
    points=(Vector2f*)calloc(numPoints,sizeof(Vector2f));
-   for(int i=0;i<numPoints;i+=2){	//even points - copy point from last array
+   for(int i=0;i<numPoints;i+=2)
+   {	//even points - copy point from last array
       points[i]=oldPoints[i/2];
    }/*for i*/
-   for(int i=1;i<numPoints;i+=2){	//odd points - get random point
+   for(int i=1;i<numPoints;i+=2)
+   {	//odd points - get random point
       this->RefineCoastPointNoX(i);
    }/*for i*/
-   free(oldPoints);
+   delete [] oldPoints;
 }//RefineCoast
-void
-IslandCoastline::
-RefineCoastPoint(int i){
+
+void IslandCoastline::RefineCoastPoint(int i)
+{
    //bread and butter function - makes a new refinement of the coast
    float SmallestNum=0.00001f;
    float deltax=points[i+1].x-points[i-1].x;    if(abs(deltax)<SmallestNum)deltax=nzsign(deltax)*SmallestNum; //prevent division by zero
@@ -111,38 +118,43 @@ RefineCoastPoint(int i){
    //This function could alternatively be rewritten to simply find a random point in
    //the bounding box ((x1,y1),(y2,y2))
 }//RefineCoastPoint
-IslandCoastline::
-IslandCoastline(Vector2f point1,Vector2f point2,Vector2f point3,Vector2f point4,float dv){
-   //if(points)free(points);
-   Vector2f pa[]={point1,point2,point3,point4};
+
+IslandCoastline::IslandCoastline(Vector2f point1,Vector2f point2,Vector2f point3,Vector2f point4,float dv)
+{
+   Vector2f pa[]= {point1,point2,point3,point4};
    Init(5,pa,dv);
 }
+
 //3 point constructor
-IslandCoastline::
-IslandCoastline(Vector2f point1,Vector2f point2,Vector2f point3,float dv){
-   //if(points)free(points);
-   Vector2f pa[]={point1,point2,point3};
+IslandCoastline::IslandCoastline(Vector2f point1,Vector2f point2,Vector2f point3,float dv)
+{
+   Vector2f pa[]= {point1,point2,point3};
    Init(4,pa,dv);
 }
+
 //the following function should only be called by constructors.
-void
-IslandCoastline::
-Init(int np,Vector2f initpts[],float dv){
-   numPoints=np;	distVariation=dv;	points=NULL;
-   points=(Vector2f*)calloc(numPoints,sizeof(Vector2f));
+void IslandCoastline::Init(int np,Vector2f initpts[],float dv)
+{
+   numPoints = np;
+   distVariation = dv;
+   points = NULL;
+   points= new Vector2f[numPoints];
    for(int i=0;i<numPoints-1;i++)	{	points[i]=initpts[i];	}
+
    FullCircle();
 }
-void
-IslandCoastline::
-Init0(int np,float dv){
-   numPoints=np;	distVariation=dv;
-   points=(Vector2f*)realloc(points,numPoints*sizeof(Vector2f));
+
+void IslandCoastline::Init0(int np,float dv)
+{
+   numPoints = np;
+   distVariation = dv;
+   delete [] points;
+   points= new Vector2f [numPoints];
    for(int i=0;i<numPoints;i++)	{	points[i]=Vector2f(0.f,0.f);	}
 }
-bool
-IslandCoastline::
-ThereIsAnIntersection(Vector2f p1,Vector2f p2,Vector2f p3,Vector2f p4){
+
+bool IslandCoastline::ThereIsAnIntersection(Vector2f p1,Vector2f p2,Vector2f p3,Vector2f p4)
+{
    //if any two points are the same, return false
    if(		p1==p2||p1==p3||p1==p4||p2==p3||p2==p4||p3==p4		)	{
       return(false);
@@ -153,13 +165,17 @@ ThereIsAnIntersection(Vector2f p1,Vector2f p2,Vector2f p3,Vector2f p4){
    float numeB=(p2.x-p1.x)*(p1.y-p3.y)-(p1.x-p3.x)*(p2.y-p1.y);
    float denom=(p2.x-p1.x)*(p4.y-p3.y)-(p4.x-p3.x)*(p2.y-p1.y);
    //check for parallel and coincident lines
-   if(denom==0.0f){
+   if(denom==0.0f)
+   {
       if(numeA==0.0f&&numeB==0.0f)
          return(false); //COINCIDENT
       return(false);//PARALLEL;
    }//if denom
-   float ua=numeA/denom;		float ub=numeB/denom;
-   if(ua>=0.0f&&ua<=1.0f&&ub>=0.0f&&ub<=1.0f)	{
+
+   float ua=numeA/denom;
+   float ub=numeB/denom;
+   if(ua>=0.0f&&ua<=1.0f&&ub>=0.0f&&ub<=1.0f)
+   {
       // Get the intersection point.
       Vector2f intersection;
       intersection.x=p1.x+ua*(p2.x-p1.x);
@@ -173,39 +189,44 @@ ThereIsAnIntersection(Vector2f p1,Vector2f p2,Vector2f p3,Vector2f p4){
    }
    return(false);
 }//ThereIsAnIntersection
-bool
-IslandCoastline::
-CheckForXing(int i,int stopI){
+
+bool IslandCoastline::CheckForXing(int i,int stopI)
+{
    bool xingCheck=false;int j;
-   for(j=0;j<stopI&&!xingCheck;j++){
-      if(j<stopI){
+   for(j=0;j<stopI&&!xingCheck;j++)
+   {
+      if(j<stopI)
+      {
          if(i<numPoints-1)
             xingCheck=xingCheck||this->ThereIsAnIntersection(points[i],points[i+1],points[j],points[j+1]);
+
          xingCheck=xingCheck||this->ThereIsAnIntersection(points[i-1],points[i],points[j],points[j+1]);
       }
    }
    return xingCheck;
 }
 #define debugCoastGenAppendFlag 1
-void
-IslandCoastline::
-GenIsland(int NumStartPoints,int NumCoastRefinements,bool alreadyInitialized){
+void IslandCoastline::GenIsland(int NumStartPoints,int NumCoastRefinements,bool alreadyInitialized)
+{
    //initial points
    float dv=this->distVariation;
    int nLoops=NumCoastRefinements;
    refineRound=0;
-   if(!alreadyInitialized)		{
+   if(!alreadyInitialized)
+   {
       const float ws=10.0f;
       World world(ws,ws);
       numPoints=NumStartPoints;
-      for(int i=0;i<=numPoints;i++){
+      for(int i=0;i<=numPoints;i++)
+      {
          GenRandPointNoX(i,world);
       }/*for*/
    }
    //subsequent points
    float base=1.25f;
    CoastalGenPrintout(0,"dumpCoastalGen1.txt");
-   for(int j=1;j<=nLoops;j++){
+   for(int j=1;j<=nLoops;j++)
+   {
       //Add more random points between the existing ones
       distVariation=dv/pow(base,j);
       refineRound=j;
@@ -224,19 +245,24 @@ GenIsland(int NumStartPoints,int NumCoastRefinements,bool alreadyInitialized){
 #endif// debugCoastalGen
    distVariation=dv;
 }//GenIsland
+
 #if debugCoastalGen
 #if(debugCoastalGen==1)
-void
-IslandCoastline::
-CoastalGenPrintout(short i,char*file)	{
-   FILE*f;char mode[3];
-   if(this->refineRound!=0&&debugCoastGenAppendFlag)	{	strcpy(mode,"a");		}
+
+void IslandCoastline::CoastalGenPrintout(short i,char*file)
+{
+   FILE*f;
+   char mode[3];
+   if (this->refineRound!=0&&debugCoastGenAppendFlag)	strcpy(mode,"a");
    else strcpy(mode,"w+");
+
    f=fopen(file,mode);
-   if(!f)			return;
+   if(!f) return;
+
    fprintf(f,"Vector printout for island refinement %d\r\n",i);
    fprintf(f,"point#\tx\ty\t\r\n");
-   for(int i=0;i<numPoints;i++){
+   for(int i=0;i<numPoints;i++)
+   {
       fprintf(f,"%i:\t%0.3f\t%0.3f\t\r\n",i,points[i].x,points[i].y);
    }//for
    fclose(f);

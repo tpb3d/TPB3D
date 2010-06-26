@@ -16,7 +16,7 @@ class Material;
 
 struct QuadPoint
 {
-   short Index;
+   unsigned short Index;
    short Other;
    float mUV[2];
 };

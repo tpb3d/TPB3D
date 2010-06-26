@@ -3,22 +3,23 @@
 #pragma once
 
 #include "../Types/MathStuff.h"
-//#include<stdio.h>
-#include<string.h>
-#include<stdlib.h>
-#include<time.h>
-#include<stdio.h>
+#include <string>
+#include <list>
+#include <cstdlib>
+//#include <time.h>
+//#include <stdio.h>
 
 #define personNameMaxSize 10
 
-struct NameString{
+struct NameString
+{
 	char buffer[personNameMaxSize];
 	//NameString method declarations
 	NameString();
 	void operator=(char*s);
 	char*Text();
 	//NameString(char*s)	{	(*this)=s;	}
-	};
+};
 
 //feature (proto)types for human peeps.  Maybe eventually custom types like alien or fantasy races may be added, but these are the default ones
 	//	how these convert to actual peep appearance will be defined later
@@ -46,7 +47,8 @@ typedef	enum	{
 	//		should also be taken into account when determining appearance.  This can be ignored if it takes
 	//		too many resources or comp. time - it's mostly for a realism.  Appearances and names can be randomly assigned
 	//		without regards to one another.
-struct Name2PeepAppearanceStruct{
+struct Name2PeepAppearanceStruct
+{
 	unsigned char weight:4,	appearancetype:3,	usedflag:1;
 	void Init(unsigned char sweight,unsigned char sappearancetype, bool sused)	{
 		weight=sweight;	appearancetype=sappearancetype; usedflag=sused?1:0;
@@ -60,7 +62,7 @@ struct Name2PeepAppearanceStruct{
 	bool IsUsed(){	return(usedflag==1);	}
 	//unary operator *: Answers "Is this structure being used?"
 	bool operator*(){	this->IsUsed();	}
-	};
+};
 
 typedef Name2PeepAppearanceStruct Name2Features;
 
@@ -69,7 +71,8 @@ typedef Name2PeepAppearanceStruct Name2Features;
 #define nname2appearTypes	4
 #define nameEntryFillSize	(nameEntryTargetSize-nname2appearTypes-2-personNameMaxSize)
 
-struct NameEntry{
+struct NameEntry
+{
 	NameString name;//("");
 	short weight;
 	Name2PeepAppearanceStruct appearances[nname2appearTypes];
@@ -78,6 +81,11 @@ struct NameEntry{
 	#endif
 	//NameEntry method declarations
 	void Init(char*n,long w);
+   NameEntry()
+   {
+      name = "";
+      weight = 0;
+   }
 	NameEntry(char*n,long w);
 	void Init(char*n,long w,Name2Features a1,Name2Features a2,Name2Features a3,Name2Features a4);
 	NameEntry(char*n,long w,Name2Features a,Name2Features b,Name2Features c,Name2Features d);
@@ -85,16 +93,23 @@ struct NameEntry{
 	NameEntry(char*n,long w,Name2Features a,Name2Features b);
 	NameEntry(char*n,long w,Name2Features a);
 	NameEntry(char*n,long w,Name2Features a[]);
-	};
+public:
+   static int Compare (NameEntry* a, NameEntry* b)
+   {
+      return (a->weight < b->weight);
+   }
+};
 
 //class RandomNameMaker;  //defined later
 
 #define listnameMaxSize 32
 
-class NameGenerator{
+class NameGenerator
+{
 	public:
-	NameEntry*list;
-	union{	short numEntries;	short nentries;	};
+	//NameEntry*list;
+      std::list<NameEntry*> mList;
+	//union{	short numEntries;	short nentries;	};
 	char listname[listnameMaxSize];
 	short location;
 	//RandomNameMaker randGen;
@@ -107,11 +122,11 @@ class NameGenerator{
 	void ReadListFromFile(char*file)	;
 	NameGenerator(char*file,short slocation)	;
 	void Init(char*file,short slocation)	;
-	void ResizeList(short snentries);
-	void GrowList();
-	void GrowList(short nnewentries);
+	//void ResizeList(short snentries);
+	//void GrowList();
+	//void GrowList(short nnewentries);
 	void Add2List(char*name,long weight)	;
-	void Add2List(NameEntry n);
+	void Add2List(NameEntry* n);
 	void CleanList()	;
 	long GetTotNameWeight()	;
 	long InRange(long n,long l,long h)  ;

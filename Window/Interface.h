@@ -24,6 +24,8 @@
 
 class ToolBar;
 class EventHandler;
+class WindowDelegate;
+class SpecialDelegate;
 
 class Interface : public EventBase
 {
@@ -39,6 +41,9 @@ protected:
    Stats mStats;
    EventHandler& mEVH; // tap the event handler for the app
    ToolBar* mpToolBar;
+   WindowDelegate* mpWindowDelegate;
+   ViewObject*    mpWindow;
+   SpecialDelegate* mpSpecialDelegate;
    float m_fHeight;
 
 public:
@@ -60,9 +65,13 @@ public:
 
    Stats& GetStats() { return mStats; }
 
+   void CloseChildWindow();
+
    virtual bool OnMouseDown (sf::Mouse::Button Button, Vector2i point, Vector2i pointb);
    virtual bool OnMouseUp (sf::Mouse::Button Button, Vector2i pointa, Vector2i pointb);
    virtual bool OnMouseMove ( Vector2i pointa, Vector2i pointb);
+   virtual bool OnKeyDown (sf::Key::Code Key);
+   virtual bool OnKeyUp (sf::Key::Code Key);
 
    void LoadToolbar ();
    void Update (float dt);

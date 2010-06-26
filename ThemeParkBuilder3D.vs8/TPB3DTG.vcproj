@@ -254,6 +254,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Window\TextViewObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\TextViewObject.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Window\ToolBar.cpp"
 				>
 			</File>
@@ -1374,6 +1382,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Delegates\KeyNavDelegate.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\KeyNavDelegate.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Delegates\PlaceItemDelegate.cpp"
 				>
 			</File>
@@ -1391,6 +1407,14 @@
 			</File>
 			<File
 				RelativePath="..\Delegates\ToolBarDelegate.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\WindowDelegate.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\WindowDelegate.h"
 				>
 			</File>
 		</Filter>

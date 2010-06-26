@@ -25,8 +25,10 @@
 #include "../Graphics/Animation.h"
 #include "../Graphics/Camera.h"
 #include "../Hub/Event.h"
+#include "../Delegates/KeyNavDelegate.h" // if a window is open, this delegate is in use
 #include "ToolButton.h"
 #include "ToolBar.h"
+#include "TextViewObject.h"
 #include "Interface.h"
 
 using namespace Gfx;
@@ -35,6 +37,9 @@ Interface::Interface (EventHandler& revh)
 :  mEVH(revh)
 {
    mpToolBar = new ToolBar(6, HR_MainMenu);
+   mpWindowDelegate = NULL;
+   mpWindow = NULL;
+   mpSpecialDelegate = NULL;
    LoadToolbar();
    mLanguageCode = 0;
    mSoundFxOn = false;
@@ -200,3 +205,53 @@ bool Interface::OnMouseMove ( Vector2i pointa, Vector2i pointb)
    return true;
 }
 
+bool Interface::OnKeyDown (sf::Key::Code Key)
+{
+   if (mpWindowDelegate != NULL)
+   {
+      mpWindowDelegate->Dispatch (Key);
+      return true;
+   }
+   return false;
+}
+
+class SpecialDelegate : public WindowDelegate
+{
+   Interface& mpParent;
+public:
+   SpecialDelegate(Interface& par)
+      : WindowDelegate ("None", NULL)
+      , mpParent (par)
+   {
+   }
+   void OnHitDown (short ID) { mpParent.CloseChildWindow(); }
+   void OnHitUp (short ID) {}
+   void Dispatch (int e) {};
+};
+
+void Interface::CloseChildWindow()
+{
+   delete mpWindow;
+   mpWindow = NULL;
+}
+
+bool Interface::OnKeyUp (sf::Key::Code Key)
+{
+   if (mpWindowDelegate != NULL)
+   {
+      mpWindowDelegate->OnHitUp (Key);
+   }
+   else
+   {
+      if (Key == sf::Key::Code::F1)
+      {
+         if (mpSpecialDelegate == NULL)
+         {
+            mpSpecialDelegate = new SpecialDelegate(*this);
+            mpWindowDelegate = new KeyNavDelegate(*mpSpecialDelegate, "", NULL);
+         }
+         mpWindow = new TextViewObject (120, 200, 1293, *mpWindowDelegate);
+      }
+   }
+   return false;
+}
