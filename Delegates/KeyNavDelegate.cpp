@@ -1,7 +1,6 @@
 #include "KeyNavDelegate.h"
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include <CEGUI.h>
 
 
 KeyNavDelegate::KeyNavDelegate(WindowDelegate& rMain, const char* pszName, Scene* pScene)

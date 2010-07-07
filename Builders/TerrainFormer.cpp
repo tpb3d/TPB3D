@@ -23,15 +23,11 @@
 
 //#undef doCoastline
 #define checkOutIsPointOnIsland 2
-// these will not build in windows
-#ifndef WIN32
 #if doCoastline
 #include "../Builders/coastlineGen.h"
 #endif
 #if doFractal
 #include "../Builders/FractalTerrain.h"
-#endif
-// our own terrain gen until Doc brings his one!
 #endif
 
 TerrainFormer::TerrainFormer(void)

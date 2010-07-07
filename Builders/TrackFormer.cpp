@@ -409,3 +409,168 @@ ObjectBase* TrackFormer::Support( Vector3f ptMount, TrackGuide& guide, float fMo
 //   pSupp->AddMesh( pMeshB );
    return pSupp;
 }
+
+ObjectBase* TrackFormer::WoodSupports( Vector3f ptMount, TrackGuide& guide, float MountAngle, float Load, float fBaseHeight )
+{
+   int id = 500;  // local mesh numbering
+   double dSuppRadius = 0.5;
+   float fYOffset = 0.8f;
+   Vector3f ptH(0, ptMount.y, 0);
+   Vector3f ptSupport(ptMount);
+   MeshNode* pSupp = ObjectFactory::CreateMeshNode(4);
+   WoodPost (pSupp, ptH.x, fBaseHeight, ptH.z, 6, ptMount.y);
+   return pSupp;
+}
+
+void TrackFormer::WoodPost(MeshNode* pSupp, float x, float y, float z, float w, float h)
+{
+   TexturedMesh *pMeshA = new TexturedMesh( 2, 5, mpTexture, 0xff5e5c5f, 600 );
+   pSupp->AddMesh( pMeshA );
+
+   Vector3f pt( x-w/2, y, z-w/2);
+   Vector3f ptU( x-w/2, y+h+2, z-w/2);
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.x += w;
+   ptU.x += w;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.z += w;
+   ptU.z += w;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.x -= w;
+   ptU.x -= w;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.z -= w;
+   ptU.z -= w;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+}
+
+void TrackFormer::WoodBeam(MeshNode* pSupp, float x, float y, float z, float w, float l, float d)
+{
+   TexturedMesh *pMeshA = new TexturedMesh( 2, 5, mpTexture, 0xff5e5c5f, 600 );
+   pSupp->AddMesh( pMeshA );
+
+   Vector3f pt( x-l/2, y, z-d/2);
+   Vector3f ptU( x-l/2, y+w/2, z-d/2);
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.x += l;
+   ptU.x += l;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.z += d;
+   ptU.z += d;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.x -= l;
+   ptU.x -= l;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.z -= d;
+   ptU.z -= d;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+}
+
+void TrackFormer::WoodBrace(MeshNode* pSupp, float x, float y, float z, float w, float l, float d, float h)
+{
+   TexturedMesh *pMeshA = new TexturedMesh( 2, 5, mpTexture, 0xff5e5c5f, 600 );
+   pSupp->AddMesh( pMeshA );
+
+   Vector3f pt( x-l/2, y, z-d/2);
+   Vector3f ptU( x+l/2-w, y+h, z-d/2);
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.x += w;
+   ptU.x += w;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.z += d;
+   ptU.z += d;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.x -= w;
+   ptU.x -= w;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+   pt.z -= d;
+   ptU.z -= d;
+   pMeshA->AddPoint (pt);
+   pMeshA->AddPoint (ptU);
+}
+
+void TrackFormer::WoodBent(MeshNode* pSupp, float x, float y, float z, float w, float l, float d, float angle)
+{
+   TexturedMesh *pMeshA = new TexturedMesh( 2, 5, mpTexture, 0xff5e5c5f, 600 );
+   pSupp->AddMesh( pMeshA );
+
+   Vector3f ptA;
+   Vector3f ptB;
+   Vector3f::VectorAngle3<float> trg (0, 0, angle);
+   float fx = l/2;
+   float fxC = x + fx;
+
+   ptA.Set (-fx,0,z);
+   ptA.Rotate (trg);
+   ptA.x += fxC;
+   ptA.y += y;
+   pMeshA->AddPoint (ptA);
+
+   ptB.Set (-fx, w, z);
+   ptB.Rotate (trg);
+   ptB.x += fxC;
+   ptB.y += y;
+   pMeshA->AddPoint (ptB);
+
+   ptA.Set (fx, 0, z);
+   ptA.Rotate (trg);
+   ptA.x += fxC;
+   ptA.y += y;
+   pMeshA->AddPoint (ptA);
+
+   ptB.Set (fx, w, z);
+   ptB.Rotate (trg);
+   ptB.x += fxC;
+   ptB.y += y;
+   pMeshA->AddPoint (ptB);
+
+   ptA.Set (fx, 0, z+d);
+   ptA.Rotate (trg);
+   ptA.x += fxC;
+   ptA.y += y;
+   pMeshA->AddPoint (ptA);
+
+   ptB.Set (fx, w, z+d);
+   ptB.Rotate (trg);
+   ptB.x += fxC;
+   ptB.y += y;
+   pMeshA->AddPoint (ptB);
+
+   ptA.Set (-fx, 0, z+d);
+   ptA.Rotate (trg);
+   ptA.x += fxC;
+   ptA.y += y;
+   pMeshA->AddPoint (ptA);
+
+   ptB.Set (-fx, w, z+d);
+   ptB.Rotate (trg);
+   ptB.x += fxC;
+   ptB.y += y;
+   pMeshA->AddPoint (ptB);
+
+   ptA.Set (-fx, 0,z);
+   ptA.Rotate (trg);
+   ptA.x += fxC;
+   ptA.y += y;
+   pMeshA->AddPoint (ptA);
+
+   ptB.Set (-fx, w, z);
+   ptB.Rotate (trg);
+   ptB.x += fxC;
+   ptB.y += y;
+   pMeshA->AddPoint (ptB);
+}

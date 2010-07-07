@@ -15,6 +15,7 @@
  */
 
 #include <iostream>
+#include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include <string.h>
 #include <map>
@@ -142,7 +143,7 @@ void Interface::Update (float dt)
 
 void Interface::Draw ()
 {
-   
+
    mpToolBar->Draw ();
    mClock.Draw ();
    mStats.Draw ();
@@ -243,7 +244,7 @@ bool Interface::OnKeyUp (sf::Key::Code Key)
    }
    else
    {
-      if (Key == sf::Key::Code::F1)
+      if (Key == VK_F1) //sf::Key::Code::F1)
       {
          if (mpSpecialDelegate == NULL)
          {
@@ -255,3 +256,32 @@ bool Interface::OnKeyUp (sf::Key::Code Key)
    }
    return false;
 }
+
+bool Interface::OnToolHit (const HR_Events tool)
+{
+   switch (tool)
+   {
+   case HR_Settings:
+      return OnSettings();
+   case HR_Tools:
+      return OnTools();
+   }
+   return false;
+}
+
+bool Interface::OnTools ()
+{
+//   ToolsWin.Create (this->mpRootWind);
+   return true;
+}
+
+bool Interface::OnSettings ()
+{
+//   if (setwin == NULL)
+//   {
+//      setwin = new SettingsWindow (mInterface);
+//   }
+//   setwin->Create (this->mpRootWind);
+   return false; //true;
+}
+

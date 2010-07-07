@@ -73,6 +73,10 @@ public:
    virtual bool OnKeyDown (sf::Key::Code Key);
    virtual bool OnKeyUp (sf::Key::Code Key);
 
+   virtual bool OnToolHit (const HR_Events tool);
+   virtual bool OnTools ();
+   virtual bool OnSettings ();
+
    void LoadToolbar ();
    void Update (float dt);
    void Draw ();

@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;\Dev\VC++\SFML-1.5\include&quot;;&quot;\Dev\VC++\CEGUI-SDK-0.6.2-vc8\include&quot;;&quot;\Dev\VC++\CEGUI-SDK-0.6.2-vc8&quot;;&quot;\Dev\VC++\wxWidgets-2.8.10\include&quot;;&quot;\Dev\VC++\zlib123\include&quot;;&quot;\Dev\VC++\lib3ds-20080909\src&quot;;&quot;\Dev\VC++\lpng1240&quot;;&quot;\Dev\VC++\ZLib&quot;"
+				AdditionalIncludeDirectories="&quot;\Dev\VC++\SFML-1.5\include&quot;;&quot;\Dev\VC++\zlib123\include&quot;;&quot;\Dev\VC++\lib3ds-20080909\src&quot;;&quot;\Dev\VC++\lpng1240&quot;;&quot;\Dev\VC++\ZLib&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;PNG_NO_ERROR_NUMBERS;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -62,7 +62,7 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sfml-Graphics-d.lib sfml-System-d.lib sfml-Window-d.lib OPENGL32.LIB glu32.lib CEGUIBase_d.lib OpenGLGUIRenderer_d.lib CEGUITinyXMLParser_Static.lib libpng.lib lib3ds-2_0.lib zdll.lib"
+				AdditionalDependencies="sfml-Graphics-d.lib sfml-System-d.lib sfml-Window-d.lib OPENGL32.LIB glu32.lib libpng.lib lib3ds-2_0.lib zdll.lib"
 				LinkIncremental="2"
 				AdditionalLibraryDirectories="&quot;\Dev\VC++\SFML-1.5\lib\vc2005&quot;;&quot;C:\Program Files (x86)\Microsoft Visual Studio 8\VC\lib&quot;;&quot;\Dev\VC++\CEGUI-SDK-0.6.2-vc8\lib&quot;;&quot;\Dev\VC++\lpng1240\projects\visualc71\Win32_LIB_Release&quot;;&quot;\Dev\VC++\lib3ds-20080909\release&quot;;&quot;\Dev\VC++\zlib123\lib&quot;"
 				GenerateDebugInformation="true"
@@ -198,19 +198,27 @@
 			Name="Window"
 			>
 			<File
+				RelativePath="..\Window\ButtonViewObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\ButtonViewObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\CheckViewObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\CheckViewObject.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Window\Clock.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\Window\Clock.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Window\FRCSWindow.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Window\FRCSWindow.h"
 				>
 			</File>
 			<File
@@ -235,14 +243,6 @@
 			</File>
 			<File
 				RelativePath="..\Window\Interface.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Window\SettingsWindow.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Window\SettingsWindow.h"
 				>
 			</File>
 			<File
@@ -275,14 +275,6 @@
 			</File>
 			<File
 				RelativePath="..\Window\ToolButton.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Window\ToolsWindow.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Window\ToolsWindow.h"
 				>
 			</File>
 		</Filter>
@@ -527,6 +519,14 @@
 		<Filter
 			Name="Types"
 			>
+			<File
+				RelativePath="..\Storage\ACPng.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Storage\ACPng.h"
+				>
+			</File>
 			<File
 				RelativePath="..\Types\MathStuff.cpp"
 				>
@@ -1234,6 +1234,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Builders\FractalTerrain.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Builders\FractalTerrain.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Builders\PartGuide.cpp"
 				>
 			</File>
@@ -1460,6 +1468,14 @@
 		</File>
 		<File
 			RelativePath="..\TPB3DTG.h"
+			>
+		</File>
+		<File
+			RelativePath=".\UserInput.cpp"
+			>
+		</File>
+		<File
+			RelativePath=".\UserInput.h"
 			>
 		</File>
 	</Files>

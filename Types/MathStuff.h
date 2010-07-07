@@ -137,7 +137,7 @@ T WAvg(T*d,T*w,int nentries)	{
 	else			return(sumprod/wsum);
 	}
 template<class T>
-T RoundPlaces(T a,short places){	return(round(a*pow(10,places))/pow(10,places));		}
+T RoundPlaces(T a,float places){	return(round(pow(10,places)*a)/pow(10,places));		}
 
 template<class T>
 

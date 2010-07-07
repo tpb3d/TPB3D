@@ -2,8 +2,9 @@
 
 //Builders/FractalTerrain.h
 #include "../Types/MathStuff.h" 
-#include <png.h>
 #include <iostream>
+#include <png.h>
+#include "../Storage/ACPng.h"
 
 class FractalTerrainMap
 {
@@ -39,29 +40,32 @@ class FractalTerrainMap
       lo=base;
 		lnhi=ln(hi);
       lnlo=-lnhi;
-		PngImage png;
-		bool pngLoaded=(*pngfile)?png.Load(pngfile):false;
+		//PngImage png;
+      ACPng png;
+      pngRawInfo Info;
+      png.pngLoadRaw (pngfile, &Info);
+		bool pngLoaded = Info.IsValid();
 		if(pngLoaded)
       {
-         w=png.pd.Width;
-         d=png.pd.Height;
+         w = Info.Width;
+         d = Info.Height;
       }
 		else
       {
-         w=swidth;
-         d=sdepth;
+         w = swidth;
+         d = sdepth;
       }
 		spikiness=sspikiness;
       varspike=svarspike;
 		heights= new float[w*d];
 
 		if(pngLoaded)
-         GetStartHeightsFromPng(png);
+         GetStartHeightsFromPng(Info);
 		else
          GetStartHeights(base);
 	} //FractalTerrain() constructor
 
-	void GetStartHeightsFromPng(PngImage&png)
+	void GetStartHeightsFromPng(pngRawInfo& png)
    {
 		for(int y=0;y<d;y++)
       {
@@ -231,8 +235,15 @@ class FractalTerrainMap
 	//						established heights
 	void GenFractalHeight(long x,long y,FractalTerrainMap::direction dir)
    {
-		short ny=y-1,sy=y+1,ex=x+1,wx=x-1;
-		float nh,ah[2],htbase,s[2],span;
+		short ny=y-1;
+      short sy=y+1;
+      short ex=x+1;
+      short wx=x-1;
+		float nh;
+      float ah[2];
+      float htbase;
+      float s[2];
+      float span;
 		float h[4];
 		switch(dir)
       {

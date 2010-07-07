@@ -16,6 +16,7 @@ struct TrackGuide;
 class Track;
 class TexturedStrip;
 class Park;
+class MeshNode;
 struct TrackGuide;
 
 class TrackFormer
@@ -30,4 +31,10 @@ public:
    void MakeSection( TrackGuide& guide, Track& track );
    TexturedStrip* CrossTie( Vector3f& TrackPoint, TrackGuide& guide );
    ObjectBase* Support( Vector3f pt, TrackGuide& guide, float MountAngle, float Load, float fBaseHeight );
+   ObjectBase* WoodSupports( Vector3f pt, TrackGuide& guide, float MountAngle, float Load, float fBaseHeight );
+
+   void WoodPost(MeshNode* pSupp, float x, float y, float z, float w, float height);
+   void WoodBeam(MeshNode* pSupp, float x, float y, float z, float w, float l, float d);
+   void WoodBrace(MeshNode* pSupp, float x, float y, float z, float w, float l, float d, float h);
+   void WoodBent(MeshNode* pSupp, float x, float y, float z, float w, float l, float d, float angle);
 };

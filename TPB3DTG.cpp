@@ -100,7 +100,6 @@ main ()
          cam->Integrate (60);
          cam->DrawModel(&theScene); // the background and Park(s).
          cam->DrawInterface( pInterface );
-         Gui.Draw ();
          cam->Display ();
          // end drawing scope
 
