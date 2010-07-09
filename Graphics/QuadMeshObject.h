@@ -45,7 +45,7 @@ class QuadMeshObject : public ObjectBase
    QuadVertex* mpVertices;
    QuadFace* mpFaces;
    QuadFace* mpDetailFaces;
-   
+
    char*  mpName;
    float  mMatrix[4][4];        /**< Transformation matrix for mesh data */
    float mAngle;
@@ -74,5 +74,5 @@ public:
    void AddMesh( int mVertices,  QuadVertex* pVerts, int mFaces, QuadFace* pTrigSource );
    void AddMesh( int mVertices,  QuadVertex* pVerts, int mFaces, QuadFace* pTrigSource, int tag );
    void CalcNormans();
-   
+
 };

@@ -40,7 +40,7 @@ class Scene
 {
    friend class ParkAgent;
    friend class GameManager;
- 
+
 public:
    typedef std::vector<Park*>::iterator TypeParkIterator;
    typedef std::vector<Park*> TypeParkVector;

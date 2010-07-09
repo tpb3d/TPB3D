@@ -13,8 +13,10 @@ PngImageDot::
 		return luma;
 		}
 
+/*
 PngImage::
 	~PngImage(){	if(pd.Data)free(pd.Data);	if(pd.Palette)free(pd.Palette);		}
+*/
 PngImageDot&
 PngImage::
 	dot(int x,int y){

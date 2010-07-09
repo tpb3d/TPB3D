@@ -244,7 +244,7 @@ bool Interface::OnKeyUp (sf::Key::Code Key)
    }
    else
    {
-      if (Key == VK_F1) //sf::Key::Code::F1)
+      if (Key == sf::Key::F1) //sf::Key::Code::F1)
       {
          if (mpSpecialDelegate == NULL)
          {

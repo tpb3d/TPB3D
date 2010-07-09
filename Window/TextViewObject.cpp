@@ -8,6 +8,8 @@
 #include "../Delegates/WindowDelegate.h"
 #include "TextViewObject.h"
 
+#include "../Types/Virtkeys.h"
+
 using namespace Gfx;
 
 namespace Gfx
@@ -98,9 +100,13 @@ void TextViewObject::Hit (int code)
    case VK_CLEAR:
       set_Text ("");
       break;
-   case VK_SHIFT:
-   case VK_CONTROL:
+   case VK_LSHIFT:
+   case VK_RSHIFT:
+   case VK_LCONTROL:
+   case VK_RCONTROL:
+   #ifdef VK_MENU
    case VK_MENU:
+	#endif
       break;
    default:
       AppendText(code);

@@ -1,7 +1,7 @@
 #include "KeyNavDelegate.h"
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-
+#include "../Types/Virtkeys.h"
 
 KeyNavDelegate::KeyNavDelegate(WindowDelegate& rMain, const char* pszName, Scene* pScene)
    :  WindowDelegate (pszName, pScene)
@@ -17,7 +17,7 @@ KeyNavDelegate::~KeyNavDelegate(void)
 void KeyNavDelegate::Dispatch (int nChar)
 {
 	switch ( nChar ) {
-   case sf::Key::Code::Escape:
+   case sf::Key::Escape:
 //      mrMain.PostMessage ( WM_CLOSE );
 		break;
    case 'M':

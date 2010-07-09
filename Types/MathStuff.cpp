@@ -131,8 +131,14 @@ short ShortRand(void){
 
 short RandSign(void)	{	return((ShortRand()%2==0)?1:-1);	}
 
+float frandRange(float lo,float hi){
+	float randbase=(float)Abs(rand()%0x7fffffffl)/0x7fffffffl;	// should be between 0 and 1
+	float span=hi-lo;
+	float frr=lo+randbase*span;
+	return frr;
+	}
 float frand(){
-	float fr=(float)(ShortRand())/0x8000l;
+	float fr=frandRange(0,1);
 	//std::cout<<fr<<"\r\n";
 	return(fr);
 	}

@@ -90,12 +90,15 @@ template<class InRangeType>
 	bool InRange(InRangeType a,InRangeType l,InRangeType h){	return(l>h?InRange(a,h,l):a>=l&&a<=h);	}
 
 float frand();
+float frandRange(float lo,float hi);
 float frandCenter(float c,float distFrom);
 float SignedFloatRand();
 float ScaledRand(float scale);
 float SignedScaledRand(float span);
 float nzsign(float n);
 
+template<class T>
+T Max(T a,T b,T c){		return Max(Max(a,b),c);	}
 template<class T>
 T Max(T a,T b){		return(a>b?a:b);	}
 template<class T>
@@ -106,6 +109,8 @@ T Max(T a[]){
 	}
 template<class T>
 T Min(T a,T b){		return(a<b?a:b);	}
+template<class T>
+T Min(T a,T b,T c){		return Min(Min(a,b),c);	}
 template<class T>
 T Min(T a[]){
 	T minv=a[0]; int nentries=sizeof(a)/sizeof(a[0]);

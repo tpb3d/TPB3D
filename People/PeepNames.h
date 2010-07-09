@@ -3,6 +3,7 @@
 #pragma once
 
 #include "../Types/MathStuff.h"
+#undef max
 #include <string>
 #include <list>
 #include <cstdlib>

@@ -34,6 +34,16 @@ void SkyBowl::Init( double dWorldSize )
    double dMiddleRad = 500;
    double dOuterRad = 510;
    double dTop = 300;
+   #define bigbowl 1
+   #if bigbowl
+   {
+   double scale=1.5;
+   dInnerRad*=scale;
+   dMiddleRad*=scale;
+   dOuterRad*=scale;
+   dTop*=scale;
+	}
+   #endif
 
    double lastTheta = PI * 2;
    double bumpTheta = lastTheta/(kBowlFacets-1);
