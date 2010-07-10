@@ -525,11 +525,13 @@ TerrainFormer::
 
 Terrain* TerrainFormer::DefaultMesh()
 {
-	#if doCoastline
-		return IslandTestMesh();
-	#elif doFractal
-		return this->FractalHeightTestMesh();
-	#endif
+#if doCoastline
+	return IslandTestMesh();
+#elif doFractal
+	return this->FractalHeightTestMesh();
+#else
+   return doOld();
+#endif
 }
 Terrain* TerrainFormer::DocsMesh()
 {
@@ -910,14 +912,10 @@ Terrain* TerrainFormer::FractalHeightTestMesh()
 }//TerrainFormer::FractalHeightTestMesh()
 
 #endif //0
+#endif
 
-Terrain* TerrainFormer::DefaultMesh()
+Terrain* TerrainFormer::doOld()
 {
-#if doCoastline
-   return IslandTestMesh();
-#elif doFractal
-   return this->FractalHeightTestMesh();
-#else
    // Terrain - entity
    Terrain* pTerra = new Terrain();
    // The graphics mesh for OpenGL
@@ -1013,13 +1011,4 @@ Terrain* TerrainFormer::DefaultMesh()
    gluBuild2DMipmaps( GL_TEXTURE_2D, iChan, pTex->GetWidth(), pTex->GetHeight(),
                         GL_RGBA, GL_UNSIGNED_BYTE, pTex->GetPixelsPtr());
    return pTerra;
-#endif
 }
-
-Terrain* TerrainFormer::DocsMesh()
-{
-   // Call the terraformer
-   return DefaultMesh();
-}
-}
-#endif

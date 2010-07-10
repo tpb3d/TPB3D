@@ -5,20 +5,23 @@
 class WindowDelegate;
 class SerializerBase;
 
-class ButtonViewObject : public ViewObject
+class WindowViewObject : public ViewObject
 {
-   enum ButtonState
+   enum WindowState
    {
-      BS_Normal = 0, // up and not highlighted
-      BS_Selected,       // lit and down
-      BS_Highlighted // just lit
+      WS_Normal = 0, // up and not highlighted
+      WS_Selected,       // lit and active
+      WS_Highlighted // just lit
    };
    std::string mStrContent;
+   std::vector<ViewObject*> mChildren;
+   Vector3f mOriginPoint;  // Window anchor point in the world scene
+   Vector3f mSize;         // Size vector of the client rectangle.
    int m_ID;
    AnimationSingle* mpFace;
    AnimationSingle* mpTextTex;
    SimpleQuad     m_Geometry;
-   ButtonState    mButtonState;
+   WindowState    mWindowState;
 
    char mEnabled; // Enabled, Disabled
    char mVisible; // Visible, Invisible
@@ -28,20 +31,26 @@ class ButtonViewObject : public ViewObject
    WindowDelegate& mParentPipe;
    int    mPosition;
 public:
-   ButtonViewObject( float x, float y, int ID, WindowDelegate& rParent);
-   ~ButtonViewObject(void);
+   typedef std::vector<ViewObject*>::iterator ChildIterator;
+
+public:
+   WindowViewObject( float x, float y, int ID, WindowDelegate& rParent);
+   ~WindowViewObject(void);
 
 public:
    // properties
-   void set_State( ButtonState cs ) { mButtonState = cs; }
+   void set_State( WindowState cs ) { mWindowState = cs; }
 
    // methods
 public:
-   void Clear();   // return this button to normal
+   void Clear();   // return this Window to normal
    int TestHit (Vector2i point); // just render geometry for selection
 
    void set_EventHandler (WindowDelegate* pEvent) { mpEvent = pEvent; }
    void set_Text (const char* pszText);
+
+   void Resize (int iWidth, int iHeight);
+   void Move (int iX, int iY, int iZ);
       
    void Select (bool bState);
    void Hightlight (bool bState);
@@ -54,7 +63,7 @@ public:
    void AppendText (int c);
    void MoveCursor (int code);
 
-   void Update (ButtonState state);
+   void Update (WindowState state);
    void Draw ();
 
    // support for xml

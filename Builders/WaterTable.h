@@ -184,7 +184,7 @@ class WaterTable	{
 	//bool IsPointInMapBounds(short px,short py)	{	return(px>=0&&px<pw()&&py>=0&&py<pl());	}
 	private:
 	bool 	PushPointInMapBounds(short px,short py,WaterTableStack&stack)	;
-	bool FloodTileNeighborPusher(short tx,short ty,WaterTableStack&stack)	;
+   bool FloodTileNeighborPusher(short tx,short ty,WaterTableStack&stack)	{ return false; }
 	public:
 	bool FloodFill(WaterTablePoint seed)	{
 		WaterDrain();

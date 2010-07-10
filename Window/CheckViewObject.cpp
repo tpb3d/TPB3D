@@ -1,7 +1,6 @@
 #include <string>
 
 #include <SFML/System.hpp>
-#include <CEGUI.h>
 #include "../Graphics/Image.h"
 #include "../Graphics/Camera.h"
 #include "../Scene/Scene.h"

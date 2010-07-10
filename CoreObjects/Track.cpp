@@ -10,7 +10,7 @@
 
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "CamPath.h"
+#include "../Utility/CamPath.h"
 #include "Track.h"
 #include "TrackSection.h"
 #include "../Graphics/ObjectFactory.h"

@@ -30,16 +30,16 @@ void KeyNavDelegate::Dispatch (int nChar)
       break;
 
       // pass throughs for the arrow keys
-   case VK_DOWN:
+   case sf::Key::Down:
    case 'S':
       break;
-   case VK_UP:
+   case sf::Key::Up:
    case 'W':
       break;
-   case VK_RIGHT:
+   case sf::Key::Right:
    case 'D':
       break;
-   case VK_LEFT:
+   case sf::Key::Left:
    case 'A':
       break;
 	} // end switch

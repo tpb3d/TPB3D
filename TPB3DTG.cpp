@@ -85,12 +85,13 @@ main ()
 
       std::cout << "Starting event loop...\n";
       int cycle = 0;
+      sf::Window* pWindow = cam->GetWindow();
       while (mev.IsRunning())
       {
          // This should be here so we can create custom events later,
          // and also so we can create fake events for debugging.
          sf::Event Event;
-         while (cam->GetEvent(Event))
+         while (pWindow->GetEvent(Event))
          {
             Events.HandleEvents (Event);
          }

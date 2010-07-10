@@ -64,14 +64,10 @@ Camera::Camera ()
    mCam.y = mHeight.y;
    mIgnoreCamera = false;
    mpInput = &(mpWindow->GetInput ());
-   mPosition.x = 0.0;
-   mPosition.y = 0.0;
-   mPosition.z = 0.0;
-   mpWindow->ShowMouseCursor (false);
 
-   mTarget.x = 35.0;
-   mTarget.y = 90.0;
-   mTarget.z = 0.0;
+   mPosition.Set (0,0,0);
+   mMotionVector.Set (0,0,0); // camera motion start at still
+   mTarget.Set (35.0, 90.0, 0.0);
 
    mMousePos.x = 0;
    mMousePos.y = 0;
@@ -85,17 +81,17 @@ const sf::Input * Camera::GetInput ()
    return mpInput;
 }
 
-Vector2i Camera::GetMouse ()
-{
-   Vector2f ms2( mPosition.x, mPosition.y );
-   return ms2 + GetLocalMouse();
-}
+//Vector2i Camera::GetMouse ()
+//{
+//   Vector2f ms2( mPosition.x, mPosition.y );
+//   return ms2 + GetLocalMouse();
+//}
 
-Vector2i Camera::GetLocalMouse()
-{
-   return Vector2i (mpInput->GetMouseX (), mpInput->GetMouseY ());
-}
-
+// Private
+//Vector2i Camera::GetLocalMouse()
+//{
+//   return Vector2i (mpInput->GetMouseX (), mpInput->GetMouseY ());
+//}
 
 void Camera::SetMaxFramerate (int rate)
 {
@@ -131,98 +127,8 @@ void Camera::SetActive()
    glViewport(0, 0, (GLsizei)mCam.x, (GLsizei)mCam.y);//this->ms.x, ms.y); these were negative need to fixe this so the
    glMatrixMode(GL_MODELVIEW);
 
-   // This is probably the wrong place for these
-
-   // Move camera forward
-   if (keylist[sf::Key::W])
-   {
-      if(mZoomFactor < -5)
-      {
-         Move(0.0f, 0.0f, -0.01f * mZoomFactor);
-      }
-      else
-      {
-         Move(0.0f, 0.0f, 0.5f);
-      }
-   }
-
-   // Move camera backward
-   if (keylist[sf::Key::S])
-   {
-      if(mZoomFactor < -5)
-      {
-         Move(0.0f, 0.0f, 0.01f * mZoomFactor);
-      }
-      else
-      {
-         Move(0.0f, 0.0f, -0.5f);
-      }
-   }
-
-   // Move camera left
-   if (keylist[sf::Key::A])
-   {
-      if(mZoomFactor < -5)
-      {
-         Move (-0.01f * mZoomFactor, 0.0f, 0.0f);
-      }
-      else
-      {
-         Move (0.5f, 0.0f, 0.0f);
-      }
-   }
-
-   // Move camera right
-   if (keylist[sf::Key::D])
-   {
-      if(mZoomFactor < -5)
-      {
-         Move (0.01f * mZoomFactor, 0.0f, 0.0f);
-      }
-      else
-      {
-         Move (-0.5f, 0.0f, 0.0f);
-      }
-   }
-
-   // Change camera attitude
-   if (keylist[sf::Key::Q])
-   {
-      mTarget.x += 1.0f;
-   }
-   if (keylist[sf::Key::E])
-   {
-      mTarget.x -= 1.0f;
-   }
-
-   // Change camera angle
-   if (keylist[sf::Key::R])
-   {
-      mTarget.y += 2.0;
-   }
-   if (keylist[sf::Key::T])
-   {
-      mTarget.y -= 2.0;
-   }
-
-   // Rotate camera xy, with middle mouse button.
-   if(btnlist[sf::Mouse::Middle])
-   {
-      Vector2i mv2i;
-      mv2i.x = (GetLocalMouse().x) - (int)(mCam.x / 2);
-      mv2i.y = (GetLocalMouse().y) - (int)(mCam.y / 2);
-
-      mTarget.x += float(mv2i.y - mMousePos.y) / 4;
-      mTarget.y += float(mv2i.x - mMousePos.x) / 4;
-      mMousePos.x = mv2i.x;
-      mMousePos.y = mv2i.y;
-   } else {
-      Vector2i mv2i;
-      mv2i.x = (GetLocalMouse().x) - (int)(mCam.x / 2);
-      mv2i.y = (GetLocalMouse().y) - (int)(mCam.y / 2);
-      mMousePos.x = mv2i.x;
-      mMousePos.y = mv2i.y;
-   }
+   Move ();  // On ride this will be receiving queues from the source monitored.
+   // Mouse and Keyboard movement code moved to Refresh function
 
    // Set camera
    glTranslatef(0.0f, 0.0f, mZoomFactor); // Camera center, point of rotation
@@ -527,11 +433,11 @@ Vector3f Camera::GetOGLPos (Vector2f winVec) // NeHe Productions at GameDev
    return Vector3f((float)posX-GetPositionX(), (float)posY+GetPositionY(), (float)posZ); // +GetPositionX());
 }
 
-bool
-Camera::GetEvent (sf::Event & event)
-{
-   return mpWindow->GetEvent (event);
-}
+//bool
+//Camera::GetEvent (sf::Event & event)
+//{
+//   return mpWindow->GetEvent (event);
+//}
 
 
 Vector3f Camera::GetOGLPos2(float zFar, float zNear, Vector3f v)
@@ -606,6 +512,147 @@ void Camera::Move(float x, float y, float z)
    }
 }
 
+void Camera::Move() // overload with local motion vector.
+{
+   // covert this to vector math which will take about 5 lines of code.
+
+   const double RAD = 57.29577851; // Radians, I don't know if this is already declared somewhere?
+   double lx = 0;
+   double lz = 0;
+
+    // Move along camera angle on the X axis
+   if(mMotionVector.x < 0)
+   {
+      lz = +sin( -(mTarget.y / RAD) );
+      lx = -cos( -(mTarget.y / RAD) );
+
+      mPosition.x += (float)(lx * -mMotionVector.x);
+      mPosition.z += (float)(lz * -mMotionVector.x);
+   }
+
+   else if(mMotionVector.x > 0)
+   {
+      lz = +sin( -(mTarget.y / RAD) );
+      lx = -cos( -(mTarget.y / RAD) );
+
+      mPosition.x -= (float)(lx * mMotionVector.x);
+      mPosition.z -= (float)(lz * mMotionVector.x);
+   }
+
+   // Move along camera angle on the Z axis
+   if(mMotionVector.z < 0)
+   {
+      lx = +sin( -(mTarget.y / RAD) );
+      lz = -cos( -(mTarget.y / RAD));
+
+      mPosition.x -= (float)(lx * -mMotionVector.z);
+      mPosition.z += (float)(lz * -mMotionVector.z);
+   }
+
+   else if(mMotionVector.z > 0)
+   {
+      lx = +sin( -(mTarget.y / RAD) );
+      lz = -cos( -(mTarget.y / RAD) );
+
+      mPosition.x += (float)(lx * mMotionVector.z);
+      mPosition.z -= (float)(lz * mMotionVector.z);
+   }
+}
+
+void Camera::Zoom(float Factor)
+{
+   //Rectf ZoomedRect;
+   // Calcuate the center
+   if(( Factor < 0 && mZoomFactor > -600 )||( Factor > 0 && mZoomFactor < 0 ))
+   {
+      mZoomFactor += Factor;
+   }
+   //std::cout << "ZF=" << mZoomFactor << "\n";
+}
+
+
+// The following functons don't belong in this camera object.
+// They need to me part of a GUI object that controls the camera.
+// The reason they ended up hear is that camera hosts mpWindow which is view and in-stream of UI.
+// Exceptions, Refresh needs to be refactored to handle vectors fed to the camera.
+
+void Camera::RefreshMotion()
+{
+   float x = 0;
+   float y = 0;
+   float z = 0;
+   if (keylist[sf::Key::W])
+   {
+      if(mZoomFactor < -5)
+      {
+         z = -0.01f * mZoomFactor;
+      }
+      else
+      {
+         z = 0.5f;
+      }
+   }
+
+   // Move camera backward
+   if (keylist[sf::Key::S])
+   {
+      if(mZoomFactor < -5)
+      {
+         z = 0.01f * mZoomFactor;
+      }
+      else
+      {
+         z = -0.5f;
+      }
+   }
+
+   // Move camera left
+   if (keylist[sf::Key::A])
+   {
+      if(mZoomFactor < -5)
+      {
+         x = -0.01f * mZoomFactor;
+      }
+      else
+      {
+         x = 0.5f;
+      }
+   }
+
+   // Move camera right
+   if (keylist[sf::Key::D])
+   {
+      if(mZoomFactor < -5)
+      {
+         x = 0.01f * mZoomFactor;
+      }
+      else
+      {
+         x = -0.5f;
+      }
+   }
+   // Change camera attitude
+   if (keylist[sf::Key::Q])
+   {
+      mTarget.x += 1.0f;
+   }
+   if (keylist[sf::Key::E])
+   {
+      mTarget.x -= 1.0f;
+   }
+
+   // Change camera angle
+   if (keylist[sf::Key::R])
+   {
+      mTarget.y += 2.0;
+   }
+   if (keylist[sf::Key::T])
+   {
+      mTarget.y -= 2.0;
+   }
+   mMotionVector.Set (x,y,z);
+}
+
 bool Camera::OnMouseUp (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam)
 {
    btnlist[Button] = false;
@@ -618,15 +665,43 @@ bool Camera::OnMouseDown (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam
    return false;
 }
 
+bool Camera::OnMouseMove (Vector2i Scene, Vector2i Cam)
+{
+   bool bResult = false;
+   if(btnlist[sf::Mouse::Middle])
+   {
+      Vector2i mv2i;
+      mv2i.x = (mpInput->GetMouseX()) - (int)(mCam.x / 2);
+      mv2i.y = (mpInput->GetMouseY()) - (int)(mCam.y / 2);
+
+      mTarget.x += float(mv2i.y - mMousePos.y) / 4;
+      mTarget.y += float(mv2i.x - mMousePos.x) / 4;
+      mMousePos.x = mv2i.x;
+      mMousePos.y = mv2i.y;
+      bResult = true;
+   }
+   else
+   {
+      Vector2i mv2i;
+      mv2i.x = (mpInput->GetMouseX()) - (int)(mCam.x / 2);
+      mv2i.y = (mpInput->GetMouseY()) - (int)(mCam.y / 2);
+      mMousePos.x = mv2i.x;
+      mMousePos.y = mv2i.y;
+   }
+   return bResult;
+}
+
 bool Camera::OnKeyUp (sf::Key::Code Key)
 {
    keylist[Key] = false;
+   RefreshMotion();
    return true;
 }
 
 bool Camera::OnKeyDown (sf::Key::Code Key)
 {
    keylist[Key] = true;
+   RefreshMotion();
    return true;
 }
 
@@ -638,8 +713,8 @@ bool Camera::OnMouseWheel (int Delta)
 
       // Zoom in to the mouse pointer. The code doens't work perfactly, but it's pretty close.
       Vector2i mv2i; // Mouse Vector 2i
-      mv2i.x = (GetLocalMouse().x) - (int)(mCam.x / 2);
-      mv2i.y = (GetLocalMouse().y) - (int)(mCam.y / 2);
+      mv2i.x = (mpInput->GetMouseX()) - (int)(mCam.x / 2);
+      mv2i.y = (mpInput->GetMouseY()) - (int)(mCam.y / 2);
 
       // Figure out how much OGL space is between one mouse unit
       glLoadIdentity(); // Reset OGL matrix, keeps rotation and translation from affecting this
@@ -668,13 +743,4 @@ bool Camera::OnMouseWheel (int Delta)
    return true;
 }
 
-void Camera::Zoom(float Factor)
-{
-   //Rectf ZoomedRect;
-   // Calcuate the center
-   if(( Factor < 0 && mZoomFactor > -600 )||( Factor > 0 && mZoomFactor < 0 ))
-   {
-      mZoomFactor += Factor;
-   }
-   //std::cout << "ZF=" << mZoomFactor << "\n";
-}
+// moved zoom

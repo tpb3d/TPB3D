@@ -1,12 +1,12 @@
 #include <string>
 
 #include <SFML/System.hpp>
-#include <CEGUI.h>
 #include "../Graphics/Image.h"
 #include "../Graphics/Camera.h"
 #include "../Scene/Scene.h"
 #include "../Delegates/WindowDelegate.h"
 #include "ButtonViewObject.h"
+#include "../Storage/SerializerBase.h"
 
 using namespace Gfx;
 
@@ -73,22 +73,22 @@ void ButtonViewObject::Hit (int code)
       mSelected = true;
       switch (code)
       {
-      case VK_RETURN:
+      case sf::Key::Return:
          Select(false);
          mButtonState = BS_Selected;
          mpEvent->Dispatch(1);
          break;
-      case VK_ESCAPE:
+      case sf::Key::Escape:
          Select(false);
          break;
-      case VK_SPACE:
+      case sf::Key::Space:
          mButtonState = BS_Selected;
          mpEvent->Dispatch(1);
          break;
-      case VK_SHIFT:
-      case VK_CONTROL:
-      case VK_MENU:
-         break;
+//      case sf::Key::Shift:
+//      case sf::Key::Control:
+//      case sf::Key::Menu:
+//         break;
       }
    }
 }
@@ -171,4 +171,19 @@ void ButtonViewObject::Draw(void)  // Use the compiled GL code to show it in the
          fxa+= 0.65f;
       }
    }
+}
+
+// Serialization
+void ButtonViewObject::Load(SerializerBase& ser)
+{
+   int iW = ser.GetInt ("Width");
+   int iH = ser.GetInt ("Height");
+//   this->mSize.x = (float)iW;
+//   this->mSize.y = (float)iH;
+//   this->mSize.z = 0;
+}
+
+void ButtonViewObject::Save(SerializerBase& ser)
+{
+   ser.Add("Button", this->mStrContent.c_str());
 }

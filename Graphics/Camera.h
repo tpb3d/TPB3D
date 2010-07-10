@@ -18,16 +18,13 @@
 #define _CAMERA_H
 
 #include "../Types/Vector2.h"
-#include "../Types/Rect.h"
 #include "../Physics/MotionPhysics.h"
 #include "../Window/Interface.h"
 #include "../Hub/Event.h"
 
 class Animation;
 class AnimationSingle;
-class Tiler;
 class Scene;
-//class ToolBar;
 class Pathway;
 class PeepsAgent;
 
@@ -47,6 +44,7 @@ private:
 
    Vector3f mTarget;
    Vector2i mMousePos;
+   Vector3f mMotionVector;
 
    bool keylist[256]; // keys
    bool btnlist[4]; // mouse buttons
@@ -60,18 +58,23 @@ protected:
    // instance
 
 public:
+   // interface properies
    static Camera* GetInstance();
    const sf::Input * GetInput ();
-   // properties
+   sf::Window* GetWindow() { return mpWindow; }
+
+   // general properties
    void SetMaxFramerate (int rate);
    float GetAspect () { return mAspect; }
    float GetZoom() { return mZoomFactor; }
-   //void SetCamSize (int x, int y);
    void SetSceneSize (Vector2f);
    Vector2f GetSceneSize () { return mScene; }
    Vector2f GetCamSize () { return mCam; }
-   Vector2i GetMouse ();
-   Vector2i GetLocalMouse();
+
+   //void SetCamSize (int x, int y);
+   //Vector2i GetMouse ();
+   //Vector2i GetLocalMouse();
+   //bool GetEvent (sf::Event & event);
 
    // methods
    void SetActive();
@@ -87,17 +90,19 @@ public:
    Vector3f GetOGLPos (Vector2f winVec);   // Where is the confounded mouse pointer in 3D
    void Create (const std::string & caption);
    void Center (int x, int y);
-   bool GetEvent (sf::Event & event);
 
    Vector3f GetOGLPos2(float zFar, float zNear, Vector3f v);
    void Move(float x, float y, float z);
+   void Move (); // use internal vector.
 
+   void RefreshMotion(); // somthing changed, check motion
    // Event hanlders
    bool OnKeyDown (sf::Key::Code Key);
    bool OnKeyUp (sf::Key::Code Key);
    bool OnMouseWheel (int Delta);
    bool OnMouseDown (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam);
    bool OnMouseUp (sf::Mouse::Button Button, Vector2i Scene, Vector2i Cam);
+   bool OnMouseMove (Vector2i Scene, Vector2i Cam);
    bool OnResize(Vector2i);
 };
 

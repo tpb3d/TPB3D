@@ -277,6 +277,14 @@
 				RelativePath="..\Window\ToolButton.h"
 				>
 			</File>
+			<File
+				RelativePath="..\Window\WindowViewObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\WindowViewObject.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Settings"
@@ -1200,6 +1208,32 @@
 			Name="Builders"
 			>
 			<File
+				RelativePath="..\Builders\CoastlineGen.cpp"
+				>
+				<FileConfiguration
+					Name="Debug|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)\$(InputName)1.obj"
+						XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+					/>
+				</FileConfiguration>
+				<FileConfiguration
+					Name="Release|Win32"
+					>
+					<Tool
+						Name="VCCLCompilerTool"
+						ObjectFile="$(IntDir)\$(InputName)1.obj"
+						XMLDocumentationFileName="$(IntDir)\$(InputName)1.xdc"
+					/>
+				</FileConfiguration>
+			</File>
+			<File
+				RelativePath="..\Builders\CoastlineGen.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Builders\FlatRideBuilder.cpp"
 				>
 			</File>
@@ -1364,8 +1398,6 @@
 				>
 			</File>
 			<File
-<<<<<<< .mine
-=======
 				RelativePath="..\Delegates\KeyNavDelegate.cpp"
 				>
 			</File>
@@ -1378,7 +1410,6 @@
 				>
 			</File>
 			<File
->>>>>>> .r61
 				RelativePath="..\Delegates\PlaceItemDelegate.h"
 				>
 			</File>

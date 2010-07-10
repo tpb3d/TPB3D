@@ -112,7 +112,7 @@ void Scene::Draw ()
    //glDisable (GL_COLOR_MATERIAL);
 	glEnable(GL_NORMALIZE);
    mpTerrain->Draw();
-   if(mpTerrain->Water()!=NULL)	mpTerrain->Water()->Draw();
+// aborts with uninitialized   if(mpTerrain->Water()!=NULL)	mpTerrain->Water()->Draw();
    //glDisable(GL_LIGHT1);
 	glDisable(GL_CULL_FACE);
 
