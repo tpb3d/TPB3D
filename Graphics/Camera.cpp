@@ -38,10 +38,12 @@
 #include "Camera.h"
 
 float gLightPosition[] = { 0, 500.0f, 50, 0.0f };
-float gSpotPosition[] = { -95.0f, 295.0f, -120.0f, 1.0f };
+float gSpotPosition[] = { -95.0f, 495.0f, -120.0f, 1.0f };
 float LightDirection[]= {  0.05f, -1.0f, 0.01f };
 float SpotDirection[]= {  0.35f, -0.75f, 0.0f };
-const GLfloat LightOff[]=	{ 0.0f, 0.0f, 0.0f, 1.0f }; // just a little
+const GLfloat LightOff[]=	{ 0.2f, 0.2f, 0.2f, 1.0f }; // none
+const GLfloat LightMoon[]=	{ 0.0f, 0.1f, 0.2f, 1.0f }; // just a little moon
+const GLfloat LightOn[]=	{ 0.5f, 0.5f, 0.5f, 1.0f }; // at 50%
 const GLfloat SpotCutoff =	75.0f;
 const GLfloat SpecRef[]= {  0.45f, 0.55f, 0.75f, 1.0f };
 
@@ -144,7 +146,9 @@ void Camera::SetActive()
    glLightfv(GL_LIGHT1, GL_POSITION, gSpotPosition);	// Position The Light
    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, SpotDirection);	// Position The Light
    glLightf(GL_LIGHT1, GL_SPOT_CUTOFF, SpotCutoff);	// Limit The Light
-   glMaterialfv(GL_FRONT, GL_EMISSION, LightOff );
+//   glMaterialfv(GL_FRONT, GL_EMISSION, LightOff ); // no ambient light
+   glMaterialfv(GL_FRONT, GL_EMISSION, LightOn ); // bright lights
+
 }
 
 void Camera::Display ()
@@ -218,12 +222,12 @@ void Camera::InitLighting()
    //const GLfloat SpotAmbient[]=	 { 0.47f, 0.68f, 0.48f, 0.85f }; // bright ng vapor street light
    //const GLfloat SpotDiffuse[]=	 { 0.47f, 0.46f, 0.49f, 0.65f };
    const GLfloat LightSpecular[]= { 0.25f, 0.35f, 0.3f, 0.5f };
-   const GLfloat LightAmbient[]=	{ 0.15f, 0.10f, 0.05f, 0.5f }; // day glow
+   const GLfloat LightAmbient[]=	{ 0.25f, 0.20f, 0.25f, 0.75f }; // day glow
    const GLfloat LightDiffuse[]=	{ 0.08f, 0.07f, 0.08f, 0.45f };
 
-   const GLfloat SpotSpecular[] = { 0.25f, 0.17f, 0.17f, 0.5f };
-   const GLfloat SpotAmbient[]=	 { 0.17f, 0.18f, 0.18f, 0.5f }; // bright ng vapor street light
-   const GLfloat SpotDiffuse[]=	 { 0.17f, 0.16f, 0.19f, 0.5f };
+   const GLfloat SpotSpecular[] = { 0.25f, 0.17f, 0.17f, 0.75f };
+   const GLfloat SpotAmbient[]=	 { 0.17f, 0.18f, 0.18f, 0.75f }; // bright ng vapor street light
+   const GLfloat SpotDiffuse[]=	 { 0.17f, 0.16f, 0.19f, 0.75f };
 
    //GLfloat SpotOn[]={ 0.0f, -20.0f, -20.0f, -40.0 };
    const GLfloat UplightDirection[]={ 0.0f, 1.0f, 0.0f };
@@ -257,7 +261,7 @@ void Camera::InitLighting()
    glLightfv(GL_LIGHT0, GL_POSITION, gLightPosition);	// mLightPosition// Position The Light
    glLightfv(GL_LIGHT0, GL_SPECULAR, LightSpecular);		// Setup The Specular Light
    glLightfv(GL_LIGHT0, GL_DIFFUSE,  LightDiffuse);		// Setup The Diffuse Light
-   glLightf( GL_LIGHT0, GL_LINEAR_ATTENUATION,  0.025f);		// Setup The Strength of Light
+   glLightf( GL_LIGHT0, GL_LINEAR_ATTENUATION,  0.0125f);		// Setup The Strength of Light
    glLightfv( GL_LIGHT0, GL_SPOT_DIRECTION, LightDirection);
 
    glEnable(GL_LIGHT1);
@@ -265,8 +269,8 @@ void Camera::InitLighting()
    glLightfv(GL_LIGHT1, GL_SPECULAR, SpotSpecular);		// Setup The Specular Light
    glLightfv(GL_LIGHT1, GL_DIFFUSE,  SpotDiffuse);		// Setup The Diffuse Light
    glLightfv(GL_LIGHT1, GL_SPOT_DIRECTION, SpotDirection); // Facing, down?
-   glLightf( GL_LIGHT1, GL_SPOT_EXPONENT, 15.0f ); // ?
-   glLightf( GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0);		// Setup The Strength of Light
+   glLightf( GL_LIGHT1, GL_SPOT_EXPONENT, 25.0f ); // ?
+   glLightf( GL_LIGHT1, GL_CONSTANT_ATTENUATION, 0.1);		// Setup The Strength of Light
    glLightf( GL_LIGHT1, GL_LINEAR_ATTENUATION, 0.0025f);		// Setup The Strength of Light
    glLightf( GL_LIGHT1, GL_QUADRATIC_ATTENUATION, 0);		// Setup The Strength of Light
 

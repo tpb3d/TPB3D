@@ -9,7 +9,8 @@ class WindowViewObject : public ViewObject
 {
    enum WindowState
    {
-      WS_Normal = 0, // up and not highlighted
+      WS_Refresh = 0,   // nothing changes in state but the graphics updated.
+      WS_Normal, // up and not highlighted
       WS_Selected,       // lit and active
       WS_Highlighted // just lit
    };

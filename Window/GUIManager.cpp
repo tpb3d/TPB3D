@@ -16,14 +16,9 @@
 #include "../Utility/GameException.h"
 
 #include "../Hub/Event.h"
-//#include "FRCSWindow.h"
-//#include "SettingsWindow.h"
-//#include "ToolsWindow.h"
 #include "GUIManager.h"
 
-#define LOOK "WindowsLook"
-
-GUIManager::GUIManager(EventHandler& revh, Interface& rInterface) //, Park* Park) can't pass a Park as there will be more than one. Think events
+GUIManager::GUIManager(EventHandler& revh, Interface& rInterface)
 :  mEVH (revh)
 ,  mInterface (rInterface)
 {

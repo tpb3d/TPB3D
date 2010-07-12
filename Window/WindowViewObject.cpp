@@ -36,10 +36,9 @@ WindowViewObject::WindowViewObject( float x, float y, int ID, WindowDelegate& rP
 ,  mParentPipe (rParent)
 {
    m_ID = ID;
-   m_Geometry.mPoints[0] = Vector3f (x,y,0);
-   m_Geometry.mPoints[1] = Vector3f (x+140,y,0);
-   m_Geometry.mPoints[2] = Vector3f (x+140,y+24,0);
-   m_Geometry.mPoints[3] = Vector3f (x,y+32,0);
+   Move (20,20,0);
+   Resize(140,32);
+   Update (WS_Refresh);
    ImageManager * images = ImageManager::GetInstance ();
    Texture* pTex = images->GetTexture ("Windows.png", GL_RGBA);
    mpFace = new AnimationSingle (pTex, 140, 24);
@@ -79,6 +78,16 @@ void WindowViewObject::Move (int iX, int iY, int iZ)
    mOriginPoint.x = (float)iX;
    mOriginPoint.y = (float)iY;
    mOriginPoint.z = 0;  // don't use Z at this time
+}
+
+void WindowViewObject::Update (WindowState state)
+{
+   float x = mOriginPoint.x;
+   float y = mOriginPoint.y;
+   m_Geometry.mPoints[0] = Vector3f (x,y,0);
+   m_Geometry.mPoints[1] = Vector3f (x+mSize.x,y,0);
+   m_Geometry.mPoints[2] = Vector3f (x+mSize.x,y+mSize.y,0);
+   m_Geometry.mPoints[3] = Vector3f (x,y+mSize.y,0);
 }
 
 void WindowViewObject::Hit (bool bState)
@@ -154,18 +163,9 @@ void WindowViewObject::Visible (bool bVisible)
 
 void WindowViewObject::Draw(void)  // Use the compiled GL code to show it in the view
 {
-   float fv = 1.0 / 16;
    if (mVisible )
    {
-      // this needs to be in graphics
-      glDisable (GL_TEXTURE_2D);
-      glColor3ub (147,147,196);
-      glBegin(GL_QUADS);
-         glVertex3f (mOriginPoint.x, mOriginPoint.y, 20);
-         glVertex3f (mOriginPoint.x+mSize.x, mOriginPoint.y, 20);
-         glVertex3f (mOriginPoint.x+mSize.x, mOriginPoint.y+mSize.y, 20);
-         glVertex3f (mOriginPoint.x, mOriginPoint.y+mSize.y, 20);
-      glEnd();
+      Render (&m_Geometry);
       ChildIterator itc;
       for (itc = mChildren.begin(); itc != mChildren.end(); itc++)
       {

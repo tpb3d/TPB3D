@@ -27,6 +27,7 @@
 #include "../Graphics/Camera.h"
 #include "../Hub/Event.h"
 #include "../Delegates/KeyNavDelegate.h" // if a window is open, this delegate is in use
+#include "../Delegates/WindowDelegate.h" // if a window is open, this delegate is in use
 #include "ToolButton.h"
 #include "ToolBar.h"
 #include "TextViewObject.h"
@@ -38,7 +39,6 @@ Interface::Interface (EventHandler& revh)
 :  mEVH(revh)
 {
    mpToolBar = new ToolBar(6, HR_MainMenu);
-   mpWindowDelegate = NULL;
    mpWindow = NULL;
    mpSpecialDelegate = NULL;
    LoadToolbar();
@@ -48,10 +48,15 @@ Interface::Interface (EventHandler& revh)
    LoadSettings();
    mChangedSettings = false;
    mCurDay = 0;
+//   mpSettings = NULL;
 }
 
 Interface::~Interface ()
 {
+   //if (mpSettings != NULL)
+   //{
+   //   delete mpSettings;
+   //}
    if (mChangedSettings)
    {
       SaveSettings();
@@ -147,6 +152,10 @@ void Interface::Draw ()
    mpToolBar->Draw ();
    mClock.Draw ();
    mStats.Draw ();
+//   if (mpSettings != NULL)
+//   {
+//      mpSettings->Draw();
+//   }
 }
 
 void Interface::SetLanguageCode (int code)
@@ -277,11 +286,11 @@ bool Interface::OnTools ()
 
 bool Interface::OnSettings ()
 {
-//   if (setwin == NULL)
+//   if (mpSettings == NULL)
 //   {
-//      setwin = new SettingsWindow (mInterface);
+//      mpSettings = new SettingsWindow (mInterface);
 //   }
-//   setwin->Create (this->mpRootWind);
+//   //setwin->Create (this->mpRootWind);
    return false; //true;
 }
 

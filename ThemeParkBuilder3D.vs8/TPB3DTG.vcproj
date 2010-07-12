@@ -41,7 +41,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="0"
 				AdditionalIncludeDirectories="&quot;\Dev\VC++\SFML-1.5\include&quot;;&quot;\Dev\VC++\zlib123\include&quot;;&quot;\Dev\VC++\lib3ds-20080909\src&quot;;&quot;\Dev\VC++\lpng1240&quot;;&quot;\Dev\VC++\ZLib&quot;"
-				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;PNG_NO_ERROR_NUMBERS;_CRT_SECURE_NO_WARNINGS"
+				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;PNG_NO_ERROR_NUMBERS;_CRT_SECURE_NO_WARNINGS;doFractal;useLoadPng"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
 				RuntimeLibrary="3"

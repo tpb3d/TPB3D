@@ -20,6 +20,7 @@ Terrain::Terrain(void)
    mDepth = 100;
    mWidth = 100;
    mBaseElevation = 10;
+   water = NULL;
    //mWaterTable = 0;
    for(int i=0;i<maxWaterTables;i++)	{	watertables[i]=NULL;	}
 }

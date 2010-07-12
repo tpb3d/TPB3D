@@ -266,20 +266,22 @@ TerrainFormer::
 		startPoints=Max(startWidth,startDepth);
 		float lv;
 		short numRefinements=ceil(lv=logb(2,(float)targetSize/startPoints));
-		float estPoints=(float)startPoints*pow(2,numRefinements);
+		float estPoints=(float)startPoints*pow(2.0f, numRefinements);
 
 		fractmap.Fractalize(numRefinements);
-		float ha[fractmap.depth][fractmap.width];
+		float* ha = new float[fractmap.depth*fractmap.width];
 		memcpy(ha,fractmap.heights,sizeof(ha));
 
 		short nwaterTables=6;
 		WaterTable*watertables=new WaterTable[nwaterTables];
 		//Make multiple water tables
-		for(int i=0;i<nwaterTables;i++)	{
-			watertables[i].Init(fractmap.width-1,fractmap.depth-1,10.f,10.f,true,avgWaterTableHeight,&(ha[0][0]));
+		for(int i=0;i<nwaterTables;i++)
+      {
+			watertables[i].Init(fractmap.width-1,fractmap.depth-1,10.f,10.f,true,avgWaterTableHeight,&(ha[0])); //[0][0]));
 			bool done=false;
 			short trycount=0;	short tryThreshold=30;
-			while(!done)	{
+			while(!done)
+         {
 				while(!watertables[i].FloodFillRandom(minWaterTableHeight,maxWaterTableHeight)&&trycount<tryThreshold)	{	trycount++;	}
 				if(i>0)	{
 					//test for overlap with previous tables
@@ -310,7 +312,7 @@ TerrainFormer::
 			}
 
 		//fixed dimensions
-
+      delete [] ha;
 
 		short tilewidth=Min(watertables[0].tw,maxTileDrawWidth,(short)(fractmap.depth-1));		short&tw=tilewidth;
 		short tilelength=Min(watertables[0].tw,maxTileDrawLength,(short)(fractmap.width-1));	short&tl=tilelength;

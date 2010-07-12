@@ -7,7 +7,7 @@
 #include <png.h>
 //#include <iostream>
 #ifdef useLoadPng
-	#include "../Graphics/PngFile.h"
+//	#include "../Graphics/PngFile.h"
 	#include "../Storage/ACPng.h"
 #endif
 
@@ -100,7 +100,7 @@ class FractalTerrainMap
    {
 		srand(time(NULL));
 		float htsum=0;	short htsdone=0;	float htmax=-1e+6;	float htmin=+1e+6;	float htavg=0;
-		float ll=lo;	float hh=hi;		short htsdoneThreshold=5;	float tlnlo;	float tlnhi;
+		float ll=lo;	float hh=hi;		short htsdoneThreshold=5;	float tlnlo =  0;	float tlnhi = 0;
 		float totalHeight=0.f;	short npoints=w*d;	float avgVal=0.f;	float rangeval;	bool isRandLimited=false;
 		float rad=Abs(hi-lo);	float radp2=pow(rad,2);
 		for(int iy=0;iy<d;iy++)
@@ -226,7 +226,7 @@ class FractalTerrainMap
 
       delete [] ohts;
 	   //fill in the pits
-	   PitKiller();
+	   //PitKiller();
 	   ++curRound;
 	   if(curRound==nrounds)
       {

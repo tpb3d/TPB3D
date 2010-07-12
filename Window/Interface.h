@@ -44,6 +44,7 @@ protected:
    WindowDelegate* mpWindowDelegate;
    ViewObject*    mpWindow;
    SpecialDelegate* mpSpecialDelegate;
+
    float m_fHeight;
 
 public:
