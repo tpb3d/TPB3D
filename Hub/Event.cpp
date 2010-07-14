@@ -22,6 +22,14 @@
 #include "../Types/Vector2.h"
 #include "../Graphics/Camera.h"
 #include "Event.h"
+void EventSubscriber::cleanup()
+{
+}
+
+void ViewEvent::Subscribe(Types type, const EventSubscriber& ev)
+{
+   this->mEventSubs.insert (pair<Types, EventSubscriber>(type, ev));
+}
 
 EventHandler::EventHandler ()
 {

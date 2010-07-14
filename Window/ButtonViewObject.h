@@ -1,6 +1,7 @@
 #pragma once
 #include "../Graphics/ViewObject.h"
 #include "../Graphics/Animation.h"
+#include "../Hub/Event.h"
 
 class WindowDelegate;
 class SerializerBase;
@@ -13,6 +14,7 @@ class ButtonViewObject : public ViewObject
       BS_Selected,       // lit and down
       BS_Highlighted // just lit
    };
+   ViewEvent mEvents;
    std::string mStrContent;
    int m_ID;
    AnimationSingle* mpFace;
@@ -37,6 +39,8 @@ public:
 
    // methods
 public:
+   WindowDelegate* subscribeEvent(const char* name, EventSubscriber* subscriber);
+
    void Clear();   // return this button to normal
    int TestHit (Vector2i point); // just render geometry for selection
 

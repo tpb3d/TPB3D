@@ -17,11 +17,11 @@
  *   You should have received a copy of the GNU General Public License
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include <CEGUI.h>
+#include "../Delegates/WindowDelegate.h"
+#include "CheckViewObject.h"
+#include "WindowViewObject.h"
 #include "SettingsWindow.h"
 #include "Interface.h"
-
-#define LOOK "WindowsLook"
 
 SettingsWindow::SettingsWindow(Interface& rInterface)
 :  mInterface(rInterface)
@@ -40,10 +40,9 @@ SettingsWindow::~SettingsWindow()
 /*************************************************************************
 Sample specific initialisation goes here.
 *************************************************************************/
-bool SettingsWindow::Create (CEGUI::Window* pRoot)
+bool SettingsWindow::Create ()
 {
-   using namespace CEGUI;
-
+/*
 // Code provided by Paul D Turner (C) 2005
    CEGUI::WindowManager& winMgr = CEGUI::WindowManager::getSingleton();
    // A FrameWindow is a window with a frame and a titlebar which may be moved around
@@ -200,55 +199,74 @@ bool SettingsWindow::Create (CEGUI::Window* pRoot)
    mpWnd->addChildWindow(pBox3c);
    mpWnd->addChildWindow(pBox3d);
    mpWnd->addChildWindow(pBox3e);
-
+*/
    // subscribe handler that closes the dialog
-   mpWnd->subscribeEvent (FrameWindow::EventCloseClicked, Event::Subscriber(&SettingsWindow::OnClose, this));
+//   mpWnd->subscribeEvent (FrameWindow::EventCloseClicked, Event::Subscriber(&SettingsWindow::OnClose, this));
+
+   mpWnd = new WindowViewObject(200, 100, 1, NULL);
+
+   mpSoundFx = new CheckViewObject(10, 30, 1, *mpWnd);
+   mpSoundFx->Visible (true);
+   mpSoundFx->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnSoundCheck, this));
+
+   mpMusic = new CheckViewObject(10, 60, 1, *mpWnd);
+   mpMusic->Visible (true);
+   mpMusic->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnMusicCheck, this));
+
    return true;
 }
 
-bool SettingsWindow::OnClose(const CEGUI::EventArgs& e)
+void SettingsWindow::Draw ()
+{
+   if (mpWnd != NULL)
+   {
+      mpWnd->Draw();
+   }
+}
+
+bool SettingsWindow::OnClose(const EventArgs& e)
 {
    Destroy();
    return true;
 }
 
-bool SettingsWindow::OnSoundCheck(const CEGUI::EventArgs& e)
+bool SettingsWindow::OnSoundCheck(const EventArgs& e)
 {
-   mInterface.SetSoundFx( (mpSoundFx->isSelected()) );
+//   mInterface.SetSoundFx( (mpSoundFx->isSelected()) );
    return true;
 }
 
-bool SettingsWindow::OnMusicCheck(const CEGUI::EventArgs& e)
+bool SettingsWindow::OnMusicCheck(const EventArgs& e)
 {
-   mInterface.SetMusic( (mpMusic->isSelected()) );
+   mInterface.SetMusic( (mpMusic->isChecked()) );
    return true;
 }
 
-bool SettingsWindow::OnEnglish(const CEGUI::EventArgs& e)
+bool SettingsWindow::OnEnglish(const EventArgs& e)
 {
    mInterface.SetLanguageCode(1);
    return true;
 }
 
-bool SettingsWindow::OnSpanish(const CEGUI::EventArgs& e)
+bool SettingsWindow::OnSpanish(const EventArgs& e)
 {
    mInterface.SetLanguageCode(2);
    return true;
 }
 
-bool SettingsWindow::OnDeutsch(const CEGUI::EventArgs& e)
+bool SettingsWindow::OnDeutsch(const EventArgs& e)
 {
    mInterface.SetLanguageCode(3);
    return true;
 }
 
-bool SettingsWindow::OnFrench(const CEGUI::EventArgs& e)
+bool SettingsWindow::OnFrench(const EventArgs& e)
 {
    mInterface.SetLanguageCode(4);
    return true;
 }
 
-bool SettingsWindow::OnItalian (const CEGUI::EventArgs& e)
+bool SettingsWindow::OnItalian (const EventArgs& e)
 {
    mInterface.SetLanguageCode(5);
    return true;
@@ -259,11 +277,10 @@ Cleans up resources allocated in the initialiseSample call.
 *************************************************************************/
 void SettingsWindow::Destroy()
 {
-   using namespace CEGUI;
    if (mpWnd != NULL)
    {
-      CEGUI::WindowManager& winMgr = CEGUI::WindowManager::getSingleton();
-      winMgr.destroyWindow(mpWnd);
+      // destroy window
+      delete mpWnd;
       mpWnd = NULL;
    }
 }

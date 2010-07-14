@@ -26,6 +26,7 @@ class ToolBar;
 class EventHandler;
 class WindowDelegate;
 class SpecialDelegate;
+class SettingsWindow;
 
 class Interface : public EventBase
 {
@@ -43,6 +44,7 @@ protected:
    ToolBar* mpToolBar;
    WindowDelegate* mpWindowDelegate;
    ViewObject*    mpWindow;
+   SettingsWindow* mpSettings;
    SpecialDelegate* mpSpecialDelegate;
 
    float m_fHeight;

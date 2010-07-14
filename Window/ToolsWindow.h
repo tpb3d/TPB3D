@@ -16,18 +16,10 @@
 // Tick Tock!
 
 #pragma once
-#ifndef _TOOLSWINDOW_H
-#define _TOOLSWINDOW_H
 
-#define SKIN "WindowsLook"
+class ViewWindowObject;
 
-namespace CEGUI
-{
-   class FrameWindow;
-}
-
-using namespace CEGUI;
-
+/*
 class ListItem : public ListboxTextItem
 {
 public:
@@ -38,25 +30,24 @@ public:
       setTextColours (rgbC, rgbC, rgbC, rgbC );
    }
 };
-
+*/
 class ToolsWindow
 {
 protected:
-   CEGUI::Window* mpWnd;
+   ViewWindowObject* mpWnd;
 public:
    ToolsWindow ();
    ~ToolsWindow ();
 
 public:
-   bool Create(CEGUI::Window* pRoot);
+   bool Create();
    void Destroy ();
-
-   bool OnSoundCheck(const CEGUI::EventArgs& e);
+/*
+   bool OnSoundCheck(const EventArgs& e);
    bool OnNewRide (const EventArgs& e);
    bool OnPlace (const EventArgs& e);
    bool OnClose (const CEGUI::EventArgs& e);
+   */
    void RefreshPartList ();
 
 };
-
-#endif // _TOOLSWINDOW_H

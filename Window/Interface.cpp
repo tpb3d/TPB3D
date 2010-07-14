@@ -31,6 +31,7 @@
 #include "ToolButton.h"
 #include "ToolBar.h"
 #include "TextViewObject.h"
+#include "SettingsWindow.h"
 #include "Interface.h"
 
 using namespace Gfx;
@@ -48,15 +49,15 @@ Interface::Interface (EventHandler& revh)
    LoadSettings();
    mChangedSettings = false;
    mCurDay = 0;
-//   mpSettings = NULL;
+   mpSettings = NULL;
 }
 
 Interface::~Interface ()
 {
-   //if (mpSettings != NULL)
-   //{
-   //   delete mpSettings;
-   //}
+   if (mpSettings != NULL)
+   {
+      delete mpSettings;
+   }
    if (mChangedSettings)
    {
       SaveSettings();
@@ -152,10 +153,10 @@ void Interface::Draw ()
    mpToolBar->Draw ();
    mClock.Draw ();
    mStats.Draw ();
-//   if (mpSettings != NULL)
-//   {
-//      mpSettings->Draw();
-//   }
+   if (mpSettings != NULL)
+   {
+      mpSettings->Draw();
+   }
 }
 
 void Interface::SetLanguageCode (int code)
@@ -286,11 +287,12 @@ bool Interface::OnTools ()
 
 bool Interface::OnSettings ()
 {
-//   if (mpSettings == NULL)
-//   {
-//      mpSettings = new SettingsWindow (mInterface);
-//   }
-//   //setwin->Create (this->mpRootWind);
+   if (mpSettings == NULL)
+   {
+      mpSettings = new SettingsWindow (*this);
+      mpSettings->Create();
+   }
+   //setwin->Create (this->mpRootWind);
    return false; //true;
 }
 

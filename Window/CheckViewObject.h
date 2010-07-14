@@ -1,6 +1,7 @@
 #pragma once
 #include "../Graphics/ViewObject.h"
 #include "../Graphics/Animation.h"
+#include "../Hub/Event.h"
 
 class WindowDelegate;
 
@@ -13,6 +14,7 @@ class CheckViewObject : public ViewObject
       CS_Highlighted, // just lit
       CS_Checked
    };
+   ViewEvent mEvents;
    std::string mStrContent;
    int m_ID;
    AnimationSingle* mpFace;
@@ -26,8 +28,8 @@ class CheckViewObject : public ViewObject
    char mHighlit; // mouse presence
    char mChecked;
 
-   WindowDelegate* mpEvent;
-   WindowDelegate& mParentPipe;
+//   WindowDelegate* mpEvent;
+   ViewObject& mParent;
    int    mPosition;
    // TODO: add style!
 
@@ -37,19 +39,20 @@ protected:
    char mColorHighlit[4];
 
 public:
-   CheckViewObject(float x, float y, int ID, WindowDelegate& rParent);
+   CheckViewObject(float x, float y, int ID, ViewObject& rParent);
    ~CheckViewObject(void);
 public:
    // properties
    void set_State( CheckState cs ) { mCheckState = cs; }
-
+   bool isChecked() { return (mChecked != 0); }
    // methods
 public:
    void Clear();   // return this button to normal
    int TestHit (Vector2i point); // just render geometry for selection
 
-   void set_EventHandler (WindowDelegate* pEvent) { mpEvent = pEvent; }
+//   void set_EventHandler (WindowDelegate* pEvent) { mpEvent = pEvent; }
    void set_Text (const char* pszText);
+   void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
       
    void Select (bool bState);
    void Hightlight (bool bState);
@@ -65,3 +68,5 @@ public:
    void Update (CheckState state);
    void Draw ();
 };
+
+typedef CheckViewObject CheckBox;

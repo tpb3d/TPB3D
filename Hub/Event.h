@@ -1,23 +1,24 @@
 /*   This file is part of Theme Park Builder 3D The Game.
- *
- *   Theme Park Builder 3D The Game is free software: you can redistribute it and/or modify
- *   it under the terms of the GNU General Public License as published by
- *   the Free Software Foundation, either version 3 of the License, or
- *   (at your option) any later version.
+*
+*   Theme Park Builder 3D The Game is free software: you can redistribute it and/or modify
+*   it under the terms of the GNU General Public License as published by
+*   the Free Software Foundation, either version 3 of the License, or
+*   (at your option) any later version.
 
- *   Theme Park Builder 3D The Game is distributed in the hope that it will be useful,
- *   but WITHOUT ANY WARRANTY; without even the implied warranty of
- *   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *   GNU General Public License for more details.
- *
- *   You should have received a copy of the GNU General Public License
- *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
- */
+*   Theme Park Builder 3D The Game is distributed in the hope that it will be useful,
+*   but WITHOUT ANY WARRANTY; without even the implied warranty of
+*   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+*   GNU General Public License for more details.
+*
+*   You should have received a copy of the GNU General Public License
+*   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
+*/
 
 #ifndef _EVENT_H
 #define _EVENT_H
 
 #include "../Types/Vector2.h"
+class DelegateBase;
 
 enum HR_Events
 {
@@ -72,6 +73,129 @@ public:
    virtual bool OnOpen (const char* pPath) { return false; }
    virtual bool OnSave (const char* pPath) { return false; }
 };
+
+class EventArgs
+{
+public:
+   bool bHandled;
+public:
+   // ctor
+   EventArgs(void)
+   {
+      bHandled = false;
+   }
+   virtual ~EventArgs(void) {}
+};
+
+
+class FunctorBase
+{
+public:
+   virtual ~FunctorBase() {};
+   virtual bool operator()(const EventArgs& args) = 0;
+};
+
+template <class T> class EventFunctor : public FunctorBase
+{
+   typedef bool (T::*F)(const EventArgs&);
+   T* mpParent;
+   F mF;
+public:
+   EventFunctor(F f, T* obj)
+   :  mF(f)
+   {
+      mpParent = obj;
+   }
+   virtual bool operator()(const EventArgs& args)
+   {
+      return (mpParent->*mF)(args);
+   }
+};
+
+class EventSubscriber
+{
+   FunctorBase* mpF;
+
+public:
+   EventSubscriber();
+   ~EventSubscriber()
+   {
+      cleanup(); 
+   }
+
+   bool operator()(const EventArgs& args) const
+   {
+      return (*mpF)(args);
+   }
+
+   void cleanup();
+
+   template<typename T>
+   EventSubscriber(int id, bool (T::*function)(const EventArgs&), T* obj) :
+   mpF(new EventFunctor<T>(function, obj))
+   {}
+
+
+   //    template<typename T>
+   //    EventSubscriber(const T& functor) :
+   //        d_functor_impl(new FunctorCopySlot<T>(functor))
+   //    {}
+
+   //    template<typename T>
+   //    EventSubscriber(T* functor) :
+   //        d_functor_impl(new FunctorPointerSlot<T>(functor))
+   //    {}
+
+};
+
+class ViewEvent
+{
+public:
+   enum Types
+   {
+      None = 0,
+      Click,
+      Changed
+   };
+protected:
+   std::string mName;
+
+   typedef std::multimap<int, EventSubscriber> EventMap;
+   EventMap mEventSubs;  //!< Collection holding ref-counted bound slots\
+
+protected:
+   // Copy constructor and assignment are not allowed for events
+   ViewEvent(const ViewEvent& event) {}
+   ViewEvent& operator=(const ViewEvent& other)  {return *this;}
+
+public:
+   ViewEvent(const char* name)
+   {
+      mName = name;
+   }
+   virtual ~ViewEvent() {};
+
+   const std::string& getName(void) const
+   {
+      return mName;
+   }
+
+   void Subscribe(Types type, const EventSubscriber& ev);
+   void operator()(Types t, EventArgs& args)
+   {
+      size_t iT = mEventSubs.count (t);
+      if( iT > 0 )
+      {
+         EventMap::iterator ies = mEventSubs.find(t);
+         EventSubscriber& es = ies->second;
+         es(args);
+      }
+   };
+
+private:
+   void unsubscribe(const EventBase& ev);
+};
+
 
 class EventHandler
 {

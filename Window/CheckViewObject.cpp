@@ -30,9 +30,10 @@ namespace Gfx
    };
 }
 
-CheckViewObject::CheckViewObject( float x, float y, int ID, WindowDelegate& rParent)
+CheckViewObject::CheckViewObject( float x, float y, int ID, ViewObject& rParent)
 :  ViewObject(Gfx::kTextUVs)
-,  mParentPipe (rParent)
+,  mParent (rParent)
+,  mEvents ("CheckBox")
 {
    m_ID = ID;
    mCheckState = CS_Normal;
@@ -61,9 +62,19 @@ void CheckViewObject::set_Text (const char* pszText)
    mPosition = (int)mStrContent.size();
 }
 
+void CheckViewObject::SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber)
+{
+   mEvents.Subscribe (id, *subscriber);
+}
+
 void CheckViewObject::Hit (bool bState)
 {
-   if (mEnabled && bState) mSelected = true;
+   if (mEnabled && bState)
+   {
+      mSelected = true;
+      EventArgs ea;
+      mEvents(ViewEvent::Changed, ea);
+   }
 }
 
 void CheckViewObject::Hit (int code)
@@ -78,7 +89,6 @@ void CheckViewObject::Hit (int code)
       break;
    case VK_SPACE:
       Select(false);
-      mpEvent->Dispatch(1);
       mCheckState = CS_Checked;
       break;
    case VK_SHIFT:
@@ -93,14 +103,9 @@ void CheckViewObject::Select (bool bState)
    if (mEnabled && bState)
    {
       mSelected = 1;
-      if (mpEvent != NULL)
-      {
-         mpEvent->Dispatch (1);
-      }
    }
    else
    {
-      mParentPipe.Dispatch ('N');
       mSelected = 0;
    }
 }

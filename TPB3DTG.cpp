@@ -30,7 +30,6 @@
 #include "Scene/Scene.h"
 
 
-#include "Window/GUIManager.h"
 #include "Scene/SceneEvent.h"
 #include "Hub/GameManager.h"
 
@@ -70,11 +69,9 @@ main ()
 
       EventHandler Events;
       Interface* pInterface = new Interface(Events);
-      GUIManager Gui (Events, *pInterface); //, &thePark);
-      Events.Add (&Gui);
-      Events.Add (cam);
-
       MainEvent mev;
+
+      Events.Add (cam);
       Events.Add(&SceneEV);
       Events.Add (&mev);
       Events.Add (pInterface);

@@ -222,27 +222,19 @@
 				>
 			</File>
 			<File
-				RelativePath="..\Window\GUIManager.cpp"
-				>
-				<FileConfiguration
-					Name="Debug|Win32"
-					>
-					<Tool
-						Name="VCCLCompilerTool"
-						BrowseInformation="1"
-					/>
-				</FileConfiguration>
-			</File>
-			<File
-				RelativePath="..\Window\GUIManager.h"
-				>
-			</File>
-			<File
 				RelativePath="..\Window\Interface.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\Window\Interface.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\SettingsWindow.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\SettingsWindow.h"
 				>
 			</File>
 			<File

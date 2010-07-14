@@ -18,15 +18,9 @@
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
 #include <iostream>
-#include "CEGUI.h"
-#include "CEGUIPropertyHelper.h"
 #include "../Graphics/Image.h"
 
 #include "ToolsWindow.h"
-
-using namespace CEGUI;
-
-#define SKIN "WindowsLook"
 
 ToolsWindow::ToolsWindow()
 {
@@ -42,7 +36,7 @@ ToolsWindow::~ToolsWindow()
    //}
 }
 
-bool ToolsWindow::Create(CEGUI::Window* pRoot)
+bool ToolsWindow::Create()
 {
    // we will use of the WindowManager.
    WindowManager& winMgr = WindowManager::getSingleton ();

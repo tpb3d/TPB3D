@@ -18,33 +18,34 @@
 #pragma once
 
 class Interface;
-
-namespace CEGUI
-{
-   class FrameWindow;
-}
+class EventArgs;
+class CheckViewObject;
+class WindowViewObject;
+class WindowDelegate;
 
 class SettingsWindow
 {
 protected:
-   CEGUI::FrameWindow* mpWnd;
-   CEGUI::Checkbox* mpSoundFx;
-   CEGUI::Checkbox* mpMusic;
+   WindowViewObject* mpWnd;
+   WindowDelegate* mpDelegate;
+   CheckViewObject* mpSoundFx;
+   CheckViewObject* mpMusic;
    Interface& mInterface;
 public:
    SettingsWindow (Interface& rInterface);
    ~SettingsWindow ();
 
 public:
-   bool Create(CEGUI::Window* pRoot);
+   bool Create ();
    void Destroy ();
+   void Draw ();
 
-   bool OnMusicCheck (const CEGUI::EventArgs& e);
-   bool OnSoundCheck (const CEGUI::EventArgs& e);
-   bool OnClose (const CEGUI::EventArgs& e);
-   bool OnEnglish (const CEGUI::EventArgs& e);
-   bool OnSpanish (const CEGUI::EventArgs& e);
-   bool OnFrench (const CEGUI::EventArgs& e);
-   bool OnDeutsch (const CEGUI::EventArgs& e);
-   bool OnItalian (const CEGUI::EventArgs& e);
+   bool OnMusicCheck (const EventArgs& e);
+   bool OnSoundCheck (const EventArgs& e);
+   bool OnClose (const EventArgs& e);
+   bool OnEnglish (const EventArgs& e);
+   bool OnSpanish (const EventArgs& e);
+   bool OnFrench (const EventArgs& e);
+   bool OnDeutsch (const EventArgs& e);
+   bool OnItalian (const EventArgs& e);
 };

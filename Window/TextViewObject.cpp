@@ -7,8 +7,6 @@
 #include "../Delegates/WindowDelegate.h"
 #include "TextViewObject.h"
 
-#include "../Types/Virtkeys.h"
-
 using namespace Gfx;
 
 namespace Gfx
@@ -72,7 +70,7 @@ void TextViewObject::Hit (int code)
 {
    switch (code)
    {
-   case VK_DELETE:
+   case sf::Key::Delete:
       DeleteChar(0);   // zero because we don't move the cursor
       break;
    case VK_BACK:

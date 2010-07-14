@@ -39,6 +39,7 @@ public:
    virtual void Draw()
    {
    }
+   const char* GetName() { return mName.c_str(); }
 protected:
 
    ObjectNode* /*DelegateBase::*/LoadGraphic ();

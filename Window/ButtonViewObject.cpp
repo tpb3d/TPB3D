@@ -34,6 +34,7 @@ namespace Gfx
 ButtonViewObject::ButtonViewObject( float x, float y, int ID, WindowDelegate& rParent)
 :  ViewObject(Gfx::kTextUVs)
 ,  mParentPipe (rParent)
+,  mEvents ("Button")
 {
    m_ID = ID;
    m_Geometry.mPoints[0] = Vector3f (x,y,0);

@@ -1,6 +1,7 @@
 #pragma once
 #include "../Graphics/ViewObject.h"
 #include "../Graphics/Animation.h"
+#include "../Hub/Event.h"
 
 class WindowDelegate;
 class SerializerBase;
@@ -23,19 +24,20 @@ class WindowViewObject : public ViewObject
    AnimationSingle* mpTextTex;
    SimpleQuad     m_Geometry;
    WindowState    mWindowState;
+   ViewObject*    mpParent;
 
    char mEnabled; // Enabled, Disabled
    char mVisible; // Visible, Invisible
    char mSelected; // hit
    char mHighlit; // mouse presence
-   WindowDelegate* mpEvent;
-   WindowDelegate& mParentPipe;
+   ViewEvent mEvents;
    int    mPosition;
+
 public:
    typedef std::vector<ViewObject*>::iterator ChildIterator;
 
 public:
-   WindowViewObject( float x, float y, int ID, WindowDelegate& rParent);
+   WindowViewObject( float x, float y, int ID, ViewObject* rParent );
    ~WindowViewObject(void);
 
 public:
@@ -47,8 +49,10 @@ public:
    void Clear();   // return this Window to normal
    int TestHit (Vector2i point); // just render geometry for selection
 
-   void set_EventHandler (WindowDelegate* pEvent) { mpEvent = pEvent; }
    void set_Text (const char* pszText);
+   void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
+
+   void AddChild (ViewObject* pChild);
 
    void Resize (int iWidth, int iHeight);
    void Move (int iX, int iY, int iZ);

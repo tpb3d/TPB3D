@@ -31,16 +31,17 @@ namespace Gfx
    };
 }
 
-WindowViewObject::WindowViewObject( float x, float y, int ID, WindowDelegate& rParent)
-:  ViewObject(Gfx::kTextUVs)
-,  mParentPipe (rParent)
+WindowViewObject::WindowViewObject( float x, float y, int ID, ViewObject* pParent)
+:  ViewObject (Gfx::kTextUVs)
+,  mpParent (pParent)
+,  mEvents ("Window")
 {
    m_ID = ID;
    Move (20,20,0);
    Resize(140,32);
    Update (WS_Refresh);
    ImageManager * images = ImageManager::GetInstance ();
-   Texture* pTex = images->GetTexture ("Windows.png", GL_RGBA);
+   Texture* pTex = images->GetTexture ("Nav3D.png", GL_RGBA);
    mpFace = new AnimationSingle (pTex, 140, 24);
    mpFace->SetPosition(x, y, 0);
    mpFace->SetLightingColor (kTextLights[0]);
@@ -59,6 +60,11 @@ WindowViewObject::~WindowViewObject(void)
       delete pC;
    }
    mChildren.clear();
+}
+
+void WindowViewObject::AddChild (ViewObject* pChild)
+{
+   mChildren.push_back (pChild);
 }
 
 void WindowViewObject::set_Text (const char* pszText)
@@ -105,14 +111,12 @@ void WindowViewObject::Hit (int code)
       case VK_RETURN:
          Select(false);
          mWindowState = WS_Selected;
-         mpEvent->Dispatch(1);
          break;
       case VK_ESCAPE:
          Select(false);
          break;
       case VK_SPACE:
          mWindowState = WS_Selected;
-         mpEvent->Dispatch(1);
          break;
       case VK_SHIFT:
       case VK_CONTROL:
@@ -127,14 +131,9 @@ void WindowViewObject::Select (bool bState)
    if (mEnabled && bState)
    {
       mSelected = 1;
-      if (mpEvent != NULL)
-      {
-         mpEvent->Dispatch (1);
-      }
    }
    else
    {
-      mParentPipe.Dispatch ('N');
       mSelected = 0;
    }
 }
