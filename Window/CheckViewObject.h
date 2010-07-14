@@ -7,6 +7,7 @@ class WindowDelegate;
 
 class CheckViewObject : public ViewObject
 {
+public:
    enum CheckState
    {
       CS_Normal = 0, // up and not highlighted
@@ -14,6 +15,7 @@ class CheckViewObject : public ViewObject
       CS_Highlighted, // just lit
       CS_Checked
    };
+protected:
    ViewEvent mEvents;
    std::string mStrContent;
    int m_ID;
@@ -40,13 +42,14 @@ protected:
 
 public:
    CheckViewObject(float x, float y, int ID, ViewObject& rParent);
-   ~CheckViewObject(void);
+   virtual ~CheckViewObject(void);
 public:
    // properties
    void set_State( CheckState cs ) { mCheckState = cs; }
    bool isChecked() { return (mChecked != 0); }
    // methods
 public:
+   void InitGFX(float x, float y);
    void Clear();   // return this button to normal
    int TestHit (Vector2i point); // just render geometry for selection
 
@@ -60,13 +63,13 @@ public:
    void Visible (bool bVisible);
 
    void Hit (int c);
-   void Hit (bool b);
+   virtual void Hit (bool b);
    void DeleteChar (int BackOrDel);
    void AppendText (int c);
    void MoveCursor (int code);
 
-   void Update (CheckState state);
-   void Draw ();
+   virtual void Update (CheckState state);
+   virtual void Draw ();
 };
 
 typedef CheckViewObject CheckBox;

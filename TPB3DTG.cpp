@@ -17,7 +17,6 @@
 // By AlabamaCajun, RFrank, crazy2be
 
 #include <iostream>
-#include <CEGUI.h>
 
 #include "Graphics/Camera.h"
 

@@ -134,18 +134,6 @@ public:
    EventSubscriber(int id, bool (T::*function)(const EventArgs&), T* obj) :
    mpF(new EventFunctor<T>(function, obj))
    {}
-
-
-   //    template<typename T>
-   //    EventSubscriber(const T& functor) :
-   //        d_functor_impl(new FunctorCopySlot<T>(functor))
-   //    {}
-
-   //    template<typename T>
-   //    EventSubscriber(T* functor) :
-   //        d_functor_impl(new FunctorPointerSlot<T>(functor))
-   //    {}
-
 };
 
 class ViewEvent
@@ -155,13 +143,15 @@ public:
    {
       None = 0,
       Click,
-      Changed
+      Changed,
+      RadioExclude
    };
 protected:
    std::string mName;
 
+   // Events container
    typedef std::multimap<int, EventSubscriber> EventMap;
-   EventMap mEventSubs;  //!< Collection holding ref-counted bound slots\
+   EventMap mEventSubs;
 
 protected:
    // Copy constructor and assignment are not allowed for events
@@ -175,13 +165,17 @@ public:
    }
    virtual ~ViewEvent() {};
 
-   const std::string& getName(void) const
+   const std::string& get_Name(void) const
    {
       return mName;
    }
+   void set_Name(const char* szName)
+   {
+      mName = szName;
+   }
 
    void Subscribe(Types type, const EventSubscriber& ev);
-   void operator()(Types t, EventArgs& args)
+   virtual void operator()(Types t, EventArgs& args)
    {
       size_t iT = mEventSubs.count (t);
       if( iT > 0 )
@@ -196,6 +190,23 @@ private:
    void unsubscribe(const EventBase& ev);
 };
 
+// Mutual Exclusive group like radio buttons
+class GroupViewEvent : public ViewEvent
+{
+public:
+   GroupViewEvent(const char* name)
+   :  ViewEvent(name)
+   {
+   }
+   virtual void operator()(Types t, EventArgs& args)
+   {
+      for (EventMap::iterator ies = mEventSubs.begin(); ies != mEventSubs.end(); ies++)
+      {
+         EventSubscriber& es = ies->second;
+         es(args);
+      }
+   };
+};
 
 class EventHandler
 {

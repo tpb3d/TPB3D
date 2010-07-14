@@ -3,7 +3,6 @@
 #include "../Graphics/Animation.h"
 #include "../Hub/Event.h"
 
-class WindowDelegate;
 class SerializerBase;
 
 class ButtonViewObject : public ViewObject
@@ -14,8 +13,8 @@ class ButtonViewObject : public ViewObject
       BS_Selected,       // lit and down
       BS_Highlighted // just lit
    };
-   ViewEvent mEvents;
-   std::string mStrContent;
+   ViewEvent      mEvents;
+   std::string    mStrContent;
    int m_ID;
    AnimationSingle* mpFace;
    AnimationSingle* mpTextTex;
@@ -26,11 +25,10 @@ class ButtonViewObject : public ViewObject
    char mVisible; // Visible, Invisible
    char mSelected; // hit
    char mHighlit; // mouse presence
-   WindowDelegate* mpEvent;
-   WindowDelegate& mParentPipe;
+   ViewObject& mParentPipe;
    int    mPosition;
 public:
-   ButtonViewObject( float x, float y, int ID, WindowDelegate& rParent);
+   ButtonViewObject( float x, float y, int ID, ViewObject& rParent);
    ~ButtonViewObject(void);
 
 public:
@@ -44,8 +42,8 @@ public:
    void Clear();   // return this button to normal
    int TestHit (Vector2i point); // just render geometry for selection
 
-   void set_EventHandler (WindowDelegate* pEvent) { mpEvent = pEvent; }
    void set_Text (const char* pszText);
+   void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
       
    void Select (bool bState);
    void Hightlight (bool bState);

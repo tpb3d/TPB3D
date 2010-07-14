@@ -177,7 +177,7 @@ void WindowViewObject::Draw(void)  // Use the compiled GL code to show it in the
 // Serialization
 void WindowViewObject::Load(SerializerBase& ser)
 {
-   SerializerBase* pSer = ser.GetFirstChild ("Stalls");
+   SerializerBase* pSer = ser.GetFirstChild ("WindowChildren");
    while (pSer != NULL)
    {
       int iW = pSer->GetInt ("Width");
@@ -191,7 +191,7 @@ void WindowViewObject::Load(SerializerBase& ser)
 void WindowViewObject::Save(SerializerBase& ser)
 {
    ser.Add("Window", this->mStrContent.c_str());
-   SerializerBase* pSer = ser.Spawn("Stalls"); // create a locale serializer of the type used for Stall
+   SerializerBase* pSer = ser.Spawn("WindowChildren"); // create a locale serializer of the type used for Stall
    ChildIterator itc;
    for (itc = mChildren.begin(); itc != mChildren.end(); itc++)
    {

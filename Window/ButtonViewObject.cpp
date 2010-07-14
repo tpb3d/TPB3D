@@ -31,7 +31,7 @@ namespace Gfx
    };
 }
 
-ButtonViewObject::ButtonViewObject( float x, float y, int ID, WindowDelegate& rParent)
+ButtonViewObject::ButtonViewObject( float x, float y, int ID, ViewObject& rParent)
 :  ViewObject(Gfx::kTextUVs)
 ,  mParentPipe (rParent)
 ,  mEvents ("Button")
@@ -71,20 +71,21 @@ void ButtonViewObject::Hit (int code)
 {
    if (mEnabled)
    {
+      EventArgs ea;
       mSelected = true;
       switch (code)
       {
       case sf::Key::Return:
          Select(false);
          mButtonState = BS_Selected;
-         mpEvent->Dispatch(1);
+         mEvents(ViewEvent::Changed, ea);
          break;
       case sf::Key::Escape:
          Select(false);
          break;
       case sf::Key::Space:
          mButtonState = BS_Selected;
-         mpEvent->Dispatch(1);
+         mEvents(ViewEvent::Changed, ea);
          break;
 //      case sf::Key::Shift:
 //      case sf::Key::Control:
@@ -99,14 +100,11 @@ void ButtonViewObject::Select (bool bState)
    if (mEnabled && bState)
    {
       mSelected = 1;
-      if (mpEvent != NULL)
-      {
-         mpEvent->Dispatch (1);
-      }
+      EventArgs ea;
+      mEvents(ViewEvent::Changed, ea);
    }
    else
    {
-      mParentPipe.Dispatch ('N');
       mSelected = 0;
    }
 }
@@ -133,9 +131,16 @@ void ButtonViewObject::Visible (bool bVisible)
    mVisible = (bVisible) ? 1 : 0;
 }
 
+void ButtonViewObject::SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber)
+{
+   mEvents.Subscribe (id, *subscriber);
+}
+
 void ButtonViewObject::Draw(void)  // Use the compiled GL code to show it in the view
 {
-   float fv = 1.0 / 16;
+   Render (mpFace);
+   RenderText (mpTextTex, 1, 1, mStrContent);
+/*   float fv = 1.0 / 16;
    if (mVisible )
    {
       // this needs to be in graphics
@@ -171,7 +176,7 @@ void ButtonViewObject::Draw(void)  // Use the compiled GL code to show it in the
          glEnd();
          fxa+= 0.65f;
       }
-   }
+   }*/
 }
 
 // Serialization

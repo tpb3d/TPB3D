@@ -3,49 +3,45 @@
 #include <SFML/System.hpp>
 #include "../Graphics/Image.h"
 #include "../Graphics/Camera.h"
-#include "../Scene/Scene.h"
-#include "../Delegates/WindowDelegate.h"
-#include "CheckViewObject.h"
+#include "LabelViewObject.h"
 
 using namespace Gfx;
 
 namespace Gfx
 {
-   const unsigned char kTextLights[3][4] =
+   const unsigned char kLabelLights[3][4] =
    {
       { 195,195,195,128 },    // Mormal
       { 195,255,255,255 },    // Lit
       { 151,151,151,255 }     // Hit
    };
-   const float kTextUVs[4][2] =
+   const float kLabelUVs[4][2] =
    {
       { 0, 0 },
       { 0, 0.25 },
       { 1, 0.25 },
       { 1, 0 }
    };
-   const float kTextTextUVs[8] =
+   const float kLabel2UVs[8] =
    {
       0.0f, 0.0f,  0.0f, 0.125f,  1.0f, 0.125f,  1.0f, 0.0f
    };
 }
 
-CheckViewObject::CheckViewObject( float x, float y, int ID, ViewObject& rParent)
-:  ViewObject(Gfx::kTextUVs)
+LabelViewObject::LabelViewObject( float x, float y, int ID, ViewObject& rParent)
+:  ViewObject(Gfx::kLabelUVs)
 ,  mParent (rParent)
-,  mEvents ("CheckBox")
 {
    m_ID = ID;
    
-   mCheckState = CS_Normal;
    InitGFX(x,y);
 }
 
-CheckViewObject::~CheckViewObject(void)
+LabelViewObject::~LabelViewObject(void)
 {
 }
 
-void CheckViewObject::InitGFX(float x, float y)
+void LabelViewObject::InitGFX(float x, float y)
 {
    m_Geometry.mPoints[0] = Vector3f (x,y,0);
    m_Geometry.mPoints[1] = Vector3f (x+140,y,0);
@@ -55,70 +51,22 @@ void CheckViewObject::InitGFX(float x, float y)
    Texture* pTex = images->GetTexture ("buttons.png", GL_RGBA);
    mpFace = new AnimationSingle (pTex, 140, 24);
    mpFace->SetPosition(x, y, 0);
-   mpFace->SetLightingColor (kTextLights[0]);
+   mpFace->SetLightingColor (kLabelLights[0]);
    pTex = images->GetTexture ("stats.png", GL_RGBA);
    mpTextTex = new AnimationSingle (pTex, 256, 22);
-   mpTextTex->SetUVs (kTextTextUVs);
+   mpTextTex->SetUVs (kLabel2UVs);
 
 }
 
-void CheckViewObject::set_Text (const char* pszText)
+void LabelViewObject::set_Text (const char* pszText)
 {
    mStrContent = pszText;
-   mPosition = (int)mStrContent.size();
 }
 
-void CheckViewObject::SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber)
-{
-   mEvents.Subscribe (id, *subscriber);
-}
 
-void CheckViewObject::Hit (bool bState)
+void LabelViewObject::Hightlight (bool bState)
 {
-   if (mEnabled && bState)
-   {
-      mSelected = true;
-      EventArgs ea;
-      mEvents(ViewEvent::Changed, ea);
-   }
-}
-
-void CheckViewObject::Hit (int code)
-{
-   switch (code)
-   {
-   case VK_RETURN:
-      Select(false);
-      break;
-   case VK_ESCAPE:
-      Select(false);
-      break;
-   case VK_SPACE:
-      Select(false);
-      mCheckState = CS_Checked;
-      break;
-   case VK_SHIFT:
-   case VK_CONTROL:
-   case VK_MENU:
-      break;
-   }
-}
-
-void CheckViewObject::Select (bool bState)
-{
-   if (mEnabled && bState)
-   {
-      mSelected = 1;
-   }
-   else
-   {
-      mSelected = 0;
-   }
-}
-
-void CheckViewObject::Hightlight (bool bState)
-{
-   if (mEnabled && bState)
+   if (bState)
    {
       mHighlit = 1;
    }
@@ -128,26 +76,13 @@ void CheckViewObject::Hightlight (bool bState)
    }
 }
 
-void CheckViewObject::Enable (bool bEnable)
-{
-   mEnabled = (bEnable) ? 1 : 0;
-}
-
-void CheckViewObject::Visible (bool bVisible)
+void LabelViewObject::Visible (bool bVisible)
 {
    mVisible = (bVisible) ? 1 : 0;
 }
 
-void CheckViewObject::Update(CheckState cs)
+void LabelViewObject::Draw(void)  // Use the compiled GL code to show it in the view
 {
-   mCheckState = cs;
-}
-
-void CheckViewObject::Draw(void)  // Use the compiled GL code to show it in the view
-{
-   Render (mpFace);
-   RenderText (mpTextTex, 1, 1, mStrContent);
-/*
    float fv = 1.0 / 16;
    if (mVisible )
    {
@@ -184,5 +119,5 @@ void CheckViewObject::Draw(void)  // Use the compiled GL code to show it in the 
          glEnd();
          fxa+= 0.65f;
       }
-   }*/
+   }
 }

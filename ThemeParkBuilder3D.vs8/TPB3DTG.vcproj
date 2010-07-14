@@ -40,7 +40,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;\Dev\VC++\SFML-1.5\include&quot;;&quot;\Dev\VC++\zlib123\include&quot;;&quot;\Dev\VC++\lib3ds-20080909\src&quot;;&quot;\Dev\VC++\lpng1240&quot;;&quot;\Dev\VC++\ZLib&quot;"
+				AdditionalIncludeDirectories="&quot;\Dev\VC++\SFML-1.5\include&quot;;&quot;\Dev\VC++\lib3ds-20080909\src&quot;;&quot;\Dev\VC++\lpng1240&quot;;&quot;C:\Dev\VC++\ZLib123&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;PNG_NO_ERROR_NUMBERS;_CRT_SECURE_NO_WARNINGS;doFractal;useLoadPng"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -227,6 +227,22 @@
 			</File>
 			<File
 				RelativePath="..\Window\Interface.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\LabelViewObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\LabelViewObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\RadioButtonViewObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\RadioButtonViewObject.h"
 				>
 			</File>
 			<File
@@ -1468,14 +1484,6 @@
 		</File>
 		<File
 			RelativePath="..\TPB3DTG.h"
-			>
-		</File>
-		<File
-			RelativePath=".\UserInput.cpp"
-			>
-		</File>
-		<File
-			RelativePath=".\UserInput.h"
 			>
 		</File>
 	</Files>

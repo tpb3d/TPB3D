@@ -20,8 +20,12 @@
 class Interface;
 class EventArgs;
 class CheckViewObject;
+class RadioButtonViewObject;
+class ButtonViewObject;
 class WindowViewObject;
+class LabelViewObject;
 class WindowDelegate;
+class GroupViewEvent; // basic group box without the visual element until we need the visual
 
 class SettingsWindow
 {
@@ -30,6 +34,16 @@ protected:
    WindowDelegate* mpDelegate;
    CheckViewObject* mpSoundFx;
    CheckViewObject* mpMusic;
+   RadioButtonViewObject* mpEnglish;
+   RadioButtonViewObject* mpFrench;
+   RadioButtonViewObject* mpGerman;
+   RadioButtonViewObject* mpItalian;
+   RadioButtonViewObject* mpSpanish;
+   ButtonViewObject* mpClose;
+   LabelViewObject* mpLabel1;
+   LabelViewObject* mpLabel2;
+
+   GroupViewEvent* mpLanguageGroup;
    Interface& mInterface;
 public:
    SettingsWindow (Interface& rInterface);
