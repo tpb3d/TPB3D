@@ -47,6 +47,7 @@ public:
    }
    inline float* GetLightingColor() { return LightingColor; }
    inline void SetWidth (float w) { mWidth.x = w; }
+   inline void SetHeight (float h) { mWidth.y = h; }
    virtual void BindTexture() = 0;
    virtual void ClearFrames () {};
    virtual void Update (float dt) {};

@@ -116,6 +116,37 @@ void ViewObject::RenderText(AnimationBase* pBase, float x, float y, string str)
    glEnd();
 }
 
+void ViewObject::RenderText(AnimationBase* pBase, std::string str)
+{
+   float x = pBase->GetPositionX();//-ms.x; position needs to be a member of modelObject, let physics access it to move it.
+   float y = (pBase->GetPositionY());//-ms.y;
+   const float cu = 1.0f/32;
+   float z = 0; //pBody->GetPositionZ();
+   float x2 = x + 9;
+   float y2 = y + 12;
+   pBase->BindTexture();
+   glBegin(GL_QUADS);
+   {
+      for( unsigned int ic = 0; ic < str.length(); ++ic)
+      {
+         char t = (char)str[ic]-' ';
+         float u = (t%32) * cu;
+         float v = 1.0f - 0.13f * int((128-t)/32);
+         glTexCoord2f (u, v-0.125f);
+         glVertex3f( x, y2, z );
+         glTexCoord2f (u, v);
+         glVertex3f( x, y, z );
+         glTexCoord2f (u+cu, v);
+         glVertex3f( x2, y, z );
+         glTexCoord2f (u+cu, v-0.125f);
+         glVertex3f( x2, y2, z );
+         x+=8;
+         x2+=8;
+      }
+   }
+   glEnd();
+}
+
 void ViewObject::Render(SimpleQuad* pQuad)
 {
    float x = pQuad->Position.x;

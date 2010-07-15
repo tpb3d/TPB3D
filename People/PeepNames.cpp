@@ -316,6 +316,7 @@ void TestAmericanNames()
          std::cout<<"(Check file: "<<nameoutfile<<")\r\n";
          fprintf(f,"==== American surname generator test ====\r\n");
       }
+#ifdef NAMES
       for(int i=0;i<nnames;i++)
       {
          name=countrynames.GetListName();
@@ -323,6 +324,7 @@ void TestAmericanNames()
          else	std::cout<<name.Text()<<", ";
 
       }//for i
+#endif
       if(f)	fclose(f);
       else	std::cout<<name.Text()<<"\r\n";
 

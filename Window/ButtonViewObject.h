@@ -18,7 +18,6 @@ class ButtonViewObject : public ViewObject
    int m_ID;
    AnimationSingle* mpFace;
    AnimationSingle* mpTextTex;
-   SimpleQuad     m_Geometry;
    ButtonState    mButtonState;
 
    char mEnabled; // Enabled, Disabled
@@ -55,7 +54,8 @@ public:
    void DeleteChar (int BackOrDel);
    void AppendText (int c);
    void MoveCursor (int code);
-
+   void ButtonViewObject::Resize (int iWidth, int iHeight);
+   void ButtonViewObject::Move (int iX, int iY, int iZ);
    void Update (ButtonState state);
    void Draw ();
 

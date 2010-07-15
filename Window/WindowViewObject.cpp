@@ -37,8 +37,6 @@ WindowViewObject::WindowViewObject( float x, float y, int ID, ViewObject* pParen
 ,  mEvents ("Window")
 {
    m_ID = ID;
-   Move (20,20,0);
-   Resize(140,32);
    Update (WS_Refresh);
    ImageManager * images = ImageManager::GetInstance ();
    Texture* pTex = images->GetTexture ("Nav3D.png", GL_RGBA);
@@ -75,25 +73,19 @@ void WindowViewObject::set_Text (const char* pszText)
 
 void WindowViewObject::Resize (int iWidth, int iHeight)
 {
-   mSize.x = (float)iWidth;
-   mSize.y = (float)iHeight;
+   mpFace->SetWidth ((float)iWidth);
+   mpFace->SetHeight ((float)iHeight);
 }
 
 void WindowViewObject::Move (int iX, int iY, int iZ)
 {
-   mOriginPoint.x = (float)iX;
-   mOriginPoint.y = (float)iY;
-   mOriginPoint.z = 0;  // don't use Z at this time
+   mpFace->MoveTo (iX, iY, iZ, 0);
+   mpTextTex->MoveTo (iX, iY, iZ, 0);
 }
 
 void WindowViewObject::Update (WindowState state)
 {
-   float x = mOriginPoint.x;
-   float y = mOriginPoint.y;
-   m_Geometry.mPoints[0] = Vector3f (x,y,0);
-   m_Geometry.mPoints[1] = Vector3f (x+mSize.x,y,0);
-   m_Geometry.mPoints[2] = Vector3f (x+mSize.x,y+mSize.y,0);
-   m_Geometry.mPoints[3] = Vector3f (x,y+mSize.y,0);
+   mWindowState = state;
 }
 
 void WindowViewObject::Hit (bool bState)
@@ -164,12 +156,12 @@ void WindowViewObject::Draw(void)  // Use the compiled GL code to show it in the
 {
    if (mVisible )
    {
-      Render (&m_Geometry);
+      Render (mpFace);
       ChildIterator itc;
       for (itc = mChildren.begin(); itc != mChildren.end(); itc++)
       {
          ViewObject *pC = *(itc);
-         //pC->Draw();
+         pC->Draw();
       }
    }
 }

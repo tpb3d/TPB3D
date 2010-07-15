@@ -97,7 +97,7 @@ bool SettingsWindow::Create ()
 
    mpClose = new ButtonViewObject(100,270,8, *mpWnd);
    mpClose->Visible (true);
-   mpClose->set_Text ("Sound On");
+   mpClose->set_Text ("Close");
    mpClose->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnClose, this));
 
    mpWnd->AddChild (mpSoundFx);
@@ -107,6 +107,7 @@ bool SettingsWindow::Create ()
    mpWnd->AddChild (mpGerman);
    mpWnd->AddChild (mpItalian);
    mpWnd->AddChild (mpSpanish);
+   mpWnd->AddChild (mpClose);
    mpSpanish->Hit (true);
    return true;
 }

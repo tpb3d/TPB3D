@@ -21,7 +21,6 @@ protected:
    int m_ID;
    AnimationSingle* mpFace;
    AnimationSingle* mpTextTex;
-   SimpleQuad     m_Geometry;
    CheckState      mCheckState;
 
    char mEnabled; // Enabled, Disabled

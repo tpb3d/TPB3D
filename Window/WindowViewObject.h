@@ -22,7 +22,6 @@ class WindowViewObject : public ViewObject
    int m_ID;
    AnimationSingle* mpFace;
    AnimationSingle* mpTextTex;
-   SimpleQuad     m_Geometry;
    WindowState    mWindowState;
    ViewObject*    mpParent;
 
