@@ -18,6 +18,7 @@
 #include <iostream>
 #include <string>
 #include "Animation.h"
+#include "SimpleMesh.h"
 #include "Texture.h"
 #include "ViewObject.h"
 
@@ -34,11 +35,17 @@ ViewObject::ViewObject ()
    mUVs[2][1] = 0;
    mUVs[3][0] = 1;
    mUVs[3][1] = 1;
+   memset (mPoints, 0, sizeof(mPoints));
+   mSize.x = 8;
+   mSize.y = 8;
 }
 
 ViewObject::ViewObject (const float uvs[4][2])
 {
    memcpy (mUVs, uvs, sizeof(mUVs));
+   memset (&mPoints, 0, sizeof(mPoints));
+   mSize.x = 8;
+   mSize.y = 8;
 }
 
 void ViewObject::Render(AnimationBase* pBase)
@@ -149,15 +156,11 @@ void ViewObject::RenderText(AnimationBase* pBase, std::string str)
 
 void ViewObject::Render(SimpleQuad* pQuad)
 {
-   float x = pQuad->Position.x;
-   float y = pQuad->Position.y;
-   float z = pQuad->Position.z;
-
    glPushMatrix();
 //      glLoadIdentity();
       glDisable (GL_TEXTURE_2D);
       glEnable (GL_COLOR_MATERIAL);
-      glTranslatef (x, y, z);
+      glTranslatef (pQuad->Position.x, pQuad->Position.y, pQuad->Position.z);
       glRotatef( -pQuad->Angle, 0, 0, 1 );
       glBegin(GL_QUADS);
       {
@@ -173,6 +176,90 @@ void ViewObject::Render(SimpleQuad* pQuad)
       glEnd();
       glDisable (GL_COLOR_MATERIAL);
       glEnable (GL_TEXTURE_2D);
+      glColor4ub (255,255,255,255);
+   glPopMatrix();
+}
+
+void ViewObject::Render(SimpleMesh* pMesh)  // Renders a quad from 4 vectors.
+{
+   glPushMatrix();
+      Vector3f* pQuad = pMesh->get_Mesh();
+      Vector2f* pUV = pMesh->get_mUVs();
+      pMesh->BindTexture();
+      glColor4fv (pMesh->GetLightingColor());
+      glTranslatef (pMesh->get_Position().x, pMesh->get_Position().y, pMesh->get_Position().z);
+      //glBegin(GL_QUADS); //_STRIP);
+      //{
+      //   glTexCoord2f (0, 0);
+      //   glVertex3fv ((float*)&pQuad[0].x);
+      //   glTexCoord2f (1, 0);
+      //   glVertex3fv ((float*)&pQuad[3].x);
+      //   glTexCoord2f (1, 1);
+      //   glVertex3fv ((float*)&pQuad[4].x);
+      //   glTexCoord2f (0, 1);
+      //   glVertex3fv ((float*)&pQuad[7].x);
+      //}
+      //glEnd();
+      glBegin(GL_QUAD_STRIP);
+      {
+         glTexCoord2fv (&pUV[0].x);
+         glVertex3fv ((float*)&pQuad[0].x);
+         glTexCoord2fv (&pUV[4].x);
+         glVertex3fv ((float*)&pQuad[4].x);
+         glTexCoord2fv (&pUV[1].x);
+         glVertex3fv ((float*)&pQuad[1].x);
+         glTexCoord2fv (&pUV[5].x);
+         glVertex3fv ((float*)&pQuad[5].x);
+         glTexCoord2fv (&pUV[2].x);
+         glVertex3fv ((float*)&pQuad[2].x);
+         glTexCoord2fv (&pUV[6].x);
+         glVertex3fv ((float*)&pQuad[6].x);
+         glTexCoord2fv (&pUV[3].x);
+         glVertex3fv ((float*)&pQuad[3].x);
+         glTexCoord2fv (&pUV[7].x);
+         glVertex3fv ((float*)&pQuad[7].x);
+      }
+      glEnd();
+      glBegin(GL_QUAD_STRIP);
+      {
+         glTexCoord2fv (&pUV[4].x);
+         glVertex3fv ((float*)&pQuad[4].x);
+         glTexCoord2fv (&pUV[8].x);
+         glVertex3fv ((float*)&pQuad[8].x);
+         glTexCoord2fv (&pUV[5].x);
+         glVertex3fv ((float*)&pQuad[5].x);
+         glTexCoord2fv (&pUV[9].x);
+         glVertex3fv ((float*)&pQuad[9].x);
+         glTexCoord2fv (&pUV[6].x);
+         glVertex3fv ((float*)&pQuad[6].x);
+         glTexCoord2fv (&pUV[10].x);
+         glVertex3fv ((float*)&pQuad[10].x);
+         glTexCoord2fv (&pUV[7].x);
+         glVertex3fv ((float*)&pQuad[7].x);
+         glTexCoord2fv (&pUV[11].x);
+         glVertex3fv ((float*)&pQuad[11].x);
+      }
+      glEnd();
+      glBegin(GL_QUAD_STRIP);
+      {
+         glTexCoord2fv (&pUV[8].x);
+         glVertex3fv ((float*)&pQuad[8].x);
+         glTexCoord2fv (&pUV[12].x);
+         glVertex3fv ((float*)&pQuad[12].x);
+         glTexCoord2fv (&pUV[9].x);
+         glVertex3fv ((float*)&pQuad[9].x);
+         glTexCoord2fv (&pUV[13].x);
+         glVertex3fv ((float*)&pQuad[13].x);
+         glTexCoord2fv (&pUV[10].x);
+         glVertex3fv ((float*)&pQuad[10].x);
+         glTexCoord2fv (&pUV[14].x);
+         glVertex3fv ((float*)&pQuad[14].x);
+         glTexCoord2fv (&pUV[11].x);
+         glVertex3fv ((float*)&pQuad[11].x);
+         glTexCoord2fv (&pUV[15].x);
+         glVertex3fv ((float*)&pQuad[15].x);
+      }
+      glEnd();
       glColor4ub (255,255,255,255);
    glPopMatrix();
 }

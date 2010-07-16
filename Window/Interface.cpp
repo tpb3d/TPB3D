@@ -27,9 +27,10 @@
 #include "../Graphics/Camera.h"
 #include "../Hub/Event.h"
 #include "../Delegates/KeyNavDelegate.h" // if a window is open, this delegate is in use
-#include "../Delegates/WindowDelegate.h" // if a window is open, this delegate is in use
+#include "../Delegates/GUIDelegate.h" // if a window is open, this delegate is in use
 #include "ToolButton.h"
 #include "ToolBar.h"
+#include "WindowViewObject.h"
 #include "TextViewObject.h"
 #include "SettingsWindow.h"
 #include "Interface.h"
@@ -191,6 +192,7 @@ bool Interface::OnMouseDown (sf::Mouse::Button Button, Vector2i pointa, Vector2i
    {
       int t = hit;
       //hit
+      return true;
    }
    return false; // leave the message in for the pointer
 }
@@ -202,6 +204,15 @@ bool Interface::OnMouseUp (sf::Mouse::Button Button, Vector2i pointa, Vector2i p
    if( hit )
    {
       return mEVH.HandleEvents ((HR_Events)hit);
+   }
+   if ( this->mpWindow!= NULL)
+   {
+      hit = mpWindow->TestHit (pt);
+      if (hit)
+      {
+         mpWindowDelegate = mpWindow->get_Delegate();
+         return mEVH.HandleEvents ((HR_Events)hit);
+      }
    }
    return false; // leave the message in for the pointer
 }
@@ -226,18 +237,20 @@ bool Interface::OnKeyDown (sf::Key::Code Key)
    return false;
 }
 
-class SpecialDelegate : public WindowDelegate
+class SpecialDelegate : public GUIDelegate
 {
    Interface& mpParent;
 public:
    SpecialDelegate(Interface& par)
-      : WindowDelegate ("None", NULL)
+      : GUIDelegate ("None", NULL)
       , mpParent (par)
    {
    }
-   void OnHitDown (short ID) { mpParent.CloseChildWindow(); }
-   void OnHitUp (short ID) {}
-   void Dispatch (int e) {};
+   void OnKeyDown (short ID) {}
+   void OnKeyUp (short ID) {}
+   void OnMouseDown(short ID) { mpParent.CloseChildWindow(); }
+   void OnMouseUp(short ID) {}
+   void Dispatch (int e) {}
 };
 
 void Interface::CloseChildWindow()
@@ -250,7 +263,7 @@ bool Interface::OnKeyUp (sf::Key::Code Key)
 {
    if (mpWindowDelegate != NULL)
    {
-      mpWindowDelegate->OnHitUp (Key);
+      mpWindowDelegate->OnKeyUp (Key);
    }
    else
    {
@@ -261,7 +274,7 @@ bool Interface::OnKeyUp (sf::Key::Code Key)
             mpSpecialDelegate = new SpecialDelegate(*this);
             mpWindowDelegate = new KeyNavDelegate(*mpSpecialDelegate, "", NULL);
          }
-         mpWindow = new TextViewObject (120, 200, 1293, *mpWindowDelegate);
+//help         mpWindow = new WindowViewObject (120, 200, 1293, *mpWindowDelegate);
       }
    }
    return false;
@@ -291,6 +304,7 @@ bool Interface::OnSettings ()
    {
       mpSettings = new SettingsWindow (*this);
       mpSettings->Create();
+      mpWindowDelegate = mpSettings->get_Delegate();
    }
    //setwin->Create (this->mpRootWind);
    return false; //true;

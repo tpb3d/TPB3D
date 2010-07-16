@@ -62,6 +62,8 @@ ToolButton::ToolButton( float x, float y, int ID)
    pTex = images->GetTexture ("stats.png", GL_RGBA);
    mpTextTex = new AnimationSingle (pTex, 256, 22);
    mpTextTex->SetUVs (kButtonTextUVs);
+   mSize.x = 140.0f;
+   mSize.y = 24.0f;
 }
 
 ToolButton::~ToolButton ()
@@ -73,7 +75,7 @@ void ToolButton::Clear ()
    // clear all the buttons
 }
 
-int ToolButton::TestHit (Vector2i point)
+int ToolButton::TestHit (Vector2i& point)
 {
    if ((point.x > m_Geometry.mPoints[0].x && point.x < m_Geometry.mPoints[2].x)
       && (point.y > m_Geometry.mPoints[0].y && point.y < m_Geometry.mPoints[2].y))

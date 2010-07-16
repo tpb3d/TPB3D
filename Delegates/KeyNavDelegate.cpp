@@ -3,8 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include "../Types/Virtkeys.h"
 
-KeyNavDelegate::KeyNavDelegate(WindowDelegate& rMain, const char* pszName, Scene* pScene)
-   :  WindowDelegate (pszName, pScene)
+KeyNavDelegate::KeyNavDelegate(GUIDelegate& rMain, const char* pszName, Gfx::ViewObject* pParent)
+   :  GUIDelegate (pszName, pParent)
    ,  mrMain (rMain)
 {
 }

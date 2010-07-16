@@ -1,4 +1,5 @@
 #pragma once
+#include "../Types/Vector2.h"
 #include "../Graphics/ViewObject.h"
 #include "../Graphics/Animation.h"
 
@@ -15,7 +16,6 @@ protected:
    int m_ID;
    AnimationSingle* mpFace;
    AnimationSingle* mpTextTex;
-   SimpleQuad     m_Geometry;
 
    char mVisible; // Visible, Invisible
    char mHighlit; // mouse presence
@@ -41,5 +41,6 @@ public:
    void Hightlight (bool bState);
    void Visible (bool bVisible);
 
+   virtual int  TestHit (Vector2i& point) { return 0; }
    virtual void Draw ();
 };

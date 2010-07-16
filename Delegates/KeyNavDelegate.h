@@ -1,19 +1,22 @@
 #pragma once
-#include "WindowDelegate.h"
+#include "../Graphics/ViewObject.h"
+#include "GUIDelegate.h"
 
 class CMainFrame;
 
-class KeyNavDelegate : public WindowDelegate
+class KeyNavDelegate : public GUIDelegate
 {
 protected:
-   WindowDelegate& mrMain;
+   GUIDelegate& mrMain;
 
 public:
-   KeyNavDelegate(WindowDelegate& rMain, const char* pszName, Scene* pScene);
+   KeyNavDelegate(GUIDelegate& rMain, const char* pszName, Gfx::ViewObject* pParent);
    ~KeyNavDelegate(void);
 
-   virtual void OnHitDown (short ID) {};
-   virtual void OnHitUp (short ID) {};
+   virtual void OnKeyDown (short ID) {};
+   virtual void OnKeyUp (short ID) {};
+   virtual void OnMouseDown(short ID) {}
+   virtual void OnMouseUp(short ID) {}
    void Dispatch (int e);
 };
 

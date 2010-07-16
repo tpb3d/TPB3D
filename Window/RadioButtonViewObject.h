@@ -22,7 +22,8 @@ public:
 
    bool OnClear (const EventArgs& e);
 
-   virtual void RadioButtonViewObject::Hit (bool bState);
+   virtual void Hit (bool bState);
+   virtual void Select (bool bState);
    virtual void Update (RadioState state);
    virtual void Draw ();
 

@@ -21,6 +21,7 @@
 #ifndef _VIEWOBJECT_H
 #define _VIEWOBJECT_H
 #include "../Types/Vector3.h"
+#include "../Types/Vector2.h"
 
 struct SimpleQuad
 {
@@ -30,6 +31,7 @@ struct SimpleQuad
    float    Angle;
 };
 
+class SimpleMesh;
 class AnimationBase;    // Main body of physics component
 
 namespace Gfx
@@ -39,18 +41,22 @@ namespace Gfx
    {
    protected:
       float    mUVs[4][2];
+      Vector3f mPoints[2];
+      Vector2f mSize;
 
    public:
       ViewObject ();
       ViewObject (const float uvs[4][2]);
 
       virtual void Draw() {};
+      virtual int  TestHit (Vector2i& point) { return 0; }
    protected:
       void Render(AnimationBase* pBase);  // draw method replacement, drawing now happens on the GPU side for us
       void Render(AnimationBase* pBase, const float uvs[4][2]);  // draw method replacement, drawing now happens on the GPU side for us
       void RenderText(AnimationBase* pBase, float x, float y, std::string str); // includes font w&h, string
       void RenderText(AnimationBase* pBase, std::string str);
       void Render(SimpleQuad* pQuad);  // Renders a quad from 4 vectors.
+      void Render(SimpleMesh* pQuad);  // Renders a quad from 4 vectors.
       void DrawSelectionTarget(SimpleQuad* pQuad);      // just the basic geometry
    };
 }

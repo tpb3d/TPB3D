@@ -24,8 +24,9 @@
 
 class ToolBar;
 class EventHandler;
-class WindowDelegate;
+class GUIDelegate;
 class SpecialDelegate;
+class WindowViewObject;
 class SettingsWindow;
 
 class Interface : public EventBase
@@ -42,8 +43,8 @@ protected:
    Stats mStats;
    EventHandler& mEVH; // tap the event handler for the app
    ToolBar* mpToolBar;
-   WindowDelegate* mpWindowDelegate;
-   ViewObject*    mpWindow;
+   GUIDelegate* mpWindowDelegate;
+   WindowViewObject* mpWindow;
    SettingsWindow* mpSettings;
    SpecialDelegate* mpSpecialDelegate;
 

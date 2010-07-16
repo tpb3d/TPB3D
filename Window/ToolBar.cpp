@@ -85,7 +85,7 @@ void ToolBar::Clear ()
    }
 }
 
-int ToolBar::TestHit (Vector2i point)
+int ToolBar::TestHit (Vector2i& point)
 {
    int hit = 0;
    for(int ix = 0; hit == 0 && ix < m_ButtonMax; ++ix)

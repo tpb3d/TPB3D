@@ -2,11 +2,26 @@
 
 #include <SFML/System.hpp>
 #include "../Graphics/Image.h"
-#include "../Graphics/Camera.h"
+#include "../Graphics/SimpleMesh.h"
 #include "../Scene/Scene.h"
-#include "../Delegates/WindowDelegate.h"
+#include "../Delegates/GUIDelegate.h"
 #include "RadioButtonViewObject.h"
 #include "../Storage/SerializerBase.h"
+
+const float kUnpressedUVs[16][2] =
+{
+   { 0.76f, 0.87f },{ 0.78f, 0.87f },{ 0.85f, 0.87f },{ 0.87f, 0.87f },
+   { 0.76f, 0.89f },{ 0.78f, 0.89f },{ 0.85f, 0.89f },{ 0.87f, 0.89f },
+   { 0.76f, 0.97f },{ 0.78f, 0.97f },{ 0.85f, 0.97f },{ 0.87f, 0.97f },
+   { 0.76f, 0.99f },{ 0.78f, 0.99f },{ 0.85f, 0.99f },{ 0.87f, 0.99f }
+};
+const float kPressedUVs[16][2] =
+{
+   { 0.875f, 0.87f },{ 0.895f, 0.87f },{ 0.975f, 0.87f },{ 0.995f, 0.87f },
+   { 0.875f, 0.89f },{ 0.895f, 0.89f },{ 0.975f, 0.89f },{ 0.995f, 0.89f },
+   { 0.875f, 0.97f },{ 0.895f, 0.97f },{ 0.975f, 0.97f },{ 0.995f, 0.97f },
+   { 0.875f, 0.99f },{ 0.895f, 0.99f },{ 0.975f, 0.99f },{ 0.995f, 0.99f }
+};
 
 RadioButtonViewObject::RadioButtonViewObject( float x, float y, int ID, ViewObject& rParent, GroupViewEvent& rEvents)
 :  CheckViewObject(x, y, ID, rParent)
@@ -38,6 +53,21 @@ void RadioButtonViewObject::Hit (bool bState)
       Update (RS_Pressed);
    }
 }
+
+void RadioButtonViewObject::Select (bool bState)
+{
+   if (mEnabled && bState)
+   {
+      mSelected = 1;
+      mpFace->SetUVs (kPressedUVs);
+   }
+   else
+   {
+      mSelected = 0;
+      mpFace->SetUVs (kUnpressedUVs);
+   }
+}
+
 
 void RadioButtonViewObject::Update(RadioState rs)
 {

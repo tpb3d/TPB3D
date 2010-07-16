@@ -43,7 +43,7 @@ public:
    void PosCalc ();
 //   void Update (int state);
    void Draw ();
-   int TestHit (Vector2i point);
+   int TestHit (Vector2i& point);
 
 };
 

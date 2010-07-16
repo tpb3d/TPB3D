@@ -460,6 +460,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Graphics\SimpleMesh.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Graphics\SimpleMesh.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Graphics\SimpleMeshObject.cpp"
 				>
 			</File>
@@ -1406,6 +1414,22 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Delegates\EventDelegate.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\EventDelegate.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\GUIDelegate.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Delegates\GUIDelegate.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Delegates\KeyNavDelegate.cpp"
 				>
 			</File>
@@ -1431,14 +1455,6 @@
 			</File>
 			<File
 				RelativePath="..\Delegates\ToolBarDelegate.h"
-				>
-			</File>
-			<File
-				RelativePath="..\Delegates\WindowDelegate.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Delegates\WindowDelegate.h"
 				>
 			</File>
 		</Filter>

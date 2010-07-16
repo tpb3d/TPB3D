@@ -3,7 +3,7 @@
 #include "../Graphics/Animation.h"
 #include "../Hub/Event.h"
 
-class WindowDelegate;
+class GUIDelegate;
 class SerializerBase;
 
 class WindowViewObject : public ViewObject
@@ -17,11 +17,12 @@ class WindowViewObject : public ViewObject
    };
    std::string mStrContent;
    std::vector<ViewObject*> mChildren;
-   Vector3f mOriginPoint;  // Window anchor point in the world scene
+   Vector3f mPosition;
    Vector3f mSize;         // Size vector of the client rectangle.
    int m_ID;
-   AnimationSingle* mpFace;
+   SimpleMesh*    mpFace;
    AnimationSingle* mpTextTex;
+   GUIDelegate*   mpWindowDelegate;
    WindowState    mWindowState;
    ViewObject*    mpParent;
 
@@ -30,7 +31,6 @@ class WindowViewObject : public ViewObject
    char mSelected; // hit
    char mHighlit; // mouse presence
    ViewEvent mEvents;
-   int    mPosition;
 
 public:
    typedef std::vector<ViewObject*>::iterator ChildIterator;
@@ -42,11 +42,11 @@ public:
 public:
    // properties
    void set_State( WindowState cs ) { mWindowState = cs; }
+   GUIDelegate* get_Delegate () { return mpWindowDelegate; }
 
    // methods
 public:
    void Clear();   // return this Window to normal
-   int TestHit (Vector2i point); // just render geometry for selection
 
    void set_Text (const char* pszText);
    void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
@@ -67,6 +67,7 @@ public:
    void AppendText (int c);
    void MoveCursor (int code);
 
+   int  TestHit (Vector2i& point);
    void Update (WindowState state);
    void Draw ();
 

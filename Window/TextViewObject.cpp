@@ -4,7 +4,7 @@
 #include "../Graphics/Image.h"
 #include "../Graphics/Camera.h"
 #include "../Scene/Scene.h"
-#include "../Delegates/WindowDelegate.h"
+#include "../Delegates/GUIDelegate.h"
 #include "TextViewObject.h"
 
 using namespace Gfx;
@@ -30,16 +30,16 @@ namespace Gfx
    };
 }
 
-TextViewObject::TextViewObject( float x, float y, int ID, WindowDelegate& rParent)
+TextViewObject::TextViewObject( float x, float y, int ID, GUIDelegate& rParent)
 :  ViewObject(Gfx::kTextUVs)
 ,  mParentPipe (rParent)
 {
    m_ID = ID;
    m_TextState = TS_Normal;
-   m_Geometry.mPoints[0] = Vector3f (x,y,0);
-   m_Geometry.mPoints[1] = Vector3f (x+140,y,0);
-   m_Geometry.mPoints[2] = Vector3f (x+140,y+24,0);
-   m_Geometry.mPoints[3] = Vector3f (x,y+32,0);
+   mPoints[0] = Vector3f (x,y,0);
+   mPoints[1] = Vector3f (x+140,y,0);
+   mPoints[2] = Vector3f (x+140,y+24,0);
+   mPoints[3] = Vector3f (x,y+32,0);
    ImageManager * images = ImageManager::GetInstance ();
    Texture* pTex = images->GetTexture ("buttons.png", GL_RGBA);
    mpFace = new AnimationSingle (pTex, 140, 24);
@@ -218,6 +218,15 @@ void TextViewObject::Visible (bool bVisible)
 {
    mVisible = (bVisible) ? 1 : 0;
 }
+
+int TextViewObject::TestHit (Vector2i& point)
+{
+   if ((point.x > mPoints[0].x && point.x < mPoints[1].x)
+      && (point.y > mPoints[0].y && point.y < mPoints[1].y))
+      return this->m_ID;
+   return 0;
+}
+
 
 void TextViewObject::Draw(void)  // Use the compiled GL code to show it in the view
 {

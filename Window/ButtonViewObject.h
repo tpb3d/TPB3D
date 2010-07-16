@@ -16,7 +16,7 @@ class ButtonViewObject : public ViewObject
    ViewEvent      mEvents;
    std::string    mStrContent;
    int m_ID;
-   AnimationSingle* mpFace;
+   SimpleMesh*    mpFace;
    AnimationSingle* mpTextTex;
    ButtonState    mButtonState;
 
@@ -25,7 +25,7 @@ class ButtonViewObject : public ViewObject
    char mSelected; // hit
    char mHighlit; // mouse presence
    ViewObject& mParentPipe;
-   int    mPosition;
+
 public:
    ButtonViewObject( float x, float y, int ID, ViewObject& rParent);
    ~ButtonViewObject(void);
@@ -36,11 +36,9 @@ public:
 
    // methods
 public:
-   WindowDelegate* subscribeEvent(const char* name, EventSubscriber* subscriber);
+   GUIDelegate* subscribeEvent(const char* name, EventSubscriber* subscriber);
 
    void Clear();   // return this button to normal
-   int TestHit (Vector2i point); // just render geometry for selection
-
    void set_Text (const char* pszText);
    void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
       
@@ -54,8 +52,9 @@ public:
    void DeleteChar (int BackOrDel);
    void AppendText (int c);
    void MoveCursor (int code);
-   void ButtonViewObject::Resize (int iWidth, int iHeight);
-   void ButtonViewObject::Move (int iX, int iY, int iZ);
+   void Resize (int iWidth, int iHeight);
+   void Move (int iX, int iY, int iZ);
+   virtual int  TestHit (Vector2i& point);
    void Update (ButtonState state);
    void Draw ();
 

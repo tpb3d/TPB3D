@@ -24,14 +24,14 @@ class RadioButtonViewObject;
 class ButtonViewObject;
 class WindowViewObject;
 class LabelViewObject;
-class WindowDelegate;
+class GUIDelegate;
 class GroupViewEvent; // basic group box without the visual element until we need the visual
 
 class SettingsWindow
 {
 protected:
    WindowViewObject* mpWnd;
-   WindowDelegate* mpDelegate;
+   GUIDelegate* mpDelegate;
    CheckViewObject* mpSoundFx;
    CheckViewObject* mpMusic;
    RadioButtonViewObject* mpEnglish;
@@ -48,6 +48,8 @@ protected:
 public:
    SettingsWindow (Interface& rInterface);
    ~SettingsWindow ();
+
+   GUIDelegate* get_Delegate() { return mpDelegate; }
 
 public:
    bool Create ();

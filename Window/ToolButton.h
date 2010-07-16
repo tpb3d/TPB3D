@@ -54,7 +54,7 @@ public:
    // methods
 public:
    void Clear();   // return this button to normal
-   int TestHit (Vector2i point); // just render geometry for selection
+   int TestHit (Vector2i& point); // just render geometry for selection
 
    void Update (ButtonState state);
    void Draw ();

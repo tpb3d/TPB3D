@@ -17,7 +17,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "../Delegates/WindowDelegate.h"
+#include "../Delegates/GUIDelegate.h"
 #include "../Hub/Event.h"
 #include "LabelViewObject.h"
 #include "CheckViewObject.h"
@@ -68,6 +68,7 @@ bool SettingsWindow::Create ()
    mpMusic->Visible (true);
    mpMusic->set_Text ("Music On");
    mpMusic->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnMusicCheck, this));
+   mpMusic->Select(true);
 
    // Language group all subscribe to an event ring mpLanguageGroup.
    mpEnglish = new RadioButtonViewObject (10, 110, 4, *mpWnd, *mpLanguageGroup);
@@ -94,8 +95,10 @@ bool SettingsWindow::Create ()
    mpSpanish->Visible (true);
    mpSpanish->set_Text ("Espaniol");
    mpSpanish->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnSpanish, this));
+   mpSpanish->Select(true);
 
    mpClose = new ButtonViewObject(100,270,8, *mpWnd);
+   mpClose->Resize (64, 24);
    mpClose->Visible (true);
    mpClose->set_Text ("Close");
    mpClose->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnClose, this));

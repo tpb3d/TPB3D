@@ -2,7 +2,7 @@
 #include "../Graphics/ViewObject.h"
 #include "../Graphics/Animation.h"
 
-class WindowDelegate;
+class GUIDelegate;
 
 class TextViewObject : public ViewObject
 {
@@ -16,15 +16,14 @@ class TextViewObject : public ViewObject
    int m_ID;
    AnimationSingle* mpFace;
    AnimationSingle* mpTextTex;
-   SimpleQuad     m_Geometry;
    TextState      m_TextState;
 
    char mEnabled; // Enabled, Disabled
    char mVisible; // Visible, Invisible
    char mSelected; // hit
    char mHighlit; // mouse presence
-   WindowDelegate* mpEvent;
-   WindowDelegate& mParentPipe;
+   GUIDelegate* mpEvent;
+   GUIDelegate& mParentPipe;
    int    mPosition;
    // TODO: add style!
 
@@ -34,7 +33,7 @@ protected:
    char mColorHighlit[4];
 
 public:
-   TextViewObject(float x, float y, int ID, WindowDelegate& rParent);
+   TextViewObject(float x, float y, int ID, GUIDelegate& rParent);
    ~TextViewObject(void);
 public:
    // properties
@@ -43,9 +42,9 @@ public:
    // methods
 public:
    void Clear();   // return this button to normal
-   int TestHit (Vector2i point); // just render geometry for selection
+   int  TestHit (Vector2i& point); // just render geometry for selection
 
-   void set_EventHandler (WindowDelegate* pEvent) { mpEvent = pEvent; }
+   void set_EventHandler (GUIDelegate* pEvent) { mpEvent = pEvent; }
    void set_Text (const char* pszText);
       
    void Select (bool bState);

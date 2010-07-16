@@ -43,10 +43,6 @@ LabelViewObject::~LabelViewObject(void)
 
 void LabelViewObject::InitGFX(float x, float y)
 {
-   m_Geometry.mPoints[0] = Vector3f (x,y,0);
-   m_Geometry.mPoints[1] = Vector3f (x+140,y,0);
-   m_Geometry.mPoints[2] = Vector3f (x+140,y+24,0);
-   m_Geometry.mPoints[3] = Vector3f (x,y+32,0);
    ImageManager * images = ImageManager::GetInstance ();
    Texture* pTex = images->GetTexture ("buttons.png", GL_RGBA);
    mpFace = new AnimationSingle (pTex, 140, 24);
