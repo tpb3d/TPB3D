@@ -39,10 +39,10 @@ bool SceneEvent::OnToolHit (const HR_Events tool)
 {
    switch (tool)
    {
-   case HR_OpenScene:
-      return OnOpen("data/xml/Park.xml");
-   case HR_SaveScene:
-      return OnSave("data/xml/Park2.xml");
+   //case HR_OpenScene:
+   //   return OnOpen("data/xml/Park.xml");
+   //case HR_SaveScene:
+   //   return OnSave("data/xml/Park2.xml");
 //   case HR_Settings:
 //      return mGameManager.Settings();
    case HR_FRCS:

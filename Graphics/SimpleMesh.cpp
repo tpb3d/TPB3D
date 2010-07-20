@@ -11,11 +11,8 @@ SimpleMesh::~SimpleMesh(void)
 {
 }
 
-void SimpleMesh::SetSize (int width, int height, int border) // width, height, border thickness
+void SimpleMesh::SetSize (float fX, float fY, float fB) // width, height, border thickness
 {
-   float fX = (float)width;
-   float fY = (float)height;
-   float fB = (float)border;
    mMesh[0] = Vector3f(0, 0, 0);
    mMesh[1] = Vector3f(fB, 0, 0);
    mMesh[2] = Vector3f(fB+fX, 0, 0);

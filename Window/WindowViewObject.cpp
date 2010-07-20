@@ -77,7 +77,10 @@ WindowViewObject::~WindowViewObject(void)
 
 void WindowViewObject::AddChild (ViewObject* pChild)
 {
-   mChildren.push_back (pChild);
+   if (pChild != NULL)
+   {
+      mChildren.push_back (pChild);
+   }
 }
 
 void WindowViewObject::set_Text (const char* pszText)

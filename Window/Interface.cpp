@@ -26,6 +26,7 @@
 #include "../Graphics/Animation.h"
 #include "../Graphics/Camera.h"
 #include "../Hub/Event.h"
+#include "../Hub/GameManager.h"
 #include "../Delegates/KeyNavDelegate.h" // if a window is open, this delegate is in use
 #include "../Delegates/GUIDelegate.h" // if a window is open, this delegate is in use
 #include "ToolButton.h"
@@ -33,12 +34,14 @@
 #include "WindowViewObject.h"
 #include "TextViewObject.h"
 #include "SettingsWindow.h"
+#include "FileDialogWindow.h"
 #include "Interface.h"
 
 using namespace Gfx;
 
-Interface::Interface (EventHandler& revh)
+Interface::Interface (EventHandler& revh, GameManager& GM)
 :  mEVH(revh)
+,  mGameManager(GM)
 {
    mpToolBar = new ToolBar(6, HR_MainMenu);
    mpWindow = NULL;
@@ -51,6 +54,7 @@ Interface::Interface (EventHandler& revh)
    mChangedSettings = false;
    mCurDay = 0;
    mpSettings = NULL;
+   mpFileDialog = NULL;
 }
 
 Interface::~Interface ()
@@ -62,6 +66,10 @@ Interface::~Interface ()
    if (mChangedSettings)
    {
       SaveSettings();
+   }
+   if (mpFileDialog)
+   {
+      delete mpFileDialog;
    }
 }
 
@@ -157,6 +165,10 @@ void Interface::Draw ()
    if (mpSettings != NULL)
    {
       mpSettings->Draw();
+   }
+   if (mpFileDialog != NULL)
+   {
+      mpFileDialog->Draw();
    }
 }
 
@@ -284,6 +296,24 @@ bool Interface::OnToolHit (const HR_Events tool)
 {
    switch (tool)
    {
+   case HR_OpenScene:
+      if (mpFileDialog!=NULL)
+      {
+         delete mpFileDialog;
+      }
+      mpFileDialog = new FileDialogWindow(*this, FileDialogWindow::FDT_OpenFile);
+      mpFileDialog->Create();
+      mpWindowDelegate = mpFileDialog->get_Delegate();
+      return true;
+   case HR_SaveScene:
+      if (mpFileDialog!=NULL)
+      {
+         delete mpFileDialog;
+      }
+      mpFileDialog = new FileDialogWindow(*this, FileDialogWindow::FDT_SaveFile);
+      mpFileDialog->Create();
+      mpWindowDelegate = mpFileDialog->get_Delegate();
+      return true;
    case HR_Settings:
       return OnSettings();
    case HR_Tools:
@@ -310,3 +340,12 @@ bool Interface::OnSettings ()
    return false; //true;
 }
 
+bool Interface::OpenScene (const char* pPath)
+{
+   return mGameManager.LoadGame( pPath );
+}
+
+bool Interface::SaveScene (const char* pPath)
+{
+   return mGameManager.SaveGame( pPath );
+}

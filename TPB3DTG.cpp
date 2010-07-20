@@ -67,7 +67,7 @@ main ()
       SceneEvent SceneEV(&theScene, gm);
 
       EventHandler Events;
-      Interface* pInterface = new Interface(Events);
+      Interface* pInterface = new Interface(Events, gm);
       MainEvent mev;
 
       Events.Add (cam);

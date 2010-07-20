@@ -31,6 +31,7 @@ public:
    inline void set_Position(float x, float y, float z) { mPosition.Set(x,y,z); }
    inline Vector3f& get_Position() { return mPosition; }
 
-   void SetSize (int x, int y, int border);
+   void SetSize (int x, int y, int border) { SetSize ((float)x, (float)y, (float)border); }
+   void SetSize (float x, float y, float border);
    void BindTexture();
 };

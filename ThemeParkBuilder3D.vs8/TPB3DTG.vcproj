@@ -222,6 +222,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Window\FileDialogWindow.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\FileDialogWindow.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Window\Interface.cpp"
 				>
 			</File>
@@ -238,11 +246,27 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Window\ListViewObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\ListViewObject.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Window\RadioButtonViewObject.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\Window\RadioButtonViewObject.h"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\ScrollViewObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Window\ScrollViewObject.h"
 				>
 			</File>
 			<File

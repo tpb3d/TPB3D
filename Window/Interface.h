@@ -21,6 +21,7 @@
 #include "Clock.h"
 #include "Stats.h"
 #include "../Hub/Event.h"
+#include "../Hub/GameManager.h"
 
 class ToolBar;
 class EventHandler;
@@ -28,6 +29,7 @@ class GUIDelegate;
 class SpecialDelegate;
 class WindowViewObject;
 class SettingsWindow;
+class FileDialogWindow;
 
 class Interface : public EventBase
 {
@@ -46,12 +48,14 @@ protected:
    GUIDelegate* mpWindowDelegate;
    WindowViewObject* mpWindow;
    SettingsWindow* mpSettings;
+   FileDialogWindow* mpFileDialog;
    SpecialDelegate* mpSpecialDelegate;
+   GameManager& mGameManager;
 
    float m_fHeight;
 
 public:
-   Interface (EventHandler& revh);
+   Interface (EventHandler& revh, GameManager& GM);
    ~Interface ();
 
    void SetLanguageCode( int code );
@@ -80,6 +84,9 @@ public:
    virtual bool OnToolHit (const HR_Events tool);
    virtual bool OnTools ();
    virtual bool OnSettings ();
+
+   bool OpenScene (const char* pPath);
+   bool SaveScene (const char* pPath);
 
    void LoadToolbar ();
    void Update (float dt);

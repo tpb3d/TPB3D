@@ -175,8 +175,11 @@ void ButtonViewObject::Update (ButtonState state)
 
 void ButtonViewObject::Draw(void)  // Use the compiled GL code to show it in the view
 {
-   Render (mpFace);
-   RenderText (mpTextTex, mStrContent);
+   if (mVisible)
+   {
+      Render (mpFace);
+      RenderText (mpTextTex, mStrContent);
+   }
 }
 
 // Serialization
