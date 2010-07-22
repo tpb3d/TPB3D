@@ -71,17 +71,17 @@ Clock::Clock ()
    // these are the vectors for rendering the hands.
    // Hour and minute angles will transform them to 360 degs of turn.
    mMinuteHand.mPoints[0] = Vector3f ( 0,  0, 0);
-   mMinuteHand.mPoints[1] = Vector3f (-3, 18, 0);
-   mMinuteHand.mPoints[2] = Vector3f ( 0, 30, 0);
-   mMinuteHand.mPoints[3] = Vector3f ( 3, 18, 0);
+   mMinuteHand.mPoints[1] = Vector3f (-3, -18, 0);
+   mMinuteHand.mPoints[2] = Vector3f ( 0, -30, 0);
+   mMinuteHand.mPoints[3] = Vector3f ( 3, -18, 0);
    memcpy( mMinuteHand.Colors[0], kszColor0, 4 );
    memcpy( mMinuteHand.Colors[1], kszColor1, 4 );
    memcpy( mMinuteHand.Colors[2], kszColor0, 4 );
    memcpy( mMinuteHand.Colors[3], kszColor1, 4 );
-   mHourHand.mPoints[0] = Vector3f ( 0,   0, 0);
-   mHourHand.mPoints[1] = Vector3f (-3.5,11, 0);
-   mHourHand.mPoints[2] = Vector3f ( 0,  22, 0);
-   mHourHand.mPoints[3] = Vector3f ( 3.5,11, 0);
+   mHourHand.mPoints[0] = Vector3f ( 0,    0, 0);
+   mHourHand.mPoints[1] = Vector3f (-3.5, -11, 0);
+   mHourHand.mPoints[2] = Vector3f ( 0,   -22, 0);
+   mHourHand.mPoints[3] = Vector3f ( 3.5, -11, 0);
    memcpy( mHourHand.Colors[0], kszColor0, 4 );
    memcpy( mHourHand.Colors[1], kszColor2, 4 );
    memcpy( mHourHand.Colors[2], kszColor0, 4 );
@@ -95,9 +95,9 @@ Clock::~Clock ()
 void Clock::PosCalc ()
 {
    Camera* pCam = Camera::GetInstance ();
-   mClockFace->SetPosition ((pCam->GetCamSize ().x / 2) - 32, pCam->GetHeight()-64, 0);
-   mHourHand.Position = Vector3f(( pCam->GetInstance()->GetCamSize ().x / 2), pCam->GetHeight() - 32, 0.2f );
-   mMinuteHand.Position = Vector3f(( pCam->GetInstance()->GetCamSize ().x / 2), pCam->GetHeight() - 32, 0.1f );
+   mClockFace->SetPosition ((pCam->GetCamSize ().x / 2) - 32, 0, 0);
+   mHourHand.Position = Vector3f(( pCam->GetInstance()->GetCamSize ().x / 2), 32, 0.2f );
+   mMinuteHand.Position = Vector3f(( pCam->GetInstance()->GetCamSize ().x / 2), 32, 0.1f );
 }
 
 const char* Clock::DayOfWeekToString()

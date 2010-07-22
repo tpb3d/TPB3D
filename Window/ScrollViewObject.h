@@ -52,7 +52,7 @@ public:
 
    void Clear();   // return this Scroll to normal
 
-   void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
+   void SubscribeEvent(ViewEvent::EventTypes id, EventSubscriber* subscriber);
       
    void Select (bool bState);
    void Hightlight (bool bState);

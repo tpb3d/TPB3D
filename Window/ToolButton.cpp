@@ -34,14 +34,14 @@ namespace Gfx
    };
    const float kButtonUVs[4][2] =
    {
-      { 0, 0 },
       { 0, 0.25 },
-      { 1, 0.25 },
-      { 1, 0 }
+      { 0, 0 },
+      { 1, 0 },
+      { 1, 0.25 }
    };
    const float kButtonTextUVs[8] =
    {
-      0.0f, 0.0f,  0.0f, 0.125f,  1.0f, 0.125f,  1.0f, 0.0f
+      0.0f, 0.125f,  0.0f, 0.0f,  1.0f, 0.0f,  1.0f, 0.125f
    };
 }
 
@@ -50,20 +50,20 @@ ToolButton::ToolButton( float x, float y, int ID)
 {
    m_ID = ID;
    m_ButtonState = BS_Normal;
+   mSize.x = 96;
+   mSize.y = 24;
    m_Geometry.mPoints[0] = Vector3f (x,y,0);
-   m_Geometry.mPoints[1] = Vector3f (x+140,y,0);
-   m_Geometry.mPoints[2] = Vector3f (x+140,y+24,0);
-   m_Geometry.mPoints[3] = Vector3f (x,y+32,0);
+   m_Geometry.mPoints[1] = Vector3f (x + mSize.x, y, 0);
+   m_Geometry.mPoints[2] = Vector3f (x + mSize.x, y + mSize.y, 0);
+   m_Geometry.mPoints[3] = Vector3f (x, y+ mSize.y, 0);
    ImageManager * images = ImageManager::GetInstance ();
    Texture* pTex = images->GetTexture ("buttons.png", GL_RGBA);
-   mpFace = new AnimationSingle (pTex, 140, 24);
+   mpFace = new AnimationSingle (pTex, mSize.x, mSize.y);
    mpFace->SetPosition(x, y, 0);
    mpFace->SetLightingColor (kButtonLights[0]);
    pTex = images->GetTexture ("stats.png", GL_RGBA);
    mpTextTex = new AnimationSingle (pTex, 256, 22);
    mpTextTex->SetUVs (kButtonTextUVs);
-   mSize.x = 140.0f;
-   mSize.y = 24.0f;
 }
 
 ToolButton::~ToolButton ()
@@ -92,6 +92,6 @@ void ToolButton::Update (ButtonState state)
 void ToolButton::Draw ()
 {
    Render( mpFace );
-   RenderText( mpTextTex, m_Geometry.mPoints[0].x+40, m_Geometry.mPoints[0].y+8, m_Text);
+   RenderText( mpTextTex, m_Geometry.mPoints[0].x+20, m_Geometry.mPoints[0].y+8, m_Text);
 }
 

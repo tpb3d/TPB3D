@@ -51,15 +51,17 @@ public:
    ~FileDialogWindow ();
 
    GUIDelegate* get_Delegate() { return mpDelegate; }
+   WindowViewObject::WindowState get_State() { return mpWnd->get_State(); }
 
 public:
-   bool Create ();
+   bool Create (float fx, float fy);
    void Destroy ();
    void Draw ();
 
-   bool OnScroll (const EventArgs& e);
-   bool OnSelect (const EventArgs& e);
-   bool OnOpen (const EventArgs& e);
-   bool OnSave (const EventArgs& e);
-   bool OnClose (const EventArgs& e);
+   // based on event types
+   int OnScroll (const EventArgs& e);
+   int OnSelect (const EventArgs& e);
+   int OnOpen (const EventArgs& e);
+   int OnSave (const EventArgs& e);
+   int OnClose (const EventArgs& e);
 };

@@ -3,6 +3,8 @@
 #include "../Graphics/ViewObject.h"
 #include "../Graphics/Animation.h"
 
+class SimpleMesh;
+
 class LabelViewObject : public ViewObject
 {
 public:
@@ -14,7 +16,7 @@ public:
 protected:
    std::string mStrContent;
    int m_ID;
-   AnimationSingle* mpFace;
+   SimpleMesh* mpFace;
    AnimationSingle* mpTextTex;
 
    char mVisible; // Visible, Invisible
@@ -36,6 +38,8 @@ public:
    void set_Text (const char* pszText);
    // methods
 public:
+   void Resize (int iWidth, int iHeight);
+   void Move (int iX, int iY, int iZ);
    void InitGFX(float x, float y);
       
    void Hightlight (bool bState);

@@ -50,6 +50,7 @@ namespace Gfx
 
       virtual void Draw() {};
       virtual int  TestHit (Vector2i& point) { return 0; }
+      virtual int  Dispatch (short code, Vector2i& point) { return 0; }
    protected:
       void Render(AnimationBase* pBase);  // draw method replacement, drawing now happens on the GPU side for us
       void Render(AnimationBase* pBase, const float uvs[4][2]);  // draw method replacement, drawing now happens on the GPU side for us

@@ -17,7 +17,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "../Delegates/GUIDelegate.h"
+#include "../Delegates/KeyNavDelegate.h"
 #include "../Hub/Event.h"
 #include "LabelViewObject.h"
 #include "ListViewObject.h"
@@ -48,30 +48,55 @@ FileDialogWindow::~FileDialogWindow()
    }
 }
 
-bool FileDialogWindow::Create ()
+bool FileDialogWindow::Create (float fx, float fy)
 {
    // create the window frame
-   mpWnd = new WindowViewObject(0, 0, 1, NULL);
-   mpWnd->Resize (400, 300);
+   mpWnd = new WindowViewObject(fx, fy, 1, NULL);
+   mpWnd->Resize (360, 300);
+   mpWnd->SubscribeEvent (ViewEvent::ParentClose, new EventSubscriber(1, &FileDialogWindow::OnClose, this));
+   if (mDialogType == FDT_OpenFile)
+   {
+      mpWnd->set_Text ("Open File");
+   }
+   else
+   {
+      mpWnd->set_Text ("Save File");
+   }
+   mpDelegate = new KeyNavDelegate ("File", mpWnd);
 
    // add the title blocks followed by teh controls.
    // subscribe the events so FileDialog window can get notice.
-   LabelViewObject* mpLabel1 =  new LabelViewObject (10, 280, 2, *mpWnd);
-   mpLabel1->set_Text ("Open/Save File");
-   LabelViewObject* mpLabel2 =  new LabelViewObject (10, 250, 2, *mpWnd);
-   mpLabel2->set_Text ("Files");
+   LabelViewObject* mpLabel1 =  new LabelViewObject (10, 2, 2, *mpWnd);
+   mpLabel1->set_Text ("Files");
    mpWnd->AddChild (mpLabel1);
-   mpWnd->AddChild (mpLabel2);
 
 
    // Scroll List
-   mpList = new ListViewObject(10, 320, 2, *mpWnd);
+   mpList = new ListViewObject(10, 10, 3, *mpWnd);
    mpList->Visible (true);
-   mpList->Resize (300,300);
-   mpList->AddText ("File1");
+   mpList->Resize (300,250);
+
+   // PLAY DATA
+   mpList->AddText ("A really BIG park");
+   mpList->AddText ("Dark Park");
+   mpList->AddText ("Diamond Springs Park");
+   mpList->AddText ("Diamondback Rattler World");
+   mpList->AddText ("Flatrideville");
+   mpList->AddText ("Overkill loaded with coasters no flats");
+   mpList->AddText ("Peep Slide Fun Park");
+   mpList->AddText ("Perrindle Park");
+   mpList->AddText ("Rattlesnake infested zoo");
+   mpList->AddText ("Small park");
+   mpList->AddText ("Test Parks and faked data");
+   mpList->AddText ("TORCG wished it had these rides");
+   mpList->AddText ("Wishwehadwaterparks");
+   mpList->AddText ("Yellow Bolder Screams and Chills");
+   mpList->AddText ("Zephyrs and Zoos");
+   // END
+
    mpList->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &FileDialogWindow::OnSelect, this));
 
-   mpScroll = new ScrollViewObject(350, 48, 3, *mpWnd);
+   mpScroll = new ScrollViewObject(320, 20, 4, *mpWnd);
    mpScroll->Resize (20,250);
    mpScroll->Visible (true);
    mpScroll->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &FileDialogWindow::OnScroll, this));
@@ -79,17 +104,17 @@ bool FileDialogWindow::Create ()
 
    // Buttons Cancel and either Open or Save.
 
-   mpClose = new ButtonViewObject(300,20,4, *mpWnd);
+   mpClose = new ButtonViewObject(276, 280, 5, *mpWnd);
    mpClose->Resize (64, 20);
    mpClose->Visible (true);
    mpClose->set_Text ("Cancel");
    mpClose->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &FileDialogWindow::OnClose, this));
-   mpOpen = new ButtonViewObject(200,20,5, *mpWnd);
+   mpOpen = new ButtonViewObject(200, 280, 6, *mpWnd);
    mpOpen->Resize (64, 20);
    mpOpen->Visible (false);
    mpOpen->set_Text ("Open");
    mpOpen->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &FileDialogWindow::OnOpen, this));
-   mpSave = new ButtonViewObject(200,20,6, *mpWnd);
+   mpSave = new ButtonViewObject(200, 280, 7, *mpWnd);
    mpSave->Resize (64, 20);
    mpSave->Visible (false);
    mpSave->set_Text ("Save");
@@ -119,28 +144,28 @@ void FileDialogWindow::Draw ()
    }
 }
 
-bool FileDialogWindow::OnClose(const EventArgs& e)
+int FileDialogWindow::OnClose(const EventArgs& e)
 {
-   Destroy();
-   return true;
+   mpWnd->Close(); // set the window to close state
+   return ViewEvent::ParentClose;
 }
 
-bool FileDialogWindow::OnSave(const EventArgs& e)
-{
-   return true;
-}
-
-bool FileDialogWindow::OnOpen(const EventArgs& e)
+int FileDialogWindow::OnSave(const EventArgs& e)
 {
    return true;
 }
 
-bool FileDialogWindow::OnSelect(const EventArgs& e)
+int FileDialogWindow::OnOpen(const EventArgs& e)
 {
    return true;
 }
 
-bool FileDialogWindow::OnScroll(const EventArgs& e)
+int FileDialogWindow::OnSelect(const EventArgs& e)
+{
+   return true;
+}
+
+int FileDialogWindow::OnScroll(const EventArgs& e)
 {
    return true;
 }

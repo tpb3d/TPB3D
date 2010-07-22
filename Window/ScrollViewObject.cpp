@@ -178,7 +178,7 @@ void ScrollViewObject::Visible (bool bVisible)
    mVisible = (bVisible) ? 1 : 0;
 }
 
-void ScrollViewObject::SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber)
+void ScrollViewObject::SubscribeEvent(ViewEvent::EventTypes id, EventSubscriber* subscriber)
 {
    mEvents.Subscribe (id, *subscriber);
 }

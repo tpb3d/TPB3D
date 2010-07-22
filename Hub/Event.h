@@ -92,12 +92,12 @@ class FunctorBase
 {
 public:
    virtual ~FunctorBase() {};
-   virtual bool operator()(const EventArgs& args) = 0;
+   virtual int operator()(const EventArgs& args) = 0;
 };
 
 template <class T> class EventFunctor : public FunctorBase
 {
-   typedef bool (T::*F)(const EventArgs&);
+   typedef int (T::*F)(const EventArgs&);
    T* mpParent;
    F mF;
 public:
@@ -106,7 +106,7 @@ public:
    {
       mpParent = obj;
    }
-   virtual bool operator()(const EventArgs& args)
+   virtual int operator()(const EventArgs& args)
    {
       return (mpParent->*mF)(args);
    }
@@ -123,7 +123,7 @@ public:
       cleanup(); 
    }
 
-   bool operator()(const EventArgs& args) const
+   int operator()(const EventArgs& args) const
    {
       return (*mpF)(args);
    }
@@ -131,7 +131,7 @@ public:
    void cleanup();
 
    template<typename T>
-   EventSubscriber(int id, bool (T::*function)(const EventArgs&), T* obj) :
+   EventSubscriber(int id, int (T::*function)(const EventArgs&), T* obj) :
    mpF(new EventFunctor<T>(function, obj))
    {}
 };
@@ -139,12 +139,13 @@ public:
 class ViewEvent
 {
 public:
-   enum Types
+   enum EventTypes
    {
       None = 0,
       Click,
       Changed,
-      RadioExclude
+      RadioExclude,
+      ParentClose
    };
 protected:
    std::string mName;
@@ -174,16 +175,17 @@ public:
       mName = szName;
    }
 
-   void Subscribe(Types type, const EventSubscriber& ev);
-   virtual void operator()(Types t, EventArgs& args)
+   void Subscribe(EventTypes type, const EventSubscriber& ev);
+   virtual int operator()(EventTypes t, EventArgs& args)
    {
       size_t iT = mEventSubs.count (t);
       if( iT > 0 )
       {
          EventMap::iterator ies = mEventSubs.find(t);
          EventSubscriber& es = ies->second;
-         es(args);
+         return es(args);
       }
+      return 0;
    };
 
 private:
@@ -198,13 +200,15 @@ public:
    :  ViewEvent(name)
    {
    }
-   virtual void operator()(Types t, EventArgs& args)
+   virtual int operator()(EventTypes t, EventArgs& args)
    {
+      int iResult = 0;
       for (EventMap::iterator ies = mEventSubs.begin(); ies != mEventSubs.end(); ies++)
       {
          EventSubscriber& es = ies->second;
-         es(args);
+         iResult = es(args);
       }
+      return iResult;
    };
 };
 

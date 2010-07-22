@@ -17,7 +17,7 @@
  *   You should have received a copy of the GNU General Public License
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
-#include "../Delegates/GUIDelegate.h"
+#include "../Delegates/KeyNavDelegate.h"
 #include "../Hub/Event.h"
 #include "LabelViewObject.h"
 #include "CheckViewObject.h"
@@ -32,6 +32,7 @@ SettingsWindow::SettingsWindow(Interface& rInterface)
 {
    mpWnd = NULL;
    mpLanguageGroup = new GroupViewEvent("Group");
+   mpDelegate = NULL;
 }
 
 SettingsWindow::~SettingsWindow()
@@ -43,11 +44,13 @@ SettingsWindow::~SettingsWindow()
    delete mpLanguageGroup;
 }
 
-bool SettingsWindow::Create ()
+bool SettingsWindow::Create (float fx, float fy)
 {
    // create the window frame
-   mpWnd = new WindowViewObject(200, 100, 1, NULL);
-   mpWnd->Resize (200, 300);
+   mpWnd = new WindowViewObject (fx, fy, 1, NULL);
+   mpWnd->Resize (250, 300);
+   mpWnd->SubscribeEvent (ViewEvent::ParentClose, new EventSubscriber(1, &SettingsWindow::OnClose, this));
+   mpDelegate = new KeyNavDelegate ("Settings", mpWnd);
 
    // add the title blocks followed by teh controls.
    // subscribe the events so Settings window can get notice.
@@ -62,46 +65,47 @@ bool SettingsWindow::Create ()
    mpSoundFx = new CheckViewObject(10, 30, 2, *mpWnd);
    mpSoundFx->Visible (true);
    mpSoundFx->set_Text ("Sound On");
-   mpSoundFx->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnSoundCheck, this));
+   mpSoundFx->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(2, &SettingsWindow::OnSoundCheck, this));
 
    mpMusic = new CheckViewObject(10, 60, 3, *mpWnd);
    mpMusic->Visible (true);
    mpMusic->set_Text ("Music On");
-   mpMusic->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnMusicCheck, this));
+   mpMusic->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(3, &SettingsWindow::OnMusicCheck, this));
    mpMusic->Select(true);
 
    // Language group all subscribe to an event ring mpLanguageGroup.
    mpEnglish = new RadioButtonViewObject (10, 110, 4, *mpWnd, *mpLanguageGroup);
    mpEnglish->Visible (true);
    mpEnglish->set_Text ("English");
-   mpEnglish->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnEnglish, this));
+   mpEnglish->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(4, &SettingsWindow::OnEnglish, this));
 
    mpFrench = new RadioButtonViewObject (10, 140, 5, *mpWnd, *mpLanguageGroup);
    mpFrench->Visible (true);
    mpFrench->set_Text ("French");
-   mpFrench->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnFrench, this));
+   mpFrench->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(5, &SettingsWindow::OnFrench, this));
 
    mpGerman = new RadioButtonViewObject (10, 170, 6, *mpWnd, *mpLanguageGroup);
    mpGerman->Visible (true);
    mpGerman->set_Text ("Deutsch");
-   mpGerman->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnDeutsch, this));
+   mpGerman->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(6, &SettingsWindow::OnDeutsch, this));
 
    mpItalian = new RadioButtonViewObject (10, 200, 7, *mpWnd, *mpLanguageGroup);
    mpItalian->Visible (true);
    mpItalian->set_Text ("Italian");
-   mpItalian->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnItalian, this));
+   mpItalian->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(7, &SettingsWindow::OnItalian, this));
 
    mpSpanish = new RadioButtonViewObject (10, 230, 7, *mpWnd, *mpLanguageGroup);
    mpSpanish->Visible (true);
    mpSpanish->set_Text ("Espaniol");
-   mpSpanish->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnSpanish, this));
-   mpSpanish->Select(true);
+   mpSpanish->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(8, &SettingsWindow::OnSpanish, this));
 
-   mpClose = new ButtonViewObject(100,270,8, *mpWnd);
+   mpEnglish->Select(true);
+
+   mpClose = new ButtonViewObject(100, 270,8, *mpWnd);
    mpClose->Resize (64, 24);
    mpClose->Visible (true);
    mpClose->set_Text ("Close");
-   mpClose->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(1, &SettingsWindow::OnClose, this));
+   mpClose->SubscribeEvent (ViewEvent::Changed, new EventSubscriber(9, &SettingsWindow::OnClose, this));
 
    mpWnd->AddChild (mpSoundFx);
    mpWnd->AddChild (mpMusic);
@@ -123,52 +127,63 @@ void SettingsWindow::Draw ()
    }
 }
 
-bool SettingsWindow::OnClose(const EventArgs& e)
+int  SettingsWindow::TestHit (Vector2i& point)
 {
-   Destroy();
-   return true;
+   return mpWnd->TestHit (point);
 }
 
-bool SettingsWindow::OnSoundCheck(const EventArgs& e)
+int  SettingsWindow::Dispatch (short code, Vector2i& point)
+{
+   int iResult = mpWnd->Dispatch (code, point);
+   return iResult;
+}
+
+int SettingsWindow::OnClose(const EventArgs& e)
+{
+   mpWnd->Close(); // set the window to close state
+   return ViewEvent::ParentClose;
+}
+
+int SettingsWindow::OnSoundCheck(const EventArgs& e)
 {
    mInterface.SetSoundFx( (mpSoundFx->isChecked()) );
-   return true;
+   return ViewEvent::None;
 }
 
-bool SettingsWindow::OnMusicCheck(const EventArgs& e)
+int SettingsWindow::OnMusicCheck(const EventArgs& e)
 {
    mInterface.SetMusic( (mpMusic->isChecked()) );
-   return true;
+   return ViewEvent::None;
 }
 
-bool SettingsWindow::OnEnglish(const EventArgs& e)
+int SettingsWindow::OnEnglish(const EventArgs& e)
 {
    mInterface.SetLanguageCode(1);
-   return true;
+   return ViewEvent::None;
 }
 
-bool SettingsWindow::OnSpanish(const EventArgs& e)
+int SettingsWindow::OnSpanish(const EventArgs& e)
 {
    mInterface.SetLanguageCode(2);
-   return true;
+   return ViewEvent::None;
 }
 
-bool SettingsWindow::OnDeutsch(const EventArgs& e)
+int SettingsWindow::OnDeutsch(const EventArgs& e)
 {
    mInterface.SetLanguageCode(3);
-   return true;
+   return ViewEvent::None;
 }
 
-bool SettingsWindow::OnFrench(const EventArgs& e)
+int SettingsWindow::OnFrench(const EventArgs& e)
 {
    mInterface.SetLanguageCode(4);
-   return true;
+   return ViewEvent::None;
 }
 
-bool SettingsWindow::OnItalian (const EventArgs& e)
+int SettingsWindow::OnItalian (const EventArgs& e)
 {
    mInterface.SetLanguageCode(5);
-   return true;
+   return ViewEvent::None;
 }
 
 /*************************************************************************

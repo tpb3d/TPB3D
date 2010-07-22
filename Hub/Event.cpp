@@ -26,9 +26,9 @@ void EventSubscriber::cleanup()
 {
 }
 
-void ViewEvent::Subscribe(Types type, const EventSubscriber& ev)
+void ViewEvent::Subscribe(EventTypes type, const EventSubscriber& ev)
 {
-   this->mEventSubs.insert (pair<Types, EventSubscriber>(type, ev));
+   this->mEventSubs.insert (pair<EventTypes, EventSubscriber>(type, ev));
 }
 
 EventHandler::EventHandler ()
@@ -37,8 +37,7 @@ EventHandler::EventHandler ()
    mpInput = Cam->GetInput();
 }
 
-void
-EventHandler::Add (EventBase* Handler)
+void EventHandler::Add (EventBase* Handler)
 {
    mHandlers.push_back (Handler);
 }

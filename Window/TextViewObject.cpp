@@ -3,6 +3,7 @@
 #include <SFML/System.hpp>
 #include "../Graphics/Image.h"
 #include "../Graphics/Camera.h"
+#include "../Graphics/SimpleMesh.h"
 #include "../Scene/Scene.h"
 #include "../Delegates/GUIDelegate.h"
 #include "TextViewObject.h"
@@ -11,11 +12,9 @@ using namespace Gfx;
 
 namespace Gfx
 {
-   const unsigned char kTextLights[3][4] =
+   const float kTextLights[4] =
    {
-      { 195,195,195,128 },    // Mormal
-      { 195,255,255,255 },    // Lit
-      { 151,151,151,255 }     // Hit
+       0.95f, 0.95f, 0.95f, 0.95f
    };
    const float kTextUVs[4][2] =
    {
@@ -26,7 +25,7 @@ namespace Gfx
    };
    const float kTextTextUVs[8] =
    {
-      0.0f, 0.0f,  0.0f, 0.125f,  1.0f, 0.125f,  1.0f, 0.0f
+      0.0f, 0.125f,  0.0f, 0.0f,  1.0f, 0.0f,  1.0f, 0.125f
    };
 }
 
@@ -36,19 +35,16 @@ TextViewObject::TextViewObject( float x, float y, int ID, GUIDelegate& rParent)
 {
    m_ID = ID;
    m_TextState = TS_Normal;
-   mPoints[0] = Vector3f (x,y,0);
-   mPoints[1] = Vector3f (x+140,y,0);
-   mPoints[2] = Vector3f (x+140,y+24,0);
-   mPoints[3] = Vector3f (x,y+32,0);
    ImageManager * images = ImageManager::GetInstance ();
-   Texture* pTex = images->GetTexture ("buttons.png", GL_RGBA);
-   mpFace = new AnimationSingle (pTex, 140, 24);
-   mpFace->SetPosition(x, y, 0);
-   mpFace->SetLightingColor (kTextLights[0]);
+   Texture* pTex = images->GetTexture ("Nav3D.png", GL_RGBA);
+   mpFace = new SimpleMesh (pTex);
+   mpFace->set_Position(x, y, 0);
+   mpFace->SetLightingColor (kTextLights);
    pTex = images->GetTexture ("stats.png", GL_RGBA);
    mpTextTex = new AnimationSingle (pTex, 256, 22);
    mpTextTex->SetUVs (kTextTextUVs);
-
+   Move (int(x), int(y), 0);
+   Resize (int(x), int(y));
 }
 
 TextViewObject::~TextViewObject(void)
@@ -59,6 +55,27 @@ void TextViewObject::set_Text (const char* pszText)
 {
    mStrContent = pszText;
    mPosition = (int)mStrContent.size();
+}
+
+void TextViewObject::Resize (int iWidth, int iHeight)
+{
+   mpFace->SetSize (iWidth-8, iHeight-8, 4);
+   mSize.x = (float)iWidth;
+   mSize.y = (float)iHeight;
+   mPoints[1].x = mPoints[0].x + mSize.x;
+   mPoints[1].y = mPoints[0].y + mSize.y;
+}
+
+void TextViewObject::Move (int iX, int iY, int iZ)
+{
+   float fX = (float)iX;
+   float fY = (float)iY;
+   mpFace->set_Position (fX, fY, (float)iZ);
+   mpTextTex->MoveTo (fX+4, fY+4, (float)iZ, 0);
+   mPoints[0].x = fX;
+   mPoints[0].y = fY;
+   mPoints[1].x = fX + mSize.x;
+   mPoints[1].y = fY + mSize.y;
 }
 
 void TextViewObject::Hit (bool bState)

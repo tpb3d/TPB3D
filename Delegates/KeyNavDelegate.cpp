@@ -2,10 +2,11 @@
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "../Types/Virtkeys.h"
+#include "../Graphics/ViewObject.h"
 
-KeyNavDelegate::KeyNavDelegate(GUIDelegate& rMain, const char* pszName, Gfx::ViewObject* pParent)
+KeyNavDelegate::KeyNavDelegate(const char* pszName, Gfx::ViewObject* pParent)
    :  GUIDelegate (pszName, pParent)
-   ,  mrMain (rMain)
+//   ,  mrMain (rMain)
 {
 }
 
@@ -23,10 +24,10 @@ void KeyNavDelegate::Dispatch (int nChar)
    case 'M':
    case 'N':
    case 'n':
-      mrMain.Dispatch(nChar);
+//      mrMain.Dispatch(nChar);
       break;
    case 'C':
-      mrMain.Dispatch(nChar);
+//      mrMain.Dispatch(nChar);
       break;
 
       // pass throughs for the arrow keys
@@ -43,4 +44,13 @@ void KeyNavDelegate::Dispatch (int nChar)
    case 'A':
       break;
 	} // end switch
+}
+
+void KeyNavDelegate::OnMouseDown(short ID, Vector2i pointa)
+{
+}
+
+void KeyNavDelegate::OnMouseUp(short ID, Vector2i pointa)
+{
+   int iResult = mpParent->Dispatch(ID, pointa);
 }

@@ -50,18 +50,22 @@ public:
    ~SettingsWindow ();
 
    GUIDelegate* get_Delegate() { return mpDelegate; }
+   WindowViewObject::WindowState get_State() { return mpWnd->get_State(); }
 
 public:
-   bool Create ();
+   bool Create (float fx, float fy);
    void Destroy ();
    void Draw ();
 
-   bool OnMusicCheck (const EventArgs& e);
-   bool OnSoundCheck (const EventArgs& e);
-   bool OnClose (const EventArgs& e);
-   bool OnEnglish (const EventArgs& e);
-   bool OnSpanish (const EventArgs& e);
-   bool OnFrench (const EventArgs& e);
-   bool OnDeutsch (const EventArgs& e);
-   bool OnItalian (const EventArgs& e);
+   virtual int  TestHit (Vector2i& point);
+   virtual int  Dispatch (short code, Vector2i& point);
+
+   int OnMusicCheck (const EventArgs& e);
+   int OnSoundCheck (const EventArgs& e);
+   int OnClose (const EventArgs& e);
+   int OnEnglish (const EventArgs& e);
+   int OnSpanish (const EventArgs& e);
+   int OnFrench (const EventArgs& e);
+   int OnDeutsch (const EventArgs& e);
+   int OnItalian (const EventArgs& e);
 };

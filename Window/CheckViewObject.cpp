@@ -23,28 +23,28 @@ namespace Gfx
    };
    const float kTextUVs[4][2] =
    {
-      { 0, 0 },
       { 0, 0.25 },
-      { 1, 0.25 },
-      { 1, 0 }
+      { 0, 0 },
+      { 1, 0 },
+      { 1, 0.25 }
    };
    const float kTextTextUVs[8] =
    {
-      0.0f, 0.0f,  0.0f, 0.125f,  1.0f, 0.125f,  1.0f, 0.0f
+      0.0f, 0.125f,  0.0f, 0.0f,  1.0f, 0.0f,  1.0f, 0.125f
    };
    const float kUncheckedUVs[16][2] =
    {
-      { 0.75f, 0.87f },{ 0.77f, 0.87f },{ 0.85f, 0.87f },{ 0.87f, 0.87f },
-      { 0.75f, 0.89f },{ 0.77f, 0.89f },{ 0.85f, 0.89f },{ 0.87f, 0.89f },
+      { 0.75f, 0.99f },{ 0.77f, 0.99f },{ 0.85f, 0.99f },{ 0.87f, 0.99f },
       { 0.75f, 0.97f },{ 0.77f, 0.97f },{ 0.85f, 0.97f },{ 0.87f, 0.97f },
-      { 0.75f, 0.99f },{ 0.77f, 0.99f },{ 0.85f, 0.99f },{ 0.87f, 0.99f }
+      { 0.75f, 0.89f },{ 0.77f, 0.89f },{ 0.85f, 0.89f },{ 0.87f, 0.89f },
+      { 0.75f, 0.87f },{ 0.77f, 0.87f },{ 0.85f, 0.87f },{ 0.87f, 0.87f }
    };
    const float kCheckedUVs[16][2] =
    {
-      { 0.875f, 0.87f },{ 0.895f, 0.87f },{ 0.975f, 0.87f },{ 0.995f, 0.87f }, // inverted for OpenGL
-      { 0.875f, 0.85f },{ 0.895f, 0.85f },{ 0.975f, 0.85f },{ 0.995f, 0.85f },
+      { 0.875f, 0.76f },{ 0.895f, 0.76f },{ 0.975f, 0.76f },{ 0.995f, 0.76f }, // inverted for OpenGL
       { 0.875f, 0.78f },{ 0.895f, 0.78f },{ 0.975f, 0.78f },{ 0.995f, 0.78f },
-      { 0.875f, 0.76f },{ 0.895f, 0.76f },{ 0.975f, 0.76f },{ 0.995f, 0.76f }
+      { 0.875f, 0.85f },{ 0.895f, 0.85f },{ 0.975f, 0.85f },{ 0.995f, 0.85f },
+      { 0.875f, 0.87f },{ 0.895f, 0.87f },{ 0.975f, 0.87f },{ 0.995f, 0.87f }
    };
 }
 
@@ -77,6 +77,7 @@ void CheckViewObject::InitGFX(float x, float y)
    mpTextTex->SetUVs (kTextTextUVs);
    mpTextTex->SetPosition (x+32, y, 0);
    mpTextTex->SetLightingColor (kTextLights[0]);
+   Move (int(x), int(y), 0);
 }
 
 void CheckViewObject::set_Text (const char* pszText)
@@ -85,7 +86,7 @@ void CheckViewObject::set_Text (const char* pszText)
    mPosition = (int)mStrContent.size();
 }
 
-void CheckViewObject::SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber)
+void CheckViewObject::SubscribeEvent(ViewEvent::EventTypes id, EventSubscriber* subscriber)
 {
    mEvents.Subscribe (id, *subscriber);
 }
@@ -104,13 +105,16 @@ void CheckViewObject::Hit (int code)
 {
    switch (code)
    {
-   case VK_RETURN:
+   case sf::Mouse::Left:
+      Select((mSelected == 1) ? false : true);
+      break;
+   case sf::Key::Return:
       Select(false);
       break;
-   case VK_ESCAPE:
+   case sf::Key::Escape:
       Select(false);
       break;
-   case VK_SPACE:
+   case sf::Key::Space:
       Select(false);
       mCheckState = CS_Checked;
       break;
@@ -162,6 +166,8 @@ void CheckViewObject::Resize (int iWidth, int iHeight)
    mpFace->SetSize (iWidth-8, iHeight-8, 4);
    mSize.x = (float)iWidth;
    mSize.y = (float)iHeight;
+   mPoints[1].x = mPoints[0].x + mSize.x;
+   mPoints[1].y = mPoints[0].y + mSize.y;
 }
 
 void CheckViewObject::Move (int iX, int iY, int iZ)
@@ -178,8 +184,8 @@ void CheckViewObject::Move (int iX, int iY, int iZ)
 
 int CheckViewObject::TestHit (Vector2i& point)
 {
-   if ((point.x > mPoints[0].x && point.x < mPoints[1].x)
-      && (point.y > mPoints[0].y && point.y < mPoints[1].y))
+   if ((point.x >= mPoints[0].x && point.x <= mPoints[1].x)
+      && (point.y >= mPoints[0].y && point.y <= mPoints[1].y))
       return this->m_ID;
    return 0;
 }
@@ -189,8 +195,19 @@ void CheckViewObject::Update(CheckState cs)
    mCheckState = cs;
 }
 
+int  CheckViewObject::Dispatch (short code, Vector2i& point)
+{
+   Hit (code);
+   EventArgs ea;
+   return mEvents(ViewEvent::Changed, ea);
+}
+
+
 void CheckViewObject::Draw(void)  // Use the compiled GL code to show it in the view
 {
-   Render (mpFace);
-   RenderText (mpTextTex, mStrContent);
+   if (mVisible )
+   {
+      Render (mpFace);
+      RenderText (mpTextTex, mStrContent);
+   }
 }

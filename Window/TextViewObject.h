@@ -3,6 +3,7 @@
 #include "../Graphics/Animation.h"
 
 class GUIDelegate;
+class SimpleMesh;
 
 class TextViewObject : public ViewObject
 {
@@ -14,7 +15,7 @@ class TextViewObject : public ViewObject
    };
    std::string mStrContent;
    int m_ID;
-   AnimationSingle* mpFace;
+   SimpleMesh* mpFace;
    AnimationSingle* mpTextTex;
    TextState      m_TextState;
 
@@ -41,6 +42,8 @@ public:
 
    // methods
 public:
+   void Resize (int iWidth, int iHeight);
+   void Move (int iX, int iY, int iZ);
    void Clear();   // return this button to normal
    int  TestHit (Vector2i& point); // just render geometry for selection
 

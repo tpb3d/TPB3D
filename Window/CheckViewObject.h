@@ -54,7 +54,7 @@ public:
 
 //   void set_EventHandler (WindowDelegate* pEvent) { mpEvent = pEvent; }
    void set_Text (const char* pszText);
-   void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
+   void SubscribeEvent(ViewEvent::EventTypes id, EventSubscriber* subscriber);
       
    virtual void Select (bool bState);
    void Hightlight (bool bState);
@@ -62,6 +62,7 @@ public:
    void Visible (bool bVisible);
 
    void Hit (int c);
+   virtual int  Dispatch (short code, Vector2i& point);
    virtual void Hit (bool b);
    void Resize (int iWidth, int iHeight);
    void Move (int iX, int iY, int iZ);

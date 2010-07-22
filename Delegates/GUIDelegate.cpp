@@ -2,7 +2,7 @@
 
 
 GUIDelegate::GUIDelegate(const char* pszName, Gfx::ViewObject* pParent)
-//   :  DelegateBase (pszName, pParent)
+:  mpParent (pParent)
 {
 }
 

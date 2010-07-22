@@ -2,7 +2,6 @@
 
 #include <SFML/System.hpp>
 #include "../Graphics/Image.h"
-#include "../Graphics/Camera.h"
 #include "../Graphics/SimpleMesh.h"
 #include "../Scene/Scene.h"
 #include "../Delegates/KeyNavDelegate.h"
@@ -56,12 +55,16 @@ WindowViewObject::WindowViewObject( float x, float y, int ID, ViewObject* pParen
    mpFace->SetSize(120, 200, 4);
    mpFace->SetLightingColor (kTextLights[0]);
    mpFace->SetUVs (kWindowRightUVs);
+   mpFace->set_Position (0, 0, 0); // on client space
    pTex = images->GetTexture ("stats.png", GL_RGBA);
    mpTextTex = new AnimationSingle (pTex, 256, 22);
    mpTextTex->SetUVs (kTextTextUVs);
+   mpTextTex->MoveTo (120-18, 200-8, 0, 0); // 
+   mpTextTex->SetRotation(0,0,90);
    mSize.x = 120.0f;
    mSize.y = 200.0f;
-   mpWindowDelegate = new KeyNavDelegate(*mpWindowDelegate, "Window", this);
+   Move (int(x), int(y), 0);
+   mpWindowDelegate = new KeyNavDelegate("Window", this);
 }
 
 WindowViewObject::~WindowViewObject(void)
@@ -88,11 +91,20 @@ void WindowViewObject::set_Text (const char* pszText)
    mStrContent = pszText;
 }
 
+void WindowViewObject::SubscribeEvent(ViewEvent::EventTypes id, EventSubscriber* subscriber)
+{
+   mEvents.Subscribe (id, *subscriber);
+}
+
+
 void WindowViewObject::Resize (int iWidth, int iHeight)
 {
    mpFace->SetSize (iWidth, iHeight, 4);
+   mpTextTex->MoveTo ((float)iWidth-18, (float)iHeight-8, 0, 0);
    mSize.x = (float)iWidth;
    mSize.y = (float)iHeight;
+   mPoints[1].x = mPoints[0].x + mSize.x;
+   mPoints[1].y = mPoints[0].y + mSize.y;
 }
 
 void WindowViewObject::Move (int iX, int iY, int iZ)
@@ -102,12 +114,10 @@ void WindowViewObject::Move (int iX, int iY, int iZ)
    mPosition.x = fX;
    mPosition.y = fY;
    mPosition.z = (float)iZ;
-   mpFace->set_Position (fX, fY, (float)iZ);
-   mpTextTex->MoveTo (fX, fY, (float)iZ, 0);
-   mPoints[0].x = fX;
+   mPoints[0].x = fX;      // Note Y is inverted
    mPoints[0].y = fY;
-   mPoints[1].x = fX + mSize.x;
-   mPoints[1].y = fY + mSize.y;
+   mPoints[1].x = mPoints[0].x + mSize.x;
+   mPoints[1].y = mPoints[0].y + mSize.y;
 }
 
 void WindowViewObject::Update (WindowState state)
@@ -157,6 +167,22 @@ int WindowViewObject::TestHit (Vector2i& point)
    return hit;
 }
 
+int  WindowViewObject::Dispatch (short code, Vector2i& point)
+{
+   int iResult = 0;
+   ChildIterator itc;
+   Vector2i localPT (point.x - (int)mPoints[0].x, point.y - (int)mPoints[0].y);
+   for (itc = mChildren.begin(); itc != mChildren.end(); itc++)
+   {
+      ViewObject *pC = *(itc);
+      if (pC->TestHit (localPT))
+      {
+         iResult = pC->Dispatch (code, localPT);
+         break;
+      }
+   }
+   return iResult;
+}
 
 void WindowViewObject::Select (bool bState)
 {
@@ -197,8 +223,10 @@ void WindowViewObject::Draw(void)  // Use the compiled GL code to show it in the
    if (mVisible )
    {
    	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
+      glLoadIdentity();									// Reset The Modelview Matrix
       glTranslatef (mPosition.x, mPosition.y, mPosition.z);
       Render (mpFace);
+      Render (mpTextTex);
       ChildIterator itc;
       for (itc = mChildren.begin(); itc != mChildren.end(); itc++)
       {

@@ -108,13 +108,13 @@ void ViewObject::RenderText(AnimationBase* pBase, float x, float y, string str)
          char t = (char)str[ic]-' ';
          float u = (t%32) * cu;
          float v = 1.0f - 0.13f * int((128-t)/32);
-         glTexCoord2f (u, v-0.125f);
-         glVertex3f( x, y2, z );
          glTexCoord2f (u, v);
+         glVertex3f( x, y2, z );
+         glTexCoord2f (u, v-0.125f);
          glVertex3f( x, y, z );
-         glTexCoord2f (u+cu, v);
-         glVertex3f( x2, y, z );
          glTexCoord2f (u+cu, v-0.125f);
+         glVertex3f( x2, y, z );
+         glTexCoord2f (u+cu, v);
          glVertex3f( x2, y2, z );
          x+=8;
          x2+=8;
@@ -139,13 +139,13 @@ void ViewObject::RenderText(AnimationBase* pBase, std::string str)
          char t = (char)str[ic]-' ';
          float u = (t%32) * cu;
          float v = 1.0f - 0.13f * int((128-t)/32);
-         glTexCoord2f (u, v-0.125f);
-         glVertex3f( x, y2, z );
          glTexCoord2f (u, v);
+         glVertex3f( x, y2, z );
+         glTexCoord2f (u, v-0.125f);
          glVertex3f( x, y, z );
-         glTexCoord2f (u+cu, v);
-         glVertex3f( x2, y, z );
          glTexCoord2f (u+cu, v-0.125f);
+         glVertex3f( x2, y, z );
+         glTexCoord2f (u+cu, v);
          glVertex3f( x2, y2, z );
          x+=8;
          x2+=8;
@@ -161,7 +161,7 @@ void ViewObject::Render(SimpleQuad* pQuad)
       glDisable (GL_TEXTURE_2D);
       glEnable (GL_COLOR_MATERIAL);
       glTranslatef (pQuad->Position.x, pQuad->Position.y, pQuad->Position.z);
-      glRotatef( -pQuad->Angle, 0, 0, 1 );
+      glRotatef( pQuad->Angle, 0, 0, 1 );
       glBegin(GL_QUADS);
       {
          glColor4ubv (pQuad->Colors[0]);

@@ -117,23 +117,23 @@ void Interface::LoadToolbar ()
 {
    // Hardcode plug
    Camera* pCam = Camera::GetInstance ();
-   m_fHeight = pCam->GetHeight();
-   ToolButton* pB = new ToolButton(0, m_fHeight-32, HR_Settings);
+   m_fHeight = 0;//pCam->GetHeight();
+   ToolButton* pB = new ToolButton(0, 32, HR_Settings);
    pB->SetText("Options");
    mpToolBar->AddButton (pB);
-   pB = new ToolButton(0, m_fHeight-64, HR_Tools);
+   pB = new ToolButton(0, m_fHeight+64, HR_Tools);
    pB->SetText("FRCS");
    mpToolBar->AddButton (pB);
-   pB = new ToolButton(0, m_fHeight-96, HR_PlacePathItem);
+   pB = new ToolButton(0, m_fHeight+96, HR_PlacePathItem);
    pB->SetText("Paths");
    mpToolBar->AddButton (pB);
-   pB = new ToolButton(0, m_fHeight-128, HR_OpenScene);
+   pB = new ToolButton(0, m_fHeight+128, HR_OpenScene);
    pB->SetText("Load");
    mpToolBar->AddButton (pB);
-   pB = new ToolButton(0, m_fHeight-160, HR_SaveScene);
+   pB = new ToolButton(0, m_fHeight+160, HR_SaveScene);
    pB->SetText("Save");
    mpToolBar->AddButton (pB);
-   pB = new ToolButton(0, m_fHeight-192, HR_Close);
+   pB = new ToolButton(0, m_fHeight+192, HR_Close);
    pB->SetText("Exit");
    mpToolBar->AddButton (pB);
 }
@@ -196,9 +196,10 @@ void Interface::SetMusic ( bool bMusic)
    mCurDay = 0;
 }
 
+// these will become delegate event subscribers
 bool Interface::OnMouseDown (sf::Mouse::Button Button, Vector2i pointa, Vector2i pointb)
 {
-   Vector2i pt(pointa.x, (int)m_fHeight - pointa.y);
+   Vector2i pt(pointa.x, pointa.y);
    int hit = mpToolBar->TestHit (pt);
    if( hit )
    {
@@ -211,19 +212,29 @@ bool Interface::OnMouseDown (sf::Mouse::Button Button, Vector2i pointa, Vector2i
 
 bool Interface::OnMouseUp (sf::Mouse::Button Button, Vector2i pointa, Vector2i pointb)
 {
-   Vector2i pt(pointa.x, (int)m_fHeight - pointa.y);
+   Vector2i pt(pointa.x, pointa.y);
    int hit = mpToolBar->TestHit (pt);
    if( hit )
    {
       return mEVH.HandleEvents ((HR_Events)hit);
    }
-   if ( this->mpWindow!= NULL)
+   if ( this->mpWindowDelegate!= NULL)
    {
-      hit = mpWindow->TestHit (pt);
-      if (hit)
+      Vector2i glPoint (pointa.x, pointa.y);
+      mpWindowDelegate->OnMouseUp (Button, glPoint);
+      if (mpSettings && mpSettings->get_State() == WindowViewObject::WS_Destroy)
       {
-         mpWindowDelegate = mpWindow->get_Delegate();
-         return mEVH.HandleEvents ((HR_Events)hit);
+         mpSettings->Destroy();
+         delete mpSettings;
+         mpSettings = NULL;
+         mpWindowDelegate = NULL;
+      }
+      else if (mpFileDialog && mpFileDialog->get_State() == WindowViewObject::WS_Destroy)
+      {
+         mpFileDialog->Destroy();
+         delete mpFileDialog;
+         mpFileDialog = NULL;
+         mpWindowDelegate = NULL;
       }
    }
    return false; // leave the message in for the pointer
@@ -231,7 +242,7 @@ bool Interface::OnMouseUp (sf::Mouse::Button Button, Vector2i pointa, Vector2i p
 
 bool Interface::OnMouseMove ( Vector2i pointa, Vector2i pointb)
 {
-   Vector2i pt(pointa.x, (int)m_fHeight - pointa.y);
+   Vector2i pt(pointa.x, pointa.y);
    int hit = mpToolBar->TestHit (pt);
    if( hit )
    {
@@ -260,8 +271,8 @@ public:
    }
    void OnKeyDown (short ID) {}
    void OnKeyUp (short ID) {}
-   void OnMouseDown(short ID) { mpParent.CloseChildWindow(); }
-   void OnMouseUp(short ID) {}
+   void OnMouseDown(short ID, Vector2i pointa) { mpParent.CloseChildWindow(); }
+   void OnMouseUp(short ID, Vector2i pointa) {}
    void Dispatch (int e) {}
 };
 
@@ -284,7 +295,7 @@ bool Interface::OnKeyUp (sf::Key::Code Key)
          if (mpSpecialDelegate == NULL)
          {
             mpSpecialDelegate = new SpecialDelegate(*this);
-            mpWindowDelegate = new KeyNavDelegate(*mpSpecialDelegate, "", NULL);
+            mpWindowDelegate = new KeyNavDelegate("Interface", NULL);
          }
 //help         mpWindow = new WindowViewObject (120, 200, 1293, *mpWindowDelegate);
       }
@@ -301,20 +312,56 @@ bool Interface::OnToolHit (const HR_Events tool)
       {
          delete mpFileDialog;
       }
+      if (mpSettings)
+      {
+         mpSettings->Destroy();
+         delete mpSettings;
+         mpSettings = NULL;
+         mpWindowDelegate = NULL;
+      }
+      if (mpFileDialog)
+      {
+         mpFileDialog->Destroy();
+         delete mpFileDialog;
+         mpFileDialog = NULL;
+         mpWindowDelegate = NULL;
+      }
       mpFileDialog = new FileDialogWindow(*this, FileDialogWindow::FDT_OpenFile);
-      mpFileDialog->Create();
+      mpFileDialog->Create(120,60);
       mpWindowDelegate = mpFileDialog->get_Delegate();
+
       return true;
    case HR_SaveScene:
       if (mpFileDialog!=NULL)
       {
          delete mpFileDialog;
       }
+      if (mpSettings)
+      {
+         mpSettings->Destroy();
+         delete mpSettings;
+         mpSettings = NULL;
+         mpWindowDelegate = NULL;
+      }
+      if (mpFileDialog)
+      {
+         mpFileDialog->Destroy();
+         delete mpFileDialog;
+         mpFileDialog = NULL;
+         mpWindowDelegate = NULL;
+      }
       mpFileDialog = new FileDialogWindow(*this, FileDialogWindow::FDT_SaveFile);
-      mpFileDialog->Create();
+      mpFileDialog->Create(120,80);
       mpWindowDelegate = mpFileDialog->get_Delegate();
       return true;
    case HR_Settings:
+      if (mpFileDialog)
+      {
+         mpFileDialog->Destroy();
+         delete mpFileDialog;
+         mpFileDialog = NULL;
+         mpWindowDelegate = NULL;
+      }
       return OnSettings();
    case HR_Tools:
       return OnTools();
@@ -333,7 +380,7 @@ bool Interface::OnSettings ()
    if (mpSettings == NULL)
    {
       mpSettings = new SettingsWindow (*this);
-      mpSettings->Create();
+      mpSettings->Create(140, 100);
       mpWindowDelegate = mpSettings->get_Delegate();
    }
    //setwin->Create (this->mpRootWind);

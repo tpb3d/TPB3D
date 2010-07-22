@@ -40,21 +40,22 @@ public:
 
    void Clear();   // return this button to normal
    void set_Text (const char* pszText);
-   void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
+   void SubscribeEvent(ViewEvent::EventTypes id, EventSubscriber* subscriber);
       
    void Select (bool bState);
    void Hightlight (bool bState);
    void Enable (bool bEnable);
    void Visible (bool bVisible);
 
-   void Hit (int c);
-   void Hit (bool b);
+   int  Hit (int c);
+   int  Hit (bool b);
    void DeleteChar (int BackOrDel);
    void AppendText (int c);
    void MoveCursor (int code);
    void Resize (int iWidth, int iHeight);
    void Move (int iX, int iY, int iZ);
    virtual int  TestHit (Vector2i& point);
+   virtual int  Dispatch (short code, Vector2i& point);
    void Update (ButtonState state);
    void Draw ();
 

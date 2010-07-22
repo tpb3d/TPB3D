@@ -8,13 +8,17 @@ class SerializerBase;
 
 class WindowViewObject : public ViewObject
 {
+public:
    enum WindowState
    {
       WS_Refresh = 0,   // nothing changes in state but the graphics updated.
       WS_Normal, // up and not highlighted
       WS_Selected,       // lit and active
-      WS_Highlighted // just lit
+      WS_Highlighted, // just lit
+      WS_Destroy
    };
+
+protected:
    std::string mStrContent;
    std::vector<ViewObject*> mChildren;
    Vector3f mPosition;
@@ -43,13 +47,20 @@ public:
    // properties
    void set_State( WindowState cs ) { mWindowState = cs; }
    GUIDelegate* get_Delegate () { return mpWindowDelegate; }
+   WindowState get_State() { return mWindowState; }
 
    // methods
 public:
    void Clear();   // return this Window to normal
 
    void set_Text (const char* pszText);
-   void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
+   void SubscribeEvent(ViewEvent::EventTypes id, EventSubscriber* subscriber);
+
+   void Close()
+   {
+      mWindowState = WindowViewObject::WS_Destroy;
+   }
+
 
    void AddChild (ViewObject* pChild);
 
@@ -67,9 +78,10 @@ public:
    void AppendText (int c);
    void MoveCursor (int code);
 
-   int  TestHit (Vector2i& point);
    void Update (WindowState state);
    void Draw ();
+   virtual int  TestHit (Vector2i& point);
+   virtual int  Dispatch (short code, Vector2i& point);
 
    // support for xml
    void Load(SerializerBase& ser);

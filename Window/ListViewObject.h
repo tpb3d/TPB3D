@@ -1,6 +1,10 @@
 #pragma once
 #include "../Types/Vector2.h"
 #include "../Graphics/ViewObject.h"
+#include "../Graphics/Animation.h"
+#include "../Hub/Event.h"
+
+class SimpleMesh;
 
 class ListViewObject : public ViewObject
 {
@@ -14,7 +18,7 @@ protected:
    ViewEvent      mEvents;
    std::vector<string*> mListContent;
    int m_ID;
-   AnimationSingle* mpFace;
+   SimpleMesh* mpFace;
    AnimationSingle* mpTextTex;
 
    char mVisible; // Visible, Invisible
@@ -37,11 +41,12 @@ public:
    // methods
 public:
    void InitGFX(float x, float y);
-   void SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber);
+   void SubscribeEvent(ViewEvent::EventTypes id, EventSubscriber* subscriber);
       
    void Hightlight (bool bState);
    void Visible (bool bVisible);
    void Resize (int x, int y);
+   void Move (int iX, int iY, int iZ);
 
    virtual int  TestHit (Vector2i& point) { return 0; }
    virtual void Draw ();

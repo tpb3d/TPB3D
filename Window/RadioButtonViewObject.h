@@ -20,9 +20,10 @@ public:
    RadioButtonViewObject( float x, float y, int ID, ViewObject& rParent, GroupViewEvent& rEvents);
    ~RadioButtonViewObject(void);
 
-   bool OnClear (const EventArgs& e);
+   int OnClear (const EventArgs& e);
 
    virtual void Hit (bool bState);
+   virtual int  Dispatch (short code, Vector2i& point);
    virtual void Select (bool bState);
    virtual void Update (RadioState state);
    virtual void Draw ();

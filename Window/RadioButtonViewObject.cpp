@@ -43,9 +43,9 @@ RadioButtonViewObject::~RadioButtonViewObject(void)
 }
 
 //used by the group event to clear this control.
-bool RadioButtonViewObject::OnClear (const EventArgs& e)
+int RadioButtonViewObject::OnClear (const EventArgs& e)
 {
-   mState = RS_NotPressed;
+   Select (false);
    return true;
 }
 
@@ -56,6 +56,14 @@ void RadioButtonViewObject::Hit (bool bState)
       Update (RS_Pressed);
    }
 }
+
+int  RadioButtonViewObject::Dispatch (short code, Vector2i& point)
+{
+   Hit (true);
+   EventArgs ea;
+   return mEvents(ViewEvent::Changed, ea);
+}
+
 
 void RadioButtonViewObject::Select (bool bState)
 {
@@ -76,7 +84,7 @@ void RadioButtonViewObject::Update(RadioState rs)
 {
    EventArgs ea;
    mGroupEvents(GroupViewEvent::RadioExclude, ea);
-   mState = rs;
+   Select (true);
 }
 
 void RadioButtonViewObject::Draw(void)  // Use the compiled GL code to show it in the view

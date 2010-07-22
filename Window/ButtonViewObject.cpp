@@ -2,7 +2,6 @@
 
 #include <SFML/System.hpp>
 #include "../Graphics/Image.h"
-#include "../Graphics/Camera.h"
 #include "../Graphics/SimpleMesh.h"
 #include "../Scene/Scene.h"
 #include "../Delegates/GUIDelegate.h"
@@ -55,6 +54,7 @@ ButtonViewObject::ButtonViewObject( float x, float y, int ID, ViewObject& rParen
    mpTextTex->SetPosition (x+4, y+2, 0);
    mpTextTex->SetUVs (kTextTextUVs);
    mpTextTex->SetLightingColor (kTextLights);
+   Move (int(x), int(y), 0);
 }
 
 ButtonViewObject::~ButtonViewObject(void)
@@ -66,31 +66,37 @@ void ButtonViewObject::set_Text (const char* pszText)
    mStrContent = pszText;
 }
 
-void ButtonViewObject::Hit (bool bState)
+int ButtonViewObject::Hit (bool bState)
 {
    if (mEnabled && bState)
       Select (true);
+   return 0;
 }
 
-void ButtonViewObject::Hit (int code)
+int ButtonViewObject::Hit (int code)
 {
+   int iResult = 0;
    if (mEnabled)
    {
       EventArgs ea;
       mSelected = true;
       switch (code)
       {
+      case sf::Mouse::Left:
+         mButtonState = BS_Selected;
+         iResult = mEvents(ViewEvent::Changed, ea);
+         break;
       case sf::Key::Return:
          Select(false);
          mButtonState = BS_Selected;
-         mEvents(ViewEvent::Changed, ea);
+         iResult = mEvents(ViewEvent::Changed, ea);
          break;
       case sf::Key::Escape:
          Select(false);
          break;
       case sf::Key::Space:
          mButtonState = BS_Selected;
-         mEvents(ViewEvent::Changed, ea);
+         iResult = mEvents(ViewEvent::Changed, ea);
          break;
 //      case sf::Key::Shift:
 //      case sf::Key::Control:
@@ -98,6 +104,7 @@ void ButtonViewObject::Hit (int code)
 //         break;
       }
    }
+   return iResult;
 }
 
 void ButtonViewObject::Select (bool bState)
@@ -136,7 +143,7 @@ void ButtonViewObject::Visible (bool bVisible)
    mVisible = (bVisible) ? 1 : 0;
 }
 
-void ButtonViewObject::SubscribeEvent(ViewEvent::Types id, EventSubscriber* subscriber)
+void ButtonViewObject::SubscribeEvent(ViewEvent::EventTypes id, EventSubscriber* subscriber)
 {
    mEvents.Subscribe (id, *subscriber);
 }
@@ -146,6 +153,8 @@ void ButtonViewObject::Resize (int iWidth, int iHeight)
    mpFace->SetSize (iWidth-8, iHeight-8, 4);
    mSize.x = (float)iWidth;
    mSize.y = (float)iHeight;
+   mPoints[1].x = mPoints[0].x + mSize.x;
+   mPoints[1].y = mPoints[0].y + mSize.y;
 }
 
 void ButtonViewObject::Move (int iX, int iY, int iZ)
@@ -153,7 +162,7 @@ void ButtonViewObject::Move (int iX, int iY, int iZ)
    float fX = (float)iX;
    float fY = (float)iY;
    mpFace->set_Position (fX, fY, (float)iZ);
-   mpTextTex->MoveTo (fX, fY, (float)iZ, 0);
+   mpTextTex->MoveTo (fX+4, fY+4, (float)iZ, 0);
    mPoints[0].x = fX;
    mPoints[0].y = fY;
    mPoints[1].x = fX + mSize.x;
@@ -166,6 +175,12 @@ int ButtonViewObject::TestHit (Vector2i& point)
       && (point.y > mPoints[0].y && point.y < mPoints[1].y))
       return this->m_ID;
    return 0;
+}
+
+int  ButtonViewObject::Dispatch (short code, Vector2i& point)
+{
+   int hit = Hit (code);
+   return hit;
 }
 
 void ButtonViewObject::Update (ButtonState state)

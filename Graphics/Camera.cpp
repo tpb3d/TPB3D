@@ -307,7 +307,7 @@ void Camera::DrawInterface(Interface* pI)   // 2d interface objects
    glPushMatrix();										// Store The Projection Matrix
    {
       glLoadIdentity();									// Reset The Projection Matrix
-      glOrtho( 0, mWidth.x, 0, mHeight.y, -1, 1);	   // Set Up An Ortho Screen zero is at the bottom
+      glOrtho( 0, mWidth.x, mHeight.y, 0, -1, 1);	   // Set Up An Ortho Screen zero is at the bottom
       glMatrixMode(GL_MODELVIEW);							// Select The Modelview Matrix
       glPushMatrix();										// Store The Modelview Matrix
       {
