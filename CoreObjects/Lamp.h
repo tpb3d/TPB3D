@@ -16,6 +16,7 @@
 //#include "CoreBase.h"
 
 class ObjectNode;
+class TexturedStrip;
 
 class Lamp : public ObjectNode
 {
@@ -27,6 +28,7 @@ protected:
    std::string mTexName;
    std::string mTexGlow;
    ObjectNode* mpGraphic;
+   TexturedStrip* mpGlow;
 
 public:
    Lamp (float height, const char* TexName, const char* TexGlow);

@@ -24,6 +24,10 @@
 #define _USE_MATH_DEFINES
 #include <math.h>
 
+namespace Gfx
+{
+   extern float gfGlobalAngle;
+}
 Lamp::Lamp (float height, const char* TexName, const char* TexGlow)
 //:  CoreBase (Vector3f(0,0,0), Vector3f(0,0,0))
 :  ObjectNode(0, ObjectFactory::TakeANumber())
@@ -64,6 +68,9 @@ void Lamp::Draw()
    glTranslatef( mLocation[0], mLocation[1], mLocation[2] );										// Move Left 1.5 Units And Into The Screen 6.0
 	glRotatef( mAngle, 0.0f, 1.0f, 0.0f);
    mpGraphic->Draw();
+	glRotatef( -mAngle, 0.0f, 1.0f, 0.0f);
+   glRotatef( -Gfx::gfGlobalAngle, 0.0f, 1.0f, 0.0f);
+   mpGlow->Draw();
    glDisable (GL_BLEND);
    glPopMatrix();
 }
@@ -266,12 +273,17 @@ void Lamp::Render()
    pair[4].mPoints[1].Index = 9;
    pGroup->AddStripPair(5,pair);
 
-   TexturedStrip* pGlow = ObjectFactory::CreateTexturedStrip (2, mTexGlow.c_str(), 0xf0f0f0f0);
-   pGlow->AddPoint (sf::Vector3f(-1.5f, mHeight-1.5f, 0.54f));
-   pGlow->AddPoint (sf::Vector3f(-1.5f, mHeight+1.65f, 0.54f));
-   pGlow->AddPoint (sf::Vector3f(1.5f, mHeight-1.5f, 0.54f));
-   pGlow->AddPoint (sf::Vector3f(1.5f, mHeight+1.65f, 0.54f));
-   mpGraphic->AddMesh (pGlow);
+//   TexturedStrip* pGlow = ObjectFactory::CreateTexturedStrip (2, mTexGlow.c_str(), 0xf0f0f0f0);
+   //mpGlow->AddPoint (sf::Vector3f(-1.5f, mHeight-1.5f, 0.54f));
+   //mpGlow->AddPoint (sf::Vector3f(-1.5f, mHeight+1.65f, 0.54f));
+   //mpGlow->AddPoint (sf::Vector3f(1.5f, mHeight-1.5f, 0.54f));
+   //mpGlow->AddPoint (sf::Vector3f(1.5f, mHeight+1.65f, 0.54f));
+   //mpGraphic->AddMesh (pGlow);
+   mpGlow = ObjectFactory::CreateTexturedStrip (2, mTexGlow.c_str(), 0xf0f0f0f0);
+   mpGlow->AddPoint (sf::Vector3f(-1.5f, mHeight, 0.54f));
+   mpGlow->AddPoint (sf::Vector3f(-1.5f, mHeight + 2.15f, 0.54f));
+   mpGlow->AddPoint (sf::Vector3f(1.5f, mHeight, 0.54f));
+   mpGlow->AddPoint (sf::Vector3f(1.5f, mHeight + 2.15f, 0.54f));
 
    StripMeshObject* pCap = ObjectFactory::CreateStrip ();
    mpGraphic->AddMesh (pCap);

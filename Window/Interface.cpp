@@ -46,6 +46,7 @@ Interface::Interface (EventHandler& revh, GameManager& GM)
    mpToolBar = new ToolBar(6, HR_MainMenu);
    mpWindow = NULL;
    mpSpecialDelegate = NULL;
+   mpWindowDelegate = NULL;
    LoadToolbar();
    mLanguageCode = 0;
    mSoundFxOn = false;

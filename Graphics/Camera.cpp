@@ -48,6 +48,12 @@ const GLfloat SpotCutoff =	75.0f;
 const GLfloat SpecRef[]= {  0.45f, 0.55f, 0.75f, 1.0f };
 
 #define FIELD_OF_VIEW 45.0f  // this controls how long the focal view of the camera is in OpenGL
+
+namespace Gfx
+{
+   float gfGlobalAngle = 0;
+}
+
 Camera * Camera::mpInstance = NULL;
 
 Camera::Camera ()
@@ -137,6 +143,7 @@ void Camera::SetActive()
    glRotatef (mTarget.x, 1.0f, 0.0f, 0.0f);
    glRotatef (mTarget.y, 0.0f, 1.0f, 0.0f);
    glRotatef (mTarget.z, 0.0f, 0.0f, 1.0f);
+   gfGlobalAngle = mTarget.y;
 
    glTranslatef(mPosition.x, mPosition.y, mPosition.z); // Translate camera
 
