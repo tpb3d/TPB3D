@@ -56,6 +56,7 @@ public:
 public:
    bool Create (float fx, float fy);
    void Destroy ();
+   int  TestHit (Vector2i& point);
    void Draw ();
 
    // based on event types

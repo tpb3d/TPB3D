@@ -136,6 +136,11 @@ bool FileDialogWindow::Create (float fx, float fy)
    return true;
 }
 
+int FileDialogWindow::TestHit (Vector2i& point)
+{
+   return mpWnd->TestHit (point);
+}
+
 void FileDialogWindow::Draw ()
 {
    if (mpWnd != NULL)

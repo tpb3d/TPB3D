@@ -1337,6 +1337,14 @@
 				RelativePath="..\Builders\TreeFormer.h"
 				>
 			</File>
+			<File
+				RelativePath="..\Builders\WaterTable.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Builders\WaterTable.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="Physics"

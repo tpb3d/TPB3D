@@ -11,6 +11,7 @@
 				<Option object_output=".obj\debug\" />
 				<Option type="1" />
 				<Option compiler="gcc" />
+				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
 					<Add option="-W" />
 					<Add option="-g" />
@@ -20,12 +21,12 @@
 					<Add option="-D_CONSOLE" />
 					<Add option="-DPNG_NO_ERROR_NUMBERS" />
 					<Add option="-DuseLoadPng" />
-					<Add directory="\Dev\VC++\SFML-1.5\include" />
-					<Add directory="\Dev\VC++\wxWidgets-2.8.10\include" />
-					<Add directory="\Dev\VC++\zlib123\include" />
-					<Add directory="\Dev\VC++\lib3ds-20080909\src" />
-					<Add directory="..\..\VC++\lpng1240" />
-					<Add directory="\Dev\VC++\ZLib" />
+					<Add directory="..\..\VC++\SFML-1.5\include" />
+					<Add directory="..\..\VC++\wxWidgets-2.8.10\include" />
+					<Add directory="..\..\VC++\zlib123\include" />
+					<Add directory="..\..\VC++\lib3ds-20080909\src" />
+					<Add directory="..\..\VC++\lpng1240\projects\visualc71\Win32_LIB_Release" />
+					<Add directory="..\..\VC++\ZLib" />
 				</Compiler>
 				<ResourceCompiler>
 					<Add directory="\Dev\VC++\SFML-1.5\include" />
@@ -38,16 +39,11 @@
 					<Add directory="\Dev\VC++\ZLib" />
 				</ResourceCompiler>
 				<Linker>
-					<Add library="sfml-graphics" />
-					<Add library="sfml-system" />
-					<Add library="sfml-window" />
-					<Add library="GL" />
-					<Add library="GLU" />
-					<Add library="CEGUIBase" />
-					<Add library="libpng" />
-					<Add library="lib3ds" />
-					<Add library="CEGUIOpenGLRenderer" />
-					<Add library="libglpng" />
+					<Add library="sfml-graphics-d" />
+					<Add library="sfml-system-d" />
+					<Add library="sfml-window-d" />
+					<Add library="OpenGL32" />
+					<Add library="glu32" />
 					<Add directory="\Dev\VC++\SFML-1.5\lib\vc2005" />
 					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio 8\VC\lib" />
 					<Add directory="\Dev\VC++\CEGUI-SDK-0.6.2-vc8\lib" />
@@ -318,15 +314,18 @@
 		<Unit filename="Delegates\BuildDelegate.h" />
 		<Unit filename="Delegates\DelegateBase.cpp" />
 		<Unit filename="Delegates\DelegateBase.h" />
+		<Unit filename="Delegates\EventDelegate.cpp" />
+		<Unit filename="Delegates\EventDelegate.h" />
+		<Unit filename="Delegates\GUIDelegate.cpp" />
+		<Unit filename="Delegates\GUIDelegate.h" />
 		<Unit filename="Delegates\KeyNavDelegate.cpp" />
 		<Unit filename="Delegates\KeyNavDelegate.h" />
+		<Unit filename="Delegates\PlaceItemDelegate.cpp" />
 		<Unit filename="Delegates\PlaceItemDelegate.h" />
 		<Unit filename="Delegates\SelectDelegate.cpp" />
 		<Unit filename="Delegates\SelectDelegate.h" />
 		<Unit filename="Delegates\ToolBarDelegate.cpp" />
 		<Unit filename="Delegates\ToolBarDelegate.h" />
-		<Unit filename="Delegates\WindowDelegate.cpp" />
-		<Unit filename="Delegates\WindowDelegate.h" />
 		<Unit filename="Graphics\Animation.cpp" />
 		<Unit filename="Graphics\Animation.h" />
 		<Unit filename="Graphics\AnimationBase.cpp" />
@@ -358,9 +357,10 @@
 		<Unit filename="Graphics\ObjectNode.h" />
 		<Unit filename="Graphics\ObjectTree.cpp" />
 		<Unit filename="Graphics\ObjectTree.h" />
-		<Unit filename="Graphics\PngFile.h" />
 		<Unit filename="Graphics\QuadMeshObject.cpp" />
 		<Unit filename="Graphics\QuadMeshObject.h" />
+		<Unit filename="Graphics\SimpleMesh.cpp" />
+		<Unit filename="Graphics\SimpleMesh.h" />
 		<Unit filename="Graphics\SimpleMeshObject.cpp" />
 		<Unit filename="Graphics\SimpleMeshObject.h" />
 		<Unit filename="Graphics\SkyBowl.cpp" />
@@ -379,7 +379,6 @@
 		<Unit filename="Graphics\Tree.h" />
 		<Unit filename="Graphics\ViewObject.cpp" />
 		<Unit filename="Graphics\ViewObject.h" />
-		<Unit filename="Graphics\pngFile.cpp" />
 		<Unit filename="Hub\Event.cpp" />
 		<Unit filename="Hub\Event.h" />
 		<Unit filename="Hub\GameManager.cpp" />
@@ -429,6 +428,7 @@
 		<Unit filename="Settings\Settings.h" />
 		<Unit filename="Storage\3DSHandler.cpp" />
 		<Unit filename="Storage\3DSHandler.h" />
+		<Unit filename="Storage\ACPng.cpp" />
 		<Unit filename="Storage\ACPng.h" />
 		<Unit filename="Storage\MS3DFile.cpp" />
 		<Unit filename="Storage\MS3DFile.h" />
@@ -460,10 +460,15 @@
 		<Unit filename="Window\Clock.cpp" />
 		<Unit filename="Window\Clock.h" />
 		<Unit filename="Window\Event.h" />
+		<Unit filename="Window\FRCSWindow.h" />
 		<Unit filename="Window\GUIManager.h" />
 		<Unit filename="Window\Interface.cpp" />
 		<Unit filename="Window\Interface.h" />
+		<Unit filename="Window\LabelViewObject.cpp" />
+		<Unit filename="Window\LabelViewObject.h" />
 		<Unit filename="Window\LoadSave.cpp" />
+		<Unit filename="Window\RadioButtonViewObject.cpp" />
+		<Unit filename="Window\RadioButtonViewObject.h" />
 		<Unit filename="Window\SettingsWindow.cpp" />
 		<Unit filename="Window\SettingsWindow.h" />
 		<Unit filename="Window\Stats.cpp" />

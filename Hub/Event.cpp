@@ -53,11 +53,11 @@ bool EventHandler::HandleEvents (const sf::Event& Event)
                // return true if one of our handlers returned true; ie the event was eaten
       break;
 
-      case sf::Event::Resized:
-         for (ConType::iterator i = mHandlers.begin (); i != mHandlers.end (); i++)
-            (*i)->OnResize (Vector2i(Event.Size.Width, Event.Size.Height));
-               // We want all Event.handlers to receive this one; we don't want it to be "eaten"
-      break;
+      //case sf::Event::Resized:
+      //   for (ConType::iterator i = mHandlers.begin (); i != mHandlers.end (); i++)
+      //      (*i)->OnResize (Vector2i(Event.Size.Width, Event.Size.Height));
+      //         // We want all Event.handlers to receive this one; we don't want it to be "eaten"
+      //break;
 
       case sf::Event::KeyReleased:
          for (ConType::iterator i = mHandlers.begin (); i != mHandlers.end (); i++)

@@ -16,6 +16,7 @@
 
 #pragma once
 #include "DelegateBase.h" // includes map and string
+#include "../scene/scene.h"
 
 template <class T> class PlaceItemDelegate : public DelegateBase
 {
