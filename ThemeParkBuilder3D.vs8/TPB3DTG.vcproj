@@ -484,6 +484,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Graphics\SimpleMatMeshObject.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Graphics\SimpleMatMeshObject.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Graphics\SimpleMesh.cpp"
 				>
 			</File>

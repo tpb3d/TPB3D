@@ -14,6 +14,7 @@ class ObjectNode;
 class MeshNode;
 class ComponentObject;
 class SimpleMeshObject; // Object;
+class SimpleMatMeshObject; // no texture
 class StripMeshObject;
 class QuadMeshObject;
 class ComplexMeshObject;
@@ -37,6 +38,7 @@ public:
    static MeshNode* CreateMeshNode( int meshes );
    static ComponentObject* CreateComponent();
    static SimpleMeshObject* CreateMesh();
+   static SimpleMatMeshObject* CreateMatMesh();  // no texture
    static QuadMeshObject* CreateQuadMesh();
    static StripMeshObject* CreateStrip();
    static TexturedStrip* CreateTexturedStrip(int length, const char* pTexName, long color);

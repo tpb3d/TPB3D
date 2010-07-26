@@ -13,6 +13,7 @@
 #include "ObjectNode.h"
 #include "MeshNode.h"
 #include "SimpleMeshObject.h"
+#include "SimpleMatMeshObject.h"  // no texture
 #include "ComponentObject.h"
 #include "StripMeshObject.h"
 #include "QuadMeshObject.h"
@@ -34,7 +35,7 @@ ObjectFactory::~ObjectFactory(void)
 
 ObjectNode* ObjectFactory::CreateNode( int meshes )
 {
-   return new ObjectNode( meshes, TakeANumber() );
+   return new ObjectNode( meshes, TakeANumber() );  // Unique ID for these objects for the picker
 }
 
 MeshNode* ObjectFactory::CreateMeshNode( int meshes )
@@ -47,22 +48,27 @@ ComponentObject* ObjectFactory::CreateComponent()
    return new ComponentObject( TakeANumber() );
 }
 
-SimpleMeshObject* ObjectFactory::CreateMesh() // Objec
+SimpleMeshObject* ObjectFactory::CreateMesh() // Object with texture
 {
    return new SimpleMeshObject( TakeANumber() );
 }
 
-QuadMeshObject* ObjectFactory::CreateQuadMesh() // Objec
+SimpleMatMeshObject* ObjectFactory::CreateMatMesh()  // no texture
+{
+   return new SimpleMatMeshObject( TakeANumber() );
+}
+
+QuadMeshObject* ObjectFactory::CreateQuadMesh() // Object mesh in quads
 {
    return new QuadMeshObject( TakeANumber() );
 }
 
-StripMeshObject* ObjectFactory::CreateStrip() // Objec
+StripMeshObject* ObjectFactory::CreateStrip() // Object strip
 {
    return new StripMeshObject( TakeANumber() );
 }
 
-ComplexMeshObject* ObjectFactory::CreateComplex() // Objec
+ComplexMeshObject* ObjectFactory::CreateComplex() // Object
 {
    return new ComplexMeshObject( 1, TakeANumber() );
 }

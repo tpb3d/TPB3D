@@ -313,12 +313,15 @@ bool GameManager::LoadGame (const char *fileName)
 
    //pRide = flat.CreateRide(1, mPark);
    //pRide->SetPosition (fx-20,1, fz+10);
-   //mScene.GetPark()->AddRide (pRide));
+   //mScene.GetPark()->AddRide (pRide);
    //
    //pRide = flat.CreateRide(2, mPark);
    //pRide->SetPosition (fx,1, fz+40);
-   //mScene.GetPark()->AddRide (pRide));
+   //mScene.GetPark()->AddRide (pRide);
 
+   pRide = flat.CreateRide(5, mPark);  // polyp
+   pRide->SetPosition (fx,1, fz+40);
+   mScene.GetPark()->AddRide (pRide);
 
 //   const char* pHT = "hrtwr.3ds";
 //   const char* pHT2 = "data/HighRide/";

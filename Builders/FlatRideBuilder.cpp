@@ -105,6 +105,31 @@ namespace Builders
       PartGuide::RideNodeArm, // right
       PartGuide::RideNodeCar
    };
+
+   const char* kszPolyp = "data/Polyp/";
+   const char* kszPolypParts[] =
+   {
+      "",
+      "polengcvr.3ds",
+      "pol5finger.3ds",
+      "poltop.3ds",
+      "",                        // rotation
+      "monarm",
+      "polarm.3ds",
+      "polfing5.3ds",
+      "polsleicar,3ds"  // hope Santa has insurance for this thing
+   };
+   PartGuide::TRideNodeType kPolypNodes[] =
+   {
+      PartGuide::RideNodeBase,
+      PartGuide::RideNodeDeck,
+      PartGuide::RideNodeRotationHub,
+      PartGuide::RideNodeHub,
+      PartGuide::RideNodeArm,
+      PartGuide::RideNodeArm, // left
+      PartGuide::RideNodeArm, // right
+      PartGuide::RideNodeCar
+   };
 }
 
 using namespace Builders;
@@ -126,6 +151,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
    Ride* pRide = new Ride(Vector3f(0,0,0), park);
    const int iTest = 12;
 
+   // this will be replaced by a class factory once time permits and the code looks like it will work.
    if( iPattern == 0)
    {
       pRide->SetRideType (RT_FlatRide);
@@ -218,7 +244,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       const char* pPath = kszSpida;
       PartGuide guide;
       guide.Clear();
-      // test data, the Barn Stormer ride
+      // test data, the spider ride
       ObjectNode* pHubNode = new ObjectNode (0, 32);
       const char* kszHub = kszSpidaParts[6];
       rpl.Load3ds( pPath, kszHub, pHubNode );
@@ -366,6 +392,93 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
             pArm->AddNode (pStrut);
          }
          fAngle += fDeg;
+      }
+   }
+   else if( iPattern == 5)
+   {
+      RidePartLoader rpl;
+      const char* pPath = kszPolyp;
+      PartGuide guide;
+      guide.Clear();
+      // test data, the polyp ride
+      ObjectNode* pHubNode = new ObjectNode (0, 32);
+      const char* kszHub = kszPolypParts[3];
+      rpl.Load3ds( pPath, kszHub, pHubNode );
+
+      guide.fHeight = 1;
+      guide.nCount = 13;
+      RideNode* pHub = AddRideNodeHub (NULL, pHubNode, guide);
+      pRide->SetNode (pHub);
+
+      // spin up
+      guide.fHeight = 2;
+      guide.nSpeed = 35;
+      guide.fDrop = 0;
+      RideNode* pRotHub = AddRideNodeRotationHub (pRide->GetController(), pHub, NULL, guide);
+
+      ObjectNode* pBaseNode = new ObjectNode (0, 33);
+      const char* kszBase = kszPolypParts[1];
+      rpl.Load3ds( pPath, kszBase, pBaseNode );
+      // Make a base
+      guide.fOffset = 2;
+      guide.fWidth = 2.2f;
+      guide.nCount = 8;
+      RideNode* pDeck2 = AddRideNodeHub (pHub, NULL, guide);
+      pDeck2->SetPosition (0, 1.1f, 0);
+      pDeck2->Render();
+      guide.nCount = iTest;
+      RideNode* pDeck = AddRideNodeDeck (pHub, NULL, guide);
+      pDeck->SetPosition (0, 0, 0);
+
+      // test with 6 arms on the polyp
+      const int iTest5 = 5;
+      float fDeg = 360.0f / iTest5;
+      float fDegH = fDeg /2; // Half increment
+      float fAngle = 0;
+      Vector3f::VectorAngle3<float> trig(0, fDegH, 0);
+      Vector3f v1(0,0,10);
+      Vector3f v2(v1);
+      v2.Rotate(trig);
+      v2 -= v1;
+      float vx = sqrt((v2.x*v2.x) + (v2.z*v2.z));
+
+      ObjectNode* pCarNode = new ObjectNode (0, 34);
+      ObjectNode* pArmNode = new ObjectNode (0, 35);
+      guide.fOffset=-30;
+      const char* kszArm = kszPolypParts[5];
+      const char* kszArmA = kszPolypParts[6];
+      const char* kszArmB = kszPolypParts[7];
+      rpl.Load3ds( pPath, kszArm, pArmNode );
+      rpl.Load3ds( pPath, kszArmA, pArmNode );
+      rpl.Load3ds( pPath, kszArmB, pArmNode );
+
+      guide.fAngle = 90;//fAngle;
+      AddRideNodeArm (pRotHub, pArmNode, guide); // do the extension arm
+
+      //guide.fAngle = 0;
+      //guide.fOffset = 0;
+      //guide.fHeight = 12;
+      //guide.fLength = 10.0f;
+      //guide.fDrop = -10.0f;
+      //guide.fWidth = vx;
+      //guide.trig.SetY (fDegH);
+      const char* pTag1 = kszPolypParts[8];
+      rpl.Load3ds( pPath, pTag1, pCarNode );
+
+
+      guide.fHeight = 9;
+      guide.fLength = 11.0f;
+      guide.fDrop = -8.0f;
+      guide.fOffset = -vx-2;
+      for (int ix = 0; ix < iTest5; ++ix)
+      {
+         // Arm code
+
+         // Building the yoke
+         guide.fAngle = fAngle + fDegH;
+         RideNode* pWire = AddRideNodeCableHinge (pRotHub, NULL, guide); // do the hanger
+         fAngle += fDeg;
+         AddRideNodeCar (pWire, pCarNode, guide);
       }
    }
    else

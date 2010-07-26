@@ -14,6 +14,7 @@
 #include <SFML/Graphics.hpp>
 #include "../Graphics/ObjectTree.h"
 #include "../Graphics/SimpleMeshObject.h"
+#include "../Graphics/SimpleMatMeshObject.h"
 #include "../Graphics/ObjectNode.h"
 #include "../Graphics/Material.h"
 #include "../Graphics/Image.h"
@@ -423,17 +424,34 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
             pNormals[ifx][2] = pn[2];
             pMatIndexes[ifx] = pMesh->faces[ifx].material;
          }
-         SimpleMeshObject* pGLMesh = ObjectFactory::CreateMesh();
-         pGLMesh->SetScale (frx);
-         //pNode->AddMesh( pGLMesh );
-         pBaseNode->AddMesh( pGLMesh );
+         if(pMesh->texcos)
+         {
+            SimpleMeshObject* pGLMesh = ObjectFactory::CreateMesh();
+            pGLMesh->SetScale (frx);
+            //pNode->AddMesh( pGLMesh );
+            pBaseNode->AddMesh( pGLMesh );
 
-         pGLMesh->AddMatrix( pMesh->matrix );
-         pGLMesh->SetMaterials (MatList);
+            pGLMesh->AddMatrix( pMesh->matrix );
+            pGLMesh->SetMaterials (MatList);
 
-         pGLMesh->AddMesh( pMesh->nvertices, pMesh->vertices, pNormals, pMesh->nvertices, pMesh->texcos, pMesh->nfaces, pFaces, pMatIndexes );
-         delete [] pFaces;
-         delete [] pNormals;
+            pGLMesh->AddMesh( pMesh->nvertices, pMesh->vertices, pNormals, pMesh->nvertices, pMesh->texcos, pMesh->nfaces, pFaces, pMatIndexes );
+            delete [] pFaces;
+            delete [] pNormals;
+         }
+         else
+         {
+            SimpleMatMeshObject* pGLMesh = ObjectFactory::CreateMatMesh();
+            pGLMesh->SetScale (frx);
+            //pNode->AddMesh( pGLMesh );
+            pBaseNode->AddMesh( pGLMesh );
+
+            pGLMesh->AddMatrix( pMesh->matrix );
+            pGLMesh->SetMaterials (MatList);
+
+            pGLMesh->AddMesh( pMesh->nvertices, pMesh->vertices, pNormals, pMesh->nfaces, pFaces, pMatIndexes );
+            delete [] pFaces;
+            delete [] pNormals;
+         }
       }
    }
    IMan.set_path("data/");
