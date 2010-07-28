@@ -115,6 +115,8 @@ void Scene::Draw ()
    if(mpTerrain->Water()!=NULL)	mpTerrain->Water()->Draw();
    //glDisable(GL_LIGHT1);
 	glDisable(GL_CULL_FACE);
+   glDisable(GL_LIGHT1);
+   glEnable(GL_LIGHT0);
 
    for (iPark = mParks.begin (); iPark != mParks.end (); iPark++)
    {

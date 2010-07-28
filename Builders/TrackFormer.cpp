@@ -14,6 +14,7 @@
 #include "../CoreObjects/Track.h"
 #include "../CoreObjects/TrackGuide.h"
 #include "../CoreObjects/TrackSection.h"
+#include "../CoreObjects/WoodTrestle.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/MeshNode.h"
 #include "../Graphics/TexturedStrip.h"
@@ -40,7 +41,7 @@ Track* TrackFormer::CreateTrack()
 
 void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
 {
-   bool bWood = (guide.iRailShape == 8);
+   bool bWood = (guide.GetRailShape() == 8);
    int id = 400;
    int iTubeSections = 6;
    int iRailSides = 6;
@@ -51,7 +52,7 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
       iTubeSections = 9;
    }
    TrackSection* pTrackSection = new TrackSection();
-   pTrackSection->Create(4+guide.iSections*2);
+   pTrackSection->Create(4+guide.GetSections()*2);
    Track.AddSection(pTrackSection);
 
    // Determine rails needed
@@ -63,14 +64,14 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
    }
    else
    {
-      if( guide.iRailShape == 3 )
+      if( guide.GetRailShape() == 3 )
       {
-         pMesh = new TexturedMesh( guide.iSections+1, iTubeSections, mpTexture, 0xff009090, id++ );
+         pMesh = new TexturedMesh( guide.GetSections()+1, iTubeSections, mpTexture, 0xff009090, id++ );
          pTrackSection->AddSection( pMesh );
       }
-      else if( guide.iRailShape > 2 )
+      else if( guide.GetRailShape() > 2 )
       {
-         pMesh = new TexturedMesh( guide.iSections+1, iTubeSections, mpTexture, 0xff009090, id++ );
+         pMesh = new TexturedMesh( guide.GetSections()+1, iTubeSections, mpTexture, 0xff009090, id++ );
          pTrackSection->AddSection( pMesh );
       }
       else
@@ -78,8 +79,8 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
          fYOffset = 0.2f;
       }
    }
-   TexturedMesh *pMeshA = new TexturedMesh( guide.iSections+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
-   TexturedMesh *pMeshB = new TexturedMesh( guide.iSections+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
+   TexturedMesh *pMeshA = new TexturedMesh( guide.GetSections()+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
+   TexturedMesh *pMeshB = new TexturedMesh( guide.GetSections()+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
    pTrackSection->AddSection( pMeshA );
    pTrackSection->AddSection( pMeshB );
    // option for one or two more rails
@@ -89,14 +90,23 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
    Vector3f centerPT( 0, -guide.fRadius, 0 );
    Vector3f::VectorAngle3<float> trigXYZ ( guide.fTiltX, guide.fTiltY, guide.fTiltZ);
    Vector3f::VectorAngle3<float> trig (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
-   if( guide.iSections > 14 )
+
+   Vector3f WoodAngle(guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
+   float fWoodPos = guide.fCurPos;
+   float fWoodRailAngle = guide.fCurRailAngle;
+   if( guide.GetSections() > 14 )
    {
-      int steps = int(guide.iSections / 12) + 1;
-      guide.fNextMount = (float)(guide.iSections / steps + 1.9);
+      int steps = int(guide.GetSections() / 12) + 1;
+      guide.fNextMount = (float)(guide.GetSections() / steps + 1.9);
       guide.fStep = 2.0;
    }
+   else
+   {
+      guide.fNextMount = (float)guide.GetSections()-1;
+   }
 
-   int iLast = guide.iSections;
+   int iLast = guide.GetSections();
+   int iCurSupp = guide.iSupportSection;
    for( int idxz = 0; idxz<= iLast; ++idxz )
    {
       TexturedStrip* pBar = CrossTie( TrackPoint, guide );
@@ -105,7 +115,7 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
       Vector3f::VectorAngle3<float> trigRZ (0, 0, guide.fCurRailAngle);
       Vector3f::VectorAngle3<float> trigPXYZ (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
       double dRad = 0.0;
-      if (pMesh != NULL)
+      if ( !(pMesh == NULL || guide.GetRailShape() == 7))
       {
          double dDeg = 360.0/ (iTubeSections-1);
          for( int idx = 0; idx < iTubeSections; ++idx )
@@ -135,13 +145,27 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
 
          dRad += dRDeg;
       }
+      if (guide.GetRailShape() == 7)
+      {
+         if (--iCurSupp < 1)
+         {
+            Vector3f WoodPoint(TrackPoint);
+            //float fWoodSpace = 10;
+            //Vector3f ForwardVector (0, 0, guide.fStep);
+            pTrackSection->AddSection (WoodSupports (WoodPoint, guide.fCurAngleY, guide.fCurRailAngle ));
+            iCurSupp = 3;
+         }
+      }
       if( idxz < iLast )
       {
          if( guide.fCurPos > guide.fNextMount ) // bSupports == true
          {
             Vector3f ptMount(TrackPoint);
             ptMount.y -= 0.75;
-            pTrackSection->AddSection(Support(ptMount, guide, (float)guide.fCurRailAngle, 10, 1 ));
+            if (guide.GetRailShape() != 7)
+            {
+               pTrackSection->AddSection(Support(ptMount, guide, (float)guide.fCurRailAngle, 10, 1 ));
+            }
             guide.fCurPos = 0;
          }
          sf::Vector3f pt3f( TrackPoint.x,TrackPoint.y,TrackPoint.z);
@@ -158,6 +182,7 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
          TrackPoint += pFV; // rotate to the current vector
       }
    }
+   guide.iSupportSection = iCurSupp;
    guide.point = TrackPoint;
 }
 
@@ -251,7 +276,7 @@ TexturedStrip* TrackFormer::CrossTie( Vector3f& TrackPoint, TrackGuide& guide )
    FPoint* pPoints;
    int iCount = 2;
    bool bWood = false;
-   switch( guide.iRailShape )
+   switch( guide.GetRailShape() )
    {
    case 6:
       pPoints = BoxShape;
@@ -410,167 +435,15 @@ ObjectBase* TrackFormer::Support( Vector3f ptMount, TrackGuide& guide, float fMo
    return pSupp;
 }
 
-ObjectBase* TrackFormer::WoodSupports( Vector3f ptMount, TrackGuide& guide, float MountAngle, float Load, float fBaseHeight )
+ObjectBase* TrackFormer::WoodSupports( Vector3f ptMount, float fCurAngleY, float fCurRailAngle )
 {
-   int id = 500;  // local mesh numbering
-   double dSuppRadius = 0.5;
-   float fYOffset = 0.8f;
-   Vector3f ptH(0, ptMount.y, 0);
-   Vector3f ptSupport(ptMount);
-   MeshNode* pSupp = ObjectFactory::CreateMeshNode(4);
-   WoodPost (pSupp, ptH.x, fBaseHeight, ptH.z, 6, ptMount.y);
+   Vector3f ptH (ptMount);
+   ptH.y = 0; // ground + 1
+   WoodTrestle* pSupp = new WoodTrestle (mpTexture, ptH);
+   pSupp->Preset (WoodTrestle::TF_Standard, fCurAngleY, ptMount.y, 6.0f, fCurRailAngle); // guide.fCurAngleY, 6.0f, guide.fCurRailAngle
+   Vector3f HRA(0,0,0);
+   Vector3f HRB(0,0,0);
+   pSupp->Render (HRA, HRB);
    return pSupp;
 }
 
-void TrackFormer::WoodPost(MeshNode* pSupp, float x, float y, float z, float w, float h)
-{
-   TexturedMesh *pMeshA = new TexturedMesh( 2, 5, mpTexture, 0xff5e5c5f, 600 );
-   pSupp->AddMesh( pMeshA );
-
-   Vector3f pt( x-w/2, y, z-w/2);
-   Vector3f ptU( x-w/2, y+h+2, z-w/2);
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.x += w;
-   ptU.x += w;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.z += w;
-   ptU.z += w;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.x -= w;
-   ptU.x -= w;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.z -= w;
-   ptU.z -= w;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-}
-
-void TrackFormer::WoodBeam(MeshNode* pSupp, float x, float y, float z, float w, float l, float d)
-{
-   TexturedMesh *pMeshA = new TexturedMesh( 2, 5, mpTexture, 0xff5e5c5f, 600 );
-   pSupp->AddMesh( pMeshA );
-
-   Vector3f pt( x-l/2, y, z-d/2);
-   Vector3f ptU( x-l/2, y+w/2, z-d/2);
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.x += l;
-   ptU.x += l;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.z += d;
-   ptU.z += d;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.x -= l;
-   ptU.x -= l;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.z -= d;
-   ptU.z -= d;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-}
-
-void TrackFormer::WoodBrace(MeshNode* pSupp, float x, float y, float z, float w, float l, float d, float h)
-{
-   TexturedMesh *pMeshA = new TexturedMesh( 2, 5, mpTexture, 0xff5e5c5f, 600 );
-   pSupp->AddMesh( pMeshA );
-
-   Vector3f pt( x-l/2, y, z-d/2);
-   Vector3f ptU( x+l/2-w, y+h, z-d/2);
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.x += w;
-   ptU.x += w;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.z += d;
-   ptU.z += d;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.x -= w;
-   ptU.x -= w;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-   pt.z -= d;
-   ptU.z -= d;
-   pMeshA->AddPoint (pt);
-   pMeshA->AddPoint (ptU);
-}
-
-void TrackFormer::WoodBent(MeshNode* pSupp, float x, float y, float z, float w, float l, float d, float angle)
-{
-   TexturedMesh *pMeshA = new TexturedMesh( 2, 5, mpTexture, 0xff5e5c5f, 600 );
-   pSupp->AddMesh( pMeshA );
-
-   Vector3f ptA;
-   Vector3f ptB;
-   Vector3f::VectorAngle3<float> trg (0, 0, angle);
-   float fx = l/2;
-   float fxC = x + fx;
-
-   ptA.Set (-fx,0,z);
-   ptA.Rotate (trg);
-   ptA.x += fxC;
-   ptA.y += y;
-   pMeshA->AddPoint (ptA);
-
-   ptB.Set (-fx, w, z);
-   ptB.Rotate (trg);
-   ptB.x += fxC;
-   ptB.y += y;
-   pMeshA->AddPoint (ptB);
-
-   ptA.Set (fx, 0, z);
-   ptA.Rotate (trg);
-   ptA.x += fxC;
-   ptA.y += y;
-   pMeshA->AddPoint (ptA);
-
-   ptB.Set (fx, w, z);
-   ptB.Rotate (trg);
-   ptB.x += fxC;
-   ptB.y += y;
-   pMeshA->AddPoint (ptB);
-
-   ptA.Set (fx, 0, z+d);
-   ptA.Rotate (trg);
-   ptA.x += fxC;
-   ptA.y += y;
-   pMeshA->AddPoint (ptA);
-
-   ptB.Set (fx, w, z+d);
-   ptB.Rotate (trg);
-   ptB.x += fxC;
-   ptB.y += y;
-   pMeshA->AddPoint (ptB);
-
-   ptA.Set (-fx, 0, z+d);
-   ptA.Rotate (trg);
-   ptA.x += fxC;
-   ptA.y += y;
-   pMeshA->AddPoint (ptA);
-
-   ptB.Set (-fx, w, z+d);
-   ptB.Rotate (trg);
-   ptB.x += fxC;
-   ptB.y += y;
-   pMeshA->AddPoint (ptB);
-
-   ptA.Set (-fx, 0,z);
-   ptA.Rotate (trg);
-   ptA.x += fxC;
-   ptA.y += y;
-   pMeshA->AddPoint (ptA);
-
-   ptB.Set (-fx, w, z);
-   ptB.Rotate (trg);
-   ptB.x += fxC;
-   ptB.y += y;
-   pMeshA->AddPoint (ptB);
-}

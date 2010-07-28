@@ -1053,6 +1053,14 @@
 				RelativePath="..\CoreObjects\WheelDrive.h"
 				>
 			</File>
+			<File
+				RelativePath="..\CoreObjects\WoodTrestle.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\WoodTrestle.h"
+				>
+			</File>
 		</Filter>
 		<Filter
 			Name="tinyxml"

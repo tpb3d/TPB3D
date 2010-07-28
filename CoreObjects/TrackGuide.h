@@ -14,8 +14,10 @@
 #pragma once
 struct TrackGuide
 {
+protected:
    int iSections;
    int iRailShape;
+public:
    int yDir;
    int xDir;
    Vector3f point;
@@ -34,11 +36,17 @@ struct TrackGuide
    float fWalkY;
    float fWalkZ;
    float fRadius;
+   float fTieWidth;
    float fTrackGauge;
    // supports
    float fNextMount;
    float fCurPos;
-   float fStep;
+   float fStep;   // computed section length
+   float fStepLength;
+
+   int   iSupportSection;   // how many sections since the last support
+   int   iSupportInterval;  // how many sections between supports
+   bool  bStraight;
 
    TrackGuide()
    {
@@ -52,6 +60,7 @@ struct TrackGuide
       fTubeRadius = 0;
       fRailRadius = 0;
       fRailTiltZ = 0;
+      fTieWidth = 3;
       fTiltX = 0;
       fTiltY = 0;
       fTiltZ = 0;
@@ -60,8 +69,17 @@ struct TrackGuide
       // supports
       fNextMount = 32;
       fCurPos = 0;
-      fStep = 2.0;
+      fStep = 2.0f;
+      fStepLength = 2.0f;
+
+      iSupportSection = 0;
+      iSupportInterval = 7;
+
+      bStraight = false;
    }
+   void SetRailShape (int shape);
+   int  GetRailShape () { return iRailShape;}
+   int  GetSections () { return iSections; }
    void SetupTurn( double dDegRotation, double dRadius, double dRoll );
    void SetupPitch( double dDegPitch, double dRadius, double dRoll );
    void SetupStraight( double dDistance, double dRoll );

@@ -262,7 +262,7 @@ bool GameManager::LoadGame (const char *fileName)
    guide.fTubeRadius = 0.4f;
    guide.fRailRadius = 0.2f;
    guide.fTrackGauge = 2;
-   guide.iRailShape = 3;
+   guide.SetRailShape (7);
    guide.point.Set (0,12,23);
 
    guide.SetupStraight( 20, 45 );
@@ -273,7 +273,7 @@ bool GameManager::LoadGame (const char *fileName)
    TF.MakeSection (guide, *pTrack);
    guide.SetupPitch( 22, 30, 0 );
    TF.MakeSection (guide, *pTrack);
-   guide.iRailShape = 4;
+//   guide.SetRailShape (4);
    guide.SetupStraight( 20, -45 );
    TF.MakeSection (guide, *pTrack);
    guide.SetupTurn( 90, 18, -45 );
