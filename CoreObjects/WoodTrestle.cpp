@@ -2,7 +2,7 @@
 //  Copyright (C)2010 Ralph Daigle.   All rights reserved.
 //  Licensed according to the GPL v3.0
 //
-//  TrackSection class
+//  Wood Support Trestle class
 //
 //  You should have received a copy of the GNU General Public License
 //  along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
@@ -54,9 +54,10 @@ void WoodTrestle::Clear()
    mfWidth = 0;
    mfBentAngle = 0;
    mWoodColor = 0xff5e8fbf;
-   mFootintColor = 0xffafafaf;
+   mFootingColor = 0xffafafaf;
    mHandrailColor = 0xff2f3fef; // red
 }
+
 void WoodTrestle::Create(int count)
 {
 //   mpBaseParts = new ObjectBase*[count];
@@ -94,7 +95,7 @@ void WoodTrestle::Load(SerializerBase& ser)
 
 void WoodTrestle::Save(SerializerBase& ser)
 {
-   ser.Add("Type", "TrackSection");
+   ser.Add("Type", "WoodTrestle");
    ser.Add("ID", mID);
    ser.Add("Format", codes[mFormat]);
    ser.Add("YAngle", mAngle);
@@ -114,39 +115,61 @@ void WoodTrestle::Render (Vector3f& HRLeft, Vector3f& HRRight)
    Post2.Rotate (trigY);
    Loc1 += Post1;
    Loc2 += Post2;
-   float fPA = 0;
-   float fPB = 0;
+
+   int iABH = 0;
+   float fPL = 0;
+   float fPR = 0;
+   float fBHL = 0;   // Height
+   float fBHR = 0;
+   float fBDL = 0;   // distance
+   float fBDR = 0;
    if ( mfBentAngle < -1 )
    {
-      fPA = -sin(abs(mfBentAngle))*2;
-      fPB = sin(abs(mfBentAngle))*2;
+      fPL = -sin(abs(mfBentAngle))*2;
+      fPR = sin(abs(mfBentAngle))*2;
+      fBHR = mfHeight - 1;  // set right brace to height of bent
    }
    else if ( mfBentAngle > 1)
    {
-      fPA = sin(abs(mfBentAngle))*2;
-      fPB = -sin(abs(mfBentAngle))*2;
+      fBHL = mfHeight - 1;  // set left brace to height of bent
+      fPL = sin(abs(mfBentAngle))*2;
+      fPR = -sin(abs(mfBentAngle))*2;
    }
-   WoodPost (Loc1.x, Loc1.y, Loc1.z, 0.5f, mfHeight+fPA, mAngle);
-   WoodPost (Loc2.x, Loc2.y, Loc2.z, 0.5f, mfHeight+fPB, mAngle);
+   WoodPost (Loc1.x, Loc1.y, Loc1.z, 0.5f, mfHeight+fPL, mAngle);
+   WoodPost (Loc2.x, Loc2.y, Loc2.z, 0.5f, mfHeight+fPR, mAngle);
    ConcreteFooting (Loc1.x, Loc1.y, Loc1.z, 1.05f, 4.0f);
    ConcreteFooting (Loc2.x, Loc2.y, Loc2.z, 1.05f, 4.0f);
-   int iABH = 0;
-   float fBH = 0;
-   float fBD = 0;
+
    if (mfHeight > 30)
    {
       iABH = int((mfHeight * 0.75) / 6);
-      fBH = 6.0f * iABH;
-      fBD = fBH * 0.25f;
-      Vector3f Base1 (-fBD-3,0,0);
-      Vector3f Base2 (fBD+3,0,0);
+      float fbh = 6.0f * iABH;
+      if (fbh > fBHL)
+      {
+         fBHL = fbh;
+      }
+      if (fbh > fBHR)
+      {
+         fBHR = fbh;
+      }
+   }
+
+   if (fBHL > 0)  // left bracing
+   {
+      fBDL = fBHL * 0.25f;
+      Vector3f Base1 (-fBDL-3,0,0);
       Base1.Rotate (trigY);
-      Base2.Rotate (trigY);
       Base1 += mLocation;
-      Base2 += mLocation;
-      WoodBracePost (Loc1.x, Loc1.y, Loc1.z, 0.5f, fBH, -fBD, mAngle);
-      WoodBracePost (Loc2.x, Loc2.y, Loc2.z, 0.5f, fBH, fBD, mAngle);
+      WoodBracePost (Loc1.x, Loc1.y, Loc1.z, 0.5f, fBHL, -fBDL, mAngle);
       ConcreteFooting (Base1.x, Base1.y, Base1.z, 1.25f, 4.0f);
+   }
+   if (fBHR > 0) // right bracing
+   {
+      fBDR = fBHR * 0.25f;
+      Vector3f Base2 (fBDR+3,0,0);
+      Base2.Rotate (trigY);
+      Base2 += mLocation;
+      WoodBracePost (Loc2.x, Loc2.y, Loc2.z, 0.5f, fBHR, fBDR, mAngle);
       ConcreteFooting (Base2.x, Base2.y, Base2.z, 1.25f, 4.0f);
    }
    int iCount = int((mfHeight - 2) / mfWidth);
@@ -155,35 +178,37 @@ void WoodTrestle::Render (Vector3f& HRLeft, Vector3f& HRRight)
       iCount--;
    }
    float fy = mLocation.y + 2;
-   float fMax = fBH; 
-   float fIPB = 0;
+   float fIPBL = 0;
+   float fIPBR = 0;
    int iBC = iABH; // only for braced sections
    if( iABH> 0 )
    {
-      fIPB = fBD / (iABH+1); // setup to use percentage of slope of the post for each beam extended.
-      iBC++;
+      fIPBL = fBDL / iBC; // setup to use percentage of slope of the post for each beam extended.
+      fIPBR = fBDR / iBC; // setup to use percentage of slope of the post for each beam extended.
    }
    for (int ic = 0; ic < iCount; ++ic)
    {
-      float fBD = 0;
+      float fBDL = 0;
+      float fBDR = 0;
       if (iBC > 0) // only for braced sections
       {
-         fBD = fIPB * iBC;
+         fBDL = fIPBL * iBC - 0.5f;
+         fBDR = fIPBR * iBC - 0.5f;
          iBC--;
       }
-      WoodBeam (mLocation.x, fy, mLocation.z, 0.75f, mfWidth+fBD*2, 0.25f, mAngle);
+      WoodBeam (mLocation.x, fy, mLocation.z, 0.75f, mfWidth, 0.25f, mAngle, fBDL, fBDR);
       WoodBrace  (mLocation.x, fy, mLocation.z, 0.75f, mfWidth, 0.25f, mfWidth-0.325f, mAngle);
       fy+=mfWidth;
    }
    if( fy < mfHeight - 3)
    {
-      WoodBeam (mLocation.x, fy, mLocation.z, 0.75f, mfWidth, 0.25f, mAngle);
+      WoodBeam (mLocation.x, fy, mLocation.z, 0.75f, mfWidth, 0.25f, mAngle, 0, 0);
    }
    float fBY = mfHeight-1;
    if ( mfBentAngle < -25 || mfBentAngle > 25)
    {
       fBY = mfHeight - sin(abs(mfBentAngle))*3;
-      WoodBeam (mLocation.x, fy, mLocation.z, 1, mfWidth, 0.5f, mAngle);
+      WoodBeam (mLocation.x, fy, mLocation.z, 1, mfWidth, 0.5f, mAngle, 0, 0);
    }
    WoodBrace  (mLocation.x, fy, mLocation.z, 0.75f, mfWidth, 0.25f, fBY-fy-0.325f, mAngle);
    WoodBent (mLocation.x, mLocation.y + mfHeight - 1, mLocation.z, 1, mfWidth, 0.375f, mAngle, mfBentAngle);
@@ -270,7 +295,7 @@ void WoodTrestle::WoodBracePost(float x, float y, float z, float w, float l, flo
    }
 }
 
-void WoodTrestle::WoodBeam (float x, float y, float z, float w, float l, float d, float angle)
+void WoodTrestle::WoodBeam (float x, float y, float z, float w, float l, float d, float angle, float leftExt, float rightExt)
 {
    TexturedMesh *pMeshA = new TexturedMesh( 5, 2, mpTexture, mWoodColor, 600 );
    AddMesh (pMeshA);
@@ -281,8 +306,8 @@ void WoodTrestle::WoodBeam (float x, float y, float z, float w, float l, float d
    float hy = w/2;
    // building a 2x6 the hard way.
    Vector3f ptLoc (x,y,z);
-   Vector3f ptL( -l/1.8f,-hy, -0.5);
-   Vector3f ptR( l/1.8f, -hy, -0.5);
+   Vector3f ptL( -l/1.8f-leftExt, -hy, -0.5);
+   Vector3f ptR( l/1.8f+rightExt, -hy, -0.5);
    Vector3f pt1 (ptL);
    Vector3f pt2 (ptR);
    pt1.Rotate (trigY);
@@ -492,7 +517,7 @@ void WoodTrestle::WoodBent (float x, float y, float z, float w, float l, float d
 
 void WoodTrestle::ConcreteFooting (float x, float y, float z, float width, float depth)
 {
-   TexturedMesh *pMeshA = new TexturedMesh (9, 2, mpTexture, mFootintColor, 600 );
+   TexturedMesh *pMeshA = new TexturedMesh (9, 2, mpTexture, mFootingColor, 600 );
    this->AddMesh (pMeshA);
 
    Vector3f::VectorAngle3<float> trigSY (0, 360.0f/8, 0);

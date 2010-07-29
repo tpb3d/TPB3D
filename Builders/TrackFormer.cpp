@@ -15,6 +15,7 @@
 #include "../CoreObjects/TrackGuide.h"
 #include "../CoreObjects/TrackSection.h"
 #include "../CoreObjects/WoodTrestle.h"
+#include "../CoreObjects/ParabolicCorkSupport.h"
 #include "../Graphics/Image.h"
 #include "../Graphics/MeshNode.h"
 #include "../Graphics/TexturedStrip.h"
@@ -47,6 +48,7 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
    int iRailSides = 6;
    float fGauge = (float)(guide.fTrackGauge/2);
    float fYOffset = 0.8f;
+
    if( guide.fTubeRadius > 1.99/12 )
    {
       iTubeSections = 9;
@@ -182,6 +184,7 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
          TrackPoint += pFV; // rotate to the current vector
       }
    }
+
    guide.iSupportSection = iCurSupp;
    guide.point = TrackPoint;
 }
@@ -447,3 +450,14 @@ ObjectBase* TrackFormer::WoodSupports( Vector3f ptMount, float fCurAngleY, float
    return pSupp;
 }
 
+// Example call
+//   pTrackSection->AddSection (AddCorkSupport( TrackPoint, guide.fCurAngleY, 24 ));
+
+ObjectBase* TrackFormer::AddCorkSupport( Vector3f ptMount, float fCurAngleY, float fCorkLength )
+{
+   ParabolicCorkSupport* pSupp = new ParabolicCorkSupport(mpTexture, ptMount);
+   Vector3f cet(0,8.0f,0);
+   pSupp->Preset (ParabolicCorkSupport::CSF_Standard, 20, 18, 26);
+   pSupp->Render (ptMount, 15.0f);
+   return pSupp;
+}

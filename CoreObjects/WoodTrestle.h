@@ -1,9 +1,8 @@
-#pragma once
 //  Wood coaster support trestle and bracing
 //  Copyright (C)2010 Ralph Daigle.   All rights reserved.
 //  Licensed according to the GPL v3.0
 //
-//  TrackSection class
+//  Wood Trestle Support class
 //
 //  Generated track sections specified by a pattern and parameters
 //
@@ -23,9 +22,6 @@ class WoodTrestle : public ObjectNode
 {
    int   mPartsCount;
    int   mMaxParts;
-   long  mWoodColor;
-   long  mFootintColor;
-   long  mHandrailColor;
    Gfx::Texture* mpTexture;
 //   ObjectBase** mpBaseParts; // temp hardcode
 public:
@@ -42,6 +38,9 @@ public:
 protected:
    TrestleFormat mFormat;
    Vector3f mLocation;
+   long  mWoodColor;
+   long  mFootingColor;
+   long  mHandrailColor;
    float mfHeight;
    float mfWidth;
    float mfBentAngle;   // this is the cross board that supports the track
@@ -60,7 +59,7 @@ public:
 
    void Render (Vector3f& HRLeft, Vector3f& HRRight);
    void WoodPost(float x, float y, float z, float w, float h, float angle);
-   void WoodBeam(float x, float y, float z, float w, float l, float d, float angle);
+   void WoodBeam(float x, float y, float z, float w, float l, float d, float angle, float leftExt, float rightExt);
    void WoodBrace(float x, float y, float z, float w, float l, float d, float h, float angle);
    void WoodBracePost(float x, float y, float z, float w, float l, float d, float angle);
    void WoodBent(float x, float y, float z, float w, float l, float d, float angle, float tilt);

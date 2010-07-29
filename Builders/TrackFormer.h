@@ -32,6 +32,8 @@ public:
    TexturedStrip* CrossTie( Vector3f& TrackPoint, TrackGuide& guide );
    ObjectBase* Support( Vector3f pt, TrackGuide& guide, float MountAngle, float Load, float fBaseHeight );
    ObjectBase* WoodSupports( Vector3f pt, float fCurAngleY, float fCurRailAngle );
+   ObjectBase* AddCorkSupport( Vector3f ptMount, float fCurAngleY, float fCorkLength );
+
    
    // wood forming methods moved to WoodTrestle
 };

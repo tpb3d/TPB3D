@@ -814,6 +814,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CoreObjects\ParabolicCorkSupport.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\ParabolicCorkSupport.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CoreObjects\Park.cpp"
 				>
 			</File>
