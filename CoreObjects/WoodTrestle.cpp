@@ -8,6 +8,8 @@
 //  along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////
 
+#define _USE_MATH_DEFINES
+#include <math.h>
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
 #include "../Graphics/ObjectFactory.h"
@@ -123,17 +125,18 @@ void WoodTrestle::Render (Vector3f& HRLeft, Vector3f& HRRight)
    float fBHR = 0;
    float fBDL = 0;   // distance
    float fBDR = 0;
+   float fBAngle = (float)sin( M_PI/180 * mfBentAngle ) * 1.65f;
    if ( mfBentAngle < -1 )
    {
-      fPL = -sin(abs(mfBentAngle))*2;
-      fPR = sin(abs(mfBentAngle))*2;
+      fPL = fBAngle;
+      fPR = -fBAngle;
       fBHR = mfHeight - 1;  // set right brace to height of bent
    }
    else if ( mfBentAngle > 1)
    {
-      fBHL = mfHeight - 1;  // set left brace to height of bent
-      fPL = sin(abs(mfBentAngle))*2;
-      fPR = -sin(abs(mfBentAngle))*2;
+      fBHL = mfHeight - 1;  // setfBAnglesin(abs(mfBentAngle))*2;
+      fPR = -fBAngle;
+      fPL = fBAngle;
    }
    WoodPost (Loc1.x, Loc1.y, Loc1.z, 0.5f, mfHeight+fPL, mAngle);
    WoodPost (Loc2.x, Loc2.y, Loc2.z, 0.5f, mfHeight+fPR, mAngle);

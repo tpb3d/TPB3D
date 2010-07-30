@@ -56,6 +56,7 @@ void TrackSection::Clear()
 }
 void TrackSection::Create(int count)
 {
+   mMaxParts = count;
    mpBaseParts = new ObjectBase*[count];
 }
 
@@ -76,7 +77,14 @@ void TrackSection::Preset( float fDegPitch, float fDistance, float fDegRotation,
 
 void TrackSection::AddSection( ObjectBase* pGLBase )
 {
-   mpBaseParts[mPartsCount++] = pGLBase;
+   if (mPartsCount < mMaxParts)
+   {
+      mpBaseParts[mPartsCount++] = pGLBase;
+   }
+   else
+   {
+      throw "Too many parts";
+   }
 }
 
 void TrackSection::Draw()

@@ -19,9 +19,11 @@ void TrackGuide::SetRailShape (int shape)
    fStepLength = 2.0f;
    if (shape == 7 || shape == 8)
    {
-      if (iRailShape < 7)
+      if (iRailShape < 8)
+      {
          iSupportSection = 0;
-
+         fRailRadius = 3.75f/12;
+      }
       iSupportInterval = 3;
       fTieWidth = 2.0f;
    }

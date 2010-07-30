@@ -29,8 +29,12 @@ public:
    static Track* CreateTrack();
 
    void MakeSection( TrackGuide& guide, Track& track );
+   void MakeWoodSection( TrackGuide& guide, Track& track );
    TexturedStrip* CrossTie( Vector3f& TrackPoint, TrackGuide& guide );
    ObjectBase* Support( Vector3f pt, TrackGuide& guide, float MountAngle, float Load, float fBaseHeight );
+   TexturedStrip* WoodCrossTie( Vector3f& TrackPoint,
+                                Vector3f::VectorAngle3<float>& trigXYZ, Vector3f::VectorAngle3<float>& trigZ,
+                                float fGauge, float fThick );
    ObjectBase* WoodSupports( Vector3f pt, float fCurAngleY, float fCurRailAngle );
    ObjectBase* AddCorkSupport( Vector3f ptMount, float fCurAngleY, float fCorkLength );
 

@@ -42,7 +42,11 @@ Track* TrackFormer::CreateTrack()
 
 void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
 {
-   bool bWood = (guide.GetRailShape() == 8);
+   if (guide.GetRailShape() == 7 || guide.GetRailShape() == 8)
+   {
+      MakeWoodSection( guide, Track );
+      return;
+   }
    int id = 400;
    int iTubeSections = 6;
    int iRailSides = 6;
@@ -54,32 +58,25 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
       iTubeSections = 9;
    }
    TrackSection* pTrackSection = new TrackSection();
-   pTrackSection->Create(4+guide.GetSections()*2);
+   int iNeeded = 4+guide.GetSections()*2;
+   pTrackSection->Create(iNeeded);
    Track.AddSection(pTrackSection);
 
    // Determine rails needed
    TexturedMesh *pMesh = NULL;
-   if (bWood)
+   if( guide.GetRailShape() == 3 )
    {
-      iRailSides = 5;
-      fYOffset = 0.0f;
+      pMesh = new TexturedMesh( guide.GetSections()+1, iTubeSections, mpTexture, 0xff009090, id++ );
+      pTrackSection->AddSection( pMesh );
+   }
+   else if( guide.GetRailShape() > 2 )
+   {
+      pMesh = new TexturedMesh( guide.GetSections()+1, iTubeSections, mpTexture, 0xff009090, id++ );
+      pTrackSection->AddSection( pMesh );
    }
    else
    {
-      if( guide.GetRailShape() == 3 )
-      {
-         pMesh = new TexturedMesh( guide.GetSections()+1, iTubeSections, mpTexture, 0xff009090, id++ );
-         pTrackSection->AddSection( pMesh );
-      }
-      else if( guide.GetRailShape() > 2 )
-      {
-         pMesh = new TexturedMesh( guide.GetSections()+1, iTubeSections, mpTexture, 0xff009090, id++ );
-         pTrackSection->AddSection( pMesh );
-      }
-      else
-      {
-         fYOffset = 0.2f;
-      }
+      fYOffset = 0.2f;
    }
    TexturedMesh *pMeshA = new TexturedMesh( guide.GetSections()+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
    TexturedMesh *pMeshB = new TexturedMesh( guide.GetSections()+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
@@ -93,7 +90,6 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
    Vector3f::VectorAngle3<float> trigXYZ ( guide.fTiltX, guide.fTiltY, guide.fTiltZ);
    Vector3f::VectorAngle3<float> trig (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
 
-   Vector3f WoodAngle(guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
    float fWoodPos = guide.fCurPos;
    float fWoodRailAngle = guide.fCurRailAngle;
    if( guide.GetSections() > 14 )
@@ -111,7 +107,8 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
    int iCurSupp = guide.iSupportSection;
    for( int idxz = 0; idxz<= iLast; ++idxz )
    {
-      TexturedStrip* pBar = CrossTie( TrackPoint, guide );
+      TexturedStrip* pBar;
+      pBar = CrossTie( TrackPoint, guide );
       pTrackSection->AddSection( pBar );
 
       Vector3f::VectorAngle3<float> trigRZ (0, 0, guide.fCurRailAngle);
@@ -131,7 +128,7 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
          }
       }
       double dRDeg = 360.0/(iRailSides-1);
-      dRad = (bWood) ? 45.0f : 0.0;
+      dRad = 0.0;
       for( int idx = 0; idx < iRailSides; ++idx )
       {
          float fTheta = (float)(M_PI/180 * dRad);
@@ -146,17 +143,6 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
          pMeshB->AddPoint( ptB );
 
          dRad += dRDeg;
-      }
-      if (guide.GetRailShape() == 7)
-      {
-         if (--iCurSupp < 1)
-         {
-            Vector3f WoodPoint(TrackPoint);
-            //float fWoodSpace = 10;
-            //Vector3f ForwardVector (0, 0, guide.fStep);
-            pTrackSection->AddSection (WoodSupports (WoodPoint, guide.fCurAngleY, guide.fCurRailAngle ));
-            iCurSupp = 3;
-         }
       }
       if( idxz < iLast )
       {
@@ -187,6 +173,174 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
 
    guide.iSupportSection = iCurSupp;
    guide.point = TrackPoint;
+}
+
+void TrackFormer::MakeWoodSection( TrackGuide& guide, Track& Track )
+{
+   int id = 400;
+   int iTubeSections = 6;
+   int iRailSides = 6;
+   float fGauge = (float)(guide.fTrackGauge/2);
+   float fYOffset = 0.8f;
+
+   if( guide.fTubeRadius > 1.99/12 )
+   {
+      iTubeSections = 9;
+   }
+   TrackSection* pTrackSection = new TrackSection();
+   int iNeeded = 4+guide.GetSections()*2;
+   iNeeded += guide.GetSections() * 3;  // for the extra ties
+   pTrackSection->Create(iNeeded);
+   Track.AddSection(pTrackSection);
+
+   // Determine rails needed
+   TexturedMesh *pMesh = NULL;
+   iRailSides = 5;
+   fYOffset = 0.0f;
+
+   TexturedMesh *pMeshA = new TexturedMesh( guide.GetSections()+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
+   TexturedMesh *pMeshB = new TexturedMesh( guide.GetSections()+1, iRailSides, mpTexture, 0xfc2d6fef, id++ );
+   pTrackSection->AddSection( pMeshA );
+   pTrackSection->AddSection( pMeshB );
+
+   TexturedStrip* pLeftCatwalk = new TexturedStrip( guide.GetSections()+1, mpTexture, 0xff3faf3f );
+   TexturedStrip* pRightCatwalk = new TexturedStrip( guide.GetSections()+1, mpTexture, 0xff3faf3f );
+   pTrackSection->AddSection( pLeftCatwalk );
+   pTrackSection->AddSection( pRightCatwalk );
+
+
+   // Get fractional vector
+   Vector3f SupportPoint( guide.point );
+   Vector3f centerPT( 0, -guide.fRadius, 0 );
+   Vector3f::VectorAngle3<float> trigXYZ ( guide.fTiltX, guide.fTiltY, guide.fTiltZ);
+   Vector3f::VectorAngle3<float> trig (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
+
+   float fWoodPos = guide.fCurPos;
+   float fWoodRailAngle = guide.fCurRailAngle;
+   if( guide.GetSections() > 14 )
+   {
+      int steps = int(guide.GetSections() / 12) + 1;
+      guide.fNextMount = (float)(guide.GetSections() / steps + 1.9);
+      guide.fStep = 2.0;
+   }
+   else
+   {
+      guide.fNextMount = (float)guide.GetSections()-1;
+   }
+
+   int iLast = guide.GetSections();
+   int iCurSupp = guide.iSupportSection;
+   for( int idxz = 0; idxz<= iLast; ++idxz )
+   {
+      Vector3f TrackPoint( SupportPoint );
+      TexturedStrip* pBar;
+      Vector3f::VectorAngle3<float> trigRZ (0, 0, guide.fCurRailAngle);
+      Vector3f::VectorAngle3<float> trigPXYZ (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
+      float fBankShift = (float)sin( M_PI/180 * guide.fCurRailAngle ) * 1.45f;
+      Vector3f MovePoint( -fBankShift, 0, 0 );
+      MovePoint.Rotate( trigPXYZ );
+      TrackPoint += MovePoint;
+
+      float fTie = (guide.GetRailShape() == 7) ? 3.0f/12 : 6.0f/12;  // woodie or train
+      pBar = WoodCrossTie( TrackPoint, trigPXYZ, trigRZ, guide.fTrackGauge, fTie );
+      pTrackSection->AddSection( pBar );
+
+      Vector3f ptCreep (guide.ForwardVector); // We are going to drop a tie between the normal set
+      Vector3f::VectorAngle3<float> trigZ2 (0,0, guide.fCurRailAngle+guide.fRailTiltZ/2);
+      Vector3f::VectorAngle3<float> trigXYZ2 (guide.fCurAngleX+guide.fTiltX/2, guide.fCurAngleY+guide.fTiltY/2, guide.fCurAngleZ+guide.fTiltZ/2);
+      ptCreep.x /= 2;   // split the diff
+      ptCreep.y /= 2;
+      ptCreep.z /= 2;
+      ptCreep.Rotate (trigXYZ2);
+      Vector3f pt1(TrackPoint);
+      pt1 += ptCreep;
+      pBar = WoodCrossTie( pt1, trigXYZ2, trigZ2, guide.fTrackGauge, fTie );
+      pTrackSection->AddSection( pBar );
+
+      double dAngle = guide.fCurRailAngle;
+      if( dAngle < -90 ) dAngle = -90;
+      if( dAngle > 90 ) dAngle = 90;
+      float fCatwallDiff = (float)sin( M_PI/180 * dAngle ) * 1.25f;
+      if( guide.fCurRailAngle < 33)
+      {
+         Vector3f ptA( -2.5f, 0, 0 );
+         Vector3f ptB( -fGauge+0.45f, 0, 0 );
+         ptA.Rotate( trigRZ );
+         ptB.Rotate( trigRZ );
+         ptB.x -= 0.85f;
+         ptB.y = ptA.y;
+         if(fCatwallDiff < 0)
+            ptA.x += fCatwallDiff;
+         else
+            ptA.x -= fCatwallDiff;
+         ptB.x -= fCatwallDiff;
+         ptA.Transform( trigPXYZ, SupportPoint ); // Transform, use matrix here
+         ptB.Transform( trigPXYZ, SupportPoint ); // Transform, use matrix here
+
+         pLeftCatwalk->AddPoint( ptA );
+         pLeftCatwalk->AddPoint( ptB );
+      }
+      if( guide.fCurRailAngle > -33)
+      {
+         Vector3f ptA( 2.5f, 0, 0 );
+         Vector3f ptB( fGauge-0.45f, 0, 0 );
+         ptA.Rotate( trigRZ );
+         ptB.Rotate( trigRZ );
+         ptB.x += 0.85f;
+         ptB.y = ptA.y;
+         if(fCatwallDiff > 0)
+            ptA.x += fCatwallDiff;
+         else
+            ptA.x -= fCatwallDiff;
+         ptB.x -= fCatwallDiff;
+         ptA.Transform( trigPXYZ, SupportPoint ); // Transform, use matrix here
+         ptB.Transform( trigPXYZ, SupportPoint ); // Transform, use matrix here
+
+         pRightCatwalk->AddPoint( ptA );
+         pRightCatwalk->AddPoint( ptB );
+      }
+
+      double dRad = 45.0f;
+      double dRDeg = 360.0/(iRailSides-1);
+      for( int idx = 0; idx < iRailSides; ++idx )
+      {
+         float fTheta = (float)(M_PI/180 * dRad);
+         Vector3f ptA( cos(fTheta) * guide.fRailRadius-fGauge, sin(fTheta)* guide.fRailRadius + fYOffset, 0 );
+         Vector3f ptB( cos(fTheta) * guide.fRailRadius+fGauge, sin(fTheta)* guide.fRailRadius + fYOffset, 0 );
+         ptA.Rotate( trigRZ );
+         ptA.Transform( trigPXYZ, TrackPoint ); // Transform, use matrix here
+         ptB.Rotate( trigRZ );
+         ptB.Transform( trigPXYZ, TrackPoint ); // Transform, use matrix here
+
+         pMeshA->AddPoint( ptA );
+         pMeshB->AddPoint( ptB );
+
+         dRad += dRDeg;
+      }
+      if (--iCurSupp < 1)
+      {
+         pTrackSection->AddSection (WoodSupports (SupportPoint, guide.fCurAngleY, guide.fCurRailAngle ));
+         iCurSupp = 3;
+      }
+      if( idxz < iLast )
+      {
+         sf::Vector3f pt3f( TrackPoint.x,TrackPoint.y,TrackPoint.z);
+         mPark.AddTestPoint( pt3f, sf::Vector3f(-guide.fCurAngleX, guide.fCurAngleY, -guide.fCurRailAngle) ); // path
+
+         guide.fCurAngleX += guide.fTiltX;
+         guide.fCurAngleY += guide.fTiltY;
+         guide.fCurAngleZ += guide.fTiltZ;
+         guide.fCurRailAngle += guide.fRailTiltZ;
+         Vector3f::VectorAngle3<float> trigFV( guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
+         Vector3f pFV(guide.ForwardVector);
+         pFV.Rotate(trigFV);
+         guide.fCurPos += guide.fStep;
+         SupportPoint += pFV; // rotate to the current vector
+      }
+   }
+
+   guide.iSupportSection = iCurSupp;
+   guide.point = SupportPoint; // using the support location as the rail moves
 }
 
 TexturedStrip* TrackFormer::CrossTie( Vector3f& TrackPoint, TrackGuide& guide )
@@ -312,34 +466,34 @@ TexturedStrip* TrackFormer::CrossTie( Vector3f& TrackPoint, TrackGuide& guide )
    TexturedStrip* pTBar = new TexturedStrip( iCount, mpTexture, 0x00505750 );
    Vector3f::VectorAngle3<float> trigZ (0, 0, guide.fCurRailAngle);
    Vector3f::VectorAngle3<float> trig2 (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
-   if (bWood)
-   {
-      float Z1 = 0;
-      for( int ix = 0; ix < iCount; ++ix )
-      {
-         Vector3f pt1( pPoints[ix].X1, pPoints[ix].Y1, Z1 );
-         Vector3f pt2( pPoints[ix].X2, pPoints[ix].Y2, Z1 );
+   //if (bWood)
+   //{
+   //   float Z1 = 0;
+   //   for( int ix = 0; ix < iCount; ++ix )
+   //   {
+   //      Vector3f pt1( pPoints[ix].X1, pPoints[ix].Y1, Z1 );
+   //      Vector3f pt2( pPoints[ix].X2, pPoints[ix].Y2, Z1 );
 
-         pt1.Rotate( trigZ );
-         pt1.Rotate( trig2 );
-         pt1 *= fTrackGuage;
-         pt1 += TrackPoint;
+   //      pt1.Rotate( trigZ );
+   //      pt1.Rotate( trig2 );
+   //      pt1 *= fTrackGuage;
+   //      pt1 += TrackPoint;
 
-         pt2.Rotate( trigZ );
-         pt2.Rotate( trig2 );
-         pt2 *= fTrackGuage;
-         pt2 += TrackPoint;
+   //      pt2.Rotate( trigZ );
+   //      pt2.Rotate( trig2 );
+   //      pt2 *= fTrackGuage;
+   //      pt2 += TrackPoint;
 
-         pTBar->AddPoint( pt1 );
-         pTBar->AddPoint( pt2 );
-         if (ix == 2)
-         {
-            Z1 += 0.1f;
-         }
-      }
-   }
-   else
-   {
+   //      pTBar->AddPoint( pt1 );
+   //      pTBar->AddPoint( pt2 );
+   //      if (ix == 2)
+   //      {
+   //         Z1 += 0.1f;
+   //      }
+   //   }
+   //}
+   //else
+   //{
       for( int ix = 0; ix < iCount; ++ix )
       {
          Vector3f pt1( pPoints[ix].X1, pPoints[ix].Y1, 0 );
@@ -358,9 +512,43 @@ TexturedStrip* TrackFormer::CrossTie( Vector3f& TrackPoint, TrackGuide& guide )
          pTBar->AddPoint( pt1 );
          pTBar->AddPoint( pt2 );
       }
+   //}
+   return pTBar;
+}
+
+TexturedStrip* TrackFormer::WoodCrossTie( Vector3f& TrackPoint,
+                                          Vector3f::VectorAngle3<float>& trigXYZ, Vector3f::VectorAngle3<float>& trigZ,
+                                          float fGauge, float fThick)
+{
+   TexturedStrip* pTBar = new TexturedStrip( 5, mpTexture, 0xfc2d6fef );
+   Vector3f::VectorAngle3<float> trigTie (90.0f, 0, 0);
+
+   Vector3f ptDims( 0, fThick/2, fThick/2);
+   Vector3f pt1;
+   Vector3f pt2;
+   Vector3f ptAdjust (0, -0.325f, 0); // move the tie down below the rail
+   float fHTG = fGauge/2 + 1;
+
+   for (int ic = 0; ic < 5; ++ic)
+   {
+      pt1 = ptDims;     // just the end points
+      pt1 += ptAdjust;
+      pt2 = pt1;
+      pt1.x -= fHTG;    // dimension to width
+      pt2.x += fHTG;
+      pt1.Rotate(trigZ);   // fix the tilt
+      pt2.Rotate(trigZ);
+      pt1.Rotate(trigXYZ); // convert to world angle
+      pt2.Rotate(trigXYZ);
+      pt1 += TrackPoint;   // position in world
+      pt2 += TrackPoint;   // position in world
+      pTBar->AddPoint (pt1);
+      pTBar->AddPoint (pt2);
+      ptDims.Rotate(trigTie); //
    }
    return pTBar;
 }
+
 
 // this is experimental and subject to replacement
 ObjectBase* TrackFormer::Support( Vector3f ptMount, TrackGuide& guide, float fMountAngle, float Load, float fBaseHeight )
