@@ -41,6 +41,7 @@ Arm::Arm (int ID, float offset, float depth, float length, float angle, ObjectBa
    mDepth = depth;
    mLength = length;
    mAngle = angle;
+   mvAngle.y = angle;
 }
 
 Arm::~Arm (void)

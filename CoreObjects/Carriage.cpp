@@ -50,7 +50,7 @@ void Carriage::Draw()
    glPopMatrix();
 }
 
-void Carriage::DrawSelectionTarget()
+void Carriage::DrawSelectionTarget(int t)
 {
 }
 

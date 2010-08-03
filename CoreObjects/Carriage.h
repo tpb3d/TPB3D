@@ -7,7 +7,7 @@
 //  You should have received a copy of the GNU General Public License
 //  along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
 //////////////////////////////////////////////////////////////////////#pragma once
-
+#pragma once
 #include "RideNode.h"
 
 class ObjectBase;
@@ -22,7 +22,7 @@ public:
 
    virtual void Render();
    virtual void Draw();
-   virtual void DrawSelectionTarget(); // base can't draw
+   virtual void DrawSelectionTarget(int t); // base can't draw
    //virtual ObjectBase* Clone( );
    void Default();
 };

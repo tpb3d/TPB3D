@@ -17,11 +17,11 @@
 
 CableHingeJoint::CableHingeJoint ()
 {
-    mAngle = 0;
-    mWeight = 500;
-    mDistance = 5; 
-    mLength = 4;
-    mpGraphic = ObjectFactory::CreateTexturedStrip (3, "basemetal.png", 0x98b0b0b0);
+   mAngle = 0;
+   mWeight = 500;
+   mDistance = 5; 
+   mLength = 4;
+   mpGraphic = ObjectFactory::CreateTexturedStrip (3, "basemetal.png", 0x98b0b0b0);
 }
 
 CableHingeJoint::~CableHingeJoint (void)

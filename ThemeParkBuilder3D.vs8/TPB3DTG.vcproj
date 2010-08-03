@@ -1306,6 +1306,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\Builders\FlatRidePatterns.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Builders\FlatRidePatterns.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Builders\FractalTerrain.cpp"
 				>
 			</File>

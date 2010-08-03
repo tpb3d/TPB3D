@@ -9,12 +9,33 @@
 //////////////////////////////////////////////////////////////////////
 
 #pragma once
-#include "JointBase.h"
+#include "RideNode.h"
 
-class RotationJoint : public JointBase
+class RotationJoint : public RideNode
 {
+   float  mAngle;
+   float  mYAngle;
+   float  mWeight;
+   float  mDistance; // radius of ride is spining
+   float  mLength;   // current length of cable (some rides will change this
+   sf::Vector3f mV1;
 
 public:
-   RotationJoint (int ID, int points);
+   RotationJoint ();
    ~RotationJoint (void);
+
+   void SetPoint (sf::Vector3f vp) { mV1 = vp; }
+   void SetPosition (sf::Vector3f v) { mvPosition = v; }
+   void SetYAngle (float y) { mYAngle = y; }
+   void SetWeight (float wgt) { mWeight = wgt; }
+   void SetDistance (float dis) { mDistance = dis; } // radius of ride is spining
+   void SetLength (float len) { mLength = len; }     // current length of cable (some rides will change this
+
+   void SetForce(float Velocity);
+
+   virtual void Update(int dt);
+   virtual void Render();
+   virtual void Draw();
+   virtual void DrawSelectionTarget(int mode);
+//   virtual ObjectBase* Clone( ) { return new CableHingeJoint(); }
 };
