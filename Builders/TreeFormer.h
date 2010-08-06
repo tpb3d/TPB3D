@@ -130,6 +130,5 @@ public:
 	virtual ~TreeFormer();
 
    void SetHeight( float newHgt ) { mHeight = newHgt; };
-//   virtual void SyncTexture( CMainFrame* pInterface );
    void Generate( Tree* tree, int style );
 };

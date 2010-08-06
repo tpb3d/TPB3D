@@ -27,7 +27,8 @@ ObjectNode* DelegateBase::LoadGraphic ()
    const char* pszFileStall = "stall.3DS";
    const char* pszPathStall = "data/Building/";
    ObjectNode* pTempTree = new ObjectNode(0, 39);
-   RidePartLoader rpl;
+   PartCorrection corr;
+   RidePartLoader rpl(corr);
    rpl.Load3ds( pszPathStall, pszFileStall, pTempTree );
    return pTempTree;
 }

@@ -2,8 +2,6 @@
 #include "../Graphics/ViewObject.h"
 #include "GUIDelegate.h"
 
-class CMainFrame;
-
 class KeyNavDelegate : public GUIDelegate
 {
 protected:

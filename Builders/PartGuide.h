@@ -30,6 +30,7 @@ struct PartGuide
    short nSpeed;
    float fOffset;
    float fWidth;
+   float fWidthTop;
    float fHeight;
    float fLength;
    float fAngle;

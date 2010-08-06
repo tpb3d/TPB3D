@@ -21,7 +21,7 @@ class Track : public ObjectNode
 {
    float m_dHeight; // = 5;
    int   m_PartsCount;
-   ObjectBase* m_BaseParts[320]; // temp hardcode
+   ObjectBase* m_BaseParts[128]; // temp hardcode
 //   CamPath* m_pPoints[168];
 
 

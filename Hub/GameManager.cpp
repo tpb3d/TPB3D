@@ -46,7 +46,7 @@
 #include "../CoreObjects/Track.h"
 #include "../CoreObjects/TrackGuide.h"
 #include "../CoreObjects/TrackSection.h"
-#include "../CoreObjects/Car.h"
+#include "../CoreObjects/RailCar.h"
 #include "../CoreObjects/Ride.h"
 #include "../CoreObjects/Lamp.h"
 #include "../CoreObjects/Pathway.h"
@@ -120,7 +120,7 @@ bool GameManager::LoadGame (const char *fileName)
 
    // Test build a tree
    Tree* myTree = new Tree();
-   sf::Vector3f pt( 0, 0, 0 );
+   sf::Vector3f pt( 40, 0, 0 );
    TreeFormer tfm( pt, 25 );
    tfm.Generate( myTree,1 );
    ObjectTree& pOTree = mScene.GetPark()->GetTree();
@@ -128,27 +128,29 @@ bool GameManager::LoadGame (const char *fileName)
 
 
    // Define paths
-   Pathway* pPath1 = new Pathway (Vector3f(-30.0f, 1.0f, 300.0f), mScene.GetPark(), "Stone.png");
+   Pathway* pPath1 = new Pathway (Vector3f(-30.0f, 1.0f, 100.0f), mScene.GetPark(), "Stone.png");
    pPath1->Rotate( Vector3f(0, 180, 0) );
 
-   Pathway* pPath2 = new Pathway (Vector3f(-79.0f, 1.0f, 300.0f), mScene.GetPark(), "Stone.png");
+   Pathway* pPath2 = new Pathway (Vector3f(-79.0f, 1.0f, 100.0f), mScene.GetPark(), "Stone.png");
    pPath2->Rotate( Vector3f(0, 90, 0) );
 
-   Pathway* pPath3 = new Pathway (Vector3f(-79.0f, 1.0f, 251.0f), mScene.GetPark(), "Stone.png");
+   Pathway* pPath3 = new Pathway (Vector3f(-79.0f, 1.0f, 51.0f), mScene.GetPark(), "Stone.png");
    pPath3->Rotate( Vector3f(0, 0, 0) );
 
-   Pathway* pPath4 = new Pathway (Vector3f(-30.0f, 1.0f, 251.0f), mScene.GetPark(), "Stone.png");
+   Pathway* pPath4 = new Pathway (Vector3f(-30.0f, 1.0f, 151.0f), mScene.GetPark(), "Stone.png");
    pPath4->Rotate( Vector3f(0, 100, 0) );
 
-   Pathway* pPath5 = new Pathway (Vector3f(-38.5f, 1.0f, 202.0f), mScene.GetPark(), "Stone.png");
+   Pathway* pPath5 = new Pathway (Vector3f(-38.5f, 1.0f, 102.0f), mScene.GetPark(), "Stone.png");
    pPath5->Rotate( Vector3f(0, 80, 0) );
 
-   Pathway* pPath6 = new Pathway (Vector3f(-30.0f, 1.0f, 153.0f), mScene.GetPark(), "Stone.png");
+   Pathway* pPath6 = new Pathway (Vector3f(-30.0f, 1.0f, 53.0f), mScene.GetPark(), "Stone.png");
    pPath6->Rotate( Vector3f(0, 90, 0) );
 
-   Pathway* pPath7 = new Pathway (Vector3f(-30.0f, 1.0f, 104.0f), mScene.GetPark(), "Stone.png");
+   Pathway* pPath7 = new Pathway (Vector3f(-30.0f, 1.0f, 4.0f), mScene.GetPark(), "Stone.png");
    pPath7->Rotate( Vector3f(0, 90, 0) );
 
+   Pathway* pPath8 = new Pathway (Vector3f(-30.0f, 1.0f, 60.0f), mScene.GetPark(), "Stone.png");
+   pPath8->Rotate( Vector3f(0, 0, 0) );
 
    // Connect paths
    mScene.GetPark()->GetEntrance()->AddConnection (pPath1); // connect the entrance to the paths
@@ -168,6 +170,7 @@ bool GameManager::LoadGame (const char *fileName)
    pPath6->AddConnection (pPath5);
 
    pPath6->AddConnection (pPath7);
+   pPath6->AddConnection (pPath8);
    pPath7->AddConnection (pPath6);
 
    // Add paths to the park collection
@@ -178,6 +181,7 @@ bool GameManager::LoadGame (const char *fileName)
    mScene.GetPark()->AddPath(pPath5);
    mScene.GetPark()->AddPath(pPath6);
    mScene.GetPark()->AddPath(pPath7);
+   mScene.GetPark()->AddPath(pPath8);
 
    // Render paths
    pOTree.AddNode (pPath1->GetGraphic());
@@ -187,9 +191,10 @@ bool GameManager::LoadGame (const char *fileName)
    pOTree.AddNode (pPath5->GetGraphic());
    pOTree.AddNode (pPath6->GetGraphic());
    pOTree.AddNode (pPath7->GetGraphic());
+   pOTree.AddNode (pPath8->GetGraphic());
 
-
-   RidePartLoader rpl;
+   PartCorrection corr;
+   RidePartLoader rpl (corr);
    ObjectNode* pTempTree = new ObjectNode(0, 33);
    const char* pszFile = "restroom01.3ds";
    const char* pszPath = "data/Restroom 01/";
@@ -197,6 +202,11 @@ bool GameManager::LoadGame (const char *fileName)
    //pOTree.AddNode (pTempTree);
    // Can't add the restroon, not yet a part object, just a graphic
 
+   float fSTLoc[4] = { -31,0.5,25,0 };
+   float fRot[4] = { 0,270,0,0 };
+   corr.frx = 1.0f/18; // inches to feet
+   corr.SetLocation (fSTLoc);
+   corr.SetRotation (fRot);
    Stall* pStall = new Stall(1,41, ST_Food);
    mScene.GetPark()->AddStall (pStall);
    const char* pszFileStall = "stall.3DS";
@@ -210,6 +220,11 @@ bool GameManager::LoadGame (const char *fileName)
    pStall->AddItem (FoodItem::Create ("Chicken Sandwich", 5, 1));
    pPath5->AddConnection (pStall->GetQueue());  // "Stall" is now on the path
 
+   //float fTALoc[4] = { 24,1,40,0 };
+   //float fTARot[4] = { 0,0,0,0 };
+   //corr.frx = 1.0f;
+   //corr.SetRotation (fTARot);
+   //corr.SetLocation (fTALoc);
    //pTempTree = new ObjectNode(0, 39);
    //const char* pszFileB = "JMORendered.3ds";
    //const char* pszPathB = "data/Building/";
@@ -217,7 +232,7 @@ bool GameManager::LoadGame (const char *fileName)
    //pOTree.AddNode (pTempTree);
 
    Lamp* pLamp = new Lamp(8, "SteamPunkLamp.png", "LightParticle1.png");
-   float fLoc[] = { -10, 0.1f, 55};
+   float fLoc[] = { -10, 0.1f, 15};
    pLamp->Render();
    pLamp->Move (fLoc);
    pOTree.AddNode (pLamp);
@@ -257,43 +272,66 @@ bool GameManager::LoadGame (const char *fileName)
    TrackFormer TF(pTex, mPark);
    Track* pTrack = TrackFormer::CreateTrack();
    TrackGuide guide;
-   guide.fCurAngleY = 0;
+   guide.fCurAngleY = 180;
    guide.fCurAngleZ = 0;
    guide.fTubeRadius = 0.4f;
    guide.fRailRadius = 0.2f;
    guide.fTrackGauge = 2;
    guide.SetRailShape (7);
-   guide.point.Set (0,12,23);
+   guide.point.Set (40,8, 80);
 
-   guide.SetupStraight( 20, 45 );
+   guide.SetupStraight( 20, 0 ); // station
    TF.MakeSection (guide, *pTrack);
-   guide.SetupTurn( -75, 18, 0 );
+   guide.SetupPitch (-20, 6, 0);
    TF.MakeSection (guide, *pTrack);
-   guide.SetupStraight( 20, -45 );
+   guide.SetupPitch ( 20, 6, 0);
    TF.MakeSection (guide, *pTrack);
-   guide.SetupPitch( 22, 30, 0 );
+
+   guide.SetupStraight( 10, 10 );
    TF.MakeSection (guide, *pTrack);
-//   guide.SetRailShape (4);
-   guide.SetupStraight( 20, -45 );
+   guide.SetupTurn( -45, 9, 0 );
    TF.MakeSection (guide, *pTrack);
-   guide.SetupTurn( 90, 18, -45 );
+   guide.SetupStraight( 10, -20 );
    TF.MakeSection (guide, *pTrack);
-   guide.SetupStraight( 30, 90 );
-//   guide.SetupTurn( 90, 18, 45 );
+   guide.SetupTurn( 45, 9, 0 );
    TF.MakeSection (guide, *pTrack);
-   guide.SetupPitch( -60, 40, 0 );
+   guide.SetupStraight( 10, 10 );
    TF.MakeSection (guide, *pTrack);
-   guide.SetupStraight( 20, 0 );
+   guide.SetupPitch( 20, 6, 0 );
    TF.MakeSection (guide, *pTrack);
-   guide.SetupPitch( 65, 40, 0 );
+   guide.SetupStraight( 6, 0 );
    TF.MakeSection (guide, *pTrack);
-   guide.SetupPitch( -20, 30, -35 );
+   guide.SetupPitch ( -40, 8, 0);
    TF.MakeSection (guide, *pTrack);
-   guide.SetupTurn( 120, 28, -45 );
+   guide.SetupStraight( 6, 0 );
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupPitch ( 20, 6, -20);
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupTurn (180, 30, 0);
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupStraight( 15, 20 );
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupPitch( 20, 6, 0 );
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupStraight( 4, 0 );
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupPitch ( -40, 8, 0);
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupStraight( 4, 0 );
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupPitch ( 20, 6, 0);
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupStraight( 89, 0 );
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupTurn( 180, 23.48, 0 );
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupPitch ( 20, 6, 0);
+   TF.MakeSection (guide, *pTrack);
+   guide.SetupPitch (-20, 6, 0);
    TF.MakeSection (guide, *pTrack);
 
    pOTree.AddNode (pTrack);
-   Car* pCar = new Car( sf::Vector3f( 4, 1.8f, 6 ), sf::Vector3f( 0, 4.2f, 8 ), sf::Vector3f( 0,0,0 ),8,599 );
+   RailCar* pCar = new RailCar( sf::Vector3f( 4, 1.8f, 6 ), 8, 599 );
    Ride* pCarRide = new Ride(Vector3f(0,0,0), mPark);
    pOTree.AddNode ( new RidePack (pCarRide));
    pCarRide->SetNode (pCar);
@@ -304,29 +342,38 @@ bool GameManager::LoadGame (const char *fileName)
 
    Ride* pRide;
    float fx = 0;
-   float fz = 80;
-   pRide = flat.CreateRide(0, mPark );
+   float fz = 40;
+   pRide = flat.CreateRide(FlatRideBuilder::Biplanes, mPark );
    pRide->SetPosition (fx,0.1f,fz);
    mScene.GetPark()->AddRide (pRide);
    pPath4->AddConnection (pRide->GetQueue());   // join the "Barn Stormers" to the path4
 
 
-   //pRide = flat.CreateRide(1, mPark);
+   //pRide = flat.CreateRide(FlatRideBuilder::Carousel, mPark);
    //pRide->SetPosition (fx-20,1, fz+10);
    //mScene.GetPark()->AddRide (pRide);
    //
-   //pRide = flat.CreateRide(2, mPark);
+   //pRide = flat.CreateRide(FlatRideBuilder::BasketRide, mPark);
    //pRide->SetPosition (fx,1, fz+40);
    //mScene.GetPark()->AddRide (pRide);
 
-//   pRide = flat.CreateRide(5, mPark);  // polyp
-//   pRide->SetPosition (fx,1, fz+20);
-//   mScene.GetPark()->AddRide (pRide);
+   pRide = flat.CreateRide(FlatRideBuilder::Polyp, mPark);  // polyp
+   pRide->SetPosition (fx,1, fz-50);
+   mScene.GetPark()->AddRide (pRide);
 
-//   pRide = flat.CreateRide(6, mPark);  // Cephalopod octo
-//   pRide->SetPosition (fx,1, fz+40);
-//   mScene.GetPark()->AddRide (pRide);
+   pRide = flat.CreateRide(FlatRideBuilder::Octopus, mPark);  // Cephalopod octo
+   pRide->SetPosition (fx,1, fz-70);
+   mScene.GetPark()->AddRide (pRide);
 
+   pRide = flat.CreateRide(FlatRideBuilder::Scrambler, mPark);
+   pRide->SetPosition (fx,1, fz-100);
+   mScene.GetPark()->AddRide (pRide);
+
+//   float fHRLoc[4] = { 10,-60,-40,0 };
+//   float fTARot[4] = { 0,0,0,0 };
+//   corr.frx = 5.0f;
+//   corr.SetLocation (fHRLoc);
+//   corr.SetRotation (fTARot);
 //   const char* pHT = "hrtwr.3ds";
 //   const char* pHT2 = "data/HighRide/";
 //   rpl.Load3ds( pHT2, pHT );

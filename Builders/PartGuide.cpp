@@ -35,24 +35,12 @@ void  PartGuide::Clear()
    nSpeed = 0;
    fOffset = 0;
    fWidth = 1; // cube
+   fWidthTop = 1;
    fHeight = 1;
    fLength = 1;
    fDrop = 0;
    fAngle = 0;
    iNextNode = 0;
-}
-
-void PartGuide::Load(SerializerBase& ser)
-{
-   ser.Add ("NodeType", NodeTypeList[mNodeType].pNodeName);
-   ser.Add ("Count", nCount);
-   ser.Add ("Speed", nSpeed);
-   ser.Add ("Offset", fOffset);
-   ser.Add ("Height", fHeight);
-   ser.Add ("Width", fWidth);
-   ser.Add ("Length", fLength);
-   ser.Add ("Angle", fAngle);
-   ser.Add ("Drop", fDrop);
 }
 
 PartGuide::TRideNodeType PartGuide::GetNodeType (const char* szNodeName)
@@ -67,8 +55,8 @@ PartGuide::TRideNodeType PartGuide::GetNodeType (const char* szNodeName)
    }
    return RideNodeDud;
 }
-   
-void PartGuide::Save(SerializerBase& ser)
+
+void PartGuide::Load(SerializerBase& ser)
 {
    try
    {
@@ -86,4 +74,17 @@ void PartGuide::Save(SerializerBase& ser)
    {
       // tell the user this line if borked
    }      
+}
+
+void PartGuide::Save(SerializerBase& ser)
+{
+   ser.Add ("NodeType", NodeTypeList[mNodeType].pNodeName);
+   ser.Add ("Count", nCount);
+   ser.Add ("Speed", nSpeed);
+   ser.Add ("Offset", fOffset);
+   ser.Add ("Height", fHeight);
+   ser.Add ("Width", fWidth);
+   ser.Add ("Length", fLength);
+   ser.Add ("Angle", fAngle);
+   ser.Add ("Drop", fDrop);
 }

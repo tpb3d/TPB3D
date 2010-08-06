@@ -24,6 +24,7 @@
 #include "TrackFormer.h"
 
 #include "../CoreObjects/Park.h" // access to the park for the car path (will change)
+#include "../Physics/LinearPhysics.h"
 
 TrackFormer::TrackFormer( Gfx::Texture* pTexture, Park& park)
 :  mPark(park)
@@ -89,6 +90,12 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
    Vector3f centerPT( 0, -guide.fRadius, 0 );
    Vector3f::VectorAngle3<float> trigXYZ ( guide.fTiltX, guide.fTiltY, guide.fTiltZ);
    Vector3f::VectorAngle3<float> trig (guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
+
+   Spline* sp = new Spline();
+   Test::GetSpline().push_back (sp);
+   sp->AngleDelta = Vector3f(guide.fTiltX, guide.fTiltY, guide.fTiltZ);
+   sp->mVPoint = guide.point;
+   sp->mVAngle = Vector3f(guide.fCurAngleX, guide.fCurAngleY, guide.fCurAngleZ);
 
    float fWoodPos = guide.fCurPos;
    float fWoodRailAngle = guide.fCurRailAngle;
@@ -173,6 +180,7 @@ void TrackFormer::MakeSection( TrackGuide& guide, Track& Track )
 
    guide.iSupportSection = iCurSupp;
    guide.point = TrackPoint;
+   sp->MotionDelta = guide.point;
 }
 
 void TrackFormer::MakeWoodSection( TrackGuide& guide, Track& Track )
@@ -192,6 +200,7 @@ void TrackFormer::MakeWoodSection( TrackGuide& guide, Track& Track )
    iNeeded += guide.GetSections() * 3;  // for the extra ties
    pTrackSection->Create(iNeeded);
    Track.AddSection(pTrackSection);
+
 
    // Determine rails needed
    TexturedMesh *pMesh = NULL;
@@ -230,6 +239,7 @@ void TrackFormer::MakeWoodSection( TrackGuide& guide, Track& Track )
 
    int iLast = guide.GetSections();
    int iCurSupp = guide.iSupportSection;
+   float fDistance = 0;
    for( int idxz = 0; idxz<= iLast; ++idxz )
    {
       Vector3f TrackPoint( SupportPoint );
@@ -245,18 +255,31 @@ void TrackFormer::MakeWoodSection( TrackGuide& guide, Track& Track )
       pBar = WoodCrossTie( TrackPoint, trigPXYZ, trigRZ, guide.fTrackGauge, fTie );
       pTrackSection->AddSection( pBar );
 
-      Vector3f ptCreep (guide.ForwardVector); // We are going to drop a tie between the normal set
-      Vector3f::VectorAngle3<float> trigZ2 (0,0, guide.fCurRailAngle+guide.fRailTiltZ/2);
-      Vector3f::VectorAngle3<float> trigXYZ2 (guide.fCurAngleX+guide.fTiltX/2, guide.fCurAngleY+guide.fTiltY/2, guide.fCurAngleZ+guide.fTiltZ/2);
-      ptCreep.x /= 2;   // split the diff
-      ptCreep.y /= 2;
-      ptCreep.z /= 2;
-      ptCreep.Rotate (trigXYZ2);
-      Vector3f pt1(TrackPoint);
-      pt1 += ptCreep;
-      pBar = WoodCrossTie( pt1, trigXYZ2, trigZ2, guide.fTrackGauge, fTie );
-      pTrackSection->AddSection( pBar );
+      if( idxz < iLast )
+      {
+         Vector3f ptCreep (guide.ForwardVector); // We are going to drop a tie between the normal set
+         Vector3f::VectorAngle3<float> trigZ2 (0,0, guide.fCurRailAngle+guide.fRailTiltZ/2);
+         Vector3f::VectorAngle3<float> trigXYZ2 (guide.fCurAngleX+guide.fTiltX/2, guide.fCurAngleY+guide.fTiltY/2, guide.fCurAngleZ+guide.fRailTiltZ/2);
+         ptCreep.x /= 2;   // split the diff
+         ptCreep.y /= 2;
+         ptCreep.z /= 2;
+         ptCreep.Rotate (trigXYZ2);
+         Vector3f pt1(TrackPoint);
+         pt1 += ptCreep;
+         pBar = WoodCrossTie( pt1, trigXYZ2, trigZ2, guide.fTrackGauge, fTie );
+         pTrackSection->AddSection( pBar );
 
+         sf::Vector3f pt3fa( TrackPoint.x,TrackPoint.y-1.25f,TrackPoint.z);
+         sf::Vector3f pt3fb( pt1.x,pt1.y-1.25f,pt1.z);
+         Spline* sp = new Spline();
+         Test::GetSpline().push_back (sp);
+         sp->mVPoint = pt3fa;
+         sp->mVAngle = Vector3f(guide.fCurAngleX, guide.fCurAngleY, guide.fCurRailAngle);
+         sp = new Spline();
+         Test::GetSpline().push_back (sp);
+         sp->mVPoint = pt3fb;
+         sp->mVAngle = Vector3f(guide.fCurAngleX+guide.fTiltX/2, guide.fCurAngleY+guide.fTiltY/2, guide.fCurRailAngle+guide.fRailTiltZ/2);
+      }
       double dAngle = guide.fCurRailAngle;
       if( dAngle < -90 ) dAngle = -90;
       if( dAngle > 90 ) dAngle = 90;
@@ -324,8 +347,13 @@ void TrackFormer::MakeWoodSection( TrackGuide& guide, Track& Track )
       }
       if( idxz < iLast )
       {
-         sf::Vector3f pt3f( TrackPoint.x,TrackPoint.y,TrackPoint.z);
+         sf::Vector3f pt3f( TrackPoint.x,TrackPoint.y-1.25f,TrackPoint.z);
          mPark.AddTestPoint( pt3f, sf::Vector3f(-guide.fCurAngleX, guide.fCurAngleY, -guide.fCurRailAngle) ); // path
+
+//   Spline* sp = new Spline();
+//   Test::GetSpline().push_back (sp);
+//   sp->mVPoint = pt3f;
+//   sp->mVAngle = Vector3f(guide.fCurAngleX, guide.fCurAngleY, guide.fCurRailAngle);
 
          guide.fCurAngleX += guide.fTiltX;
          guide.fCurAngleY += guide.fTiltY;
@@ -335,12 +363,15 @@ void TrackFormer::MakeWoodSection( TrackGuide& guide, Track& Track )
          Vector3f pFV(guide.ForwardVector);
          pFV.Rotate(trigFV);
          guide.fCurPos += guide.fStep;
+         fDistance += guide.fStep;
          SupportPoint += pFV; // rotate to the current vector
       }
    }
 
    guide.iSupportSection = iCurSupp;
    guide.point = SupportPoint; // using the support location as the rail moves
+//   sp->TotalDistance = fDistance;
+//   sp->CalcFinalDelta(guide.point, Vector3f(guide.fCurAngleX, guide.fCurAngleY, guide.fCurRailAngle));
 }
 
 TexturedStrip* TrackFormer::CrossTie( Vector3f& TrackPoint, TrackGuide& guide )

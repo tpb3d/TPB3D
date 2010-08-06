@@ -16,6 +16,7 @@
 #include "../Physics/MotionPhysics.h"
 #include "../Graphics/Texture.h"
 #include "../Graphics/Image.h"
+#include "../Graphics/Camera.h"
 #include "../Graphics/ObjectTree.h"
 #include "../Scene/Scene.h"
 #include "../People/Person.h"
@@ -44,7 +45,7 @@ Park::Park (int ParkNo, int other, Scene& rScene )
    mPoints = 0;
    mCurPoint = 0;
 
-   mpParkEntrance = new Pathway(Vector3f(-30.0f, 1.0f, 349.0f), this, "Stone.png");
+   mpParkEntrance = new Pathway(Vector3f(-30.0f, 1.0f, 200.0f), this, "Stone.png");
    mpParkEntrance->Rotate( Vector3f(0, 90, 0) );
 }
 
@@ -71,44 +72,41 @@ void Park::AddTestPoint( sf::Vector3f pa, sf::Vector3f pb )
 
 void Park::Update (float dt, int timeOfDay)
 {
-   static int delay = 3; // playing physics
+   static int delay = 10; // playing physics
 
-   mpTheTree->Update(dt);
-   mGhostObject.GetPathNo();
-   mGhostObject.Update (this);
-
-   if( mCurPoint <= mPoints )
+   if (delay < 1)
    {
+      mpTheTree->Update(dt);
+      mGhostObject.GetPathNo();
+      mGhostObject.Update (this);
+
       if( mCurPoint < mPoints )
       {
-         //m_xcam = m_VPoints[m_CurPoint].x;
-         //m_ycam = (m_VPoints[m_CurPoint].y + 4.0 )*-1;
-         //m_zcam = m_VPoints[m_CurPoint].z;
-         //m_xrot = m_VAngles[m_CurPoint].x;
-         //m_yrot = m_VAngles[m_CurPoint].y + 180;
-         //m_zrot = m_VAngles[m_CurPoint].z;
-         mpCar->Position( Test::mVPoints[mCurPoint], Test::mVAngles[mCurPoint] );
+         // Uncomment the next 3 lines to active camera follow
+   //      Camera* pCam = Camera::GetInstance();
+   //      pCam->SetPosition (-Test::mVPoints[mCurPoint].x, 4.0f+Test::mVPoints[mCurPoint].y*-1, -Test::mVPoints[mCurPoint].z);
+   //      pCam->SetRotation (Test::mVAngles[mCurPoint].x,Test::mVAngles[mCurPoint].y+180,Test::mVAngles[mCurPoint].z);
+   //      mpCar->Position( Test::mVPoints[mCurPoint], Test::mVAngles[mCurPoint] );
+         mCurPoint++;
       }
       else
       {
-         //m_Camera.x = m_xcam;
-         //m_Camera.y = m_ycam;
-         //m_Camera.z = m_zcam;
+         mCurPoint = 0;
       }
-      mCurPoint++;
+      mRides.Update(dt, timeOfDay);
+      mStalls.Update(dt, timeOfDay);
+      //RidesIterator iRI;
+      //for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
+      //{
+      //   Ride* pRide = *iRI;
+      //   pRide->Update ((int)dt);
+      //}
+      delay = 10;
    }
    else
    {
-      mCurPoint = 0;
+      delay--;
    }
-   mRides.Update(dt, timeOfDay);
-   mStalls.Update(dt, timeOfDay);
-   //RidesIterator iRI;
-   //for (iRI = mRides.begin(); iRI != mRides.end(); iRI++)
-   //{
-   //   Ride* pRide = *iRI;
-   //   pRide->Update ((int)dt);
-   //}
 }
 
 void Park::AddPath(Pathway *path) {

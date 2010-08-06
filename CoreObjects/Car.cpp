@@ -32,6 +32,16 @@ Car::Car(const sf::Vector3f& vDim, const sf::Vector3f& vPosition, const sf::Vect
    m_PartsCount = 0;
 }
 
+Car::Car( const sf::Vector3f& vDim, int meshCount, int id )
+{
+   m_BaseParts = new ObjectNode (meshCount, id);
+   m_vDim = vDim;
+   m_BaseTexture = 2;
+   m_SeatTexture = 3;
+   m_SideTexture = 5;
+   m_PartsCount = 0;
+}
+
 Car::Car (ObjectNode* pNode)
 //:  ObjectNode (8,601)
 :  m_BaseParts (pNode)
@@ -56,18 +66,18 @@ Car::~Car(void)
 int Car::Render( int lod ) // render returning the poly count
 {
 //   CGLTexturedMesh* pMesh;
+   Start();
    return 0;
 }
 
 void Car::Draw()
 {
 	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
-   glTranslatef( m_vPosition.x, m_vPosition.y, m_vPosition.z );				// Move Left 1.5 Units And Into The Screen 6.0
-	glRotatef(-m_vAngle.y,0.0f,1.0f,0.0f);
-	glRotatef(m_vAngle.x,1.0f,0.0f,0.0f);
-	glRotatef(m_vAngle.z,0.0f,0.0f,1.0f);
-
-   m_BaseParts->Draw();
+      glTranslatef( m_vPosition.x, m_vPosition.y, m_vPosition.z );				// Move Left 1.5 Units And Into The Screen 6.0
+	   glRotatef(-m_vAngle.y,0.0f,1.0f,0.0f);
+	   glRotatef(m_vAngle.x,1.0f,0.0f,0.0f);
+	   glRotatef(m_vAngle.z,0.0f,0.0f,1.0f);
+      m_BaseParts->Draw();
    glPopMatrix();
 }
 
@@ -124,7 +134,7 @@ void Car::Default()
    pMesh->AddPoint( sf::Vector3f( 1.8f, 0.8f, 1.3f) );
    pMesh->AddPoint( sf::Vector3f( 1.8f, 2.4f, 1.0f) );
 
-   pMesh = new TexturedMesh( 4, 2, pTexC, 0x7f7f7faf, 603 );
+   pMesh = new TexturedMesh( 4, 2, pTexC, 0x7fff7faf, 603 );
    this->AddSection(pMesh);
    pMesh->AddPoint( sf::Vector3f(-1.8f, 0.8f,-1.4f) );
    pMesh->AddPoint( sf::Vector3f(-1.8f, 2.4f,-1.7f) );
@@ -139,7 +149,7 @@ void Car::Default()
    pMesh->AddPoint( sf::Vector3f( 1.8f, 0.8f,-1.4f) );
    pMesh->AddPoint( sf::Vector3f( 1.8f, 2.4f,-1.7f) );
 
-   pMesh = new TexturedMesh( 4, 2, pTexC, 0x7f7f7faf, 604 );
+   pMesh = new TexturedMesh( 4, 2, pTexC, 0xff7f7faf, 604 );
    this->AddSection(pMesh);
    pMesh->AddPoint( sf::Vector3f(-1.8f, 1.5f, 1.0f) );
    pMesh->AddPoint( sf::Vector3f( 1.8f, 1.5f, 1.0f) );

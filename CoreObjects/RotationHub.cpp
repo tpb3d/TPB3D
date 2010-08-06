@@ -35,7 +35,7 @@ RotationHub::RotationHub (RideController* pRCU, int ID, float height, short side
    mRun = 0;
    mDesiredSpeed = 5;
    mvPosition.x = 0;
-   mvPosition.y = height;
+   mvPosition.y = 0;
    mvPosition.z = 0;
    mRadii[0] = 2.75f;
    mRadii[1] = 2.75f;

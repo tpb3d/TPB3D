@@ -119,7 +119,7 @@
 			/>
 			<Tool
 				Name="VCCLCompilerTool"
-				AdditionalIncludeDirectories="&quot;\Dev\VC++\SFML-1.5\include&quot;;&quot;\Dev\VC++\CEGUI-SDK-0.6.2-vc8\include&quot;;&quot;\Dev\VC++\CEGUI-SDK-0.6.2-vc8&quot;;&quot;F:\Dev\VC++\wxWidgets-2.8.10\include&quot;"
+				AdditionalIncludeDirectories="&quot;\Dev\VC++\SFML-1.5\include&quot;;&quot;\Dev\VC++\lib3ds-20080909\src&quot;;&quot;\Dev\VC++\lpng1240&quot;;&quot;C:\Dev\VC++\ZLib123&quot;"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE"
 				RuntimeLibrary="2"
 				UsePrecompiledHeader="0"
@@ -138,9 +138,9 @@
 			/>
 			<Tool
 				Name="VCLinkerTool"
-				AdditionalDependencies="sfml-Graphics.lib sfml-System.lib sfml-Window.lib OPENGL32.LIB glu32.lib CEGUIBase.lib OpenGLGUIRenderer.lib CEGUITinyXMLParser_Static.lib"
+				AdditionalDependencies="sfml-Graphics.lib sfml-System.lib sfml-Window.lib OPENGL32.LIB glu32.lib libpng.lib lib3ds-2_0.lib zdll.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="&quot;\Dev\VC++\SFML-1.5\lib\vc2005&quot;;&quot;C:\Program Files (x86)\Microsoft Visual Studio 8\VC\lib&quot;;&quot;\Dev\VC++\CEGUI-SDK-0.6.2-vc8\lib&quot;"
+				AdditionalLibraryDirectories="&quot;\Dev\VC++\SFML-1.5\lib\vc2005&quot;;&quot;C:\Program Files (x86)\Microsoft Visual Studio 8\VC\lib&quot;;&quot;\Dev\VC++\CEGUI-SDK-0.6.2-vc8\lib&quot;;&quot;\Dev\VC++\lpng1240\projects\visualc71\Win32_LIB_Release&quot;;&quot;\Dev\VC++\lib3ds-20080909\release&quot;;&quot;\Dev\VC++\zlib123\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -870,6 +870,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CoreObjects\RailCar.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\RailCar.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CoreObjects\Ride.cpp"
 				>
 			</File>
@@ -1381,6 +1389,14 @@
 		<Filter
 			Name="Physics"
 			>
+			<File
+				RelativePath="..\Physics\LinearPhysics.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Physics\LinearPhysics.h"
+				>
+			</File>
 			<File
 				RelativePath="..\Physics\MotionPhysics.cpp"
 				>

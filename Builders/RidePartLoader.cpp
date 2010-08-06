@@ -32,7 +32,8 @@
 #endif
 
 
-RidePartLoader::RidePartLoader()
+RidePartLoader::RidePartLoader (PartCorrection& corr)
+: mPartCorrection (corr)
 {
 }
 
@@ -145,61 +146,12 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       //   tex[0] = 1;
       //}
 
-      float pn[3];
       //ObjectNode* pNode = ObjectFactory::CreateNode( pFile->nmeshes );
-      float fRRLoc[4] = { 1,0.5,2,0 };
-      float fSTLoc[4] = { -31,0.5,85,0 };
-      float fTALoc[4] = { 24,1,40,0 };
-      float fHRLoc[4] = { 10,-60,-40,0 };
-      float fRot[4] = { 0,270,0,0 };
-      float fRot2[4] = { 270,0,0,0 }; // polyp
-      float fRot3[4] = { 270,-22,0,0 }; // octo
-      float frx = 1.0f;
-      if (_strnicmp(Name,"Tag",3) == 0)
-      {
-         frx = 4;
-         //pNode->Move(fTALoc);
-         pBaseNode->Move(fTALoc);
-      }
-      else if (_strnicmp(Name,"hrt",3) == 0)
-      {
-         frx = 5;
-         //pNode->Move(fHRLoc);
-         pBaseNode->Move(fHRLoc);
-      }
-      else if (_strnicmp(Name,"brn",3) == 0)
-      {
-         frx = 1;
-      }
-      else if (_strnicmp(Name,"JMO",3) == 0)
-      {
-         frx = 0.1f;
-         //pNode->Move(fTALoc);
-         pBaseNode->Move(fTALoc);
-      }
-      else if (_strnicmp(Name,"oct",3) == 0)
-      {
-         frx = 1;
-         pBaseNode->Move(fRRLoc);
-         pBaseNode->SetRotation(fRot3);
-      }
-      else if (_strnicmp(Name,"sta",3) == 0)
-      {
-         frx = 1.0f/18; // inches to feet
-         //pNode->Move(fSTLoc);
-         //pNode->SetRotation(fRot);
-         pBaseNode->Move(fSTLoc);
-         pBaseNode->SetRotation(fRot);
-      }
-      else
-      {
-         frx = 1;
-         //pNode->Move(fRRLoc);
-         pBaseNode->Move(fRRLoc);
-         pBaseNode->SetRotation(fRot2);
-      }
 
-      //pBaseNode->AddNode( pNode );
+      pBaseNode->Move (mPartCorrection.Location);
+      pBaseNode->SetRotation (mPartCorrection.Rotation);
+
+      float pn[3];
       int MatIndexes[32];
       memset (MatIndexes, 0, sizeof(MatIndexes));
       for( int idx = 0; idx < pFile->nmeshes; idx++ )
@@ -222,7 +174,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
          if(pMesh->texcos)
          {
             SimpleMeshObject* pGLMesh = ObjectFactory::CreateMesh();
-            pGLMesh->SetScale (frx);
+            pGLMesh->SetScale (mPartCorrection.frx);
             //pNode->AddMesh( pGLMesh );
             pBaseNode->AddMesh( pGLMesh );
 
@@ -236,7 +188,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
          else
          {
             SimpleMatMeshObject* pGLMesh = ObjectFactory::CreateMatMesh();
-            pGLMesh->SetScale (frx);
+            pGLMesh->SetScale (mPartCorrection.frx);
             //pNode->AddMesh( pGLMesh );
             pBaseNode->AddMesh( pGLMesh );
 

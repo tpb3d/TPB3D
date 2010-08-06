@@ -75,7 +75,7 @@ Camera::Camera ()
 
    mPosition.Set (0,0,0);
    mMotionVector.Set (0,0,0); // camera motion start at still
-   mTarget.Set (35.0, 90.0, 0.0);
+   mTarget.Set (25.0, 90.0, 0.0);
 
    mMousePos.x = 0;
    mMousePos.y = 0;

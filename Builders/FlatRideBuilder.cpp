@@ -212,12 +212,14 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
    const int iTest = 12;
 
    // this will be replaced by a class factory once time permits and the code looks like it will work.
-   if( iPattern == 0)
+   if( iPattern == Biplanes)
    {
       pRide->SetRideType (RT_FlatRide);
       pRide->SetRideIntensity (RI_Thrill);
       pRide->SetRideName ("Barn Stormers");
-      RidePartLoader rpl;
+      PartCorrection corr;
+
+      RidePartLoader rpl (corr);
       const char* pPath = kszBS;
       PartGuide guide;
       guide.Clear();
@@ -298,9 +300,10 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          AddRideNodeCar (pWire, pCarNode, guide);
       }
    }
-   else if( iPattern == 4)
+   else if( iPattern == Spider)
    {
-      RidePartLoader rpl;
+      PartCorrection corr;
+      RidePartLoader rpl (corr);
       const char* pPath = kszSpida;
       PartGuide guide;
       guide.Clear();
@@ -384,7 +387,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          AddRideNodeSpinCar (pWire, pCarNode, guide);
       }
    }
-   else if( iPattern == 1)
+   else if( iPattern == Carousel)
    {
 
       // test with 8 section carousel
@@ -454,9 +457,16 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          fAngle += fDeg;
       }
    }
-   else if( iPattern == 5)
+   else if( iPattern == Polyp)
    {
-      RidePartLoader rpl;
+      PartCorrection corr;
+      //corr.Rotation[0] = 270; // x
+      //corr.Rotation[1] = -22; // y
+      RidePartLoader rpl (corr);
+      float fRRLoc[4] = { 0,0,0 };
+      float fRot2[4] = { 270,0,0,0 }; // polyp
+      corr.SetLocation (fRRLoc);
+      corr.SetRotation (fRot2);
       const char* pPath = kszPolyp;
       PartGuide guide;
       guide.Clear();
@@ -471,8 +481,8 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       pRide->SetNode (pHub);
 
       // spin up
-      guide.fHeight = 2;
-      guide.nSpeed = 35;
+      guide.fHeight = 0;
+      guide.nSpeed = 135;
       guide.fDrop = 0;
 
       ObjectNode* pBaseNode = new ObjectNode (0, 33);
@@ -538,6 +548,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.fOffset = -vx-3;
       for (int ix1 = 0; ix1 < iTest5; ++ix1)
       {
+         guide.fAngle = fAngle1 + fDegH1;
          RideNode* armNode = AddRideNodeArm (pRotHub, pArmNode, guide); // do the extension arm
 
          PartGuide g2;
@@ -556,13 +567,73 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
             fAngle += fDeg;
             AddRideNodeCar (pWire, pCarNode, g2);
          }
-         guide.fAngle = fAngle1 + fDegH1;
          fAngle1 += fDeg1;
       }
    }
-   else if( iPattern == 6)
+   else if (iPattern == Scrambler)
    {
-      RidePartLoader rpl;
+      pRide->SetRideType (RT_FlatRide);
+      pRide->SetRideIntensity (RI_Thrill);
+      pRide->SetRideName ("Scrambler");
+      PartGuide guide;
+      guide.Clear();
+
+      // base deck
+      guide.fHeight = 1;
+      guide.fWidth = 1; // radius
+      guide.fWidthTop = 0.75f;
+      guide.nCount = 8;
+      RideNode* pHub = AddRideNodeHub (NULL, NULL, guide);
+      pHub->Render();
+      pRide->SetNode (pHub);
+
+      // stator hub
+      guide.fOffset = 0;
+      guide.fWidth = 3; // radius
+      guide.nCount = 9;
+      RideNode* pDeck = AddRideNodeDeck (pHub, NULL, guide);
+      pDeck->SetPosition(0,0,0);
+      pDeck->Render();
+
+      // spin up
+      // rotating hub
+      RotationHub* pHub2 = new RotationHub (pRide->GetController(), 1, 5, 7, "Chips.png");
+      pHub->AddNode(pHub2);
+      pHub2->SetYPosition (1.0f);
+      pHub2->SetRadii (0.75f, 0.5f);
+      pHub2->Render();
+      pHub2->SetDesiredSpeed(15);
+
+      float fDeg = 360.0f / iTest;
+      float fDegH = fDeg /2; // Half increment
+      float fAngle = 0;
+      guide.fHeight = 9;
+      guide.fLength = 11.0f;
+      guide.fDrop = -8.0f;
+      for (int ix = 0; ix < 3; ++ix)
+      {
+         // Arm code
+
+         // Building the yoke
+         guide.fAngle = fAngle + fDegH;
+         RideNode* pArm = new Arm (ix, 1.5f, 1.5f, 6, fAngle);
+         pArm->SetPosition(0,0,0);
+         pArm->Render();
+         pHub2->AddNode (pArm);
+         fAngle += fDeg;
+         ObjectNode* pCarNode = new ObjectNode (0, 34);
+         AddRideNodeSpinCar (pArm, pCarNode, guide);
+      }
+
+   }
+   else if( iPattern == Octopus)
+   {
+      PartCorrection corr;
+      float fRRLoc[4] = { 0,0,0 };
+      float fRot1[4] = { 270,0,0,0 }; // polyp
+      corr.SetLocation (fRRLoc);
+      corr.SetRotation (fRot1);
+      RidePartLoader rpl (corr);
       const char* pPath = kszOcto;
       PartGuide guide;
       guide.Clear();
@@ -622,23 +693,26 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.fAngle = 90;//fAngle;
 
       const char* pTag1 = kszOctoParts[6];
+      float fRot2[4] = { 270,90,-30,0 }; // polyp
+      corr.SetRotation (fRot2);
       rpl.Load3ds( pPath, pTag1, pCarNode );
 
-
+      guide.fOffset = 10;
       for (int ix = 0; ix < iTest5; ++ix)
       {
          // Arm code
 
+         guide.fAngle = fAngle + fDegH;
          AddRideNodeArm (pRotHub, pArmNode, guide); // do the extension arm
          // Building the yoke
-         guide.fAngle = fAngle + fDegH;
          RideNode* pWire = AddRideNodeRotationJoint(pRotHub, NULL, guide); // do the hanger
          pWire->SetPosition (0, 3, 0);
          fAngle += fDeg;
-         AddRideNodeCar (pWire, pCarNode, guide);
+         RideNode* pCar = AddRideNodeCar (pWire, pCarNode, guide);
+         pCar->SetPosition (0, 0, 10);
       }
    }
-   else
+   else if( iPattern == Enterprise)
    {
       PartGuide guide;
       guide.Clear();
@@ -787,11 +861,13 @@ RideNode* FlatRideBuilder::AddRideNodeHub (RideNode* pParent, ObjectBase* pGraph
    if (pGraphicObject == NULL)
    {
       pHub = new Hub (guide.fHeight, guide.nCount, "foundation.png");
+      pHub->SetRadii (guide.fWidth, guide.fWidthTop);
       pHub->Render();
    }
    else
    {
       pHub = new Hub (guide.fHeight, guide.nCount, pGraphicObject);
+      pHub->SetRadii (guide.fWidth, guide.fWidthTop);
       pHub->Render();
    }
    if (pParent != NULL)
@@ -915,7 +991,7 @@ RideNode* FlatRideBuilder::AddRideNodeRotationHub (RideController* pRCU, RideNod
 {
    RotationHub* pHub2 = new RotationHub (pRCU, guide.TakeANumber(), guide.fHeight, guide.nCount, "Chips.png");
    pParent->AddNode (pHub2);
- //  pHub2->Render ();
+   pHub2->SetRadii (guide.fWidth, guide.fWidthTop);
    pHub2->SetDesiredSpeed (guide.nSpeed);
    return pHub2;
 }

@@ -118,7 +118,7 @@ void MeshNode::AddMesh( TexturedMesh* pNode )
    }
    else if( mMeshCount+1 > mAllocatedCount )
    {
-      mAllocatedCount+=4;
+      mAllocatedCount+=8;
       TexturedMesh** pMeshes = new TexturedMesh*[mAllocatedCount];
       if( mAllocatedCount > 0 )
       {

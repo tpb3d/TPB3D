@@ -33,6 +33,7 @@ public:
    ~Hub(void);
 
    //ObjectBase* Clone( );
+   void SetRadii(float bottom, float top) { mRadii[0] = bottom;  mRadii[1] = top; }
    void IncreseSides();
    void DecreseSides();
    virtual void Update(int dt);

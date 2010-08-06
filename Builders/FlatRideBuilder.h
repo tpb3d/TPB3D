@@ -11,8 +11,37 @@ class ObjectNode;
 class RideController;
 struct PartGuide;
 
+/* Example of template patterns
+   enum PatternNo
+   {
+      Static = 0, // just sits there
+      Spinner,    // Kids simple spin around a hub
+      Planetary,  // scrambler cars stationary on spining arms
+      Orbital,    // planetary and the cars spin free
+      Wobble,     // rotating and wobbling tub (Tagada)
+      Disk,       // Rotating with lift arm (enterprise)
+      Disco,      // rotating disc on track
+      Carousel,   // rotating deck with seats/animals on reciprocal poles
+      Centrifugue,  // spinning barrel (rotor).
+      Flying,     // spinning hub with arms and suspended cars (Biplanes).
+      Spider,     // 2 to n legs
+      Articulated // Pivital arm (Robot, Flying Circus, 
+   };
+*/
 class FlatRideBuilder : public BuilderBase
 {
+public:
+   enum TempNums
+   {
+      Biplanes,
+      Carousel,
+      BasketRide,
+      Scrambler,
+      Spider,
+      Polyp,
+      Octopus,
+      Enterprise
+   };
 public:
    FlatRideBuilder(void);
    ~FlatRideBuilder(void);

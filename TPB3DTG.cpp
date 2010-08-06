@@ -47,7 +47,7 @@ main ()
    Camera * cam = Camera::GetInstance ();
 
    cam->SetSceneSize (Vector2f(1280, 720));
-   cam->SetMaxFramerate (60);
+   cam->SetMaxFramerate (120);
    cam->SetActive();
    cam->InitGL();
 
@@ -106,12 +106,19 @@ main ()
          case 0:
             theScene.Update (0, pInterface->GetTimeOfDay());
             break;
-         case 1:
+         case 4:
             pInterface->GetStats().SetPopulation( thePark.GetPopulation() );
             pInterface->Update(10);
             break;
-         case 2:
+         case 8:
             thePark.Update (5, pInterface->GetTimeOfDay());
+            break;
+         case 1:
+         case 2:
+         case 3:
+         case 5:
+         case 6:
+         case 7:
             break;
 
          default:

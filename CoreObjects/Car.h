@@ -11,8 +11,6 @@
 #include "../Graphics/ObjectNode.h"
 #include "RideNode.h"
 
-class CMainFrame;
-
 class Car : public RideNode
 {
    int m_BaseTexture;
@@ -22,14 +20,17 @@ class Car : public RideNode
    Vector3f  m_vPosition;
    Vector3f  m_vAngle;
    int      m_PartsCount;
+protected:
    ObjectNode* m_BaseParts; // temp hardcode
 
 public:
    Car( const sf::Vector3f& vDim, const sf::Vector3f& vPosition, const sf::Vector3f& vAngle, int meshcount, int id );
+   Car( const sf::Vector3f& vDim, int meshcount, int id );
    Car (ObjectNode* pNode);
    virtual ~Car(void);
 
-   void Draw();
+   virtual void Start() {};
+   virtual void Draw();
    void DrawSelectionTarget(int mode);
    void Render() { Render(0); };
    int Render( int lod ); // render returning the poly count
@@ -38,7 +39,10 @@ public:
    {
       m_vPosition = vPosition;
       m_vAngle = vAngle;
-   };
+   }
+   void Update (float dt)
+   {
+   }
    void AddSection( ObjectBase* pGLBase );
    void Default();
 };
