@@ -76,7 +76,7 @@ void SimpleMeshObject::Draw()
 {
    if( mpMaterials )
    {
-//      mpMaterial->GLSetMaterial();
+      mpMaterials->GetMats()[0]->GLSetMaterial();
       glShadeModel( GL_SMOOTH );
    }
 //   else
@@ -109,6 +109,10 @@ void SimpleMeshObject::Draw()
 
 //      Material **mpM = mpMaterials->GetMats();
 //      mpM[mpFaces[idx]->Mat]->GLSetMaterial();
+      if( mpMaterials )
+      {
+         mpMaterials->GetMats()[mpFaces[idx]->Mat]->GLSetMaterial();
+      }
       TrigPoint& face = mpFaces[idx]->mPoints[0];
       glTexCoord2fv( face.mUV );
       //glNormal3fv( face.Normal );

@@ -40,7 +40,7 @@ namespace Gfx
    class MaterialsList
    {
       friend class ImageManager;
-      int count;
+      int mCount;
       Material** mpMaterials;
    public:
       Material** GetMats() const { return mpMaterials; }
@@ -49,6 +49,7 @@ namespace Gfx
          try
          {
             mpMaterials = new Material*[count];
+            mCount = count;
          }
          catch (...)
          {

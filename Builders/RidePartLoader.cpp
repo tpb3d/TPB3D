@@ -60,11 +60,13 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       Lib3dsFile* pFile = cds.GetFile();
       Gfx::MaterialsList* MatList = NULL; //Mats[8];
       int iTMax = 0;
+
+      Material** Mats = NULL;
       if( pFile->nmaterials > 0 )
       {
          iTMax = pFile->nmaterials; // <= 32) ? pFile->nmaterials : 32;
          MatList = new Gfx::MaterialsList(pFile->nmaterials);
-         Material** Mats = MatList->GetMats();
+         Mats = MatList->GetMats();
          //glGenTextures( iTMax * 2, tex );
          for( int idx = 0; idx < iTMax; ++idx )
          {
