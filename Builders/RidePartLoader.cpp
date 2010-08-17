@@ -60,6 +60,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
       Lib3dsFile* pFile = cds.GetFile();
       Gfx::MaterialsList* MatList = NULL; //Mats[8];
       int iTMax = 0;
+      int iTexCount = 0;
 
       Material** Mats = NULL;
       if( pFile->nmaterials > 0 )
@@ -100,7 +101,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
                Gfx::Texture* pTex = IMan.GetTexture(szName, iChannels);
                texs[idx] = pTex;
                pGLMat->SetTexture(pTex);
-
+               iTexCount += 1;
 
                //png_color pngColor;
                //png_uint_32 iWide = 0;
@@ -173,7 +174,7 @@ void RidePartLoader::Load3ds( const char* Path, const char* Name, ObjectNode* pB
             pNormals[ifx][2] = pn[2];
             pMatIndexes[ifx] = pMesh->faces[ifx].material;
          }
-         if(pMesh->texcos)
+         if(pMesh->texcos && iTexCount > 0)
          {
             SimpleMeshObject* pGLMesh = ObjectFactory::CreateMesh();
             pGLMesh->SetScale (mPartCorrection.frx);

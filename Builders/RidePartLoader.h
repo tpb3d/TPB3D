@@ -16,9 +16,11 @@ struct PartCorrection
    float Location[4];
    float Rotation[4];
    float frx;
+   bool  bInvertPNG;
    PartCorrection ()
    {
       frx = 1.0f;
+      bInvertPNG = true;
       memset (Location, 0, sizeof(Location));
       memset (Rotation, 0, sizeof(Rotation));
    }

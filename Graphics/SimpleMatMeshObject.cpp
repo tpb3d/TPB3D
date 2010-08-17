@@ -71,11 +71,8 @@ ObjectBase* SimpleMatMeshObject::Clone( )
 
 void SimpleMatMeshObject::Draw()
 {
-   if( mpMaterials )
-   {
-//      mpMaterial->GLSetMaterial();
-      glShadeModel( GL_SMOOTH );
-   }
+//   mpMaterials->GetMats()[0]->GLSetMaterial();
+   glShadeModel( GL_SMOOTH );
    //glEnableClientState( GL_NORMAL_ARRAY );
    //glEnableClientState( GL_VERTEX_ARRAY );
    //glEnableClientState( GL_INDEX_ARRAY );
@@ -90,14 +87,13 @@ void SimpleMatMeshObject::Draw()
    //glDisableClientState( GL_INDEX_ARRAY );
    //glDisable( GL_TEXTURE_2D );
 
-   glEnable( GL_BLEND );
-   glBegin(GL_TRIANGLES); // glBegin and glEnd delimit the vertices that define a primitive (in our case triangles)
+   glDisable( GL_TEXTURE_2D );
    for( int idx = 0; idx < mFaces; ++idx )
    {
+      mpMaterials->GetMats()[mpFaces[idx]->Mat]->GLSetMaterial();
+      glBegin(GL_TRIANGLES); // glBegin and glEnd delimit the vertices that define a primitive (in our case triangles)
         // Coordinates of the first vertex
 
-//      Material **mpM = mpMaterials->GetMats();
-//      mpM[mpFaces[idx]->Mat]->GLSetMaterial();
       TrigPoint2& face = mpFaces[idx]->mPoints[0];
       //glNormal3fv( face.Normal );
       glVertex3fv( mpVertices[face.Index] ); //Vertex definition
@@ -111,10 +107,8 @@ void SimpleMatMeshObject::Draw()
       TrigPoint2& face2 = mpFaces[idx]->mPoints[2];
       //glNormal3fv( face2.Normal );
       glVertex3fv( mpVertices[face2.Index] ); //Vertex definition
+      glEnd( );
    }
-   glEnd( );
-   glDisable( GL_TEXTURE_2D );
-   glDisable( GL_BLEND );
 }
 
 void SimpleMatMeshObject::DrawSelectionTarget()
@@ -124,17 +118,14 @@ void SimpleMatMeshObject::DrawSelectionTarget()
    {
         // Coordinates of the first vertex
       TrigPoint2& face = mpFaces[idx]->mPoints[0];
-//      glNormal3fv( face.Normal );
       glVertex3fv( mpVertices[face.Index] ); //Vertex definition
 
         // Coordinates of the second vertex
       TrigPoint2& face1 = mpFaces[idx]->mPoints[1];
-//      glNormal3fv( face1.Normal );
       glVertex3fv( mpVertices[face1.Index] ); //Vertex definition
 
         // Coordinates of the third vertex
       TrigPoint2& face2 = mpFaces[idx]->mPoints[2];
- //     glNormal3fv( face2.Normal );
       glVertex3fv( mpVertices[face2.Index] ); //Vertex definition
    }
    glEnd( );

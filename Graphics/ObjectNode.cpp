@@ -110,6 +110,11 @@ ObjectNode* ObjectNode::Clone( )
 
 void ObjectNode::Draw()
 {
+      GLenum err = glGetError();
+		if (err != GL_NO_ERROR)
+      {
+         static int terr = err;
+      }
 	glPushMatrix();															// Push Matrix Onto Stack (Copy The Current Matrix)
   // glLoadIdentity();													// Reset The Current Modelview Matrix
 	glTranslatef( mLocation[0],mLocation[1],mLocation[2] );

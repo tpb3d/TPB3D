@@ -40,7 +40,9 @@ public:
       Spider,
       Polyp,
       Octopus,
-      Enterprise
+      Enterprise,
+      Jump,
+      HussJump
    };
 public:
    FlatRideBuilder(void);
@@ -65,12 +67,15 @@ public:
    static RideNode* AddRideNodeStrut (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeArm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeDeck (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
+   static RideNode* AddRideNodeSeat (RideNode* pParent, ObjectNode* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeCar (RideNode* pParent, ObjectNode* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeDisc (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeCarriage (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeCableHinge (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeRotationJoint (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeRotationHub (RideController* pRCU, RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
+   static RideNode* AddRideNodeTelescopeHub (RideController* pRCU, RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
+   static RideNode* AddRideNodeWobbleHub (RideController* pRCU, RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeLiftArm (RideNode* pParent, ObjectBase* pGraphicObject, PartGuide& guide);
    static RideNode* AddRideNodeSpinCar (RideNode* pParent, ObjectNode* pGraphicObject, PartGuide& guide);
 };

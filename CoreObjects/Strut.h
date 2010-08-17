@@ -20,6 +20,7 @@ class ObjectBase;
 
 class Strut : public RideNode
 {
+   float  mAngle;
    float  mDistance;
    float  mLength;   // current length of cable (some rides will change this
    sf::Vector3f mV1;
@@ -27,7 +28,8 @@ class Strut : public RideNode
    ObjectBase* mpGraphic;
 
 public:
-   Strut();
+   Strut(float fAngle);
+   Strut (float fAngle, ObjectBase* pBase);
    ~Strut(void);
    void SetPoints (sf::Vector3f v1, sf::Vector3f v2) { mV1 = v1; mV2 = v2; }
    void SetPosition (sf::Vector3f v) { mvPosition = v; }

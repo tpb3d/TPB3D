@@ -74,18 +74,23 @@ ObjectBase* SimpleMeshObject::Clone( )
 
 void SimpleMeshObject::Draw()
 {
+   unsigned char ub[] = { 250,250,250,255 };
+   glColor3ubv( ub );
    if( mpMaterials )
    {
       mpMaterials->GetMats()[0]->GLSetMaterial();
-      glShadeModel( GL_SMOOTH );
+      glEnable( GL_BLEND );
+//      glShadeModel( GL_SMOOTH );
    }
 //   else
+//   {
+      //unsigned char ub[] = { 250,250,220,255 };
+      glColor3ubv( ub );
+//   }
    if( mpTexture != NULL )
    {
       glEnable( GL_TEXTURE_2D );
       mpTexture->Bind( );
-      unsigned char ub[] = { 250,250,220,255 };
-      glColor3ubv( ub );
    }
    //glEnableClientState( GL_NORMAL_ARRAY );
    //glEnableClientState( GL_VERTEX_ARRAY );
@@ -101,18 +106,15 @@ void SimpleMeshObject::Draw()
    //glDisableClientState( GL_INDEX_ARRAY );
    //glDisable( GL_TEXTURE_2D );
 
-   glEnable( GL_BLEND );
-   glBegin(GL_TRIANGLES); // glBegin and glEnd delimit the vertices that define a primitive (in our case triangles)
    for( int idx = 0; idx < mFaces; ++idx )
    {
         // Coordinates of the first vertex
 
-//      Material **mpM = mpMaterials->GetMats();
-//      mpM[mpFaces[idx]->Mat]->GLSetMaterial();
-      if( mpMaterials )
-      {
-         mpMaterials->GetMats()[mpFaces[idx]->Mat]->GLSetMaterial();
-      }
+      //if( mpMaterials )
+      //{
+      //   mpMaterials->GetMats()[mpFaces[idx]->Mat]->GLSetMaterial();
+      //}
+      glBegin(GL_TRIANGLES); // glBegin and glEnd delimit the vertices that define a primitive (in our case triangles)
       TrigPoint& face = mpFaces[idx]->mPoints[0];
       glTexCoord2fv( face.mUV );
       //glNormal3fv( face.Normal );
@@ -129,8 +131,8 @@ void SimpleMeshObject::Draw()
       glTexCoord2fv( face2.mUV );
       //glNormal3fv( face2.Normal );
       glVertex3fv( mpVertices[face2.Index] ); //Vertex definition
+      glEnd( );
    }
-   glEnd( );
    glDisable( GL_TEXTURE_2D );
    glDisable( GL_BLEND );
 }

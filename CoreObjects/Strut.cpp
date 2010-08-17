@@ -15,11 +15,20 @@
 #include "../Graphics/ObjectFactory.h"
 #include "Strut.h"
 
-Strut::Strut ()
+Strut::Strut (float fAngle)
 {
    mDistance = 5; 
    mLength = 4;
+   mAngle = fAngle;
    mpGraphic = ObjectFactory::CreateTexturedStrip (3, "basemetal.png", 0x98b0b0b0);
+}
+
+Strut::Strut (float fAngle, ObjectBase* pBase)
+{
+   mDistance = 5; 
+   mLength = 4;
+   mAngle = fAngle;
+   mpGraphic = pBase;
 }
 
 Strut::~Strut (void)

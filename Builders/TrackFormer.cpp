@@ -26,6 +26,11 @@
 #include "../CoreObjects/Park.h" // access to the park for the car path (will change)
 #include "../Physics/LinearPhysics.h"
 
+namespace Test
+{
+   T_Spline& GetSpline();
+}
+
 TrackFormer::TrackFormer( Gfx::Texture* pTexture, Park& park)
 :  mPark(park)
 {

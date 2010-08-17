@@ -1,5 +1,9 @@
 #include "RailCar.h"
-
+namespace Test
+{
+   T_Spline theSpline;
+   T_Spline& GetSpline() { return theSpline; }
+}
 
 RailCar::RailCar (const sf::Vector3f& vDim, int meshcount, int id )
 :  Car (vDim, meshcount, id)

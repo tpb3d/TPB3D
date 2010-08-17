@@ -52,8 +52,8 @@ ModelObject::Render(AnimationBase* pBase, bool bLight)
       glTexCoord2f( 1.0, 1.0 );
       glVertex3f( x2, y2, z );
    }
-   glColor4ub (250,250,250,255);
    glEnd();
+   glColor4ub (250,250,250,255);
 }
 
 void

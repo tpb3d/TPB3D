@@ -49,7 +49,7 @@ namespace Gfx {
    }
 
    Texture*
-   ImageManager::GetTexture (const std::string & name, int channels) // we have to tell it how many channels until we change the loader
+   ImageManager::GetTexture (const std::string & name, int channels, bool bInvert) // we have to tell it how many channels until we change the loader
    {
       if (mImages[name] == NULL)
       {

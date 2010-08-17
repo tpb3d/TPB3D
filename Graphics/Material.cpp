@@ -72,10 +72,15 @@ void Material::GLSetMaterial()
 
 void Material::GLSetBlendMode()
 {
-   if( this->mShading == 64 )
+   switch (mShading)
    {
+   case 64:
       glEnable( GL_BLEND );
-//      glBlendFunc( GL_DST_ALPHA, GL_ONE_MINUS_SRC_ALPHA  );
-      glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA  );
+      glBlendFunc( GL_SRC_ALPHA, GL_ONE_MINUS_DST_COLOR  );
+      break;
+//   case 3:
+//      glEnable( GL_BLEND );
+//      glBlendFunc( GL_SRC_ALPHA, GL_SRC_COLOR  );
+//      break;
    }
 }

@@ -1,5 +1,5 @@
 #pragma once
-#include "c:\dev\os\tpb3dtg\coreobjects\car.h"
+#include "car.h"
 #include "../Physics/LinearPhysics.h"
 
 class RailCar : public Car

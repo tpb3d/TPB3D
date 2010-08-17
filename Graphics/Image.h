@@ -44,7 +44,8 @@ namespace Gfx
       static ImageManager * GetInstance ();
       static ImageManager* i() { return GetInstance(); };
 //      sf::Image * GetImg (const std::string & name);
-      Texture* GetTexture( const std::string& name, int channels);
+      Texture* GetTexture( const std::string& name, int channels) { return GetTexture (name, channels, false); }
+      Texture* GetTexture( const std::string& name, int channels, bool bInvert);
 //      int preload_image (const std::string& name);
       void set_path (const std::string & prefix);
    };

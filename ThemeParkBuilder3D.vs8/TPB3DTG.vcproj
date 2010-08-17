@@ -1070,6 +1070,14 @@
 				>
 			</File>
 			<File
+				RelativePath="..\CoreObjects\WobbleHub.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\CoreObjects\WobbleHub.h"
+				>
+			</File>
+			<File
 				RelativePath="..\CoreObjects\WoodTrestle.cpp"
 				>
 			</File>
@@ -1389,14 +1397,6 @@
 		<Filter
 			Name="Physics"
 			>
-			<File
-				RelativePath="..\Physics\LinearPhysics.cpp"
-				>
-			</File>
-			<File
-				RelativePath="..\Physics\LinearPhysics.h"
-				>
-			</File>
 			<File
 				RelativePath="..\Physics\MotionPhysics.cpp"
 				>

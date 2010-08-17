@@ -14,9 +14,7 @@
  *   along with Theme Park Builder 3D The Game.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef _PHYSICS_H
-#define _PHYSICS_H
-
+#pragma once
 // Is there a way to avoid this include?
 #include "../Types/Vector2.h"
 #include "../Types/Vector3.h"
@@ -82,4 +80,3 @@ public:
    void MoveTo (float x, float y, float z, float time);
 };
 
-#endif

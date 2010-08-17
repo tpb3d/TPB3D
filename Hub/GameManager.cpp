@@ -196,9 +196,9 @@ bool GameManager::LoadGame (const char *fileName)
    PartCorrection corr;
    RidePartLoader rpl (corr);
    ObjectNode* pTempTree = new ObjectNode(0, 33);
-   const char* pszFile = "restroom01.3ds";
-   const char* pszPath = "data/Restroom 01/";
-   rpl.Load3ds( pszPath, pszFile, pTempTree );
+   //const char* pszFile = "restroom01.3ds";
+   //const char* pszPath = "data/Restroom 01/";
+   //rpl.Load3ds( pszPath, pszFile, pTempTree );
    //pOTree.AddNode (pTempTree);
    // Can't add the restroon, not yet a part object, just a graphic
 
@@ -357,17 +357,30 @@ bool GameManager::LoadGame (const char *fileName)
    //pRide->SetPosition (fx,1, fz+40);
    //mScene.GetPark()->AddRide (pRide);
 
+   //pRide = flat.CreateRide(FlatRideBuilder::Spider, mPark);  // polyp
+   //pRide->SetPosition (fx-50,1, fz-50);
+   //mScene.GetPark()->AddRide (pRide);
+
    pRide = flat.CreateRide(FlatRideBuilder::Polyp, mPark);  // polyp
-   pRide->SetPosition (fx,1, fz-50);
+   pRide->SetPosition (fx-40,1, fz);
    mScene.GetPark()->AddRide (pRide);
 
-   pRide = flat.CreateRide(FlatRideBuilder::Octopus, mPark);  // Cephalopod octo
-   pRide->SetPosition (fx,1, fz-70);
-   mScene.GetPark()->AddRide (pRide);
+//   pRide = flat.CreateRide(FlatRideBuilder::Octopus, mPark);  // Cephalopod octo
+//   pRide->SetPosition (fx-10,1, fz-70);
+//   mScene.GetPark()->AddRide (pRide);
 
-   pRide = flat.CreateRide(FlatRideBuilder::Scrambler, mPark);
-   pRide->SetPosition (fx,1, fz-100);
-   mScene.GetPark()->AddRide (pRide);
+   //pRide = flat.CreateRide(FlatRideBuilder::Scrambler, mPark);
+   //pRide->SetPosition (fx-10,1, fz-100);
+   //mScene.GetPark()->AddRide (pRide);
+
+   //pRide = flat.CreateRide(FlatRideBuilder::Jump, mPark);
+   //pRide->SetPosition (fx-60,1, fz);
+   //mScene.GetPark()->AddRide (pRide);
+
+   //pRide = flat.CreateRide(FlatRideBuilder::HussJump, mPark);
+   //pRide->SetPosition (fx-60,1, fz-50);
+   //mScene.GetPark()->AddRide (pRide);
+
 
 //   float fHRLoc[4] = { 10,-60,-40,0 };
 //   float fTARot[4] = { 0,0,0,0 };

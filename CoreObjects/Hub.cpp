@@ -73,6 +73,11 @@ Hub::~Hub(void)
 
 void Hub::Draw()
 {
+      GLenum err = glGetError();
+		if (err != GL_NO_ERROR)
+      {
+         static int terr = err;
+      }
    mpGraphic->Draw();
    RideNode::Draw();
 }
