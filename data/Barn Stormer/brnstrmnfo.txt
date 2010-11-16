@@ -1,0 +1,9 @@
+Barnstorm tri counts
+
+Ride base		 48
+Primary 		112
+Secondary		128
+Liftarm			 98
+biplane			 74
+door (x2)		  2
+

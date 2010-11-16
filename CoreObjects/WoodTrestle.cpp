@@ -210,7 +210,7 @@ void WoodTrestle::Render (Vector3f& HRLeft, Vector3f& HRRight)
    float fBY = mfHeight-1;
    if ( mfBentAngle < -25 || mfBentAngle > 25)
    {
-      fBY = mfHeight - sin(abs(mfBentAngle))*3;
+      fBY = mfHeight - sin(fabs(mfBentAngle))*3;
       WoodBeam (mLocation.x, fy, mLocation.z, 1, mfWidth, 0.5f, mAngle, 0, 0);
    }
    WoodBrace  (mLocation.x, fy, mLocation.z, 0.75f, mfWidth, 0.25f, fBY-fy-0.325f, mAngle);
@@ -452,8 +452,8 @@ void WoodTrestle::WoodBent (float x, float y, float z, float w, float l, float d
    Vector3f ptR( l/1.75f + (fRightFactor * l), -hy, -hz);
    //ptL.x -= fXFactor * l;
    //ptR.x -= fXFactor * l;
-   ptL.y -= abs (fXFactor * l);
-   ptR.y -= abs (fXFactor * l);
+   ptL.y -= fabs (fXFactor * l);
+   ptR.y -= fabs (fXFactor * l);
    Vector3f pt1 (ptL);
    Vector3f pt2 (ptR);
    pt1.Rotate (trigZ);

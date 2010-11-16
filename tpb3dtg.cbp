@@ -7,84 +7,61 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug Win32">
-				<Option output="tpb3dtg" prefix_auto="1" extension_auto="1" />
-				<Option object_output=".obj\debug\" />
+				<Option output="tpb3dtg_D" prefix_auto="1" extension_auto="1" />
+				<Option object_output="Debug Win32" />
 				<Option type="1" />
 				<Option compiler="gcc" />
-				<Option projectLinkerOptionsRelation="2" />
 				<Compiler>
-					<Add option="-W" />
+					<Add option="-w" />
 					<Add option="-g" />
-					<Add option="-O0" />
 					<Add option="-DWIN32" />
-					<Add option="-D_DEBUG" />
+					<Add option="-DDEBUG" />
 					<Add option="-D_CONSOLE" />
-					<Add option="-DPNG_NO_ERROR_NUMBERS" />
-					<Add option="-DuseLoadPng" />
-					<Add directory="..\..\VC++\SFML-1.5\include" />
-					<Add directory="..\..\VC++\wxWidgets-2.8.10\include" />
-					<Add directory="..\..\VC++\zlib123\include" />
-					<Add directory="..\..\VC++\lib3ds-20080909\src" />
-					<Add directory="..\..\VC++\lpng1240\projects\visualc71\Win32_LIB_Release" />
-					<Add directory="..\..\VC++\ZLib" />
+					<Add directory="..\SFML-1.6-sdk-windows-mingw\SFML-1.6\include" />
+					<Add directory="..\libpng-lib\include" />
+					<Add directory="..\zlib-1.2.5" />
+					<Add directory="..\lib3ds-20080909\src" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="\Dev\VC++\SFML-1.5\include" />
-					<Add directory="\Dev\VC++\CEGUI-SDK-0.6.2-vc8\include" />
-					<Add directory="\Dev\VC++\CEGUI-SDK-0.6.2-vc8" />
-					<Add directory="\Dev\VC++\wxWidgets-2.8.10\include" />
-					<Add directory="\Dev\VC++\zlib123\include" />
-					<Add directory="\Dev\VC++\lib3ds-20080909\src" />
-					<Add directory="\Dev\VC++\lpng1240" />
-					<Add directory="\Dev\VC++\ZLib" />
-				</ResourceCompiler>
 				<Linker>
 					<Add library="sfml-graphics-d" />
 					<Add library="sfml-system-d" />
 					<Add library="sfml-window-d" />
-					<Add library="OpenGL32" />
+					<Add library="OPENGL32" />
 					<Add library="glu32" />
-					<Add directory="\Dev\VC++\SFML-1.5\lib\vc2005" />
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio 8\VC\lib" />
-					<Add directory="\Dev\VC++\CEGUI-SDK-0.6.2-vc8\lib" />
-					<Add directory="\Dev\VC++\lpng1240\projects\visualc71\Win32_LIB_Release" />
-					<Add directory="\Dev\VC++\lib3ds-20080909\release" />
-					<Add directory="\Dev\VC++\zlib\lib" />
+					<Add library="libpng" />
+					<Add library="lib3ds-2_0" />
+					<Add directory="..\SFML-1.6-sdk-windows-mingw\SFML-1.6\lib" />
+					<Add directory="..\libpng-lib\lib" />
+					<Add directory="..\lib3ds-20080909\Debug" />
 				</Linker>
 			</Target>
 			<Target title="Release Win32">
-				<Option output="ExtremeParkDev" prefix_auto="1" extension_auto="1" />
+				<Option output="tpb3dtg" prefix_auto="1" extension_auto="1" />
 				<Option object_output="Release Win32" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
-					<Add option="-W" />
+					<Add option="-w" />
 					<Add option="-DWIN32" />
 					<Add option="-DNDEBUG" />
 					<Add option="-D_CONSOLE" />
-					<Add option="-DuseLoadPng" />
-					<Add directory="\Dev\VC++\SFML-1.5\include" />
-					<Add directory="F:\Dev\VC++\wxWidgets-2.8.10\include" />
+					<Add directory="..\SFML-1.6-sdk-windows-mingw\SFML-1.6\include" />
+					<Add directory="..\libpng-lib\include" />
+					<Add directory="..\zlib-1.2.5" />
+					<Add directory="..\lib3ds-20080909\src" />
 				</Compiler>
-				<ResourceCompiler>
-					<Add directory="\Dev\VC++\SFML-1.5\include" />
-					<Add directory="\Dev\VC++\CEGUI-SDK-0.6.2-vc8\include" />
-					<Add directory="\Dev\VC++\CEGUI-SDK-0.6.2-vc8" />
-					<Add directory="F:\Dev\VC++\wxWidgets-2.8.10\include" />
-				</ResourceCompiler>
 				<Linker>
+					<Add option="-static-libgcc" />
 					<Add library="sfml-Graphics" />
 					<Add library="sfml-System" />
 					<Add library="sfml-Window" />
 					<Add library="OPENGL32" />
 					<Add library="glu32" />
-					<Add library="CEGUIBase" />
-					<Add library="OpenGLGUIRenderer" />
-					<Add library="CEGUITinyXMLParser_Static" />
-					<Add library="libglpng" />
-					<Add directory="\Dev\VC++\SFML-1.5\lib\vc2005" />
-					<Add directory="C:\Program Files (x86)\Microsoft Visual Studio 8\VC\lib" />
-					<Add directory="\Dev\VC++\CEGUI-SDK-0.6.2-vc8\lib" />
+					<Add library="libpng" />
+					<Add library="lib3ds-2_0" />
+					<Add directory="..\SFML-1.6-sdk-windows-mingw\SFML-1.6\lib" />
+					<Add directory="..\libpng-lib\lib" />
+					<Add directory="..\lib3ds-20080909\Debug" />
 				</Linker>
 			</Target>
 			<Target title="Linux">
@@ -201,6 +178,8 @@
 		<Unit filename="Builders\CoastlineGen.h" />
 		<Unit filename="Builders\FlatRideBuilder.cpp" />
 		<Unit filename="Builders\FlatRideBuilder.h" />
+		<Unit filename="Builders\FlatRidePatterns.cpp" />
+		<Unit filename="Builders\FlatRidePatterns.h" />
 		<Unit filename="Builders\FractalTerrain.cpp" />
 		<Unit filename="Builders\FractalTerrain.h" />
 		<Unit filename="Builders\PartGuide.cpp" />
@@ -227,6 +206,8 @@
 		<Unit filename="CoreObjects\Building.h" />
 		<Unit filename="CoreObjects\CableHingeJoint.cpp" />
 		<Unit filename="CoreObjects\CableHingeJoint.h" />
+		<Unit filename="CoreObjects\CableSusp.cpp" />
+		<Unit filename="CoreObjects\CableSusp.h" />
 		<Unit filename="CoreObjects\CamPath.cpp" />
 		<Unit filename="CoreObjects\CamPath.h" />
 		<Unit filename="CoreObjects\Car.cpp" />
@@ -248,11 +229,14 @@
 		<Unit filename="CoreObjects\HorizontalCrankHub.h" />
 		<Unit filename="CoreObjects\Hub.cpp" />
 		<Unit filename="CoreObjects\Hub.h" />
+		<Unit filename="CoreObjects\JointBase.h" />
 		<Unit filename="CoreObjects\Lamp.cpp" />
 		<Unit filename="CoreObjects\Lamp.h" />
 		<Unit filename="CoreObjects\LiftArm.cpp" />
 		<Unit filename="CoreObjects\LiftArm.h" />
 		<Unit filename="CoreObjects\LinearActuator.h" />
+		<Unit filename="CoreObjects\ParabolicCorkSupport.cpp" />
+		<Unit filename="CoreObjects\ParabolicCorkSupport.h" />
 		<Unit filename="CoreObjects\Park.cpp" />
 		<Unit filename="CoreObjects\Park.h" />
 		<Unit filename="CoreObjects\PathCollection.cpp" />
@@ -265,6 +249,8 @@
 		<Unit filename="CoreObjects\PersonQueue.h" />
 		<Unit filename="CoreObjects\PivotJoint.cpp" />
 		<Unit filename="CoreObjects\PivotJoint.h" />
+		<Unit filename="CoreObjects\RailCar.cpp" />
+		<Unit filename="CoreObjects\RailCar.h" />
 		<Unit filename="CoreObjects\Ride.cpp" />
 		<Unit filename="CoreObjects\Ride.h" />
 		<Unit filename="CoreObjects\RideAssembly.h" />
@@ -293,6 +279,8 @@
 		<Unit filename="CoreObjects\Stall.h" />
 		<Unit filename="CoreObjects\StallCollection.cpp" />
 		<Unit filename="CoreObjects\StallCollection.h" />
+		<Unit filename="CoreObjects\Store.cpp" />
+		<Unit filename="CoreObjects\Store.h" />
 		<Unit filename="CoreObjects\Strut.cpp" />
 		<Unit filename="CoreObjects\Strut.h" />
 		<Unit filename="CoreObjects\SuperStructure.cpp" />
@@ -307,9 +295,14 @@
 		<Unit filename="CoreObjects\TrackGuide.h" />
 		<Unit filename="CoreObjects\TrackSection.cpp" />
 		<Unit filename="CoreObjects\TrackSection.h" />
+		<Unit filename="CoreObjects\Vendor.cpp" />
 		<Unit filename="CoreObjects\Vendor.h" />
 		<Unit filename="CoreObjects\WheelDrive.cpp" />
 		<Unit filename="CoreObjects\WheelDrive.h" />
+		<Unit filename="CoreObjects\WobbleHub.cpp" />
+		<Unit filename="CoreObjects\WobbleHub.h" />
+		<Unit filename="CoreObjects\WoodTrestle.cpp" />
+		<Unit filename="CoreObjects\WoodTrestle.h" />
 		<Unit filename="Delegates\BuildDelegate.cpp" />
 		<Unit filename="Delegates\BuildDelegate.h" />
 		<Unit filename="Delegates\DelegateBase.cpp" />
@@ -359,6 +352,8 @@
 		<Unit filename="Graphics\ObjectTree.h" />
 		<Unit filename="Graphics\QuadMeshObject.cpp" />
 		<Unit filename="Graphics\QuadMeshObject.h" />
+		<Unit filename="Graphics\SimpleMatMeshObject.cpp" />
+		<Unit filename="Graphics\SimpleMatMeshObject.h" />
 		<Unit filename="Graphics\SimpleMesh.cpp" />
 		<Unit filename="Graphics\SimpleMesh.h" />
 		<Unit filename="Graphics\SimpleMeshObject.cpp" />
@@ -416,6 +411,9 @@
 		<Unit filename="Physics\RotationPhysics.h" />
 		<Unit filename="Physics\ServoPhysics.cpp" />
 		<Unit filename="Physics\ServoPhysics.h" />
+		<Unit filename="Resources.h" />
+		<Unit filename="SalesObjects\DrinkItem.cpp" />
+		<Unit filename="SalesObjects\DrinkItem.h" />
 		<Unit filename="SalesObjects\FoodItem.cpp" />
 		<Unit filename="SalesObjects\FoodItem.h" />
 		<Unit filename="SalesObjects\ItemBase.cpp" />
@@ -428,8 +426,6 @@
 		<Unit filename="Settings\Settings.h" />
 		<Unit filename="Storage\3DSHandler.cpp" />
 		<Unit filename="Storage\3DSHandler.h" />
-		<Unit filename="Storage\ACPng.cpp" />
-		<Unit filename="Storage\ACPng.h" />
 		<Unit filename="Storage\MS3DFile.cpp" />
 		<Unit filename="Storage\MS3DFile.h" />
 		<Unit filename="Storage\SerializerBase.h" />
@@ -438,17 +434,15 @@
 		<Unit filename="TPB3DTG.cpp" />
 		<Unit filename="TPB3DTG.h" />
 		<Unit filename="ThinlineCheck.txt" />
-		<Unit filename="Types\AC_Inlines.h" />
+		<Unit filename="Types\ACPng.cpp" />
+		<Unit filename="Types\ACPng.h" />
 		<Unit filename="Types\MathStuff.cpp" />
 		<Unit filename="Types\MathStuff.h" />
 		<Unit filename="Types\Rect.h" />
 		<Unit filename="Types\String.cpp" />
 		<Unit filename="Types\String.h" />
-		<Unit filename="Types\Token.cpp" />
-		<Unit filename="Types\Token.h" />
 		<Unit filename="Types\Vector2.h" />
 		<Unit filename="Types\Vector3.h" />
-		<Unit filename="Types\VirtKeys.h" />
 		<Unit filename="Utility\CamPath.cpp" />
 		<Unit filename="Utility\CamPath.h" />
 		<Unit filename="Utility\GameException.cpp" />
@@ -459,16 +453,18 @@
 		<Unit filename="Window\CheckViewObject.h" />
 		<Unit filename="Window\Clock.cpp" />
 		<Unit filename="Window\Clock.h" />
-		<Unit filename="Window\Event.h" />
-		<Unit filename="Window\FRCSWindow.h" />
-		<Unit filename="Window\GUIManager.h" />
+		<Unit filename="Window\FileDialogWindow.cpp" />
+		<Unit filename="Window\FileDialogWindow.h" />
 		<Unit filename="Window\Interface.cpp" />
 		<Unit filename="Window\Interface.h" />
 		<Unit filename="Window\LabelViewObject.cpp" />
 		<Unit filename="Window\LabelViewObject.h" />
-		<Unit filename="Window\LoadSave.cpp" />
+		<Unit filename="Window\ListViewObject.cpp" />
+		<Unit filename="Window\ListViewObject.h" />
 		<Unit filename="Window\RadioButtonViewObject.cpp" />
 		<Unit filename="Window\RadioButtonViewObject.h" />
+		<Unit filename="Window\ScrollViewObject.cpp" />
+		<Unit filename="Window\ScrollViewObject.h" />
 		<Unit filename="Window\SettingsWindow.cpp" />
 		<Unit filename="Window\SettingsWindow.h" />
 		<Unit filename="Window\Stats.cpp" />

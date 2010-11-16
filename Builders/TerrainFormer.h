@@ -23,7 +23,7 @@ public:
 	Terrain*FractalHeightTestMesh();
 	#endif
    Terrain* DocsMesh();
-   Terrain* TerrainFormer::doOld(); // have to have a default or this shit won't compile or run
+   Terrain* doOld(); // have to have a default or this shit won't compile or run
 };
 
 #endif // _TerrainFormer

@@ -25,14 +25,14 @@
 
 using namespace CoreObjects;
 
-void PlaceItemDelegate<class T>::OnHitDown (short ID)
+template<> void PlaceItemDelegate<class T>::OnHitDown (short ID)
 {
    T* pCB = mpGhostItem;
 //   T* pNew = pCB->Clone();
 //      mPlaceItem.Onhit();
 }
 
-void PlaceItemDelegate<class T>::OnHitUp (short ID)
+template<> void PlaceItemDelegate<class T>::OnHitUp (short ID)
 {
 //      mPlaceItem.Onhit();
 }
