@@ -1,7 +1,7 @@
 #include "KeyNavDelegate.h"
 #include <SFML/System.hpp>
 #include <SFML/Graphics.hpp>
-#include "../Types/Virtkeys.h"
+#include "../Types/VirtKeys.h"
 #include "../Graphics/ViewObject.h"
 
 KeyNavDelegate::KeyNavDelegate(const char* pszName, Gfx::ViewObject* pParent)

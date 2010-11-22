@@ -90,37 +90,39 @@ void TextViewObject::Hit (int code)
    case sf::Key::Delete:
       DeleteChar(0);   // zero because we don't move the cursor
       break;
-   case VK_BACK:
+   case sf::Key::Back:
       DeleteChar(1);
       break;
-   case VK_LEFT:
+   case sf::Key::Left:
       MoveCursor(1);
       break;
-   case VK_RIGHT:
+   case sf::Key::Right:
       MoveCursor(2);
       break;
-   case VK_END:
+   case sf::Key::End:
       MoveCursor(3);
       break;
-   case VK_HOME:
+   case sf::Key::Home:
       MoveCursor(0);
       break;
-   case VK_RETURN:
+   case sf::Key::Return:
       Select(false);
       break;
-   case VK_ESCAPE:
+   case sf::Key::Escape:
       Select(false);
       break;
+
+   case sf::Key::Numpad5: // numpad 5 without numlock is Linux for "VK_CLEAR"
+   #ifdef  VK_CLEAR
    case VK_CLEAR:
+   #endif
       set_Text ("");
       break;
-   case VK_LSHIFT:
-   case VK_RSHIFT:
-   case VK_LCONTROL:
-   case VK_RCONTROL:
-   #ifdef VK_MENU
-   case VK_MENU:
-	#endif
+   case sf::Key::LShift:
+   case sf::Key::RShift:
+   case sf::Key::LControl:
+   case sf::Key::RControl:
+   case sf::Key::Menu:
       break;
    default:
       AppendText(code);

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "../types/vector2.h"
+#include "../Types/Vector2.h"
 #include <stdlib.h>
 #include <math.h>
 //#include <STDARG.H>

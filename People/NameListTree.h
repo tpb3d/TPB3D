@@ -3,7 +3,7 @@
 #pragma once
 
 #include "../People/PeepNames.h"
-#include "../People/locations.h"
+#include "../People/Locations.h"
 
 //includes for implementation
 #include <string>
@@ -36,7 +36,7 @@ struct NameListTreeEntry
 
 	void Init(	NameListTreeEntry*sparent,NameGenerator*sng	);
 	void AddChild(	NameListTreeEntry*child	);
-		
+
    //AddChild()
 	void UnlinkChild(NameListTreeEntry* child);		//make it an orphan
 };//NameListTreeEntry;

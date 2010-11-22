@@ -21,7 +21,7 @@ SkyBowl::SkyBowl(void)
 {
    Gfx::ImageManager& iMan = *(Gfx::ImageManager::GetInstance());
    mTexture[0] = iMan.GetTexture("sky2.png", 4);
-   mTexture[1] = iMan.GetTexture("grass.png", 4);
+   mTexture[1] = iMan.GetTexture("Grass.png", 4);
 }
 
 SkyBowl::~SkyBowl(void)

@@ -54,7 +54,7 @@ CheckViewObject::CheckViewObject( float x, float y, int ID, ViewObject& rParent)
 ,  mEvents ("CheckBox")
 {
    m_ID = ID;
-   
+
    mCheckState = CS_Normal;
    InitGFX(x,y);
 }
@@ -118,9 +118,11 @@ void CheckViewObject::Hit (int code)
       Select(false);
       mCheckState = CS_Checked;
       break;
-   case VK_SHIFT:
-   case VK_CONTROL:
-   case VK_MENU:
+   case sf::Key::RShift:
+   case sf::Key::LShift:
+   case sf::Key::LControl:
+   case sf::Key::RControl:
+   case sf::Key::Menu:
       break;
    }
 }

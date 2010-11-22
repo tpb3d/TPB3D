@@ -59,7 +59,7 @@ WindowViewObject::WindowViewObject( float x, float y, int ID, ViewObject* pParen
    pTex = images->GetTexture ("stats.png", GL_RGBA);
    mpTextTex = new AnimationSingle (pTex, 256, 22);
    mpTextTex->SetUVs (kTextTextUVs);
-   mpTextTex->MoveTo (120-18, 200-8, 0, 0); // 
+   mpTextTex->MoveTo (120-18, 200-8, 0, 0); //
    mpTextTex->SetRotation(0,0,90);
    mSize.x = 120.0f;
    mSize.y = 200.0f;
@@ -137,19 +137,21 @@ void WindowViewObject::Hit (int code)
       mSelected = true;
       switch (code)
       {
-      case VK_RETURN:
+      case sf::Key::Return:
          Select(false);
          mWindowState = WS_Selected;
          break;
-      case VK_ESCAPE:
+      case sf::Key::Escape:
          Select(false);
          break;
-      case VK_SPACE:
+      case sf::Key::Space:
          mWindowState = WS_Selected;
          break;
-      case VK_SHIFT:
-      case VK_CONTROL:
-      case VK_MENU:
+      case sf::Key::LShift:
+      case sf::Key::RShift:
+      case sf::Key::LControl:
+      case sf::Key::RControl:
+      case sf::Key::Menu:
          break;
       }
    }

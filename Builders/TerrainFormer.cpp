@@ -513,7 +513,7 @@ TerrainFormer::
 		pMesh->AddMesh( pw*pl, pVerts, tw*tl, faces, 0);
 		pTerra->AddSection(pMesh);
 		Gfx::ImageManager* pImger = Gfx::ImageManager::GetInstance();
-		Gfx::Texture* pTex = pImger->GetTexture ("whiteground.png",3);
+		Gfx::Texture* pTex = pImger->GetTexture ("whiteGround.png",3);
 		pMesh->SetTexture (pTex);
 		int iChan = pTex->SupportsAlpha() ? 4 : 3;
 		gluBuild2DMipmaps( GL_TEXTURE_2D, iChan, pTex->GetWidth(), pTex->GetHeight(),
