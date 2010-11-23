@@ -299,11 +299,11 @@ void TestAmericanNames()
       switch(pass)
       {
       case 0:
-         countrynames=NameGenerator("data/NameLists/surnames/USAmerican-All.pnl",locIndexUnitedStates);
+         countrynames=NameGenerator("data/NameLists/Surnames/USAmerican-All.pnl",locIndexUnitedStates);
          nameoutfile="output/usnames.txt";
          break;
       case 1:
-         countrynames=NameGenerator("data/NameLists/surnames/Canada-All.pnl",locIndexCanada);
+         countrynames=NameGenerator("data/NameLists/Surnames/Canada-All.pnl",locIndexCanada);
          nameoutfile="output/canadanames.txt";
          break;
       }
