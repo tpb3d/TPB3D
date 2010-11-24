@@ -43,6 +43,47 @@ void debugprint()
 int
 main ()
 {
+//////////////////////////////////////////
+//
+// Set up and display Splash Screen
+//
+
+  sf::Image SplashScreenImage;      // "Image" is a pixel array in memory
+  sf::Sprite SplashScreenSprite;    // "Sprite" is a displayable interface to "Image"
+  int SplashScreenLeft;            // left side of splash screen on desktop
+  int SplashScreenTop;             // top of splash screen on desktop
+  int SplashScreenWidth;           // width of splash screen (to be determined by inspecting the image after loading
+  int SplashScreenHeight;          // height of splash screen (to be determined by inspecting the image after loading
+  sf::Clock SplashScreenClock;      // timer to keep the splash screen displayed for a minumum amount of time
+
+  if (!SplashScreenImage.LoadFromFile("data/splashscreen.png")) // attempt to load the splashscreen (not that the user can change this file
+  {
+    std::cout << "Unable to load Splash Screen - file not found\n"; // Error...
+  }
+
+  SplashScreenWidth = SplashScreenImage.GetWidth();
+  SplashScreenHeight = SplashScreenImage.GetHeight();
+
+  // set up a desktop window with render context, etc.
+  sf::RenderWindow SplashScreen(sf::VideoMode(SplashScreenWidth,SplashScreenHeight, 32), "", sf::Style::None);
+
+  SplashScreenLeft = (sf::VideoMode::GetDesktopMode().Width - SplashScreenWidth)/2;     // determine left edge based on desktop and image sizes
+  SplashScreenTop  = (sf::VideoMode::GetDesktopMode().Height - SplashScreenHeight)/2;   // determine top edge based on desktop and image sizes
+  if (SplashScreenLeft < 0) SplashScreenLeft = 0;  // clamp value in case of big image on small desktop
+  if (SplashScreenTop  < 0) SplashScreenTop  = 0;  // clamp value in case of big image on small desktop
+
+  SplashScreen.SetPosition(SplashScreenLeft, SplashScreenTop);  // set the window position to be the center of the desktop
+  SplashScreenSprite.SetImage(SplashScreenImage);               // associate pixel array ("Image") with rendering class ("Sprite")
+  SplashScreen.Draw(SplashScreenSprite);                        // render the image to the splash screen window
+  SplashScreen.Display();                                       // we can finally draw it to the desktop!!
+
+  SplashScreenClock.Reset();      // begin timing from this point.
+
+//
+//  Splash Screen now displayed
+//
+//////////////////////////////////////////////
+
    atexit(debugprint);
    Camera * cam = Camera::GetInstance ();
 
@@ -56,11 +97,9 @@ main ()
    theScene.AddPark (&thePark);
    GameManager gm(theScene, thePark);
    gm.InitialSetup();
-
    PeepsAgent People( thePark ); // known Park, later this will be a Park list for mutiple Parks
    sf::String Title( string("Alpha"));
 
-   std::cout << "Basic loading finished....\n";
    try
    {
 
@@ -78,6 +117,21 @@ main ()
       // Load the test Park
       SceneEV.OnOpen("data/xml/Park.xml");
       //
+
+      //////////////////////////////////////////////////////////////
+      //
+      //  Minimum time to display Splash Screen
+      //
+      while (SplashScreenClock.GetElapsedTime() < 2.5)
+      {
+        // display the splash screen for a minumum amount of time (eg 2.5 seconds)
+        // as game initialization time increases due to development, this will likely become redundant.
+      }
+      SplashScreen.Close(); // Done with the splash screen - close it up and forget it
+      //
+      //////////////////////////////////////////////////////////////
+
+
 
       std::cout << "Starting event loop...\n";
       int cycle = 0;
@@ -98,6 +152,7 @@ main ()
          cam->DrawModel(&theScene); // the background and Park(s).
          cam->DrawInterface( pInterface );
          cam->Display ();
+
          // end drawing scope
 
          // update scope, thread candidates
