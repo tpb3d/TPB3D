@@ -443,7 +443,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          g2.fLength = 11.0f;
          g2.fDrop = -8.0f;
          g2.fOffset = 0;//-vx-2;
-      
+
          for (int ix = 0; ix < iTest5; ++ix)
          {
             // Arm code
@@ -628,7 +628,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          g2.fLength = 11.0f;
          g2.fDrop = -8.0f;
          g2.fOffset = 0;//-vx-2;
-      
+
          for (int ix = 0; ix < iTest5; ++ix)
          {
             // Arm code
@@ -807,7 +807,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
       guide.fLength = 11.0f;
       guide.fDrop = -8.0f;
       guide.fOffset = -vx-2;
-      const float angles[] = {60.0f, 120.0f, 240.0f, 300.0f }; 
+      const float angles[] = {60.0f, 120.0f, 240.0f, 300.0f };
       for (int ix = 0; ix < iTest; ++ix)
       {
          // Arm code
@@ -830,7 +830,7 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
          g2.fLength = 14.0f;
          g2.fDrop = -12.0f;
          g2.fOffset = 0;//-vx-2;
-      
+
          for (int iy = 0; iy < 4; ++iy)
          {
             // Building the seats
@@ -988,12 +988,12 @@ Ride* FlatRideBuilder::CreateRide(int iPattern, Park& park)
 
       // test data, the dryer ride
       // base deck
-      Deck* pDeck = new Deck(3,15,iTest,"Basemetal.png");
+      Deck* pDeck = new Deck(3,15,iTest,"basemetal.png");
       pDeck->SetPosition(0,0,0);
       pDeck->Render();
       pRide->SetNode (pDeck);
       // lifter arm build
-      LiftArm* pLA = new  LiftArm(123, 18, 5, "Basemetal.png");
+      LiftArm* pLA = new  LiftArm(123, 18, 5, "basemetal.png");
       pDeck->AddNode(pLA);
       pLA->Render();
       pLA->RideNode::SetPosition(0,0,-15);
@@ -1183,7 +1183,7 @@ RideNode* FlatRideBuilder::AddRideNodeDeck (RideNode* pParent, ObjectBase* pGrap
    Deck* pDeck = NULL;
    if (pGraphicObject == NULL)
    {
-      pDeck = new Deck (guide.fOffset, guide.fWidth - guide.fOffset, guide.nCount, "Basemetal.png");
+      pDeck = new Deck (guide.fOffset, guide.fWidth - guide.fOffset, guide.nCount, "basemetal.png");
       pDeck->SetPosition(0,0,0);
       pDeck->Render();
    }
