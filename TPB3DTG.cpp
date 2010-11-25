@@ -16,6 +16,7 @@
 // Original code from Extreme Park and Highrise Developer
 // By AlabamaCajun, RFrank, crazy2be
 
+#include <SFML/Audio.hpp>
 #include <iostream>
 
 #include "Graphics/Camera.h"
@@ -35,6 +36,8 @@
 
 #include "TPB3DTG.h"
 
+
+
 void debugprint()
 {
    std::cout << "Program exited correctly. Creating trace...\n";
@@ -43,11 +46,11 @@ void debugprint()
 int
 main ()
 {
+
 //////////////////////////////////////////
 //
 // Set up and display Splash Screen
 //
-
   sf::Image SplashScreenImage;      // "Image" is a pixel array in memory
   sf::Sprite SplashScreenSprite;    // "Sprite" is a displayable interface to "Image"
   int SplashScreenLeft;            // left side of splash screen on desktop
@@ -56,9 +59,9 @@ main ()
   int SplashScreenHeight;          // height of splash screen (to be determined by inspecting the image after loading
   sf::Clock SplashScreenClock;      // timer to keep the splash screen displayed for a minumum amount of time
 
-  if (!SplashScreenImage.LoadFromFile("data/splashscreen.png")) // attempt to load the splashscreen (not that the user can change this file
+  if (!SplashScreenImage.LoadFromFile("data/splashscreen.png")) // attempt to load the splashscreen (note that the user can change this file
   {
-    std::cout << "Unable to load Splash Screen - file not found\n"; // Error...
+    std::cout << "Error: Unable to load Splash Screen - file not found\n"; // Error...
   }
 
   SplashScreenWidth = SplashScreenImage.GetWidth();
@@ -83,6 +86,33 @@ main ()
 //  Splash Screen now displayed
 //
 //////////////////////////////////////////////
+
+
+//////////////////////////////////////////////
+//
+//  Set up background music
+//
+  sf::Music MusicBackGround;
+
+  if (!MusicBackGround.OpenFromFile("data/Sound/04_horse_don_t_fly.ogg"))
+  {
+    std::cout << "Error: Unable to load background music file.\n";// Error...
+  }
+  else
+  {
+    MusicBackGround.Play();
+    MusicBackGround.SetLoop(true);
+  }
+//
+//  Background music will now loop as long as the program runs
+//
+//////////////////////////////////////////////////
+
+
+
+
+
+
 
    atexit(debugprint);
    Camera * cam = Camera::GetInstance ();
