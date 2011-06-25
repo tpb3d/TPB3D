@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;E:\James\Development\lib3ds-20080909\src&quot;;&quot;E:\James\Development\SFML-1.6\include&quot;;&quot;E:\James\Development\libpng-lib\include&quot;;&quot;E:\James\Development\zlib-1.2.5&quot;"
+				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\Other Libs\lib3ds\src&quot;;&quot;$(ProjectDir)\..\Other Libs\sfml\include&quot;;&quot;$(ProjectDir)\..\Other Libs\libpng\include&quot;;&quot;$(ProjectDir)\..\Other Libs\zlib\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;PNG_NO_ERROR_NUMBERS;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="sfml-Graphics-d.lib sfml-System-d.lib sfml-Window-d.lib OPENGL32.LIB glu32.lib libpng.lib lib3ds-2_0.lib zdll.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;E:\James\Development\lib3ds-20080909\Debug&quot;;&quot;E:\James\Development\libpng-lib\lib&quot;;&quot;E:\James\Development\SFML-1.6\lib&quot;;E:\James\Development\Zlibr\lib"
+				AdditionalLibraryDirectories="&quot;$(ProjectDir)\..\Other Libs\lib3ds\Debug&quot;;&quot;$(ProjectDir)\..\Other Libs\libpng\lib&quot;;&quot;$(ProjectDir)\..\Other Libs\sfml\lib&quot;;&quot;$(ProjectDir)\..\Other Libs\zlib\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				RandomizedBaseAddress="1"
