@@ -5,6 +5,8 @@ Thumbs.db
 # Folder config file
 Desktop.ini
 
+*.suo
+
 # Compiled Object files
 *.slo
 *.lo
