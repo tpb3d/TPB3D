@@ -1,0 +1,5 @@
+libpng: http://cdnetworks-us-1.dl.sourceforge.net/project/gnuwin32/libpng/1.2.37/libpng-1.2.37-lib.zip
+sfml: http://cdnetworks-us-2.dl.sourceforge.net/project/sfml/sfml/1.6/SFML-1.6-dev-windows-vc2008.zip
+zlib: http://zlib.net/zlib125-dll.zip
+libpng-bin: http://cdnetworks-us-2.dl.sourceforge.net/project/gnuwin32/libpng/1.2.37/libpng-1.2.37-bin.zip
+lib3ds: http://lib3ds.googlecode.com/files/lib3ds-20080909.zip
