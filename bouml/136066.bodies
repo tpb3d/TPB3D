@@ -1,0 +1,3 @@
+class OpenCloseable
+!!!138242.cpp!!!	IsOpen() : bool
+return open;

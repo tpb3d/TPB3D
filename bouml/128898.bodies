@@ -1,0 +1,7 @@
+class Shop
+!!!130050.cpp!!!	Shop(in  : void)
+
+!!!130178.cpp!!!	~Shop(in  : void)
+
+!!!144898.cpp!!!	Close() : void
+state = ShopState.Closed;

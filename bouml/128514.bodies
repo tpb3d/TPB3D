@@ -1,0 +1,5 @@
+class WorldObject
+!!!131074.cpp!!!	WorldObject(in  : void)
+
+!!!131202.cpp!!!	~WorldObject(in  : void)
+

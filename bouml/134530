@@ -1,0 +1,1111 @@
+format 76
+"TPB3D" // TPB3D
+  revision 4
+  modified_by 2 "Duckblaster.DONALD-DESKTOP"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  deploymentview 134658 "TPB3D"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 134786 "FlatRide"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 128002 // FlatRide
+      end
+    end
+
+    artifact 134914 "FreeRide"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 128258 // FreeRide
+      end
+    end
+
+    artifact 135298 "Park"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 128770 // Park
+      end
+    end
+
+    artifact 135426 "Path"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 129026 // Path
+      end
+    end
+
+    artifact 135554 "Ride"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 128130 // Ride
+      end
+    end
+
+    artifact 135682 "SceneryObject"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 129154 // SceneryObject
+      end
+    end
+
+    artifact 135810 "Shop"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 128898 // Shop
+      end
+    end
+
+    artifact 135938 "TowerRide"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 129282 // TowerRide
+      end
+    end
+
+    artifact 136066 "Track"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 129410 // Track
+      end
+    end
+
+    artifact 136194 "TrackedRide"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 129538 // TrackedRide
+      end
+    end
+
+    artifact 136322 "WorldObject"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 128514 // WorldObject
+      end
+    end
+
+    artifact 142850 "OpenCloseable"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+      end
+    end
+
+    artifact 142978 "Road"
+      stereotype "source"
+      cpp_h "#pragma once
+${comment}
+${includes}
+${declarations}
+${namespace_start}
+${definition}
+${namespace_end}
+"
+      cpp_src "${comment}
+${includes}
+${namespace_start}
+${members}
+${namespace_end}"
+      associated_classes
+	class_ref 144258 // Road
+      end
+    end
+  end
+
+  classview 134530 "TPB3D"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default class_drawing_mode default drawing_language default package_name_in_tab default show_context default show_msg_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default show_class_context_mode default show_msg_context_mode default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 129538 "TrackedRide"
+      visibility public 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129666 // <generalisation>
+	relation 129666 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129666 // <generalisation>
+	  b parent class_ref 128130 // Ride
+      end
+
+      operation 130818 "TrackedRide"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130946 "~TrackedRide"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 189058 // RideTrack (<directional composition>)
+	relation 189058 *-->
+	  a role_name "RideTrack" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 189058 // RideTrack (<directional composition>)
+	  b parent class_ref 129410 // Track
+	  association_type class_ref 129410 // Track
+      end
+    end
+
+    class 129410 "Track"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129538 // <generalisation>
+	relation 129538 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129538 // <generalisation>
+	  b parent class_ref 129026 // Path
+      end
+
+      operation 130562 "Track"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}
+:  ObjectNode( 5, ObjectFactory::TakeANumber() )
+${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130690 "~Track"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 129282 "TowerRide"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129410 // <generalisation>
+	relation 129410 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129410 // <generalisation>
+	  b parent class_ref 128130 // Ride
+      end
+
+      operation 130306 "TowerRide"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130434 "~TowerRide"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 129154 "SceneryObject"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129154 // <generalisation>
+	relation 129154 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129154 // <generalisation>
+	  b parent class_ref 128514 // WorldObject
+      end
+
+      operation 129794 "SceneryObject"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 129922 "~SceneryObject"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 129026 "Path"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128898 // <generalisation>
+	relation 128898 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128898 // <generalisation>
+	  b parent class_ref 128514 // WorldObject
+      end
+
+      operation 129282 "Path"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 129410 "~Path"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128898 "Shop"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 130050 "Shop"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 130178 "~Shop"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      class 150914 "ShopState"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}
+};
+"
+	java_decl "${comment}${@}${visibility}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+	php_decl "${comment}${visibility}final class ${name} {
+${items}}
+"
+	python_2_2 python_decl "class ${name}:
+${docstring}${members}
+"
+	idl_decl "${comment}enum ${name} {
+${items}};
+"
+	explicit_switch_type ""
+	
+	attribute 141570 "Open"
+	  public type class_ref 150914 // ShopState
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	end
+
+	attribute 141698 "Closed"
+	  public type class_ref 150914 // ShopState
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	end
+      end
+
+      attribute 141826 "state"
+	private type class_ref 150914 // ShopState
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      operation 144770 "Open"
+	abstract cpp_virtual public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	
+	
+	
+	
+      end
+
+      operation 144898 "Close"
+	public explicit_return_type "void"
+	nparams 0
+	cpp_decl "    ${comment}${friend}${static}${inline}${virtual}${type} ${name}${(}${)}${const}${volatile}${throw}${abstract};
+"
+	cpp_def "${comment}${inline}${type} ${class}::${name}${(}${)}${const}${volatile}${throw}${staticnl} {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 208898 // <generalisation>
+	relation 208898 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 208898 // <generalisation>
+	  b parent class_ref 129154 // SceneryObject
+      end
+    end
+
+    class 128770 "Park"
+      visibility public 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 129026 "Park"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 129154 "~Park"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      classrelation 128514 // WorldObjects (<directional composition>)
+	relation 128514 *-->
+	  stereotype "vector"
+	  a role_name "WorldObjects" multiplicity "*" public
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 128514 // WorldObjects (<directional composition>)
+	  b parent class_ref 128514 // WorldObject
+	  association_type class_ref 128514 // WorldObject
+      end
+
+      classrelation 128642 // Rides (<directional composition>)
+	relation 128642 *-->
+	  stereotype "vector"
+	  a role_name "Rides" multiplicity "*" public
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 128642 // Rides (<directional composition>)
+	  b parent class_ref 128130 // Ride
+	  association_type class_ref 128130 // Ride
+      end
+
+      classrelation 128770 // Shops (<directional composition>)
+	relation 128770 *-->
+	  stereotype "vector"
+	  a role_name "Shops" multiplicity "*" public
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${stereotype}<${type}> ${name}${value};
+"
+	    classrelation_ref 128770 // Shops (<directional composition>)
+	  b parent class_ref 128898 // Shop
+	  association_type class_ref 128898 // Shop
+      end
+
+      classrelation 209026 // terrain (<directional composition>)
+	relation 209026 *-->
+	  a role_name "terrain" multiplicity "1" private
+	    cpp default "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	    classrelation_ref 209026 // terrain (<directional composition>)
+	  b parent class_ref 151042 // Terrain
+	  association_type class_ref 151042 // Terrain
+      end
+    end
+
+    class 128514 "WorldObject"
+      visibility public 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      operation 131074 "WorldObject"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 131202 "~WorldObject"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128258 "FreeRide"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128130 // <generalisation>
+	relation 128130 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128130 // <generalisation>
+	  b parent class_ref 128130 // Ride
+      end
+
+      operation 128258 "FreeRide"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128386 "~FreeRide"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 128130 "Ride"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 129026 // <generalisation>
+	relation 129026 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 129026 // <generalisation>
+	  b parent class_ref 128514 // WorldObject
+      end
+
+      operation 129538 "Ride"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 129666 "~Ride"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      attribute 141058 "state"
+	private type class_ref 150786 // RideState
+	cpp_decl "    ${comment}${static}${mutable}${volatile}${const}${type} ${name}${value};
+"
+	java_decl ""
+	php_decl ""
+	python_decl ""
+	idl_decl ""
+      end
+
+      class 150786 "RideState"
+	visibility package stereotype "enum"
+	cpp_decl "${comment}enum ${name} {
+${items}
+};
+"
+	java_decl "${comment}${@}${visibility}${final}${abstract}enum ${name}${implements} {
+${items};
+${members}}
+"
+	php_decl "${comment}${visibility}final class ${name} {
+${items}}
+"
+	python_2_2 python_decl "class ${name}:
+${docstring}${members}
+"
+	idl_decl "${comment}enum ${name} {
+${items}};
+"
+	explicit_switch_type ""
+	
+	attribute 141186 "Open"
+	  public type class_ref 150786 // RideState
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	end
+
+	attribute 141314 "Closed"
+	  public type class_ref 150786 // RideState
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	end
+
+	attribute 141442 "Testing"
+	  public type class_ref 150786 // RideState
+	  cpp_decl "  ${name}${value},${comment}"
+	  java_decl ""
+	  php_decl ""
+	  python_decl ""
+	  idl_decl ""
+	end
+      end
+    end
+
+    class 128002 "FlatRide"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128002 // <generalisation>
+	relation 128002 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 128002 // <generalisation>
+	  b parent class_ref 128130 // Ride
+      end
+
+      operation 128002 "FlatRide"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 128130 "~FlatRide"
+	preserve_cpp_body_indent public explicit_return_type ""
+	nparams 1
+	  param in name "" explicit_type "void"
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${t0} ${p0}${v0}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${t0} ${p0}${)}${throw}{
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    classdiagram 134530 "TPB3D"
+      draw_all_relations yes hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_context default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language c++ show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+      size A4
+    end
+
+    class 144258 "Road"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 202370 // <generalisation>
+	relation 202370 ---|>
+	  a public
+	    cpp default "${type}"
+	    classrelation_ref 202370 // <generalisation>
+	  b parent class_ref 129026 // Path
+      end
+
+      operation 145154 "Road"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw}  {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+
+      operation 145282 "~Road"
+	public explicit_return_type ""
+	nparams 0
+	cpp_decl "    ${comment}${inline}${virtual}${name}${(}${)}${volatile}${throw};
+"
+	cpp_def "${comment}${inline}${class}::${name}${(}${)}${volatile}${throw}  {
+  ${body}}
+"
+	
+	
+	
+	
+      end
+    end
+
+    class 151042 "Terrain"
+      visibility package 
+      cpp_decl "${comment}${template}class ${name}${inherit} {
+${members}};
+${inlines}
+"
+      java_decl ""
+      php_decl ""
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+    end
+  end
+end

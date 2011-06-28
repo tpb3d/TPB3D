@@ -1,11 +1,13 @@
 
 # Windows image file caches
-Thumbs.db 
+Thumbs.db
 
 # Folder config file
 Desktop.ini
 
 *.suo
+*.user
+*.ncb
 
 # Compiled Object files
 *.slo
@@ -20,3 +22,6 @@ Desktop.ini
 *.lai
 *.la
 *.a
+/Debug
+/TDD
+/Game Design Version 6.pdf

@@ -1,0 +1,5 @@
+class PaidObject
+!!!128770.cpp!!!	PaidObject(in  : void)
+
+!!!128898.cpp!!!	~PaidObject(in  : void)
+

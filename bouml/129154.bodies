@@ -1,0 +1,5 @@
+class SceneryObject
+!!!129794.cpp!!!	SceneryObject(in  : void)
+
+!!!129922.cpp!!!	~SceneryObject(in  : void)
+

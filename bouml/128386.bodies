@@ -1,0 +1,5 @@
+class InteractiveObject
+!!!128514.cpp!!!	InteractiveObject(in  : void)
+
+!!!128642.cpp!!!	~InteractiveObject(in  : void)
+

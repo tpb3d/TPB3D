@@ -1,0 +1,5 @@
+class TrackedRide
+!!!130818.cpp!!!	TrackedRide(in  : void)
+
+!!!130946.cpp!!!	~TrackedRide(in  : void)
+

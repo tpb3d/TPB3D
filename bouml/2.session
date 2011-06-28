@@ -1,0 +1,13 @@
+window_sizes 1360 712 318 957 512 82
+diagrams
+  active  classdiagram_ref 134530 // TPB3D
+    1032 556 100 4 123 0
+end
+show_stereotypes
+selected class_ref 144258 // Road
+open
+  deploymentview_ref 134658 // TPB3D
+  classview_ref 134530 // TPB3D
+end
+end
+verbose
