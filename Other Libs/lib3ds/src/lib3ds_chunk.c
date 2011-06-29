@@ -69,7 +69,7 @@ lib3ds_chunk_read_next(Lib3dsChunk *c, Lib3dsIo *io) {
     Lib3dsChunk d;
 
     if (c->cur >= c->end) {
-        assert(c->cur == c->end);
+        //assert(c->cur == c->end);
         return 0;
     }
 

@@ -173,6 +173,10 @@
 		</Configuration>
 	</Configurations>
 	<References>
+		<ProjectReference
+			ReferencedProjectIdentifier="{9CF2B398-9087-4D33-90EB-0320F42C78F4}"
+			RelativePathToProject="..\Other Libs\lib3ds\src\lib3ds.vcproj"
+		/>
 	</References>
 	<Files>
 		<Filter
