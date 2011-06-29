@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <style type="text/css">
+    h1{text-align:center; color:black; size:14;}
+    h2{text-align:left; color:darkblue; size:13;}
+    h3{text-align:left; color:blue; size:12;}
+    h4{text-align:left; text-indent:1em; color:mediumblue; size:11;}
+    text{text-align:left; color:darkgrey; size:10;}
+    p{text-align:left; text-indent:2em; color:charcoal; size:9;}
+    p.topic{text-align:left; text-indent:1em; color:charcoal; size:9;}
+    p.subnote{text-align:left; text-indent:2em; color:charcoal; size:9;}
+    p.note{text-align:left; text-indent:1em; color:green; size:9;}
+    p.warn{text-align:left; text-indent:1em; color:maroon; size:9;}
+    dt.topic{text-align:left; text-indent:1em; color:navy; size:9;}
+    dt.general{text-align:left; text-indent:2em; color:mediumblue; size:9;}
+    dd{text-align:left; text-indent:1em; color:charcoal; size:9;}
+    </style>
+</head>
+<body style="background-color:#f4efd7">
+   <div id="Title1">
+   <h1>Theme Park Builder 3D The Game</h1>
+   <h1>Technical Design Document</h1>   
+   <p class="note">Excerpts in this document taken from TPB3D Game Document (Game Design Version 6 PDF)</p>
+   </div>   
+   <div id="ArtVideo">
+   <h2>Artwork, Imagery and Video</h2>
+   <a>Video media tracks loaded and played through SFML audio playback.<br />
+   Images and Artwork used for static or rendered visuals.
+   </a>
+   <h3>2D Art and Animation</h3>
+   <p
+   >This is usually a texture laid out as a film strip and flicked onto a surface.
+    Use the the simple animated graphic object as it provides texture based animation.
+    This will be used with other alphas to project images on fog, water screens and glass.
+   </p>
+   <h3>3D Art and Animation</h3>
+   <p>
+   As of this writing, we only have vague specs on animating rendered objects through inverse kinetics!<br />
+   Just as in the 2D animation we will also use mutiple alphas to create 3D animated holograms.<br />
+   3D alpha objects are layers of alphas spaced apart to form a 3D object. Search Alpha Sandwich for details.
+   Many rides will use them to add thickness to wheels and lap bars at LOD Zero.
+   We will also use the parallax method to form bushes and leaves on trees.
+   The objects and layers will be Z sorted so that the alphas are draw from back to front.
+   </p>
+   <h3>Cinematics</h3>
+   <p>As of this writing, we only have vague specs on animating rendered objects through inverse kinetics!</p>
+   <h3>Video clips</h3>
+   <p>Not specified in the Game Doc but we can include an Open Source movie player as a plug in!</p>
+   </div>
+</body>
+</html>

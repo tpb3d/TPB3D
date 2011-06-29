@@ -1,0 +1,14 @@
+h1{text-align:center; color:black; font-size:14;}
+h2{text-align:left; color:darkblue; font-size:13;}
+h3{text-align:left; text-indent:1em; color:blue; font-size:12;}
+h4{text-align:left; text-indent:2em; color:mediumblue; font-size:11;}
+text{text-align:left; color:darkgrey; size:10;}
+a.subnote{text-align:left; text-indent:2em; color:charcoal; font-size:9;}
+p{text-align:left; text-indent:2em; color:charcoal; font-size:9;}
+p.topic{text-align:left; text-indent:1em; color:charcoal; font-size:9;}
+p.subnote{text-align:left; text-indent:2em; color:charcoal; font-size:9;}
+p.note{text-align:left; text-indent:1em; color:green; font-size:9;}
+p.warn{text-align:left; text-indent:1em; color:maroon; font-size:9;}
+dt.topic{text-align:left; text-indent:1em; color:navy; font-size:9;}
+dt.general{text-align:left; text-indent:2em; color:mediumblue; font-size:9;}
+dd{text-align:left; text-indent:1em; color:charcoal; font-size:9;}

@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <link rel="stylesheet" type="text/css" href="general.css" /></head>
+<body style="background-color:#f4efd7">
+   <div id="Title1">
+   <h1>Theme Park Builder 3D The Game</h1>
+   <h1>Technical Design Document</h1>   
+   <h2>Forward</h2>
+   <p class="topic">
+      Many years went into developing Theme Park Builder 3D.
+      As of early 2010 close to 250 ride and ride elements have been modeled.
+      Hundreds of posts and thousands of paragraphes of information have been written on TPB3D.
+      The TDD is an attempt to express all the details to support these ideas and features in expanded techinical detail.
+      This document starts with a techinical brief of the original Game Development Document expanding on program references.
+      The remainder of the TDD covers each of the major modules that group related objects together.
+      Each module is broken down into sub groups that define features and more specialized relations.
+      The sub groups are composed of detailed information of feature, objects and functionality.
+      Each sub group also outlined with a Role, Dependencies, Synopsis, Description and Notes.
+   </p>
+   <p>
+   At the time of this writing part of the code is developed, part is under development but a large part still needs 
+   to be laid out and coded. This is currently an overview but will soon encompass a vast logical breakdown of all systems.
+   </p>
+   </div>   
+   <div id="Contents">
+   
+   <h2>Technical Brief of the Game Development Document</h2>
+   <dl>
+   <dd><a href="gamedocumentindex.html">Game Characteristics!</a></dd>
+   </dl>
+   
+   <h2>Application and Modules</h2>
+   <p class="note">Settings and GUI modules, creates the Game Manager.</p>
+   <dl>
+   <dd><a href="coding.html">Code structure and object philosphy.</a></dd>
+   </dl>
+   
+   <h3>Main Application</h3>
+   <dl>
+   <dd><a href="application.html">TPB3DTG....</a> Theme Park Builder 3D The Game Main</dd>
+   </dl>
+   
+   <h3>World</h3>
+   <dl>
+   <dd><a href="world.html">World ...........</a> Primary Terrain, Surround and Skydome</dd>
+   </dl>
+   
+   <h3>Construction</h3>
+   <dl>
+   <dd><a href="Construction/FRCSLogic.html">FRCS Logic</a> Generator, assembler and storage/retrieval.</dd>
+   <dd><a href="Construction/TRCSLogic.html">TRCS Logic</a> Generator, assembler and storage/retrieval.</dd>
+   <dd><a href="Construction/OTRCSLogic.html">OTRCS Logic</a> Generator, assembler and storage/retrieval.</dd>
+   <dd><a href="Construction/BGCSLogic.html">BGCS Logic</a> Generator, assembler and storage/retrieval.</dd>
+   <dd><a href="Construction/LandscapeLogic.html">Landscaping Logic</a> Generator, assembler and storage/retrieval.</dd>
+   </dl>
+   <h3>AI</h3>
+   <dl>
+   <dd><a href="AI/pathfinding.html">Path Finding</a> Path Finding Logic</dd>
+   <dd><a href="AI/randomevents.html">Randon Events</a> Game Intelligence, breakdowns, weather and other natural occurances </dd>
+   <dd><a href="AI/staffbehavior.html">Employee Behavior</a> Staff Decision and Behavior Logic</dd>
+   <dd><a href="AI/guestbehavior.html">Quest and Vip Behavior</a> Guest Decision and Behavior Logic</dd>
+   </dl>
+   <h3>Graphics</h3>
+   <dl>
+   <dd>
+      <a href="Graphics/objects.html">Graphic Objects</a>
+      Render elements, strips, fans, meshes and simple graphic objects.
+      Also includes collection objects.
+   </dd>
+   <dd><a href="Graphics/lighting.html">Lighting Effects</a> Render illumination, radiance, ambiance and effects.</dd>
+   <dd><a href="Graphics/materials.html">Materials Used</a> Render of Surface, Color and Texture management.</dd>
+   <dd><a href="Graphics/reflection.html">Reflection</a> Reflection and Refraction.</dd>
+   <dd><a href="Graphics/shadows.html">Shadows</a> Shadow Rendering and dark surfaces.</dd>
+   <dd><a href="Graphics/water.html">Water Effects</a> Waves, ripples and Underwater effects.</dd>
+   </dl>
+   <h3>Core Objects</h3>
+   <dl>
+   <dd><a href="CoreObjects/rideparts.html">Ride Assemblies</a> Arms, frames, sections and ride bases.</dd>
+   <dd><a href="CoreObjects/tracks.html">Track Assemblies</a> Tracks, Supports, splines hidden and visible.</dd>
+   <dd><a href="CoreObjects/buildings.html">Building Parts</a> Walls, Roofs, Windows, Doors, Framing, Floors and Decking.</dd>
+   <dd><a href="CoreObjects/complexrides.html">Complex Ride Assemblies</a> Larger mobile objects and complex stationary objects with multiple features likt the Wonder Wheel and Sam Clemmons.</dd>
+   <dd><a href="CoreObjects/generalparts.html">General Ride Parts</a> Rods, Legs, Supports, Beams, Fencing, Railings, Catwalks.</dd>
+   <dd><a href="CoreObjects/cars.html">Cars and Seats</a> Cars, Carriages, Bogeys, Carts, Slings and Single seats that mount butts.</dd>
+   <dd><a href="CoreObjects/landscaping.html">Landscaping</a> Trees, Plants, Grass Patches and Decorations.</dd>
+   <dd><a href="CoreObjects/basesystems.html">Base Objects</a> Terrain, Roads, Paths, Fencing for off ride and Tunnels.</dd>
+   <dd><a href="CoreObjects/people.html">People</a> Guests, VIPs and Employees.</dd>
+   <dd><a href="CoreObjects/shopsvenues.html">People</a> Booths, Shops, Diners, restrooms.</dd>
+   <dd><a href="CoreObjects/animals.html">Animals</a> Pets, Zoos and Wildlife.</dd>
+   <dd><a href="CoreObjects/animatronics.html">Animated Parts</a> Robots, Dinosaurs and other Animated non-living things that move.</dd>
+   </dl>
+   <h3>Hub</h3>
+   <dl>
+   <dd><a href="Hub/gamemanager.html">Game Manager (GM)</a> Keeper and manager of the game operation.</dd>
+   <dd><a href="Hub/events.html">Events</a> Central Event handler and dispatch system (Spokes of the Hub).</dd>
+   <dd><a href="Hub/datatransport.html">Data Transport</a> Data transport that handles moving data around to where it is needed.</dd>
+   </dl>
+   <h3>Storage</h3>
+   <dl>
+   <dd><a href="storage.html">Storage Methods.</a> Available storage and retrieval systems.</dd>
+   </dl>
+   <h3>Settings</h3>
+   <dl>
+   <dd><a href="settings.html">Settings .......</a> Preferences and Gamestate tracking and storage.</dd>
+   </dl>
+   <h1>The Future Belongs To Us!</h1>
+   <a>
+   A special thanks to all the people that have been working on this project since 2005 and to Sebar for hosting the forums.
+   Also thanks to Source Forge and it's members for source storage, versioning, life cycle and a massive library of code and tools,
+   The_Cook for TPB3D-CAD source that may be used, Exterme Park Developer project for the terrain, track and import tools,
+   MilkShape 3D modeler and Legacy 3DS Max tools.
+   </a>
+   <br />
+   </div>
+   <p class="footnote">
+   Copyright &copy;2010 Alabama Cajun for Theme Park Builder 3D Licensed under Creative Commons!
+   </p>
+</body>
+</html>

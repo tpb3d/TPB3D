@@ -1,0 +1,56 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document Construction Sets</title>
+    <link rel="stylesheet" type="text/css" href="../general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Constuction Set Logic</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="TRCSLogic">
+   
+      <h2>Track Ride Construction Set Logic</h2>
+      <p class="general">
+         Logic used to assemble, compile, assist, persist and reload rides.
+      </p>
+      
+      <h3>Role</h3>
+      <p>Factory</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Core Objects, Storage, Utilities, graphics.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+         Provided all the logic to build the tracks, supports, geometry generation, alignment and tweaking.
+         Rides are collections of Track Assembly objects and RidePart objects which have have graphic objects.
+         The ride parts hold the implementation cars, physics and operational members.
+         The track parts make up the path spline, Track Assembly which has a collecton track rail, tie and support parts
+         Each ride part also has a collection of graphic objects that represent the 3D visual acspect.
+      </p>
+      <p>
+         The track components consist of rails, ties, track structure and supports.
+         The track components make up a track scection. A section can be of any length and many shapes. Each section
+         has a profile that details the track rail thickness, rail count, cross ties if used and the structure.
+         Each section can have a different profile than the previous section meaning the track style may change
+         for more complex coasters. Each profile defines how the structure and rails are built. The TRCS loades these
+         profiles and uses the data from the UI or loaded track to generate these sections. Track sections have a
+         serialize method allowing the sections and entire track to be saved and reloaded. The path spline is also
+         generated to provide the car animation with a path to follow. Onboard POV cams will also use the splines
+         for camera flight. The Path Spline is composed of a z path to follow along with tilt axis for banking.
+         Details on the tracks will be further explained in the Core Object section for each object.
+      </p>
+      <p>
+         Besides building track and setting up cars for the coasters, the TRCE will also have to move supports and 
+         change support structures in the event of collisions that require the support to move. The user may have the
+         ability to sdjust the support to fit a more meaningful arranement or attempt to desing a new one based on track.
+      </p>
+   </div>
+
+</body>
+</html>

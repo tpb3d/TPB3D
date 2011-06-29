@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document Events</title>
+    <link rel="stylesheet" type="text/css" href="../general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Graphics</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="WaterDetails">
+   
+      <h2>General Water Details</h2>
+      <p class="general">
+         Water is a multi-component entity composed of a surface, refraction and layers of alphas and visual effects.
+      </p>
+      
+      <h3>Role</h3>
+      <p>Entity</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Agents, Construction, (Game Agent).
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+         It should be possible to have several people working on different sections.
+         This project is strong on  C++ classes using some high level patterns which is necessary for several reasons.
+         Organization is the first big reason, it makes the project manageble as this thing will become enormous at some point.
+         Next is the ability to build simple modules that all work together ans inherit basic functionality like saving data, all objects have that ability.
+         Then there us the need for multi threading. Because the AI is seperate from the main code, it can thread off to do path finding on a second core while the game plays on. RCT had to write elaborate timing sequences to do the same.
+         The other is the ease of adding in the networking code. This thing will have a central hub that passes all communications from module to module.
+      </p>
+      
+      <h3>Description</h3>
+      <p>
+         Look up the object pattern "Chain of Events" and "Delegates" for what this pattern's behavior.
+         User input generates click, keystroke and movement events. This event pattern delivers these event to their intended target.
+         Events are not connected directly to ride parts, graphics or even the agents that drive the engine.
+         Instead events are linked to subscribers that handle the message and direct it to the appropriate delegate for the task.
+         The delegates or tasks assigned are assigned tp event stream for a particular operation or movement.
+         The event agent creates these delegates from templates and then assignes them to the event when the 
+         user selects options from the menus or clicks objects. The templates are thin classes that are easily 
+         mutalble to handle differnt tasks and behaviors. Once an event is dispatched to a delegate it can consume
+         it or pass it to the next in the chain. One or more delegates may respond to a single event depending on use.
+         The first one to get the event can respond and end the event or pass it on to the next delegate.
+         If the delegate consumed it buy performing an action it may return null breaking the chain or true to pass it along.
+         In the case of the Undo/Redo system, the event is obsereved, data collected and passed to the next in the chain.
+      </p>
+      <dl>
+         <dt>Event Recap</dt>
+         <dd>To garrantee an action gets attention it must be the first or second to get it.</dd>
+         <dd>First to use the event may be the only one so pay attention to events in the same chain when setting one up.</dd>
+         <dd>A delegate must be considerate to pass it on if nothing ocurred in that delegate's domain.</dd>
+      </dl>
+      <p>
+         This event system is also used in the game Highrise Developer a Tower building simulator.
+         The beauty of this is that the delegates can be swapped as user operations are changed.
+         Say you click add feature like Add Street Lamps. A delegate is built from a template to an agent that builds
+         park elements. The agent is also sent parameters as to which street light was selected. Then when the used moves
+         the pointer, a streetlight appears there as a ghost image for placing and allignment. When the used clicks the left
+         button the object will be placed. If the user clicks the right button an option menu may appear or other operaion.
+         Some of this logic will already be working in the initial code so you will get to see it first hand.
+      </p>
+      <dl>
+         <dt>Advantages</dt>
+         <dd>Little or no switch logic is needed</dd>
+         <dd>Highly maintainable since delegates are small specialized classes.</dd>
+         <dd>High degree of seperation between UI and programming logic.</dd>
+         <dd>Team work allows for one coder on the UI and another on the logic.</dd>
+      </dl>
+      <dl>
+         <dt>Disadvantages</dt>
+         <dd>Steaper learning curve, transparency shields event initiators from logic.</dd>
+         <dd>The number of templates specialized may become extensive in later development.</dd>
+      </dl>
+      <h3>Event Base Class Implementation (EventBase)</h3>
+      <h4>Properties: Protected</h4>
+      <table width="800">
+         <tr align="left">
+            <td style="background-color:Silver" >
+            <p style="text-indent:3">
+            None
+            </p>
+            </td>
+         </tr>
+      </table>
+      
+      <h4>Methods: Public Virtual</h4>
+      <p class="note">Preliminary list which only covers basics</p>
+      <table width="800">
+         <tr align="left">
+            <td style="background-color:Silver">
+      <dl>
+      <dd>bool OnResize (Vector2i viewSize) return false;</dd>
+      <dd>bool OnMouseDown (int Button, Vector2i Scene, Vector2i Camera) return false;</dd>
+      <dd>bool OnMouseUp (int Button, Vector2i Scene, Vector2i Camera) return false;</dd>
+      <dd>bool OnKeyDown (int Key) return false;</dd>
+      <dd>bool OnKeyUp (int Key) return false;</dd>
+      <dd>bool OnMouseMove (Vector2i Scene, Vector2i Camera) return false;</dd>
+      <dd>bool OnMouseWheel (int Delta) return false;</dd>
+      <dd>bool OnClose () return false;</dd>
+      <dd>bool OnToolHit (const std::string& Name) return false;</dd>
+      <dd>bool OnOpen (const char* pPath) return false;</dd>
+      <dd>bool OnSave (const char* pPath) return false;</dd>
+      </dl>
+            </td>
+         </tr>
+      </table>
+      <h3>Notes</h3>
+      <p class="note">
+         Events are the messenger for front end modules to interact with agents and objects.
+         Delegates provide the link from the event trigger to the destination handler.
+         Delegates are swappable eliminating switch logic which makes the code more responsive.
+         At first this metodology is perplexing due to the transparency of the sender to handler relation.
+         Once we are accustomed to the event logic, it becomes easier to build up features and assets.
+         The event handler allows for real time acction response and multi threading.
+         IE: If you change the language settings in the preferences the game changes right there.
+      </p>
+   </div>
+   <p class="footnote">
+   Copyright &copy;2010 Alabama Cajun for Theme Park Builder 3D Licensed under Creative Commons!
+   </p>
+</body>
+</html>

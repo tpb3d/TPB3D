@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <style type="text/css">
+    h1{text-align:center; color:black; size:14;}
+    h2{text-align:center; color:black; size:13;}
+    h3{text-align:left; text-indent:1em; color:blue; size:12;}
+    h4{text-align:left; text-indent:2em; color:mediumblue; size:11;}
+    text{text-align:left; color:darkgrey; size:10;}
+    p.topic{text-align:left; text-indent:1em; color:charcoal; size:9;}
+    p.general{text-align:left; text-indent:2em; color:charcoal; size:9;}
+    p.note{text-align:left; text-indent:1em; color:black; size:9;}
+    p.warn{text-align:left; text-indent:1em; color:maroon; size:9;}
+    dt.topic{text-align:left; text-indent:1em; color:navy; size:9;}
+    dt.general{text-align:left; text-indent:2em; color:charcoal; size:9;}
+    </style>
+</head>
+<body>
+   <div id="Title1">
+   <h1>Theme Park Builder 3D The Game</h1>
+   <h2>Technical Design Document</h2>   
+   </div>   
+   <div id="Interface">
+   
+   <h3>Interface</h3>
+      <p class="general">
+Opener
+      </p>
+    <h4>Interface</h4>
+    <dl>
+      <dt class="topic">Localization</dt>
+  
+      <dt>topic</dt>
+      <dd>Details</dd>
+   </dl>
+1.2.1.2.1 Audio
+The player can adjust the levels of sound effects and music. Music is associated with rides in the park. The volume will depend on how close the player is to given rides. The volume of sound effects will also depend on how close the player is to the event.
+1.2.1.2.2 Manual Input
+The keyboard key mapping and mouse button usage can be modified.
+1.2.1.2.3 Visual
+The screen resolution can be set.
+1.2.1.3 Guests
+Guests in the game behave independently. The player can set some general attributes. These attributes will affect new guests as they are generated. To change all the guests, the player will have to close the park and wait for all of the old guests to leave, then open the park so that new guests with the new settings will populate the park. This discourages changes in the guest settings for existing parks. These settings will normally be unchanged during routine play.
+1.2.1.3.1 Groups
+The player can choose whether guests should all be independent, all be members of groups, or some combination of these two extremes. If a combination is selected, the ratio of the two types can be specified. Guests are of three ages: child, teen and adult. The player can specify the ratios of the age groups. The player can choose to eliminate one or two of the age groups. By default, grouped guests will be generated as two adults, one teen and one child. By default, ungrouped guests will be generated as equal numbers of adults, teens and children.
+1.2.1.3.2 Preferences
+Guests will have ride preferences. (spinning, height, speed, interactivity, entertainment) Teens typically prefer the more intense rides. Children prefer less intense rides. Adults have a range of preferences. The player can adjust the typical preference for each age group. The guests will be generated with a range of preferences centered about the set value.
+The player can choose to automatically pause the game while building tracked rides. This feature can also be toggled within the construction menu.
+1.2.1.3.3 Money
+Guests will be generated with an average amount of money to spend. They will be able to get more money while in the park. The player can specify how much money they start with (on average). There is also a setting for how readily guests will spend money. Miserly guests will make it difficult to make the park financially successful. Frivolous guests simplify the park’s finances. This is the chief method of implementing a difficulty setting for the game. The player can also choose to disable finances in which case the game will be inherently easy.   
+   </div>
+</body>
+</html>

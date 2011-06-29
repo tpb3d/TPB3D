@@ -1,0 +1,62 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <link rel="stylesheet" type="text/css" href="../general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Core Object</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="WaterDetails">
+   
+      <h2>Ride Part Object</h2>
+      <p class="general">
+      </p>
+      
+      <h3>Role</h3>
+      <p>Entity</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Core Objects, Graphics.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+      </p>
+      
+      <h3>Description</h3>
+      <p class="general">
+      </p>
+      
+      <h3>Objects</h3>
+      <dl>
+      <dd>Arm - object that extends out and supports one of more cars, carriages or cages.</dd>
+      <dd>ArticulatedArm - Arm that bends somewhere along it's length.</dd>
+      <dd>RideAssembly - Collection of ride parts that mount to a movement element so that all the parts move as one.</dd>
+      <dd>Strut - support framework that supports an arm, hub of part of a ride.</dd>
+      <dd>Hub - central portion of a ride that has a rotation element on one or both ends.</dd>
+      <dd>SuperStructure - any complex framework supporting a ride.</dd>
+      <dd>RotationElement - attaches to another ride part on one side and rotates the other. </dd>
+      <dd>PivotElement - hinged element that allows movement along one element.</dd>
+      <dd>GimbleElement - twisting and rotating element that allows multi-axie motion.</dd>
+      <dd>TelescopeElement - box structure that extends out to a predetemined length.</dd>
+      <dd>BaseElement - simple structure that forms a base usually simple meshes.</dd>
+      <dd>DeckElement - Round, Rectangle or Pic shapped platform that moved with the ride.</dd>
+      <dd>WheelDrive - powered element that pushes a ride with a tire.</dd>
+      <dd>ChainDrive - sprocket and chain that profive motive power to the ride.</dd>
+      <dd>BeltDrive - same as chain but graphic looks like a belt.</dd>
+      <dd>AxleDrive - usually with an attached gearbox and rotating shaft.</dd>
+      <dd>Restraint - to be defined as the lapbars and other methods of personnel hold down mechanism.</dd>
+      <dd>RideBuilder - ride assembly class providing connections joins, seating placement and rebuilding.</dd>
+      <dt>Also see cars for the seat object.</dt>
+      </dl>      
+   </div>
+   <p class="footnote">
+   Copyright &copy;2010 Alabama Cajun for Theme Park Builder 3D Licensed under Creative Commons!
+   </p>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document Motion Physics</title>
+    <link rel="stylesheet" type="text/css" href="../general.css" />
+</head>
+<body>
+   <div id="Title1">
+   <h1>Theme Park Builder 3D The Game</h1>
+   <h1>Technical Design Document Physics</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="MotionPhysics">
+   
+      <h2>Motion Physics</h2>
+      <p class="general">
+         Real world motion requires physics dealing with both potential and kinetic energy.
+      </p>
+      
+      <h3>Role</h3>
+      <p>Utility</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         None at this time.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="topic">
+         When an object is in motion we have to add time into the equations to create time slice intervals.
+         In most cases the update methods dealing with objects depending on physics will not occur on precise intervals.
+         We have to consider where in a time interval an object has traveled and calculate where it is in the current time
+         interval. Weight loads will also vary as time moves on for many objects.
+         Most objects that move will have to consider pre calculated physics or dynamic physics.
+         This module deals with the dynamic forces affecting the objects in motion.
+      </p>
+      
+      <p class="note">Note: Arm in the folling list referes to any bar or structure attached on one end
+      and weight at one end.</p>
+      <h3>Description</h3>
+      <dl>
+      <dt>Physics covered in game</dt>
+      <dd>Single Pentulum - single arm, oscillations may be single axis or orbital</dd>
+      <dd>Compound Pendula - two or more linkages exist in the arm resulting in articulated swing.</dd>
+      <dd>Potential and Kinetic energies - Objects exposed to varying grades or in pendulous motion.</dd>
+      <dd>Wave - Flags, tents water or objects with flexibility and exposed to a force of wind or other energy source.</dd>
+      <dd>Gravity - consider any object above grade or unsupport has potential energy and a terminal velocity.</dd>
+      <dd>Rotation - mostly resistance and inertia.</dd>
+      <dd>Ballistics - any object propelled will be consided ballistics even constrained objects like coasters and cars on other rides.
+      Should one derail or dismount it becomes a missle and is then consider unconstrained.
+      Some rides also use bungie coards and or cables allowing for ballistic flight.</dd>
+      <dd>Partical - Involving many free-floating objects. Gravity and drag coefficients may apply.</dd>
+      </dl>
+      
+   </div>
+
+</body>
+</html>

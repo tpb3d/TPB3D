@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document The World</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body  style="background-color:#d7d4f7">
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document The World</h1>
+   </div>
+   <a href="index.html">Table of Contents</a>
+   <div id="World">
+   
+      <h2>The World and surrounding scene</h2>
+      <p class="general">
+         ToDo
+      </p>
+      
+      <h3>Role</h3>
+      <p>Collection</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Core Objects
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+         The World is the total encapsulation of the Park and all of it's object contents, the surrounding scene and sky dome.<br />
+         Upon game load and startup the current selected scenic surround is created and loaded with the matching tecture.<br />
+         The base (background) color of the Open GL view is set to the appropriate color for the season, weather and time of day.<br />
+         A Clouds object is created that renders the effective cloud cover, density and color tones.<br />
+         The main Park object is created and initialized with the default park settings or parameters from a saved park.<br />
+      </p>
+      <h3>The Surround and Land for Development</h3>
+      <p class="general">
+      The Surround object is a ring of meshes that encircles the park forming terrain around the park and a distant rim scene in the background.
+      The outer rim is a ribbon mesh that includes a scene texture that shows distant cities, fields, mountains and forests.
+      The purpose of the rim is to give an appearance that your park is in a larger world and forms a transistion with the sky.
+      We don't want the inhabitants of the world to realize that the world is actually a flat plane on a computer screen.
+      The surrounding terrain is a mesh that is generated between the land available for development and the outer rim.
+      You may be allowed to build more than rectangular parks in the future. The surround will be build form meshes that
+      close in the space beteen left at the edges of the developable land. The land available for development includes 
+      any land you own, available for purchase or lease and in some cases local access roads and transportaion terminals.
+      </p>
+      
+      <h3>World Object</h3>
+      <p class="general">
+      The World object is a collection object that all objects are managed in.
+      Manager classes will interact with the world object to interact with the all child objects contained within the world.
+      Park piping will involve one or more world collections or within one world. It should be possible to have two parks running
+      on one system so that life goes on in one park while you visit another. This will make it possible to have people working in
+      different parks in network to server games. For this to work the game will have to be threaded to allow the parks to
+      operate independantly but within the same time of day and calender year.
+      </p>
+      <dl>
+      <dt>Object Collections Group</dt>
+      <dd>Sky Dome (cardinality=1) only one is ever used.</dd>
+      <dd>Rim (cardinality=1) only one rim that circles the entire area.</dd>
+      <dd>Surrounding terrain (cardinality=2) 1) for the mesh 2) any transportation interconnects.</dd>
+      <dd>Developement (cardinality=1 to n) One child element for each land uses area including multiple park areas (piped parks).</dd>
+      </dl>
+   </div>
+</body>
+</html>

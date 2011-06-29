@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body style="background-color:#f4efd7">
+   <div id="Title1">
+   <h1>Theme Park Builder 3D The Game</h1>
+   <h1>Technical Design Document User Settings</h1>   
+   </div>   
+   <div id="Settings">
+   
+   <h3>User Settings</h3>
+      <p>
+      Settings and controled the user changes. Data and Logic reside in Settings and Dialog is in GUI.
+      </p>
+      <h4 class="subnote">Localization</h4>
+      <p>Storage, Retrieval and user settings. GUI Localization Dialog</p>
+      <dl class="topic">
+         <dt class="general">Language-</dt>
+         <dd>We may be able to access platform language settings or we have to store all text in language resources.</dd>
+         <dt class="general">Units-</dt>
+         <dd>Settable English or Metric units.</dd>
+         <dt class="general">Currency-</dt>
+         <dd>Control to choose from Dollars, Pounds, Marks, Lire, Francs, Peso, Escudos, Guilders or Euros. See the Game Design Document for specifics.</dd>
+      </dl>
+      
+      <h4>Interface</h4>
+      <p>Player modifications to the operation of mice, joysticks, keyboard and video devices.</p>
+      <p class="note">
+         All events from input deviced are mapped through event delegates. Delegates can be created and destroyed on the fly.
+         To change the behavior of an input device simply create the new action delegate that matches the users action then
+         swap the current delegate with the new delegate and destroy the old delegate. This behavoir removes the switch logic
+         logic that every click or event has to run through greatly simplifing logic in the event handlers.
+         </p>
+      <dl class="topic">
+         <dt class="general">Audio</dt>
+         <dd>Sound FX - level setting, check box mute.</dd>
+         <dd>Music - level setting, check box mute.</dd>
+         <dd>Background Noise - level setting, check box mute.</dd>
+         <dt class="general">Visual</dt>
+         <dd>Screen - resolution, LOD, fog, anti-aliasing, simple video override that sets all based on range of video card performance (low to high).</dd>
+      </dl>
+      
+      <h4>Guests - Your people observer</h4>
+      <p class="note">Guests in the game are independent objects controlled by the GuestControlManager (GCM).
+       This module will access guest and guest parameters through the GCM.
+       </p>
+      <dl class="topic">
+         <dt class="general">Groups</dt>
+         <dd>Select groups through the group collections in the GM, a dialog in GUI displays info, image etc.</dd>
+         <dt class="general">Preferences</dt>
+         <dd>
+         Settings focused on guset generation, grouping, preferences for rides and activities. 
+         Will also interact with the indiviual guests and group collections.
+         </dd>
+         <dt class="general">Money</dt>
+         <dd>Date, logic and UI involving guest monies!</dd>
+      </dl>
+      <br />
+      
+      <h4>Weather - it's got to rain sometime.</h4>
+      <p class="note">
+      Climate, ambiant lighting, mood, season.
+      </p>
+      <dl class="topic">
+         <dd>Sky - color, brightness and cloud cover.</dd>
+         <dd>Precipitation - stuff gets wet, snow drifts, particles come out and people don brollies if they have or buy them.</dd>
+         <dd>Sun Cycles.</dd>
+         <dd>Temperature.</dd>
+         <dd>Seasons.</dd>
+      </dl>
+      <br />
+      
+      <h4>Messages.</h4>
+      <p class="note">
+      Messaging system using the data transport.
+      </p>
+      <dl class="topic">
+      <dd>User Alerts</dd>
+      <dd>Game Action Report</dd>
+      <dd>Internet User Exchanges.</dd>
+      </dl>
+      
+      <h4>Developer notes</h4>
+      <p class="note">
+      Data settings here are persisted through normal serialization methods.<br />
+      UI interactions are passed through events and data packets to allow real time changes.<br />
+      Network operations will be able to tap into the events, serialization and data packets.<br />
+      At this time data packets are structure based and may change.
+      </p>
+   </div>
+</body>
+</html>

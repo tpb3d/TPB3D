@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body style="background-color:#f4efd7">
+   <div id="Title1">
+   <h1>Theme Park Builder 3D The Game</h1>
+   <h1>Technical Design Document</h1>   
+   <p class="note">Excerpts in this document taken from TPB3D Game Document (Game Design Version 6 PDF)</p>
+   </div>   
+   <div id="Contents">
+   
+   <h3>Construction</h3>
+      <p>
+      Ride Building and Editing Tools.
+      </p>
+      <h4 class="subnote">Terrain</h4>
+      <p></p>
+      <dl class="topic">
+         <dd>
+         Surface - multi-textured surface the user can select from grass, sand, gravel, rock or mud.
+         In addition to the natural list, faces may also be brick, wood, stone and tile.
+         Surface modeling may involve several texturing techniques depending on user changes.
+         The user may alter the height, surface texture, color, angle of surface.
+         The Game Document more information on Terrain Surface.
+         </dd>
+         <dd>
+         Underground - The user will have options to build underground and into elevated land, hills and mountains.
+         Sub-Terranian or tunneling techniques are explained in the Game Docs chapter 1.2.2.1.2.
+         Consider that tunneling is a tube structure requiring walling in to form closure.
+         Lighting is factored in as ambiant and sourced, dark rides need low ambiant for FX.
+         </dd>
+         <dd>
+         Water - involes users choice of a water table were any area below an elevation set fills with water.
+         In some instances the user may build cassons to hold back water.
+         Water will contain, texture, surface ripple/waves, color and translucent.
+         Waterfalls will be included as available scenery as animated stacked alphas.
+         </dd>
+         <dd>Saving - like other parts of the Game, the terrain can be save via serialization.</dd>
+      </dl>
+      
+      <h4 class="subnote">Paths</h4>
+      <dl class="topic">
+         <dd>Walkways - Tile with respect to surface tile and Freestyle lay down unrestrained wandering paths.
+         Surfaces may be concrete, asphalt, tile. stone, wood planks, metal, brick, dirt.
+         A walkway riseing about the mean surface will form an elevated walkway with supports and safety rails.
+         Moving belts may also be used as a people mover. Animated texture of a moving belt.
+         Steep walks become stairs, moving walkways become escalators.
+         Walkways may tunnel, curve, cross other walks and paths.
+         </dd>
+         <dd></dd>
+      </dl>
+      
+      <h4 class="subnote">Queues</h4>
+      <dl class="topic">
+         <dd>Queues can built like sidewalks or as a special structure.
+         Will need to generate crowd floaw paths and movement spline.
+         Several templates need to be made to feed the path too with location of handrails/ropes.
+         Like walkways, queues will have a surface tecture.
+         </dd>
+         <dt>Park Piping is interjected here in the GDD.</dt>
+         <dd>
+         Enhancements - The user may add path objects to the paths.
+         Lamps, Benches, Tables, Wastecans, Drinking fountains, maps and signs.
+         These can be postitiond anywhere on the path and standard collision ruled apply.
+         </dd>
+      </dl>
+      
+      <h4 class="subnote">Rides</h4>
+      <dl class="topic">
+         <dt> consturction details are in the GDD chapter 1.2.2.3.1.</dt>
+         <dd>
+         Flat - FRCS, assembly, storage, import, compile and place.
+         </dd>
+         <dd>
+         Track - TRCS, assembly, supports, guardrails, stations.
+         </dd>
+         <dd>
+         Other Track Rides - OTRCS, same ad TRCS but with differne track modes many not involving rails.
+         </dd>
+      </dl>
+      
+      <h4 class="subnote">Shops and Venues</h4>
+      <dl class="topic">
+         <dt> consturction details are in the GDD chapter 1.2.2.3.3.</dt>
+         <dd>
+         Stalls - small booths and keosks modeled require a dialog for setting options.
+         Items for sale and food service options.
+         </dd>
+         <dd>
+         Stores - larger buildings allowing gusets inside with counters and seating.
+         Items for sale and food service options.
+         </dd>
+         <dd>
+         Items - anything that people can buy, bring in, consume, litter, dispose of, wear and play with.
+         Many items like cameras, money, passes, maps and unbrellas have special uses.
+         </dd>
+      </dl>
+
+      <h4 class="subnote">Shows and Attractions</h4>
+      <dl class="topic">
+      <dd>Arenas, Bowls, Stages and Audience gatherings.</dd>
+      <dd>Tours - guided and self walking or riding.</dd>
+      </dl>
+
+      <h4 class="subnote">Midway</h4>
+      <dl class="topic">
+      <dd>Games and Arcades.</dd>
+      </dl>
+   </div>
+</body>
+</html>

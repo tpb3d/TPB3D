@@ -1,0 +1,44 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document Graphics Water</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Graphics</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="WaterDetails">
+   
+      <h2>General Water Details</h2>
+      <p class="general">
+         Water is a multi-component entity composed of a surface, refraction and layers of alphas and visual effects.
+      </p>
+      
+      <h3>Role</h3>
+      <p>Entity</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Open GL
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+         Provide Water Effects.
+      </p>
+      
+      <h3>Description</h3>
+      <dl>
+         <dd>Build a surface mesh.</dd>
+         <dd>Apply vector shader for waves on large bodies.</dd>
+         <dd>Use texture shader for smaller bodies.</dd>
+         <dd>Under bright light use the refration techniques found on the web for the visible bottom.</dd>
+         <dd>Darkending fog techniques serve to give depth to deeper waters and dirty waterways and ponds.</dd>
+         <dd>Underwater involves a screen mesh covering the view frustum (over the whole scene). (Details will be added).</dd>
+      </dl>
+   </div>
+</body>
+</html>

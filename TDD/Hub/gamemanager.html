@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document Game Manager</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Game Manager</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="Game On">
+   
+      <h2>Major operations for the Game.</h2>
+      <p class="general">
+         All operations dealing with high level operations involving the game are carried out here.
+      </p>
+      
+      <h3>Role</h3>
+      <p>Manager</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Storage, Data Transport, Storage Objects, Event Manager.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+         Open, Save, New operations run through this manager.
+         This GM is also responsible for the parks that you work on and links to the network client.
+      </p>
+      
+      <h3>Description</h3>
+      <p class="general">
+         The Game Manager is passed a referene pointer to the world created by the main Application class.
+         Subscrive to the event manager for file operation and game operation events.
+         Set up a new park or call the scene generator to create one.
+         Open a saved park, close the current open park.
+         Connect to running parks online through a local server or shared on a network.
+      </p>
+      <h3>Notes</h3>
+      <p class="note">
+         More definition is needed.
+      </p>
+   </div>
+</body>
+</html>

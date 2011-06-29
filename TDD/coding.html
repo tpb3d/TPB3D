@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document Code Philosphy</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Coding Philosphy</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="Philosophy">
+   
+      <h2>Overview</h2>
+      <p class="general">
+         The project is split into logical modules based on features and purpose that work as units.
+         Most of the classes are specialized objects derived from a common aggregate allowing developers to build loose collections.
+         At this time the code does not use attributes since it was not clear that all the compilers would support it.
+         Object implementation based on the general needs to get the game running. We just need to watch for migration issues
+         if we add implementation after the object has been used to save any rides or park features. The main app is the launch
+         point for the game, the main loop, some static resources and the primary implimentations of the tree and world collections.        
+      </p>
+      
+      <h3>Primary Architecture</h3>
+      <p class="general">
+         It should be possible to have several people working on different sections.
+         This project is strong on  C++ classes using some high level patterns which is necessary for several reasons.
+         Organization is the first big reason, it makes the project manageble as this thing will become enormous at some point.
+         Next is the ability to build simple modules that all work together ans inherit basic functionality like saving data,
+         all objects have that ability. Then there us the need for multi threading. Because the AI is seperate from the main 
+         code, it can thread off to do path finding on a second core while the game plays on. RCT had to write elaborate timing 
+         sequences to do the same. The other is the ease of adding in the networking code. This thing will have a central hub that 
+         passes all communications from module to module. No UI code is attached to the Graphics, Ride parts or any object that
+         makes up the park. Limited switch logic is user to decide where evants are going or what feature us selected for click actions.
+         User input is slow compared to the graphics engine and animation loops. Keeping the branching logic to a minimum allows
+         each action to be handled quicker and with less code. Delegates are assigned to the task of processing UI events to take
+         action in response. The delegates are designed to be small classes that manage a specific task and can be swapped with
+         other task handlers.
+      </p>
+      
+      <h3>Modules Breakdown</h3>
+      <dl>
+         <dd>The UI is the upper layer of the game which includes all dialogs, the mouse and keyboard events.</dd>
+         <dd>
+         The Hub - Central event handler and data transport system. The event handler is based on the chain of events pattern and
+         is designed to provide seperation of application layers. While it is true that this method will slow the game down slightly
+         the advantages out-weight the disadvantages. One benifit is able to thread the different modules and another keeps the
+         architecture cleaner. UI, AI, Communications are not directly linked to the core and graphics modules. More details are
+         available on the events page.<br />
+         Data Transport is a mechanism that will shuttle data for storage and communications with in the application and over a network.
+         </dd>
+         <dd>
+         Agents - the custodians of the objects, keepers of the gate and runners in the operation of the game. Each high level
+         functionality of the game is provided by an agent. Many agents will used to make up all the features and fuctions of
+         the game. People agents keep track of all the people. People are created when they vist, destoryed when leaving and
+         given an update cycle cycle periodically. The park managers are split into several groups. Each group performs a range
+         of duties. Operation managers control the rides and venues from open to close, collecting money, loading people,
+         using AI to cycle and break down. Construction managers provide the ride and venue create and modif abilities.
+         Transport managers track object operation and changes to move data and work with the networking manager if present.
+         Graphics managers handle getting objects ready for the rendering process. Storage managers save and load the objects.
+         </dd>
+         <dd>
+         AI - The thinking and logic section. In the initial release, AI may have a dependency on the storage objects.
+         If possible it will be beneficial to break this dependency by utilizing the data transport to move data to and from
+         the core as the AI services are needed. AI should be designed as a service for manager classes to use to solve problems,
+         provide autonomy, make decisions and seek out paths to people and places. The intent is that AI can be threaded on
+         multicore systems or at minimum take advantage is times normally spend loading video data or other IO. This presents
+         a challenge by being disconnected from the data. The alternative it to setup the core objects as a shared entity.
+         The later having a possible negative impact on animation and other systems which share these objects.
+         </dd>
+         <dd>
+         Core Objects - The entities of the application where all objects that represent to elements of the game. Core Objects
+         are the representation of parts, components, assemblies, collections, the park and anything that can be used or seen
+         by the user in the main view. Objects are creates, maintained and destroyed by management classes. Objects primarily
+         provide functionality that is required to access the data, validate integrity, some animation and internal updates.
+         Updates are performed through the overridden update method in objects that require routine attention. Updates are
+         moderated by management agents that time when objects update. Some objects may steer the update frequency to allow
+         performance tuning in game. Others may opt out or join in on updates as required. A broken ride may opt out until
+         fixed. A coaster may request more frequent updates for the POV to run smoother. Most Core objects will maintain a
+         set of graphic objects that represent that object, others may have none as in collections. Objects will also provide
+         a list of objects to render to the rendering engine to maintain the octtree and call in turn for rendering.
+         </dd>
+         <dd>
+         Graphics - Includes all the OpenGL code and visual presention related to OpenGL. The initial set of graphic objects
+         is designed to provide the minimum set of geometry elements needed for a park, landscaping, some rides and coasters.
+         The expanded set includes many of the lighting elements, varying levels of animation, particles, smoke etc.
+         Shaders will be a growing set that will greatly enhance visual effects as well as take advantage of the parallel
+         processors on the video card. Graphic objects are created in and are maintained by the core objects but reside
+         in their own world to be rendered at frame rate intervals. This keeps the cache smaller allowing the CPU core handling
+         the render cycle to load as much as possible into L2 and L3 cache as possible. This greatly improves performance by not
+         having to lug around code that is not related to rendering. Graphics objects do not have persistance methods to keep
+         them lightweight. Data that defines a graphic object is stored in the core object that renders it. Graphic objects
+         are dynamic and subject to change properties as often as once per frame or little as when starting a game. Manager
+         classes handle rendering, octtree sorts, LOD (level of detail), filtering and updates. Updates are maintenace cycles
+         that change properties in the graphics, set LOD and Low-Level Animation sequence management.
+         </dd>
+         <dd>
+         Storage - Saving and Loading games, rides, parks or features is open to several file systems including XML, JSON,
+         binary or any data management that supports data streaming. Each object in the application will support it's own
+         persistance methods. When calling persist for a properly built tree of object collections, the entire tree
+         should persist all of it's child objects and properties. You do not need to know what the persistance method is only
+         the available methods that the objects have access to. All Savem new and Load methods are passed a serialize base class.
+         To save you only need to push data and child objects to the serialize object. To load data you only need to pull data and
+         child objects from the serialize object. The Track object in the core objects has examples that persist the track, rail,
+         ties and supports. Users are permitted to mess with the data so be prepared to properly handle mangled data and alert
+         the user.
+         </dd>
+      </dl>
+      
+      <h3>Additional Notes</h3>      
+      <p>
+
+      </p>
+   </div>
+   <p class="footnote">
+   Copyright &copy;2010 Alabama Cajun for Theme Park Builder 3D Licensed under Creative Commons!
+   </p>
+</body>
+</html>

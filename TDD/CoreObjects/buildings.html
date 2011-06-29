@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <link rel="stylesheet" type="text/css" href="../general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Core Object</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="Building Generator Agent">
+   
+      <h2>Building Objects</h2>
+      <p class="general">
+      </p>
+      
+      <h3>Role</h3>
+      <p>Entity</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Core Objects, Graphics.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+      </p>
+      
+      <h3>Description</h3>
+      <p class="general">
+      Buildings will be made up of pre-assembled models or constucted.
+      Modeled buildings will only have some flexibility to be altered.
+      Assembled buildings will be able to be altered in may ways to accomidate the area where the
+      building is being placed within reason. This does not dictate how buildings are to be built
+      but provides tools to assemble them for the user and Building Generator. The Builder object
+      in this code is the assistant that assembles the building from data fed in. The UI and Building
+      Generator must supply the data that instructs what to assemble. Saved buildings will just load
+      in and be assembled from the same data use to create it.
+      </p>
+      <h3>Objects</h3>
+      <dl>
+      <dd>BuildingAssembly - a collection of the following building parts or imported model.</dd>
+      <dd>Floor - floor object that can support other objects and rides.</dd>
+      <dd>Wall - any type of solid wall.</dd>
+      <dd>Ceiling - overhead surface mostly for decoration if needed.</dd>
+      <dd>Roof - set of meshes assembled by the BG.</dd>
+      <dd>Door - moveble panel people and rides will pass through, animate when needed and allowed.</dd>
+      <dd>Window - any form of glass or opaque panel, fix or moveable but mostly for show.</dd>
+      <dd>decoration - additional pictures and other simple objects added to a wall, floor or ceiling.</dd>
+      <dd>Builder - building assist object that provides helper functions to put buildings together.</dd>
+      </dl>
+   </div>
+   <p class="footnote">
+   Copyright &copy;2010 Alabama Cajun for Theme Park Builder 3D Licensed under Creative Commons!
+   </p>
+</body>
+</html>

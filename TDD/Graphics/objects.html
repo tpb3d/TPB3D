@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Graphic Objects</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="A">
+   
+      <h2>Triangles, Strips, Meshes and Graphic Primatives</h2>
+      <p class="general">
+         Surfaces represent all the visual polygons in Open GL.
+         Polygons that make up a surface are made up of vector geometry and contain all the 
+      </p>
+      
+      <h3>Role</h3>
+      <p>Visual Presentation Entity</p>
+      
+      <h2>Dependencies</h2>
+      <p class="general">
+         Open GL.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+         Graphic Objects are the building blocks used to build up 3D modeling and render scenes.
+         Most objects here has geometry, defines color, texture, shaders, lighting and other attributes.
+         Some objects are collection objects that host graphic objects for rendering in ordered trees.
+         Surface objects may be a single vector, vertors pair, vector array or vector table matched with a faces table.
+         In addition to vectors the objects will in most cases have texture UV coordinates or tables of coordinates.
+      </p>
+      <h3>Object List</h3>
+      <dl>
+      <dd>Animation - attribute object providing simple animation to other objects.</dd>
+      <dd>Camera - the primary view frustum and render matrix.</dd>
+      <dd>ComplexMeshObject - collection of multi-faceted shapes sharing a common set of materials.</dd>
+      <dd>ComponentObject - collection of objects that build shapes into a modeled component.</dd>
+      <dd>ErrorImage - default graphic supplied by "crazy2be" that appears if an object fails to initialize.</dd>
+      <dd>FireAnimation - attribute object providing smoke, fire and other billowing animation.</dd>
+      <dd>Image - simple texture object or billboard graphic.</dd>
+      <dd>LeavesObject - simple object collection that hosts alphas for leaves, bushed, particles and branched objects.</dd>
+      <dd>Material - light, color, texture and surface detail attribute.</dd>
+      <dd>Matrix16 - matrix utility object.</dd>
+      <dd>MeshNode - collection element for meshed objects.</dd>
+      <dd>ModelObject - collection of objects representing an entire model as imported.</dd>
+      <dd>ObjectBase - base for factory created object_tree,node and derivative objects.</dd>
+      <dd>ObjectFactory - factory pattern used to assist with creating objects.</dd>
+      <dd>ObjectNode - node or branch in an object tree consisting of objects derived fro, ObjectBase.</dd>
+      <dd>ObjectTree - collection of ObjectNodes.</dd>
+      <dd>QuadMesgObject - mesh build from GL_Quads as opposed to GL_Triagles.</dd>
+      <dd>SimpleMeshObject - single mesh GL primitive with just material attributes.</dd>
+      <dd>Texture - texture bitmap loaded and registered with OpenGL.</dd>
+      <dd>TexturedMesh - like SimpleMeshObject but including texture.</dd>
+      <dd>TexturedStrip - strip GL primitive with material attributes and texture.</dd>
+      <dd>Tiler - simple mesh object that repeats the texture like wallpaper.</dd>
+      <dd>VPoint - vector used in building track (may be removed).</dd>
+      </dl>
+   </div>
+</body>
+</html>

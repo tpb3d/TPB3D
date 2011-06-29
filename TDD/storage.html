@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document Code Philosphy</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body style="background-color:#f4efd7">
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Coding Philosphy</h1>
+   </div>
+   <a href="index.html">Table of Contents</a>
+   <div id="Storage System">
+      <h2>Storage and Data Management.</h2>
+      <h3>Role</h3>
+         <p class="general">
+            Data persistance and management.
+         </p>
+      <h3>Dependencies</h3>
+      <dl>
+      <dt class="topic">Libraries and Support code used.</dt>
+      <dd>XML - TinyXML is included by default, open source version.</dd>
+      <dd>JSON - Newer open source data representation format provided as open source.</dd>
+      <dd>BIN - Binary format with custom code (Optional)</dd>
+      <dd>zlib - compression library can BLOG pack any of the above formats</dd>
+      <dd>io.h - IO subsystem for low level reads/writes.</dd>
+      </dl>
+      <h3>Synopsis</h3>
+      <p>
+      Data can be stored in any number of formats that we san serialize to. Serializarion is basically a smart data stream.
+      On store, data is fed into the stream with tags that identify identifiers the data when it is later loaded.
+      On load, the data is drawn out and fed back to the object manager which upon reading tags calls the proper create
+      methods or factories to rebuild the objects from the data. Each object is responsible for what to do with that data.
+      Objects must also validate the data and throw the proper exception for the problem that occurs. The data manager
+      must capture and handle it's own exceptions includind the SerializeException.
+      </p>
+      <h3>Description</h3>
+      <p>
+      When you look at the source for the XML class, you will discover that it's quite small and not complex.
+      A few methods are using delegates to allow the save and load methods a clean way to call back functions to build the tree.
+      This serialization system allows the use of multiple storage system and almost never touch the main code.
+      </p>
+      <dl>
+      <dt>Working with Serialization.</dt>
+      <dd>Building a new serializer.</dd>
+      <dd>Derive a new seialization class from SerializerBase.</dd>
+      <dd>Include the headers needed to support the storage and retrieval system you choose.</dd>
+      <dd>Override the Save and Load methods to use your new storage and retrieval library.</dd>
+      <dd>Override the child handling methods so heirarchial data methods work the game. Note the delegate(s) used.</dd>
+      <dd>Provide catches for exception handling, throw a DataException with an explicit error message when possible.</dd>
+      </dl>
+   </div>
+   <p class="footnote">
+   Copyright &copy;2010 Alabama Cajun for Theme Park Builder 3D Licensed under Creative Commons!
+   </p>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document AI Path Finding</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body>
+   <div id="Title1">
+   <h1>Theme Park Builder 3D The Game</h1>
+   <h1>Technical Design Document</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="Intelligence1">
+   
+      <h2>Artificial Intelligence Path Finding</h2>
+      <p class="general">
+         Path finding, A*, snakes, routes.
+      </p>
+      <p class="note">
+         Service oriented architecture. Path finding logic will be used my management objects to decide what paths to take.
+         People, Animals and even rides will need to seek new paths as the game changes.
+         Free floating ships and open road vehicles are other examples moving objects needing path finding.
+      </p>
+      
+      <h3>Role</h3>
+      <p>Decision Maker</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Core Objects for collecting information walkways, roads, queues, ramps, accessible grounds and waterways, entrances.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+         All objects are places in 3D space and elevation must be considered in travel.<br />
+         Remember the grid is only there for terrain and visual purposes, objects are not confined to the grid.<br />
+         Placed objects will have a bounding box or sphere that must be considered.<br />
+         Bounding boxes and spheres should have a method to test a ray for penetration into that space.<br />
+      </p>
+   </div>
+
+</body>
+</html>

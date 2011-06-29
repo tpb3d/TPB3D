@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <style type="text/css">
+    h1{text-align:center; color:black; size:14;}
+    h2{text-align:left; color:darkblue; size:13;}
+    h3{text-align:left; color:blue; size:12;}
+    h4{text-align:left; text-indent:1em; color:mediumblue; size:11;}
+    text{text-align:left; color:darkgrey; size:10;}
+    p{text-align:left; text-indent:2em; color:charcoal; size:9;}
+    p.topic{text-align:left; text-indent:1em; color:charcoal; size:9;}
+    p.subnote{text-align:left; text-indent:2em; color:charcoal; size:9;}
+    p.note{text-align:left; text-indent:1em; color:green; size:9;}
+    p.warn{text-align:left; text-indent:1em; color:maroon; size:9;}
+    dt.topic{text-align:left; text-indent:1em; color:navy; size:9;}
+    dt.general{text-align:left; text-indent:2em; color:mediumblue; size:9;}
+    dd{text-align:left; text-indent:1em; color:charcoal; size:9;}
+    </style>
+</head>
+<body style="background-color:#f4efd7">
+   <div id="Title1">
+   <h1>Theme Park Builder 3D The Game</h1>
+   <h1>Technical Design Document</h1>   
+   <p class="note">Excerpts in this document taken from TPB3D Game Document (Game Design Version 6 PDF)</p>
+   </div>   
+   <div id="Observation">
+   
+   <h2>Observation</h2>
+      All code here is OpenGL both rendered by the TPB3D engines and 3rd party tools.
+      <p class="topic">
+      </p>
+   <h3>1: Viewing</h3>
+      <p class="topic">
+The player’s main view of the park while the game is running. All code here is OpenGL rendered with the main engines.
+      </p>
+      <dl class="topic">
+         <dt class="general">Builder-</dt>
+         <dd>Normal view frustum or primary camera.</dd>
+         <dt class="general">Ride-</dt>
+         <dd>Tie the a view frustum to a ride and allow seat/car choice.</dd>
+         <dt class="general">Guest-</dt>
+         <dd>Peeping Tom or Tie the a view frustum to a person and take control.</dd>
+         <dt class="general">Snapshots-</dt>
+         <dd>Point the view frustum at a location and snapshot to bit image and dialog for a save.</dd>
+         <dt class="general">Baloon and Flying Cams-</dt>
+         <dd>Tie the a view frustum to a balloon, peep, bird or plane.</dd>
+      </dl>
+   <h3>2: Maps</h3>
+      <p class="topic">
+      3rd party tool to show graphs and charts of activities and quantities involving game play.
+      </p>
+   <h3>2: Charts</h3>
+      <p class="topic">
+      (TBD)
+      </p>
+   </div>
+</body>
+</html>

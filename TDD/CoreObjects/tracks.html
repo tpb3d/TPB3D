@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document</title>
+    <link rel="stylesheet" type="text/css" href="../general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Core Objects</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="TRackObject">
+   
+      <h2>Track Object</h2>
+      <p class="general">
+      </p>
+      
+      <h3>Role</h3>
+      <p>Entity</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Core Objects, Graphics.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+      Track Builder and Track assemnbly.
+      </p>
+      
+      <h3>Description</h3>
+      <p class="general">
+      Track is built in freeform sections that are co-dependent with adjacent sections.
+      Each section starts with the ending vector of the preceding section.
+      The track guide is a pass through structure that allows the next track section to be built
+      then that data is shared with the next sectiomn to build from and pass on to the data to the next.
+      </p>
+
+      <h3>Objects</h3>
+      <dl>
+      <dd>Track - The TrackSections collection and what defines any coaster or track based ride.</dd>
+      <dd>
+      TrackGuide - A helper structure that assist in building track.
+      The guide maintains data from the prior secion to feed into the track building agent to
+      use for building a new section of track. Built in functions provide some of the trig needed
+      to aide in calculating complex curves and 3D math.
+      </dd>
+      <dd>
+      TrackSecton - Track Section made up of elemental parts including the rail, ties and support structure.
+      This object generates and regenerates all the graphic objects used.
+      </dd>
+      </dl>      
+   </div>
+   <p class="footnote">
+   Copyright &copy;2010 Alabama Cajun for Theme Park Builder 3D Licensed under Creative Commons!
+   </p>
+</body>
+</html>

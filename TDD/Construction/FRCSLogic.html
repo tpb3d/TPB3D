@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document Construction Sets</title>
+    <link rel="stylesheet" type="text/css" href="../general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Constuction Set Logic</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="FRCSLogic">
+   
+      <h2>Flat Ride Construction Set Logic</h2>
+      <p class="general">
+         Logic used to assemble, compile, assist, persist and reload rides.
+      </p>
+      
+      <h3>Role</h3>
+      <p>Factory</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Core Objects, Storage, Utilities, Graphics.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+         Provided all the logic to assemble parts, select seating positions, geometry generation, alignment and tweaking.
+         Rides are collections of RidePart objects which have collections or Ride Parts which all have graphic object.
+         The ride parts hold the implementation of the ride connections, physics and operational members.
+         Each ride part also has a collection of graphic objects that represent the 3D visual acspect.
+         *See coaster TRCS for more details.
+      </p>
+   </div>
+
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <title>Technical Design Document Graphics Lighting</title>
+    <link rel="stylesheet" type="text/css" href="general.css" />
+</head>
+<body>
+   <div id="Title1">
+      <h1>Theme Park Builder 3D The Game</h1>
+      <h1>Technical Design Document Graphic Lighting</h1>
+   </div>
+   <a href="../index.html">Table of Contents</a>
+   <div id="LightingDetails">
+   
+      <h2>Lighting Effects</h2>
+      <p class="general">
+         ToDo
+      </p>
+      
+      <h3>Role</h3>
+      <p>Visual Properties</p>
+      
+      <h3>Dependencies</h3>
+      <p class="general">
+         Open GL.
+      </p>
+      
+      <h3>Synopsis</h3>
+      <p class="general">
+      Open GL provides a lot of flexibility in lighting.
+      In the real world lighting is the result photo emissions from any number of sources including lamps and the sun.
+      Light also emits from self illuminating objects like digital clocks, tvs, control panels and signs.
+      Other light sources are the result of reflected from walls, windows are any object that is lighter in color that
+      is itself illuminated by a light source. In the game we will only consider this radiant form of light from
+      large objects light walls but only after the game is usable.
+      Refraction is another form of light that occurs in transparent objects like glass and water but this too should wait.
+      </p>
+      <dl>
+      <dt>Objects in Open GL can be lit or possess levele of brightness by several methods.</dt>
+      <dd>Intesity of image in a texture.</dd>
+      <dd>Color intensity specified in the materials property.</dd>
+      <dd>One of the GLLights provided by the Open GL API.</dd>
+      <dd>Global Ambiant, Specular and Radiant properies in context when the object is fed to Open GL.</dd>
+      </dl>
+      <p>This subject will expand greatly as lighting in important for high quality rendering.</p>
+   </div>
+</body>
+</html>
