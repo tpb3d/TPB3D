@@ -68,6 +68,7 @@
 				AdditionalLibraryDirectories="&quot;$(ProjectDir)\..\Other Libs\lib3ds\Debug&quot;;&quot;$(ProjectDir)\..\Other Libs\libpng\lib&quot;;&quot;$(ProjectDir)\..\Other Libs\sfml\lib&quot;;&quot;$(ProjectDir)\..\Other Libs\zlib\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
+				EntryPointSymbol=""
 				RandomizedBaseAddress="1"
 				DataExecutionPrevention="0"
 				TargetMachine="1"

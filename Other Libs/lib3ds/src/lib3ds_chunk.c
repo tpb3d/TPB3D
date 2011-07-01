@@ -70,6 +70,9 @@ lib3ds_chunk_read_next(Lib3dsChunk *c, Lib3dsIo *io) {
 
     if (c->cur >= c->end) {
         //assert(c->cur == c->end);
+		if(c->cur != c->end && io->log_func) {
+			lib3ds_io_log(io, LIB3DS_LOG_ERROR, "lib3ds_chunk_read_next(%s (0x%X) size=%lu): c->cur >= c->end\ncorrupt 3ds file?", lib3ds_chunk_name(c->chunk), c->chunk, c->size);
+		}
         return 0;
     }
 

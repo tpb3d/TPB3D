@@ -380,6 +380,8 @@ void C3DSHandler::GetNode(Lib3dsNode *node, int level)
 
 bool C3DSHandler::Load( const char* szPath )
 {
+	fprintf(stdout, "Loading 3ds file: %s\n", szPath );
+
    Lib3dsIo io;
    int result;
 
