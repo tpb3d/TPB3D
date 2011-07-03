@@ -282,7 +282,7 @@ bool GameManager::LoadGame (const char *fileName)
 
    guide.SetupStraight( 20, 0 ); // station
    TF.MakeSection (guide, *pTrack);
-   guide.SetupPitch (-20, 6, 0);
+   /*/guide.SetupPitch (-20, 6, 0);
    TF.MakeSection (guide, *pTrack);
    guide.SetupPitch ( 20, 6, 0);
    TF.MakeSection (guide, *pTrack);
@@ -328,15 +328,15 @@ bool GameManager::LoadGame (const char *fileName)
    guide.SetupPitch ( 20, 6, 0);
    TF.MakeSection (guide, *pTrack);
    guide.SetupPitch (-20, 6, 0);
-   TF.MakeSection (guide, *pTrack);
+   TF.MakeSection (guide, *pTrack);// */
 
    pOTree.AddNode (pTrack);
-   RailCar* pCar = new RailCar( sf::Vector3f( 4, 1.8f, 6 ), 8, 599 );
+   /**/RailCar* pCar = new RailCar( sf::Vector3f( 4, 1.8f, 6 ), 8, 599 );
    Ride* pCarRide = new Ride(Vector3f(0,0,0), mPark);
    pOTree.AddNode ( new RidePack (pCarRide));
    pCarRide->SetNode (pCar);
    pCar->Default();
-   mPark.mpCar = pCar;
+   mPark.mpCar = pCar;// */
 
    FlatRideBuilder flat;
 

@@ -31,6 +31,7 @@ public:
    virtual ~ObjectTree(void);
 
 	virtual void Update(float);
+	virtual void PhysicsUpdate(double);
 	virtual void Draw();
    virtual void DrawSelectionTarget();
    void CloneNode( ObjectNode* m_pSelectedNode );

@@ -31,6 +31,7 @@ public:
 	virtual void Draw();
    virtual void DrawSelectionTarget();
    virtual void Update(int dt) {};
+	virtual void PhysicsUpdate(double deltaTime);
 
    virtual ObjectNode* Clone( );
 

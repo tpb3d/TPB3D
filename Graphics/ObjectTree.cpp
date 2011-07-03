@@ -89,6 +89,15 @@ void ObjectTree::Update(float dt)
    }
 }
 
+void ObjectTree::PhysicsUpdate(double deltaTime)
+{
+   for( int idx = 0; idx < m_NodeCount; ++idx )
+   {
+      ObjectNode* pObj = m_pNodes[idx];
+      pObj->PhysicsUpdate(deltaTime);
+   }
+}
+
 
 void ObjectTree::Draw()
 {

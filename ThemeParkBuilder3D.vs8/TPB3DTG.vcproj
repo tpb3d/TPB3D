@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="&quot;$(ProjectDir)\..\Other Libs\lib3ds\src&quot;;&quot;$(ProjectDir)\..\Other Libs\sfml\include&quot;;&quot;$(ProjectDir)\..\Other Libs\libpng\include&quot;;&quot;$(ProjectDir)\..\Other Libs\zlib\include&quot;"
+				AdditionalIncludeDirectories="C:\ProgramingLibs\boost_1_46_1;&quot;$(ProjectDir)\..\Other Libs\lib3ds\src&quot;;&quot;$(ProjectDir)\..\Other Libs\sfml\include&quot;;&quot;$(ProjectDir)\..\Other Libs\libpng\include&quot;;&quot;$(ProjectDir)\..\Other Libs\zlib\include&quot;"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE;PNG_NO_ERROR_NUMBERS;_CRT_SECURE_NO_WARNINGS"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -65,7 +65,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="sfml-Graphics-d.lib sfml-System-d.lib sfml-Window-d.lib OPENGL32.LIB glu32.lib libpng.lib lib3ds-2_0.lib zdll.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="&quot;$(ProjectDir)\..\Other Libs\lib3ds\Debug&quot;;&quot;$(ProjectDir)\..\Other Libs\libpng\lib&quot;;&quot;$(ProjectDir)\..\Other Libs\sfml\lib&quot;;&quot;$(ProjectDir)\..\Other Libs\zlib\lib&quot;"
+				AdditionalLibraryDirectories="C:\ProgramingLibs\boost_1_46_1\bin.v2\libs;&quot;$(ProjectDir)\..\Other Libs\lib3ds\Debug&quot;;&quot;$(ProjectDir)\..\Other Libs\libpng\lib&quot;;&quot;$(ProjectDir)\..\Other Libs\sfml\lib&quot;;&quot;$(ProjectDir)\..\Other Libs\zlib\lib&quot;"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				EntryPointSymbol=""
@@ -1402,11 +1402,27 @@
 			Name="Physics"
 			>
 			<File
+				RelativePath="..\Physics\LinearPhysics.cpp"
+				>
+			</File>
+			<File
+				RelativePath="..\Physics\LinearPhysics.h"
+				>
+			</File>
+			<File
 				RelativePath="..\Physics\MotionPhysics.cpp"
 				>
 			</File>
 			<File
 				RelativePath="..\Physics\MotionPhysics.h"
+				>
+			</File>
+			<File
+				RelativePath=".\Physics.cpp"
+				>
+			</File>
+			<File
+				RelativePath=".\Physics.h"
 				>
 			</File>
 			<File
