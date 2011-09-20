@@ -1,0 +1,63 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+# SharpDevelop 4.0.0.7070
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ms3dLoader", "Ms3dLoader\Ms3dLoader.csproj", "{D725737B-8D2A-492B-AB5E-F82120A85813}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOGL", "OOGL.csproj", "{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OOGL.GUI", "GUI\OOGL.GUI.csproj", "{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}"
+EndProject
+Global
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 5
+		SccProjectName0 = OOGL
+		SccLocalPath0 = .
+		SccProvider0 = MSSCCI:PushOk\u0020SVNSCC
+		SccProjectUniqueName1 = Ms3dLoader\\Ms3dLoader.csproj
+		SccProjectName1 = OOGL/Ms3dLoader
+		SccLocalPath1 = Ms3dLoader
+		SccProjectUniqueName2 = OOGL.csproj
+		SccLocalPath2 = .
+		SccProjectUniqueName3 = Example\\Example.csproj
+		SccProjectName3 = OOGL/Example
+		SccLocalPath3 = Example
+		SccProjectUniqueName4 = GUI\\OOGL.GUI.csproj
+		SccProjectName4 = OOGL/GUI
+		SccLocalPath4 = GUI
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D725737B-8D2A-492B-AB5E-F82120A85813}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D725737B-8D2A-492B-AB5E-F82120A85813}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D725737B-8D2A-492B-AB5E-F82120A85813}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D725737B-8D2A-492B-AB5E-F82120A85813}.Release|Any CPU.Build.0 = Release|Any CPU
+		{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BC4B0C8-02EE-497D-99D9-2E3AA90A5E41}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		name = OOGL
+		version = 0.1
+		StartupItem = Example\Example.csproj
+		MonoDevelop.ChangeLogAddIn.ChangeLogInfo = $0
+		$0.policy = UpdateNearestChangeLog
+	EndGlobalSection
+EndGlobal

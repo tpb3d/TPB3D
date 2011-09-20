@@ -1,0 +1,10 @@
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\Jitter Physics 0.1.6.0\Jitter Physics 0.1.6.0\Jitter\bin\Debug\Jitter.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\Jitter Physics 0.1.6.0\Jitter Physics 0.1.6.0\Jitter\bin\Debug\Jitter.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\Jitter Physics 0.1.6.0\Jitter Physics 0.1.6.0\Jitter\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\Jitter Physics 0.1.6.0\Jitter Physics 0.1.6.0\Jitter\obj\Debug\Jitter.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\Jitter Physics 0.1.6.0\Jitter Physics 0.1.6.0\Jitter\obj\Debug\Jitter.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\Jitter\Jitter\bin\Debug\Jitter.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\Jitter\Jitter\bin\Debug\Jitter.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\Jitter\Jitter\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\Jitter\Jitter\obj\Debug\Jitter.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\Jitter\Jitter\obj\Debug\Jitter.pdb

@@ -1,0 +1,7 @@
+Battloid-Guardian,65,122,forwardOnce
+Battloid-Transport,237,295,forwardOnce
+Guardian-Transport,123,180,forwardOnce
+Guardian-Battloid,352,410,forwardOnce
+Transport-Battloid,180,237,forwardOnce
+Transport-Guardian,295,352,forwardOnce
+Run,13,51,forwardLooping

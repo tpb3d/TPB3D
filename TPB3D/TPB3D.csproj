@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{A0900D4D-10FE-44C2-88CD-F8952BAF93DE}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>TPB3D</RootNamespace>
+    <AssemblyName>TPB3D</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK">
+      <HintPath>..\OpenTK\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.GLControl">
+      <HintPath>..\OpenTK\Binaries\OpenTK\Release\OpenTK.GLControl.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Maths\alglib\alglibinternal.cs" />
+    <Compile Include="Maths\alglib\alglibmisc.cs" />
+    <Compile Include="Maths\alglib\ap.cs" />
+    <Compile Include="Maths\alglib\dataanalysis.cs" />
+    <Compile Include="Maths\alglib\diffequations.cs" />
+    <Compile Include="Maths\alglib\fasttransforms.cs" />
+    <Compile Include="Maths\alglib\integration.cs" />
+    <Compile Include="Maths\alglib\interpolation.cs" />
+    <Compile Include="Maths\alglib\linalg.cs" />
+    <Compile Include="Maths\alglib\optimization.cs" />
+    <Compile Include="Maths\alglib\solvers.cs" />
+    <Compile Include="Maths\alglib\specialfunctions.cs" />
+    <Compile Include="Maths\alglib\statistics.cs" />
+    <Compile Include="Maths\Spline.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TrackedRide\Track.cs" />
+    <Compile Include="TrackedRide\TrackSection.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Maths" />
+    <Folder Include="Maths\alglib" />
+    <Folder Include="TrackedRide" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Maths\manual.csharp.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Jitter\Jitter\Jitter.csproj">
+      <Project>{AA03EF1A-94F7-4D30-AB14-2092863FF923}</Project>
+      <Name>Jitter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOGL\GUI\OOGL.GUI.csproj">
+      <Project>{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}</Project>
+      <Name>OOGL.GUI</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOGL\Ms3dLoader\Ms3dLoader.csproj">
+      <Project>{D725737B-8D2A-492B-AB5E-F82120A85813}</Project>
+      <Name>Ms3dLoader</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OOGL\OOGL.csproj">
+      <Project>{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}</Project>
+      <Name>OOGL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>

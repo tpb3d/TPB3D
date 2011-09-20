@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.50727</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{998CEEA2-6895-4BD2-93C0-53E8EF0AF569}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AssemblyName>GLGUI</AssemblyName>
+    <RootNamespace>GLGUI</RootNamespace>
+    <SccProjectName>OOGL/GUI</SccProjectName>
+    <SccLocalPath>.</SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>MSSCCI:PushOk SVNSCC</SccProvider>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputType>Library</OutputType>
+    <RootNamespace>GLGUI</RootNamespace>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <OutputType>Library</OutputType>
+    <DebugSymbols>true</DebugSymbols>
+    <RootNamespace>GLGUI</RootNamespace>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\BaseControl.cs" />
+    <Compile Include="Abstract\BaseDialog.cs" />
+    <Compile Include="Abstract\BaseFrame.cs" />
+    <Compile Include="Abstract\BaseFrameMgr.cs" />
+    <Compile Include="VertexStructs\PositionColor.cs" />
+    <Compile Include="VertexStructs\PositionTexture.cs" />
+    <Compile Include="Widgets\Button.cs" />
+    <Compile Include="Widgets\CheckBox.cs" />
+    <Compile Include="Widgets\ComboBox.cs" />
+    <Compile Include="Widgets\HScrollBar.cs" />
+    <Compile Include="Widgets\Label.cs" />
+    <Compile Include="Widgets\ListBox.cs" />
+    <Compile Include="Widgets\Picture.cs" />
+    <Compile Include="Widgets\ProgressBar.cs" />
+    <Compile Include="Widgets\ScrollBar.cs" />
+    <Compile Include="Widgets\TextBox.cs" />
+    <Compile Include="Widgets\VScrollBar.cs" />
+    <Compile Include="AssemblyInfo.cs" />
+    <Compile Include="DrawTextFormat.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ChangeLog" />
+    <None Include="COPYING" />
+    <None Include="README" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ProjectExtensions>
+    <VisualStudio />
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <ChangeLogPolicy UpdateMode="ProjectRoot" inheritsSet="Mono">
+            <MessageStyle LineAlign="0" />
+          </ChangeLogPolicy>
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
+  <ItemGroup>
+    <ProjectReference Include="..\OOGL.csproj">
+      <Project>{195AAF4A-3E4C-4FEA-92F6-0CD63FB3FE4B}</Project>
+      <Name>OOGL</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="OpenTK">
+      <HintPath>..\..\OpenTK\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK.Compatibility">
+      <HintPath>..\..\OpenTK\Binaries\OpenTK\Release\OpenTK.Compatibility.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+  </ItemGroup>
+</Project>

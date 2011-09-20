@@ -1,0 +1,33 @@
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\Example.exe
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\Example.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\GLGUI.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\Ms3dLoader.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\OpenTK.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\OpenTK.Utilities.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\OpenTK.Utilities.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\OpenTK.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\GLGUI.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\Ms3dLoader.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\bin\Debug\OOGL.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\obj\Debug\Example.exe
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\Example\obj\Debug\Example.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\obj\Debug\Example.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\Example.exe.config
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\Example.exe
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\Example.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\GLGUI.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\Ms3dLoader.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\OpenTK.Compatibility.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\OpenTK.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\OpenTK.GLControl.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\OOGL.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\Ms3dLoader.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\GLGUI.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\OpenTK.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\OpenTK.Compatibility.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\bin\Debug\OpenTK.GLControl.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\Example\obj\Debug\Example.exe

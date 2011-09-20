@@ -1,0 +1,25 @@
+2009-06-02  James P Michels III  <james.p.michels@gmail.com>
+
+	* ResourceLocator.cs:
+	* Animation/Model.cs:
+	* Animation/Group.cs:
+	* Animation/KeyFrame.cs:
+	* Shaders/ShaderProgram.cs: 
+
+2009-05-25  James P Michels III  <james.p.michels@gmail.com>
+
+	* Animation/Bone.cs:
+	* Animation/Track.cs:
+	* Animation/Model.cs:
+	* Animation/Group.cs:
+	* Animation/Sample.cs:
+	* Animation/KeyFrame.cs:
+	* Animation/Material.cs:
+	* Animation/Controller.cs:
+	* Animation/VertexBuffer.cs:
+	* Animation/VertexStruct.cs: 
+
+2008-10-24  James P Michels III <james.p.michels@gmail.com> 
+
+	
+

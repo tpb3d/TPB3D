@@ -1,0 +1,11 @@
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Release\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Release\OOGL.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Release\OpenTK.Compatibility.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Release\OpenTK.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Release\OpenTK.GLControl.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Release\OpenTK.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Release\OpenTK.Compatibility.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Release\OpenTK.GLControl.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\obj\Release\ResolveAssemblyReference.cache
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\obj\Release\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\obj\Release\OOGL.pdb

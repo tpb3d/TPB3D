@@ -1,0 +1,29 @@
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\bin\Debug\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\bin\Debug\OOGL.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\bin\Debug\OpenTK.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\bin\Debug\OpenTK.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\obj\Debug\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\Downloads\OOGL\obj\Debug\OOGL.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\obj\Debug\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\obj\Debug\OOGL.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Debug\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Debug\OOGL.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Debug\OpenTK.Compatibility.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Debug\OpenTK.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Debug\OpenTK.GLControl.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Debug\OpenTK.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Debug\OpenTK.Compatibility.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\FPRPG\OOGL\bin\Debug\OpenTK.GLControl.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\bin\Debug\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\bin\Debug\OOGL.pdb
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\bin\Debug\OpenTK.Compatibility.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\bin\Debug\OpenTK.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\bin\Debug\OpenTK.GLControl.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\bin\Debug\OpenTK.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\bin\Debug\OpenTK.Compatibility.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\bin\Debug\OpenTK.GLControl.xml
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\obj\Debug\OOGL.dll
+C:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\OOGL\obj\Debug\OOGL.pdb
