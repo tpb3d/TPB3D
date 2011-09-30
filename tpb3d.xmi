@@ -1,0 +1,98 @@
+<?xml version="1.0"  encoding="UTF-8"?>
+<XMI xmi.version="1.2" xmlns:UML="org.omg.xmi.namespace.UML">
+<XMI.header>
+	<XMI.documentation>
+		<XMI.exporter>Bouml</XMI.exporter>
+		<XMI.exporterVersion>1.4.6</XMI.exporterVersion>
+	</XMI.documentation>
+	<XMI.metamodel XMI.name="UML" XMI.version="1.4"/>
+</XMI.header>
+<XMI.content>
+	<UML:Model name="TPB3D.bouml" xmi.id="BOUML_0x9f0680">
+		<UML:Namespace.ownedElement>
+			<UML:Package xmi.id="BOUML_0x9f1ea0" name ="TPB3D">
+			</UML:Package>
+			<UML:Package xmi.id="BOUML_0x9f1e10" name ="TPB3D Lib">
+				<UML:Namespace.ownedElement>
+					<UML:Class name="Control" xmi.id="BOUML_0x9f1b60" visibility="public" isAbstract="false" isActive="false" >
+					</UML:Class>
+					<UML:Class name="Container" xmi.id="BOUML_0x9f1ac0" visibility="public" isAbstract="false" isActive="false" >
+					</UML:Class>
+					<UML:Generalization xmi.id="BOUML_0x9f1880" isSpecification="false">
+						<UML:Generalization.child><UML:Class xmi.idref="BOUML_0x9f1ac0"/></UML:Generalization.child>
+						<UML:Generalization.parent><UML:Class xmi.idref="BOUML_0x9f1b60"/></UML:Generalization.parent>
+					</UML:Generalization>
+					<UML:Class name="Panel" xmi.id="BOUML_0x9f1a20" visibility="public" isAbstract="false" isActive="false" >
+					</UML:Class>
+					<UML:Generalization xmi.id="BOUML_0x9f17c0" isSpecification="false">
+						<UML:Generalization.child><UML:Class xmi.idref="BOUML_0x9f1a20"/></UML:Generalization.child>
+						<UML:Generalization.parent><UML:Class xmi.idref="BOUML_0x9f1ac0"/></UML:Generalization.parent>
+					</UML:Generalization>
+					<UML:Class name="Button" xmi.id="BOUML_0x9f1980" visibility="public" isAbstract="false" isActive="false" >
+					</UML:Class>
+					<UML:Generalization xmi.id="BOUML_0x9f1700" isSpecification="false">
+						<UML:Generalization.child><UML:Class xmi.idref="BOUML_0x9f1980"/></UML:Generalization.child>
+						<UML:Generalization.parent><UML:Class xmi.idref="BOUML_0x9f1b60"/></UML:Generalization.parent>
+					</UML:Generalization>
+					<UML:Class name="Command" xmi.id="BOUML_0x9f1600" visibility="public" isAbstract="false" isActive="false" >
+					</UML:Class>
+					<UML:Association xmi.id="BOUML_0x9f1460">
+						<UML:Association.connection>
+							<UML:AssociationEnd visibility="public" ownerScope="instance" name="Parameters" aggregation="none" isOrdered="false" isNavigable="true" type="BOUML_0x9f1560">
+								<UML:AssociationEnd.multiplicity>
+									<UML:Multiplicity>
+										<UML:Multiplicity.range>
+											<UML:MultiplicityRange lower="0" upper="-1"/>
+										</UML:Multiplicity.range>
+									</UML:Multiplicity>
+								</UML:AssociationEnd.multiplicity>
+								<UML:AssociationEnd.participant>
+									<UML:Class xmi.idref="BOUML_0x9f1560"/>
+								</UML:AssociationEnd.participant>
+								<UML:ModelElement.stereotype>
+									<UML:Stereotype name="List"/>
+								</UML:ModelElement.stereotype>
+							</UML:AssociationEnd>
+							<UML:AssociationEnd visibility="public" aggregation="aggregate" isOrdered="false" isNavigable="false" type="BOUML_0x9f1600">
+								<UML:AssociationEnd.participant>
+									<UML:Class xmi.idref="BOUML_0x9f1600"/>
+								</UML:AssociationEnd.participant>
+							</UML:AssociationEnd>
+						</UML:Association.connection>
+					</UML:Association>
+					<UML:Class name="Parameter" xmi.id="BOUML_0x9f1560" visibility="public" isAbstract="false" isActive="false" >
+						<UML:Classifier.feature>
+							<UML:Attribute name="Name" xmi.id="BOUML_0x9f13b0" visibility="public" ownerScope="instance">
+								<UML:StructuralFeature.type>
+									<UML:DataType xmi.idref="BOUML_datatype_0"/>
+								</UML:StructuralFeature.type>
+							</UML:Attribute>
+							<UML:Attribute name="Type" xmi.id="BOUML_0x9f1300" visibility="public" ownerScope="instance">
+								<UML:StructuralFeature.type>
+									<UML:DataType xmi.idref="BOUML_datatype_1"/>
+								</UML:StructuralFeature.type>
+							</UML:Attribute>
+							<UML:Attribute name="Value" xmi.id="BOUML_0x9f1250" visibility="public" ownerScope="instance">
+								<UML:StructuralFeature.type>
+									<UML:DataType xmi.idref="BOUML_datatype_2"/>
+								</UML:StructuralFeature.type>
+							</UML:Attribute>
+							<UML:Attribute name="Description" xmi.id="BOUML_0x9f11a0" visibility="public" ownerScope="instance">
+								<UML:StructuralFeature.type>
+									<UML:DataType xmi.idref="BOUML_datatype_0"/>
+								</UML:StructuralFeature.type>
+							</UML:Attribute>
+						</UML:Classifier.feature>
+					</UML:Class>
+				<!-- for pack TPB3D Lib-->
+				</UML:Namespace.ownedElement>
+			</UML:Package>
+			<UML:Package xmi.id="BOUML_0x9f1d80" name ="TPB3D Addons">
+			</UML:Package>
+			<UML:DataType xmi.id="BOUML_datatype_1" name = "Type" visibility="private" isRoot="false" isLeaf="false" isAbstract="false"/>
+			<UML:DataType xmi.id="BOUML_datatype_2" name = "object" visibility="private" isRoot="false" isLeaf="false" isAbstract="false"/>
+			<UML:DataType xmi.id="BOUML_datatype_0" name = "string" visibility="private" isRoot="false" isLeaf="false" isAbstract="false"/>
+		</UML:Namespace.ownedElement>
+	</UML:Model>
+</XMI.content>
+</XMI>

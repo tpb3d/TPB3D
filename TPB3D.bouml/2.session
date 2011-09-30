@@ -1,0 +1,19 @@
+window_sizes 1360 712 414 940 682 82
+diagrams
+  classdiagram_ref 128130 // TPB3D
+    688 556 100 4 0 0
+  active  classdiagram_ref 134658 // GUI
+    940 556 100 4 0 0
+end
+show_stereotypes
+open
+  class_ref 134914 // Control
+  class_ref 135042 // Container
+  class_ref 135170 // Panel
+  class_ref 135298 // Button
+  class_ref 128002 // Command
+  class_ref 128130 // Parameter
+  
+  package_ref 128258 // TPB3D Addons
+end
+end

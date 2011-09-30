@@ -1,0 +1,22 @@
+﻿<Properties>
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="TPB3D Lib\Addin\GUI\Container.cs">
+    <Files>
+      <File FileName="TPB3D\TrackedRide\Track.cs" Line="14" Column="9" />
+      <File FileName="TPB3D\TrackedRide\TrackSection.cs" Line="1" Column="1" />
+      <File FileName="TPB3D\TPB3D.cs" Line="24" Column="4" />
+      <File FileName="TPB3D.Renderer\MyClass.cs" Line="1" Column="1" />
+      <File FileName="TPB3D.Renderer\AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="TPB3D Lib\Addin\Renderer.cs" Line="1" Column="1" />
+      <File FileName="c:\Documents and Settings\Duckblaster.DONALD-DESKTOP\My Documents\My Games\TPB3D OpenTK OOGL Jitter\Jitter\Jitter\Dynamics\SoftBody.cs" Line="1" Column="1" />
+      <File FileName="TPB3D Lib\Addin\GUI\Control.cs" Line="8" Column="8" />
+      <File FileName="TPB3D Lib\Addin\GUI\Container.cs" Line="15" Column="1" />
+      <File FileName="TPB3D Lib\Addin\GUI\Button.cs" Line="5" Column="30" />
+      <File FileName="TPB3D Lib\Addin\GUI\Panel.cs" Line="5" Column="32" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
