@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="4.0">
+  <PropertyGroup>
+    <ProjectGuid>{C7CA440B-2A76-420D-8B0E-5E5C1676F451}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Boo.Lang.Useful</RootNamespace>
+    <AssemblyName>Boo.Lang.Useful</AssemblyName>
+    <SignAssembly>false</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <AssemblyOriginatorKeyMode>File</AssemblyOriginatorKeyMode>
+    <UsePartialTypes>false</UsePartialTypes>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+    <SourceAnalysisOverrideSettingsFile>C:\Documents and Settings\Donald\Application Data\ICSharpCode/SharpDevelop4\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <NoStdLib>False</NoStdLib>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <Strict>False</Strict>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <RunSourceAnalysis>False</RunSourceAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <genwarnings>false</genwarnings>
+    <culture />
+    <ducky>false</ducky>
+    <Ducky>false</Ducky>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <genwarnings>false</genwarnings>
+    <culture />
+    <ducky>false</ducky>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.boo" />
+    <Compile Include="Attributes\AutoFlagsAttribute.boo" />
+    <Compile Include="Attributes\OnceAttribute.boo" />
+    <Compile Include="Attributes\SingletonAttribute.boo" />
+    <Compile Include="Attributes\TraceMethodCallsAttribute.boo" />
+    <Compile Include="BooTemplate\ApplyTemplateSemantics.boo" />
+    <Compile Include="BooTemplate\ITemplate.boo" />
+    <Compile Include="BooTemplate\TemplateCompiler.boo" />
+    <Compile Include="BooTemplate\TemplatePreProcessor.boo" />
+    <Compile Include="Collections\AbstractCollection.boo" />
+    <Compile Include="Collections\Cache.boo" />
+    <Compile Include="Collections\CollectionAttribute.boo" />
+    <Compile Include="Collections\Set.boo" />
+    <Compile Include="CommandLine\AbstractCommandLine.boo" />
+    <Compile Include="CommandLine\AbstractParser.boo" />
+    <Compile Include="CommandLine\ArgumentAttribute.boo" />
+    <Compile Include="CommandLine\EventBasedParser.boo" />
+    <Compile Include="CommandLine\OptionAttribute.boo" />
+    <Compile Include="CommandLine\Parser.boo" />
+    <Compile Include="IO\Impl\PreProcessorExpressionEvaluator.boo" />
+    <Compile Include="IO\Impl\PreProcessorExpressionLexer.boo" />
+    <Compile Include="IO\Impl\PreProcessorExpressionParser.boo" />
+    <Compile Include="IO\Impl\PreProcessorExpressionParserTokenTypes.boo" />
+    <Compile Include="IO\PreProcessor.boo" />
+    <Compile Include="IO\walk.boo" />
+    <Compile Include="PlatformInformation.boo" />
+    <Compile Include="Resources\ResourceFu.boo" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="IO\" />
+  </ItemGroup>
+  <Import Project="$(BooBinPath)\Boo.Microsoft.Build.targets" />
+  <ItemGroup>
+    <Reference Include="Boo.Lang.Compiler">
+      <HintPath>C:\Program Files\SharpDevelop\4.2\AddIns\BackendBindings\BooBinding\Boo.Lang.Compiler.dll</HintPath>
+    </Reference>
+    <Reference Include="Boo.Lang.Parser, Version=2.0.9.4, Culture=neutral, PublicKeyToken=32c39770e9a21a67" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+</Project>

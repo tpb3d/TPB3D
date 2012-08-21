@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{48E18542-C08D-4BAF-99D0-BA2882259F40}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <OutputType>Library</OutputType>
+    <RootNamespace>Boo.Lang.Extensions</RootNamespace>
+    <AssemblyName>Boo.Lang.Extensions</AssemblyName>
+    <ProductVersion>9.0.21022</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <UsePartialTypes>false</UsePartialTypes>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DebugSymbols>True</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <ducky>false</ducky>
+    <culture />
+    <genwarnings>false</genwarnings>
+    <nostdlib>true</nostdlib>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <ducky>false</ducky>
+    <culture />
+    <genwarnings>false</genwarnings>
+    <nostdlib>true</nostdlib>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.boo" />
+    <Compile Include="Attributes\DefaultAttribute.boo" />
+    <Compile Include="Attributes\GetterAttribute.boo" />
+    <Compile Include="Attributes\LockAttribute.boo" />
+    <Compile Include="Attributes\PropertyAttribute.boo" />
+    <Compile Include="Attributes\RequiredAttribute.boo" />
+    <Compile Include="Macros\AssertMacro.boo" />
+    <Compile Include="Macros\CheckedMacro.boo" />
+    <Compile Include="Macros\DebugMacro.boo" />
+    <Compile Include="Macros\LockMacro.boo" />
+    <Compile Include="Macros\PrintMacro.boo" />
+    <Compile Include="Macros\RawArrayIndexingMacro.boo" />
+    <Compile Include="Macros\UsingMacro.boo" />
+    <Compile Include="Macros\YieldAllMacro.boo" />
+    <Compile Include="Macros\Globals.boo" />
+    <Compile Include="Macros\MacroMacro.boo" />
+    <Compile Include="Macros\UnsafeMacro.boo" />
+    <Compile Include="Attributes\VolatileAttribute.boo" />
+    <Compile Include="Macros\IfdefMacro.boo" />
+  </ItemGroup>
+  <Import Project="$(BooBinPath)\Boo.Microsoft.Build.targets" />
+  <ItemGroup>
+    <Reference Include="Boo.Lang">
+      <HintPath>C:\Program Files\SharpDevelop\4.2\AddIns\BackendBindings\BooBinding\Boo.Lang.dll</HintPath>
+    </Reference>
+    <Reference Include="Boo.Lang.Compiler, Version=2.0.9.4, Culture=neutral, PublicKeyToken=32c39770e9a21a67" />
+  </ItemGroup>
+</Project>

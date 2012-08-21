@@ -1,0 +1,90 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.0</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{BEEC4EBE-6B8D-426D-BF5D-3E15F5C10DDD}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>SuperEngineAuto</RootNamespace>
+    <AssemblyName>SuperEngine Lib</AssemblyName>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <OutputPath>bin\</OutputPath>
+    <DebugType>None</DebugType>
+    <NoStdLib>False</NoStdLib>
+    <Ducky>False</Ducky>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <Strict>False</Strict>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>none</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Mono.Addins">
+      <HintPath>..\Mono.Addins\Mono.Addins.dll</HintPath>
+    </Reference>
+    <Reference Include="OpenTK">
+      <HintPath>..\OpenTK\Binaries\OpenTK\Release\OpenTK.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Boo.Lang" />
+    <Reference Include="Boo.Lang.Useful" />
+    <Reference Include="Boo.Lang.Extensions" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AssemblyInfo.boo" />
+    <Compile Include="Commands\Command.boo" />
+    <Compile Include="Commands\Parameter.boo" />
+    <Compile Include="Commands\ParameterGroup.boo" />
+    <Compile Include="Editors\Editor.boo" />
+    <Compile Include="Editors\TerrainEditor.boo" />
+    <Compile Include="Graphics\Mesh.boo" />
+    <Compile Include="Graphics\Texture.boo" />
+    <Compile Include="Graphics\Vertex.boo" />
+    <Compile Include="GUI\Button.boo" />
+    <Compile Include="GUI\Container.boo" />
+    <Compile Include="GUI\Control.boo" />
+    <Compile Include="Maths\Spline.boo" />
+    <Compile Include="Objects\GameObject.boo" />
+    <Compile Include="Objects\MeshObject.boo" />
+    <Compile Include="Objects\Spline.boo" />
+    <Compile Include="Objects\Terrain.boo" />
+    <Compile Include="ReadOnlyDictionary.boo" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commands\" />
+    <Folder Include="Editors\" />
+    <Folder Include="Graphics\" />
+    <Folder Include="GUI\" />
+    <Folder Include="Maths\" />
+    <Folder Include="Objects\" />
+  </ItemGroup>
+  <Import Project="$(BooBinPath)\Boo.Microsoft.Build.targets" />
+</Project>
